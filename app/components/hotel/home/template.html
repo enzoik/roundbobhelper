@@ -1,0 +1,407 @@
+<div class="wrap">
+  <div class="app-wrapper">
+      <topNav></topNav>
+      <div class="app-container">
+        <div class="app-content hotel-theme">
+          <div class="app-feed">
+            <div class="container">
+              <div class="item_nav_e">
+
+              </div>
+              <div class="app-feed-roll" id="app-feed">
+                <div class="app-form search-box">
+                  <form method="post" action="" id="hotel-search-form">
+                    <div class="form-wrapper">
+                      <div class="DItem">
+                        <div class="form_item">
+                          <label>Destination</label>
+                          <input type="text" name="" class="form-control" placeholder="Enter Hotel name, city, or country">
+                        </div><!-- end form-item -->
+                      </div><!-- end DItem -->
+
+                      <div class="input-daterange DateField" id="datepicker">
+                        <div class="DateFieldx">
+                          <div class="form_item">
+                            <label>Check in</label>
+                            <div class="f__iconItem">
+                              <span class="f__iconItem"><i class="icon-calendar-7"></i></span>
+                              <input type="text" class="input-sm form-control" readonly="readonly" name="start" placeholder="pick a date" />
+                            </div><!-- end f__iconItem -->
+                          </div><!-- end form-item -->
+                        </div><!-- end DateField-->
+
+
+                        <div class="DateFieldx">
+                          <div class="form_item">
+                            <label>Check out</label>
+                            <div class="f__iconItem">
+                              <span class="f__iconItem"><i class="icon-calendar-7"></i></span>
+                              <input type="text" class="input-sm form-control" readonly="readonly" name="end" placeholder="pick a date" />
+
+                            </div><!-- end f__iconItem -->
+                          </div><!-- end form-item -->
+                        </div><!-- end DateField -->
+                      </div><!-- end input-daterange -->
+
+
+                      <div class="FItem">
+                        <div class="form_item">
+                          <label>Guests and Rooms</label>
+                          <div class="f__iconItem">
+                            <span for="drop-room" class="f__iconItem"><i class="icon-user-1"></i></span>
+                            <input id="drop-room" readonly="readonly" class="form-control" type="button" value="1 Guest, 1 Room">
+                            <span class="sb_arrow sb_arrow_1 sb-arr"><i class="icon-angle-down"></i></span>
+                          </div><!-- end f__iconItem -->
+                        </div><!-- end form-item -->
+                      </div><!-- end FItem -->
+
+                      <div class="custom-search">
+                        <label>&nbsp;<br/></label>
+                        <button type="button" class="btn btn-yellow show-ajax">SEARCH</button>
+                      </div><!-- end custom-search -->
+                    </div><!-- end row-wrap -->
+
+                    <div class="guest-options">
+                      <div class="form-wrap">
+                        <div class="row_wrap">
+                          <div class="col-md-1 no-padding">
+                            <div class="form_item">
+                              <label>Rooms</label>
+                              <div class="select-box">
+                                <span class="sb_arrow"><i class="icon-angle-down"></i></span>
+                                <select class="form-control select_room" id="roomSelect" onchange="addupGuests();">
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
+                                </select>
+                              </div><!-- end select-box-->
+                            </div><!-- end form_item -->
+                          </div><!-- end col-md-1 -->
+
+                          <div class="col-md-9 col-md-offset-1">
+                            <div id="add-room">
+                              <div class="room-wrap">
+                                <div class="col-md-1 no-padding">
+                                  <div class="room-label">
+                                    Room 1
+                                  </div><!-- end room-label -->
+                                </div><!-- end col-md-1 -->
+
+                                <div class="col-md-2 no-padding">
+                                  <div class="form_item">
+                                    <label>Adult</label>
+                                    <div class="select-box">
+                                      <span class="sb_arrow"><i class="icon-angle-down"></i></span>
+                                      <select class="form-control hotelRoomAdultsSelector" id="adults1" onchange="addUpGuests();">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                      </select>
+                                    </div><!-- end select-box -->
+                                  </div><!-- end form_item -->
+                                </div><!-- end col-md-2 -->
+
+                                <div class="col-md-2 no-padding">
+                                  <div class="form_item">
+                                    <label>Children</label>
+                                    <div class="select-box">
+                                      <span class="sb_arrow"><i class="icon-angle-down"></i></span>
+                                      <select class="form-control" id="children1" onchange="AddChildAge('children1','childage1'); addUpGuests();">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                      </select>
+                                    </div><!-- end select-box -->
+                                  </div><!-- end form_item -->
+                                </div><!-- end col-md-2 -->
+
+                                <div class="col-md-7">
+                                  <div id="childage1"></div>
+                                </div><!-- end col-md-7 -->
+                              </div><!-- end room-wrap -->
+                            </div><!-- end add-room -->
+                          </div><!-- enc col-md-9 -->
+                        </div><!-- end row_wrap -->
+
+                        <div class="close-guest">
+                          <button type="button" class="close-x"> done <i class="icon-angle-up"></i></button>
+                        </div><!-- end close-guest -->
+                      </div><!-- end form-wrap -->
+                    </div><!-- end guest-options -->
+
+
+                  </div><!-- end form-wrapper -->
+                </form>
+              </div><!-- end app-form -->
+
+              <div class="ajax-content populate-content populate-content-visible" id="content">
+
+                <div class="app-content-view">
+
+                  <div class="col-md-3 no-padding">
+                    <div class="advanced-filter">
+                      <div class="row_wrap">
+                        <div class="f-wrap-title"><h4>Filter by name</h4></div><!-- end f-wrap-title -->
+
+                        <div class="col-md-9 no-padding">
+                          <div class="ta_item">
+                            <input type="text" class="form-control input-search-by-name" name="" placeholder="Enter Hotel Name...">
+                          </div>
+                        </div><!-- end col-md-9 -->
+
+                        <!-- <div class="col-md-no-padding">
+                          <input type="submit" class="btn btn-yellow btn-search-by-name" value="GO">
+                        </div><!-- end col-md-3 -->
+                      </div><!-- end row_wrap -->
+
+                      <div class="row_wrap f-wrap">
+                        <div class="collapsible-toggle">
+                          <input type="checkbox" checked="checked" id="label-1" name="tabs">
+                          <label for="label-1" class="label-c">
+                            <div class="f-wrap-title">
+                              <h4>By Class</h4>
+                            </div><!-- end f-wrap-title -->
+                          </label>
+
+                          <div class="menu-app-items">
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="star5">
+                              <label for="star5" class="checkb">
+                                <span class="chker"></span>
+                                <span class="lstars">
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                </span><!-- end lstars -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="star4">
+                              <label for="star4" class="checkb">
+                                <span class="chker"></span>
+                                <span class="lstars">
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star"></i>
+                                </span><!-- end lstars -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="star3">
+                              <label for="star3" class="checkb">
+                                <span class="chker"></span>
+                                <span class="lstars">
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                </span><!-- end lstars -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="star2">
+                              <label for="star2" class="checkb">
+                                <span class="chker"></span>
+                                <span class="lstars">
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                </span><!-- end lstars -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="star1">
+                              <label for="star1" class="checkb">
+                                <span class="chker"></span>
+                                <span class="lstars">
+                                  <i class="icon-star yellow"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                  <i class="icon-star"></i>
+                                </span><!-- end lstars -->
+                              </label>
+                            </div><!-- end f_item -->
+                          </div><!-- end menu-app-items -->
+                        </div><!-- end collapsible-toggle -->
+                      </div><!-- end row-wrap(f-wrap) -->
+
+
+                      <div class="row_wrap f-wrap">
+                        <div class="collapsible-toggle">
+                          <input type="checkbox" id="label-2" name="tabs">
+                          <label for="label-2" class="label-c">
+                            <div class="f-wrap-title">
+                              <h4>By Price per night</h4>
+                            </div><!-- end f-wrap-title -->
+                          </label>
+
+                          <div class="menu-app-items">
+                            <div class="f_item">
+                              <input type="checkbox" name="pricePerNight" id="pp1" min=0 max=50>
+                              <label for="pp1" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">0 - $50</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="pricePerNight" id="pp2" min=50 max=400>
+                              <label for="pp2" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">$50 - $400</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="pricePerNight" id="pp4" min=400 max=800>
+                              <label for="pp4" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">$400 - $800</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="pricePerNight" id="pp5" min=800 max=1500>
+                              <label for="pp5" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">$800 - $1,500</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="pricePerNight" id="pp6" min=1500 max=10000>
+                              <label for="pp6" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">$1,500 or more</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+                          </div><!-- end menu-app-items -->
+                        </div><!-- end collapsible-toggle -->
+                      </div><!-- end row-wrap(f-wrap) -->
+
+
+                      <div class="row_wrap">
+                        <div class="collapsible-toggle">
+                          <input type="checkbox" id="label-3" name="tabs">
+                          <label for="label-3" class="label-c">
+                            <div class="f-wrap-title">
+                              <h4>By Amenities</h4>
+                            </div><!-- end f-wrap-title -->
+                          </label>
+
+                          <div class="menu-app-items">
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="amenity1">
+                              <label for="amenity1" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">High speed intenret</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+
+
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="amenity2">
+                              <label for="amenity2" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">Air Conditioning</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="amenity3">
+                              <label for="amenity3" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">Swimming Pool</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="amenity4">
+                              <label for="amenity4" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">Laundary Services</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+
+                            <div class="f_item">
+                              <input type="checkbox" name="rating" id="amenity5">
+                              <label for="amenity5" class="checkb">
+                                <span class="chker"></span>
+                                <span class="label-v">Babysitting</span><!-- end label-v -->
+                              </label>
+                            </div><!-- end f_item -->
+                          </div><!-- end menu-app-items -->
+                        </div><!-- end collapsible-toggle -->
+                      </div><!-- end row-wrap -->
+                    </div><!-- end advanced-filter -->
+                  </div><!-- end col-md-3 -->
+
+                  <div class="col-md-9 no-padding">
+                    <div class="header-app">
+                      <div class="hd_content">
+
+                        <div class="query-results">
+                          <div class="col-md-6 no-padding">
+                            <div class="qr-text">
+                              <span class="s-results"></span>
+                            </div><!-- end qr-text -->
+                          </div><!-- end col-md-6 -->
+
+                          <div class="col-md-6 no-padding">
+                            <div class="filter-criteria pull-right">
+                              <span class="bordered">Sort by</span>
+                              <span>
+                                <div class="select-box-1">
+                                  <span class="sb_arrow"><i class="icon-angle-down"></i></span>
+                                  <select>
+                                    <option>Price</option>
+                                    <option>Star Rating</option>
+                                    <option>Distance from downtown</option>
+                                  </select>
+                                </div><!-- end select-box -->
+                              </span>
+                            </div><!-- end filter-criteria -->
+
+                          </div><!-- end check-in-out -->
+                        </div><!-- end col-md-6 -->
+
+                      </div><!-- end query-results -->
+                    </div><!-- end hd_content -->
+                  </div><!-- end header-app -->
+
+                  <div class="hotelView">
+                      loading...
+                    <!-- Application container. -->
+                    <!-- <main role="main" id="main"></main> -->
+
+                  </div><!-- end hotel-results -->
+
+                </div><!-- end col-md-9 -->
+              </div><!-- end app-content-view -->
+            </div><!-- end content -->
+          </div><!-- end app-feed-roll -->
+        </div><!-- end container-->
+      </div>
+  </div>
+</div>

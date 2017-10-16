@@ -1,0 +1,650 @@
+/*hotels*/
+/*variables*/
+/*mixins*/
+/* line 9, ../sass/hotels.scss */
+.hotel-item {
+  margin-bottom: 10px;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  border-bottom: 2px solid #d1d1d1;
+  background: #ffffff;
+  padding: 5px;
+  overflow: hidden;
+}
+/* line 17, ../sass/hotels.scss */
+.hotel-item:hover {
+  border-color: #32a634;
+  cursor: pointer;
+}
+/* line 21, ../sass/hotels.scss */
+.hotel-item:hover .hotel-item-image img {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+}
+
+/* line 28, ../sass/hotels.scss */
+.hotel-item-image {
+  position: relative;
+  overflow: hidden;
+}
+
+/* line 33, ../sass/hotels.scss */
+.hotel-item-image img {
+  width: 100%;
+  height: auto;
+  min-height: 150px;
+  max-height: 160px;
+  transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transform: scale(0.94);
+  -webkit-transform: scale(0.94);
+  -moz-transform: scale(0.94);
+  -ms-transform: scale(0.94);
+}
+
+/* line 42, ../sass/hotels.scss */
+.hotel-item-details {
+  overflow: auto;
+}
+/* line 45, ../sass/hotels.scss */
+.hotel-item-details div {
+  padding: 3px 0;
+}
+
+/* line 50, ../sass/hotels.scss */
+.hotel-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* line 55, ../sass/hotels.scss */
+.hotel-exclusive-deal {
+  color: #f9e503;
+  font-size: 12px;
+  font-weight: 900;
+}
+/* line 60, ../sass/hotels.scss */
+.hotel-exclusive-deal span {
+  color: #000e1b;
+}
+
+/* line 65, ../sass/hotels.scss */
+.hotel-rating {
+  overflow: auto;
+}
+
+/* line 69, ../sass/hotels.scss */
+.hotel-location {
+  font-size: 11px;
+  color: #666666;
+}
+/* line 73, ../sass/hotels.scss */
+.hotel-location i[class^="icon-"]:before, .hotel-location i[class*=" icon-"]:before {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+}
+
+/* line 78, ../sass/hotels.scss */
+.hotel-review {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* line 83, ../sass/hotels.scss */
+.hotel-amenities {
+  margin-top: 5px;
+}
+/* line 86, ../sass/hotels.scss */
+.hotel-amenities span {
+  display: inline-block;
+  padding: 3px 5px;
+  border: 1px solid #d1d1d1;
+  border-radius: 2px;
+}
+
+/* line 94, ../sass/hotels.scss */
+.hotel-item-price {
+  overflow: auto;
+  text-align: right;
+}
+/* line 98, ../sass/hotels.scss */
+.hotel-item-price div {
+  padding: 2px 0;
+}
+@media (max-width: 767px) {
+  /* line 94, ../sass/hotels.scss */
+  .hotel-item-price {
+    text-align: left;
+    margin-top: 20px;
+    border-top: 1px solid #d1d1d1;
+  }
+}
+
+/* line 111, ../sass/hotels.scss */
+.hotel-item-price-description {
+  font-size: 11px;
+  color: #666666;
+  font-weight: normal;
+}
+
+/* line 117, ../sass/hotels.scss */
+.hotel-item-price-value {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+/* line 124, ../sass/hotels.scss */
+.grid-1 {
+  width: 10%;
+}
+
+/* line 129, ../sass/hotels.scss */
+.grid-2 {
+  width: 20%;
+}
+
+/* line 134, ../sass/hotels.scss */
+.grid-3 {
+  width: 30%;
+}
+
+/* line 139, ../sass/hotels.scss */
+.grid-4 {
+  width: 40%;
+}
+
+/* line 144, ../sass/hotels.scss */
+.grid-5 {
+  width: 50%;
+}
+
+/* line 149, ../sass/hotels.scss */
+.grid-9 {
+  width: 90%;
+}
+
+/* line 154, ../sass/hotels.scss */
+.grid, .grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-9 {
+  display: inline-block;
+  padding: 0 5px;
+  position: relative;
+}
+@media (max-width: 767px) {
+  /* line 154, ../sass/hotels.scss */
+  .grid, .grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-9 {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* line 167, ../sass/hotels.scss */
+.float-grid {
+  float: left;
+}
+
+/* line 172, ../sass/hotels.scss */
+.hotel-item-sidebar {
+  font-size: 12px;
+}
+
+/* line 176, ../sass/hotels.scss */
+.guest-room-choice, .guest-room-choice-total-price-count {
+  font-size: 14px;
+}
+/* line 179, ../sass/hotels.scss */
+.guest-room-choice span, .guest-room-choice-total-price-count span {
+  font-weight: 600;
+}
+
+/* line 185, ../sass/hotels.scss */
+.guest-room-choice-price div {
+  padding: 2px 0;
+}
+
+/* line 191, ../sass/hotels.scss */
+.guest-room-choice-price-value-average, .guest-room-choice-total-price-value-terms {
+  color: #666666;
+  font-size: 11px;
+}
+
+/* line 197, ../sass/hotels.scss */
+.guest-room-choice-price-value, .guest-room-choice-total-price-value {
+  font-weight: 900;
+  color: red;
+  font-size: 26px;
+}
+/* line 202, ../sass/hotels.scss */
+.guest-room-choice-price-value span, .guest-room-choice-total-price-value span {
+  font-size: 12px;
+  position: relative;
+  top: -8px;
+  right: -5px;
+}
+
+/* line 226, ../sass/hotels.scss */
+.hotel-item-white-board {
+  padding: 20px;
+  background: #ffffff;
+  margin-bottom: 10px;
+}
+
+/* line 232, ../sass/hotels.scss */
+.hotel-item-selected-content-menu {
+  padding: 8px 0;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #d1d1d1;
+}
+/* line 238, ../sass/hotels.scss */
+.hotel-item-selected-content-menu span {
+  display: inline-block;
+  border-left: 1px solid #101010;
+}
+/* line 242, ../sass/hotels.scss */
+.hotel-item-selected-content-menu span a {
+  display: block;
+  font-size: 12px;
+  padding: 0 15px;
+  text-transform: capitalize;
+  text-decoration: underline;
+}
+/* line 249, ../sass/hotels.scss */
+.hotel-item-selected-content-menu span a:hover {
+  cursor: pointer;
+  color: #000e1b;
+}
+@media (max-width: 767px) {
+  /* line 257, ../sass/hotels.scss */
+  .hotel-item-selected-content-menu span {
+    border: none;
+    padding: 1px 0;
+  }
+  /* line 263, ../sass/hotels.scss */
+  .hotel-item-selected-content-menu span a {
+    padding: 0 5px;
+    border: 1px solid #666666;
+    text-decoration: none;
+  }
+}
+
+/* line 272, ../sass/hotels.scss */
+.hotel-item-selected-content-dump {
+  overflow: auto;
+}
+
+/* line 276, ../sass/hotels.scss */
+.hotel-item-selected-content-photos-nav {
+  max-height: 250px;
+  overflow-y: scroll;
+  padding: 0 10px;
+}
+/* line 281, ../sass/hotels.scss */
+.hotel-item-selected-content-photos-nav ul {
+  display: block;
+  list-style: none;
+}
+/* line 285, ../sass/hotels.scss */
+.hotel-item-selected-content-photos-nav ul li {
+  display: inline-block;
+  width: 33.3333%;
+  height: 90px;
+  float: left;
+  padding: 5px;
+  overflow: hidden;
+}
+/* line 293, ../sass/hotels.scss */
+.hotel-item-selected-content-photos-nav ul li img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 767px) {
+  /* line 276, ../sass/hotels.scss */
+  .hotel-item-selected-content-photos-nav {
+    padding: 5px 0;
+    margin-top: 10px;
+  }
+}
+
+/* line 307, ../sass/hotels.scss */
+.hotel-item-selected-content-description {
+  font-size: 13px;
+}
+/* line 310, ../sass/hotels.scss */
+.hotel-item-selected-content-description h4 {
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 10px;
+}
+/* line 317, ../sass/hotels.scss */
+.hotel-item-selected-content-description p {
+  margin-bottom: 25px;
+}
+
+/* line 322, ../sass/hotels.scss */
+.hotel-item-selected-content-map {
+  overflow: auto;
+  min-height: 200px;
+}
+
+/* line 327, ../sass/hotels.scss */
+.hotel-item-selected-rooms {
+  overflow: auto;
+  padding: 5px 0;
+}
+
+/* line 332, ../sass/hotels.scss */
+.hotel-item-selected-room-item {
+  overflow: auto;
+  padding: 0 15px;
+  background: #ffffff;
+  border-bottom: 2px solid #d1d1d1;
+}
+@media (max-width: 767px) {
+  /* line 339, ../sass/hotels.scss */
+  .hotel-item-selected-room-item div {
+    text-align: left;
+  }
+}
+
+/* line 345, ../sass/hotels.scss */
+.hotel-item-selected-room-item-row-wrap {
+  border-right: 1px solid #d1d1d1;
+}
+@media (max-width: 767px) {
+  /* line 345, ../sass/hotels.scss */
+  .hotel-item-selected-room-item-row-wrap {
+    border: none;
+  }
+}
+
+/* line 352, ../sass/hotels.scss */
+.hotel-item-selected-room-item-row {
+  padding: 10px 0;
+  overflow: auto;
+  border-bottom: 1px solid #d1d1d1;
+}
+/* line 357, ../sass/hotels.scss */
+.hotel-item-selected-room-item-row:last-child {
+  border: none;
+}
+
+/* line 362, ../sass/hotels.scss */
+.hotel-item-selected-room-item-type {
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+/* line 368, ../sass/hotels.scss */
+.hotel-item-selected-room-status {
+  font-size: 12px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/* line 374, ../sass/hotels.scss */
+.hotel-item-selected-room-avg-price {
+  font-size: 14px;
+  text-align: center;
+}
+/* line 378, ../sass/hotels.scss */
+.hotel-item-selected-room-avg-price .normal-price {
+  font-weight: normal;
+  text-decoration: line-through;
+}
+/* line 383, ../sass/hotels.scss */
+.hotel-item-selected-room-avg-price .discounted-price {
+  color: red;
+  font-weight: 600;
+}
+/* line 388, ../sass/hotels.scss */
+.hotel-item-selected-room-avg-price .xs-sign {
+  font-size: 11px;
+  color: #666666;
+}
+
+/* line 394, ../sass/hotels.scss */
+.hotel-item-selected-room-rates, .hotel-item-selected-room-rates {
+  text-align: center;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+/* line 400, ../sass/hotels.scss */
+.room-special-deals {
+  font-size: 11px;
+}
+/* line 403, ../sass/hotels.scss */
+.room-special-deals span {
+  color: #aa9019;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* line 411, ../sass/hotels.scss */
+.hotel-item-selected-room-item-book {
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* line 416, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates {
+  width: auto;
+  height: auto;
+  background: #ffffff;
+  margin-top: 5px;
+  display: none;
+  padding: 15px;
+}
+@media (max-width: 767px) {
+  /* line 416, ../sass/hotels.scss */
+  .hotel-item-selected-room-daily-rates {
+    overflow-x: scroll;
+  }
+}
+/* line 428, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table {
+  border: none;
+  font-size: 12px;
+}
+/* line 434, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > thead > tr > th {
+  background: #d8f7dc;
+  border: none;
+  font-weight: 700;
+}
+/* line 440, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > thead > tr > th:nth-child(2) {
+  background: #56c065;
+  color: #ffffff;
+}
+/* line 450, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > tbody > tr > td {
+  border: 1px solid #FFFFFF;
+  background: #f1f1f1;
+  font-weight: 500;
+}
+/* line 455, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > tbody > tr > td span {
+  display: block;
+}
+/* line 459, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > tbody > tr > td .current-price {
+  color: red;
+}
+/* line 463, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > tbody > tr > td .normal-price {
+  text-decoration: line-through;
+}
+/* line 467, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > tbody > tr > td .total-price {
+  font-size: 15px;
+}
+/* line 471, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > tbody > tr > td .table-room-no {
+  font-size: 15px;
+  color: #000e1b;
+}
+/* line 478, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > tbody > tr > td:first-child {
+  border-color: #f1f1f1;
+  min-width: 70px;
+}
+/* line 483, ../sass/hotels.scss */
+.hotel-item-selected-room-daily-rates .table > tbody > tr > td:nth-child(2) {
+  background: #f1f2a1;
+  min-width: 40px;
+  border-color: #f1f2a1;
+}
+
+/* line 493, ../sass/hotels.scss */
+.hotel-item-selected-room-item-policies {
+  padding: 15px;
+  background: #ffffff;
+  margin-top: 5px;
+  height: auto;
+  overflow: auto;
+  font-size: 12px;
+  display: none;
+}
+/* line 502, ../sass/hotels.scss */
+.hotel-item-selected-room-item-policies h4 {
+  font-size: 16px;
+  font-weight: 700;
+}
+/* line 507, ../sass/hotels.scss */
+.hotel-item-selected-room-item-policies p {
+  margin-bottom: 25px;
+}
+
+/* line 513, ../sass/hotels.scss */
+.show-hide-component-header {
+  font-size: 16px;
+  font-weight: 900;
+  color: #000e1b;
+  position: relative;
+  padding: 5px 15px;
+  margin: -15px -15px 0;
+  background: #fcfcfc;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 15px;
+}
+/* line 524, ../sass/hotels.scss */
+.show-hide-component-header .close-component {
+  display: inline-block;
+  position: absolute;
+  border: 1px solid #e1e1e1;
+  background: #e9e9e9;
+  border-radius: 2px;
+  padding: 3px;
+  right: 15px;
+  top: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #101010;
+  cursor: pointer;
+}
+
+/* line 540, ../sass/hotels.scss */
+.hotel-guest-numbers {
+  padding: 0;
+  max-height: 0;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+/* line 547, ../sass/hotels.scss */
+.hotel-guest-numbers-add-room {
+  overflow: auto;
+}
+/* line 550, ../sass/hotels.scss */
+.hotel-guest-numbers-add-room .hotel-guest-numbers-add-room-row {
+  overflow: auto;
+}
+/* line 553, ../sass/hotels.scss */
+.hotel-guest-numbers-add-room .hotel-guest-numbers-add-room-row .room-number-label {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 7em;
+  text-align: right;
+}
+
+/* line 562, ../sass/hotels.scss */
+.hotel-guest-child-age {
+  padding: 0 2px;
+}
+
+/* line 566, ../sass/hotels.scss */
+.hotel-guest-numbers-open {
+  padding: 20px 0;
+  max-height: 1000px;
+}
+
+/* line 571, ../sass/hotels.scss */
+.rating {
+  border: none;
+}
+/* line 574, ../sass/hotels.scss */
+.rating > label {
+  float: left;
+  position: relative;
+}
+/* line 579, ../sass/hotels.scss */
+.rating > label.unrated {
+  margin: 0px 2px;
+}
+/* line 581, ../sass/hotels.scss */
+.rating > label.unrated:before {
+  color: #dddddd;
+  font-size: 14px;
+  font-family: 'FontAwesome';
+  display: inline-block;
+  content: "\f005";
+}
+/* line 590, ../sass/hotels.scss */
+.rating > label.half {
+  margin: 0px 2px;
+}
+/* line 593, ../sass/hotels.scss */
+.rating > label.half:after {
+  font-size: 14px;
+  font-family: 'FontAwesome';
+  display: inline-block;
+  content: "\f089";
+  color: #FFD700;
+  position: absolute;
+  left: 0;
+}
+/* line 603, ../sass/hotels.scss */
+.rating > label.half:before {
+  font-size: 14px;
+  font-family: 'FontAwesome';
+  display: inline-block;
+  content: "\f005";
+  color: #dddddd;
+}
+/* line 612, ../sass/hotels.scss */
+.rating > label.full {
+  color: #FFD700;
+  content: "\f005";
+  margin: 0px 2px;
+}
+/* line 617, ../sass/hotels.scss */
+.rating > label.full:before {
+  font-size: 14px;
+  font-family: 'FontAwesome';
+  display: inline-block;
+  content: "\f005";
+}

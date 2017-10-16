@@ -1,0 +1,47 @@
+{
+  "name": "roundbob-ui",
+  "version": "1.0.0",
+  "devDependencies": {
+    "bbb": "~2.0.0",
+    "grunt": "~1.0.1",
+    "grunt-contrib-clean": "~1.1.0",
+    "grunt-contrib-compress": "~1.4.3",
+    "grunt-contrib-copy": "~1.0.0",
+    "grunt-contrib-cssmin": "~2.2.0",
+    "grunt-contrib-jshint": "~1.1.0",
+    "grunt-karma": "~2.0.0",
+    "grunt-karma-coveralls": "~2.5.4",
+    "grunt-processhtml": "~0.4.1",
+    "karma-coverage": "~1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-mocha": "~1.3.0",
+    "karma-phantomjs-launcher": "~1.0.4",
+    "karma-qunit": "~1.2.1"
+  },
+  "peerDependencies": {
+    "generator-bbb": "*",
+    "bower": "*",
+    "grunt-cli": "*",
+    "coveralls": "*"
+  },
+  "scripts": {
+    "test": "grunt karma:run coveralls",
+    "postinstall": "bower install -s"
+  },
+  "dependencies": {
+    "backbone.layoutmanager": "^1.0.0",
+    "bower": "^1.8.0",
+    "esprima": "^4.0.0",
+    "generator-bbb": "^0.3.5",
+    "grunt-bbb-requirejs": "0.1.0-alpha.8",
+    "grunt-bbb-server": "^0.1.2",
+    "grunt-bbb-styles": "0.1.0-alpha.5",
+    "grunt-cli": "^1.2.0",
+    "jasmine-core": "^2.6.4",
+    "jquery": "^3.2.1",
+    "karma": "^1.7.0",
+    "layoutmanager": "^0.9.7",
+    "qunitjs": "^2.4.0",
+    "uuid": "^3.1.0"
+  }
+}

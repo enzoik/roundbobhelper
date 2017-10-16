@@ -1,0 +1,628 @@
+/*variables*/
+/*mixins*/
+/* line 4, ../sass/bobhelper.scss */
+.helper-content {
+  padding: 0;
+  background-size: contain;
+}
+
+/* line 9, ../sass/bobhelper.scss */
+.color-banner-top {
+  padding-top: 4%;
+}
+
+/* line 14, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container {
+  display: block;
+  padding: 5px 0 20px;
+  position: relative;
+  overflow: hidden;
+}
+/* line 20, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-bar-icon {
+  display: inline-block;
+}
+/* line 23, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-bar-icon button {
+  background: transparent;
+  border: 0;
+  background: #638b02;
+  color: #ffffff;
+  font-size: 30px;
+  padding: 5px 0 5px 0;
+  position: relative;
+  z-index: 100;
+}
+/* line 33, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-bar-icon button:hover {
+  color: #ffffff;
+}
+/* line 39, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-item-slide {
+  display: inline-block;
+  position: absolute;
+  top: -200%;
+  left: 15%;
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  z-index: 80;
+  opacity: 0;
+}
+/* line 48, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-item-slide button.btn {
+  border-radius: 0;
+  background: #ffffff;
+  text-transform: uppercase;
+  padding: 9px 15px 9px;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+  -ms-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+}
+/* line 61, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-item-slide button.btn:hover {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decocation-color: #638b02;
+}
+/* line 70, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-item-slide-out {
+  top: 5px;
+  opacity: 1;
+}
+/* line 75, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .app-nav-button {
+  float: right;
+  display: inline-block;
+}
+/* line 79, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .app-nav-button button {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border-radius: 100%;
+  border: 1px solid #bbbbbb;
+  font-size: 24px;
+  background: #dcdcdc;
+  background: linear-gradient(#dcdcdc, #e1e1e1);
+  background: -webkit-linear-gradient(#dcdcdc, #e1e1e1);
+  background: -moz-linear-gradient(#dcdcdc, #e1e1e1);
+  background: -ms-linear-gradient(#dcdcdc, #e1e1e1);
+  color: #515050 !important;
+}
+/* line 93, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .app-nav-button button:hover {
+  background: #f1f1f1 !important;
+}
+/* line 97, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .app-nav-button button i:before {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* line 108, ../sass/bobhelper.scss */
+.card-paper {
+  height: auto !important;
+  overflow: auto;
+  background: #ffffff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.09), 0 3px 1px -2px rgba(0, 0, 0, 0.15), 0 1px 5px 0 rgba(0, 0, 0, 0.07);
+  margin-bottom: 15px;
+  padding: 0 15px;
+}
+
+/* line 117, ../sass/bobhelper.scss */
+.card-component {
+  overflow: auto !important;
+}
+
+/* line 121, ../sass/bobhelper.scss */
+.button-div {
+  padding: 5px 0 10px 0;
+}
+
+/* line 125, ../sass/bobhelper.scss */
+.card-content {
+  padding: 10px 20px;
+  overflow: auto;
+}
+
+/* line 130, ../sass/bobhelper.scss */
+.card-content-1 {
+  padding: 10px 20px;
+  overflow: none !important;
+}
+
+/* line 135, ../sass/bobhelper.scss */
+.card-content-x {
+  padding: 0 1px;
+  overflow: none !important;
+}
+
+/* line 140, ../sass/bobhelper.scss */
+.seperator {
+  width: auto;
+  height: 1px;
+  margin: 0px -15px;
+  background: #e1e1e1;
+}
+
+/* line 147, ../sass/bobhelper.scss */
+.mdl-button.mdl-button--yellow {
+  background: #f9e503;
+  color: #2d2f01;
+}
+/* line 151, ../sass/bobhelper.scss */
+.mdl-button.mdl-button--yellow:focus {
+  background: #f9e503;
+}
+
+/* line 156, ../sass/bobhelper.scss */
+.bob-communicator {
+  background: blue;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #0094ca, #0065a1);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #0094ca, #0065a1);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #0094ca, #0065a1);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #0094ca, #0065a1);
+  /* Standard syntax (must be last) */
+  overflow: auto !important;
+}
+
+/* line 165, ../sass/bobhelper.scss */
+.bob-character {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 100%;
+  background: #007db7 url(../img/helper-icon.png) center center no-repeat;
+  background-size: 80%;
+  position: relative;
+}
+
+/* line 175, ../sass/bobhelper.scss */
+.bob-talking {
+  padding: 32px 0 24px 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+  padding: 1.2em 0 0;
+}
+
+/* line 185, ../sass/bobhelper.scss */
+.field-label {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-weight: 400;
+  letter-spacing: 0px;
+  display: block;
+}
+
+/* line 196, ../sass/bobhelper.scss */
+.switch-el .switch-label {
+  font-weight: 400;
+  font-size: 13px;
+  text-transform: capitalize !important;
+  font-family: "Roboto", sans-serif;
+  color: #898989;
+  letter-spacing: 0.2px;
+  padding-right: 10px;
+}
+
+/* line 208, ../sass/bobhelper.scss */
+.bob-x-icon {
+  width: 100px;
+  height: 100px;
+  margin: 10px auto 15px;
+  border-radius: 100%;
+  text-align: center;
+  padding-top: 0%;
+  border: 2px solid #f9e503;
+  background: -webkit-linear-gradient(left top, #f9e503, #fbee58);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #f9e503, #fbee58);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #f9e503, #fbee58);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #f9e503, #fbee58);
+  /* Standard syntax (must be last) */
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 3px 1px rgba(255, 255, 255, 0.6);
+  -webkit-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 3px 1px rgba(255, 255, 255, 0.6);
+  -moz-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 3px 1px rgba(255, 255, 255, 0.6);
+  -ms-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 3px 1px rgba(255, 255, 255, 0.6);
+}
+/* line 223, ../sass/bobhelper.scss */
+.bob-x-icon img {
+  width: 100%;
+  transform: scale(0.8);
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  margin: 0 auto;
+  display: block;
+}
+
+/* line 232, ../sass/bobhelper.scss */
+.x-icon-package {
+  border: 2px solid #aefd04;
+  background: -webkit-linear-gradient(left top, #aefd04, #83be03);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #aefd04, #83be03);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #aefd04, #83be03);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #aefd04, #83be03);
+  /* Standard syntax (must be last) */
+}
+
+/* line 236, ../sass/bobhelper.scss */
+.x-icon-hotel {
+  border: 2px solid #03fe67;
+  background: -webkit-linear-gradient(left top, #03fe67, #03b64b);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #03fe67, #03b64b);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #03fe67, #03b64b);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #03fe67, #03b64b);
+  /* Standard syntax (must be last) */
+}
+
+/* line 240, ../sass/bobhelper.scss */
+.x-icon-flight {
+  border: 2px solid #02e6fa;
+  background: -webkit-linear-gradient(left top, #02e6fa, #02747e);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #02e6fa, #02747e);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #02e6fa, #02747e);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #02e6fa, #02747e);
+  /* Standard syntax (must be last) */
+}
+
+/* line 244, ../sass/bobhelper.scss */
+.x-icon-trip {
+  border: 2px solid #fd6002;
+  background: -webkit-linear-gradient(left top, #fd6002, #a23e02);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #fd6002, #a23e02);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #fd6002, #a23e02);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #fd6002, #a23e02);
+  /* Standard syntax (must be last) */
+}
+
+/* line 248, ../sass/bobhelper.scss */
+.x-icon-request {
+  border: 2px solid #fb023d;
+  background: -webkit-linear-gradient(left top, #fb023d, #a70329);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #fb023d, #a70329);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #fb023d, #a70329);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #fb023d, #a70329);
+  /* Standard syntax (must be last) */
+}
+
+/* line 252, ../sass/bobhelper.scss */
+.x-icon-save {
+  border: 2px solid #f3fc01;
+  background: -webkit-linear-gradient(left top, #f3fc01, #c0c701);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #f3fc01, #c0c701);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #f3fc01, #c0c701);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #f3fc01, #c0c701);
+  /* Standard syntax (must be last) */
+}
+
+/* line 257, ../sass/bobhelper.scss */
+.bob-x-el {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 0;
+  text-align: center;
+  color: #000;
+}
+
+/* line 266, ../sass/bobhelper.scss */
+.bob-item {
+  padding: 10px 0 0;
+}
+/* line 271, ../sass/bobhelper.scss */
+.bob-item:hover .bob-x-icon {
+  box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 6px 2px rgba(255, 255, 255, 0.6);
+  -webkit-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 6px 2px rgba(255, 255, 255, 0.6);
+  -moz-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 6px 2x rgba(255, 255, 255, 0.6);
+  -ms-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 6px 2px rgba(255, 255, 255, 0.6);
+}
+/* line 277, ../sass/bobhelper.scss */
+.bob-item:hover .bob-x-icon img {
+  transform: scale(1.3);
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+}
+
+/* line 284, ../sass/bobhelper.scss */
+a.bob-x-el {
+  color: #000e1b;
+}
+
+/* line 288, ../sass/bobhelper.scss */
+.icon-paper {
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+}
+/* line 290, ../sass/bobhelper.scss */
+.icon-paper:hover {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+}
+
+/* line 299, ../sass/bobhelper.scss */
+.btn-number {
+  height: auto;
+  padding: 12px 10px;
+  margin: -1px 0;
+  background: #e9e9e9;
+  color: #666666;
+  border-radius: 0;
+  border-left: 1px solid #fff !important;
+  border-right: 1px solid #fff !important;
+}
+/* line 309, ../sass/bobhelper.scss */
+.btn-number:active {
+  background: #f9e503;
+}
+
+/* line 314, ../sass/bobhelper.scss */
+.input-number {
+  text-align: center;
+}
+
+/* line 318, ../sass/bobhelper.scss */
+.icon-option {
+  font-size: 40px;
+  text-align: center;
+  padding: 30px 0 0;
+  color: #000 !important;
+}
+
+/* line 325, ../sass/bobhelper.scss */
+span.heads-up {
+  color: #969696;
+  font-size: 12px;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.2px;
+  display: block;
+  padding: 6px 0 0 5px;
+}
+
+/* line 334, ../sass/bobhelper.scss */
+.mdl-button {
+  text-transform: none !important;
+}
+
+/* line 338, ../sass/bobhelper.scss */
+input.no-radius {
+  border-radius: 0 !important;
+  background: #d1d1d1;
+}
+
+/* line 343, ../sass/bobhelper.scss */
+.login-temp {
+  overflow: auto;
+  padding: 0 45px;
+}
+@media (max-width: 767px) {
+  /* line 343, ../sass/bobhelper.scss */
+  .login-temp {
+    padding: 0;
+  }
+}
+
+/* line 352, ../sass/bobhelper.scss */
+.progress-metre {
+  position: relative;
+  padding: 0 15px;
+}
+
+/* line 357, ../sass/bobhelper.scss */
+.centage-label {
+  position: absolute;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 300;
+  font-family: "Roboto", sans-serif;
+  right: -15px;
+  top: -5px;
+  color: #656565;
+}
+
+/* line 368, ../sass/bobhelper.scss */
+.side-fixed-menu {
+  position: fixed;
+  right: 0;
+  top: 30%;
+  text-align: right;
+  font-family: "Roboto", sans-serif;
+}
+/* line 375, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item {
+  display: block;
+  overflow: hidden;
+  text-align: right;
+  margin-bottom: 1px;
+}
+/* line 381, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item i {
+  display: inline-block;
+  float: right;
+  padding: 10px;
+  color: #fcf2e8 !important;
+  background: #79736e;
+  color: #000e1b;
+  font-size: 18px;
+  position: relative;
+  z-index: 200;
+}
+/* line 393, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item span {
+  display: inline-block;
+  float: right;
+  margin-right: -100%;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  padding: 9px 10px;
+  background: #ffffff;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 100;
+}
+/* line 407, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item .link {
+  padding: 6px 10px;
+  background: #0094ca;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 900;
+  display: inline-block;
+}
+/* line 415, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item .link:hover {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+}
+/* line 422, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item:hover span {
+  margin-right: 0;
+}
+/* line 426, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item:hover i.facebook {
+  background: #063ddc !important;
+  color: #ffffff !important;
+}
+/* line 431, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item:hover i.twitter {
+  background: #0698dc !important;
+  color: #ffffff !important;
+}
+/* line 436, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item:hover i.instagram {
+  background: #dc06b6 !important;
+  color: #ffffff !important;
+}
+/* line 441, ../sass/bobhelper.scss */
+.side-fixed-menu .side-fixed-item:hover i.youtube {
+  background: #dc2906 !important;
+  color: #ffffff !important;
+}
+
+/* line 449, ../sass/bobhelper.scss */
+.footer {
+  margin: 15px 0;
+}
+
+/* line 453, ../sass/bobhelper.scss */
+.footer-content {
+  padding: 20 15px;
+}
+/* line 456, ../sass/bobhelper.scss */
+.footer-content .links {
+  text-align: center;
+}
+/* line 458, ../sass/bobhelper.scss */
+.footer-content .links a {
+  display: inline-block;
+  text-transform: capitalize;
+  font-size: 12px;
+  color: #898989;
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  margin-right: 15px;
+}
+/* line 467, ../sass/bobhelper.scss */
+.footer-content .links a:hover {
+  color: #2c80dc;
+  text-decoration: underline;
+  text-decoration-color: #2c80dc;
+}
+
+/* line 476, ../sass/bobhelper.scss */
+h4.cum-room-number {
+  font-size: 14px;
+  font-weight: 700;
+  display: block;
+  text-transform: uppercase;
+}
+
+/* line 483, ../sass/bobhelper.scss */
+.spinner-btn {
+  overflow: hidden;
+  padding: 20px 0 0;
+  text-align: center;
+}
+/* line 488, ../sass/bobhelper.scss */
+.spinner-btn button {
+  border: 1px solid #f9e503;
+  background: #f9e503;
+  font-size: 22px;
+  font-weight: 700;
+  padding: 10px 25px;
+  display: inline-block;
+  font-family: "Roboto", sans-serif;
+}
+
+/* line 501, ../sass/bobhelper.scss */
+.switch-el input[type=radio] {
+  display: inline;
+}
+/* line 505, ../sass/bobhelper.scss */
+.switch-el input[type=checkbox] {
+  display: inline;
+}
+/* line 509, ../sass/bobhelper.scss */
+.switch-el label.mdl-switch {
+  display: inline !important;
+  margin-top: -3px;
+}
+/* line 513, ../sass/bobhelper.scss */
+.switch-el label.mdl-switch span {
+  display: inline-block;
+  padding-left: 5px;
+}

@@ -1,0 +1,71 @@
+<div class="hotel_wrap">
+  <div class="hotelImage col-md-3 no-padding">
+    <div class="item_img">
+      <div class="I_Img_holder">
+        <img src="<%= model.get("thumb") %>">
+        <!-- <img src="images/10.jpg" /> -->
+      </div><!-- end I_Img_holder -->
+    </div><!-- end item_img -->
+  </div><!-- end col-md-3 -->
+
+  <div class="col-md-9 hotelDetail">
+    <div class="col-md-7">
+      <div class="hotel_details">
+        <div class="hotel_name">
+          <h3><%= model.get("name") %></h3>
+        </div><!-- end hotel_name -->
+
+        <div class="_stars">
+          <small> <span class="green">Exclusive</span> deal</small><br>
+          <fieldset class="rating">
+            <span class="lstars">
+              <%= model.get("starsLevelHtml") %>
+            </span>
+          </fieldset>
+        </div><!-- end starts -->
+
+        <% if(model.get("location").location){ %>
+        <div class="_hotel_location">
+          <span><i class="icon-location"></i> <%= model.get("location").location %></span>
+        </div><!-- end _hotel_location -->
+        <% } %>
+
+        <div class="_hotel_reviews">
+          <span><strong>Rating: <%= (model.get("starsLevel") * 20) %>/100</strong></span>
+        </div><!-- end _hotel_reviews -->
+
+        <div class="_amenities">
+          <span><i class="icon-food" title="Restaurant"></i></span>
+          <span><i class="icon-swimming" title="swimming pool"></i></span>
+          <span><i class="icon-users-1" title="Meeting room"></i></span>
+          <span><i class="icon-school" title="Gym"></i></span>
+          <span><i class="icon-laptop" title="Internet Access"></i></span>
+          <span><i class="icon-wheelchair" title="Wheel Chair Access"></i></span>
+          <span><i class="icon-glass" title="Bar/lounge"></i></span>
+          <span><i class="icon-umbrella" title="Beach"></i></span>
+        </div><!-- end _amenities -->
+
+      </div><!-- end hotel-details -->
+    </div><!-- end col-md-7 -->
+
+    <div class="col-md-5">
+      <div class="hotel_px">
+        <div class="_nights"><span> lowest avg nightly rate </span></div>
+        <div class="_px">
+
+          <span>$<%= model.get("minAverPrice") %></span>
+        </div><!-- end _px -->
+
+        <div class="wallet_x_price">
+          <div class="svg-cover">
+            <svg height="14" width="100">
+              <line x1="0" y1="2" x2="50" y2="2" stroke="green" stroke-width="12px"></line>
+            </svg>
+          </div><!-- end svg-cover -->
+
+          <small>Affordable</small>
+        </div><!-- end wallet_x_price -->
+      </div><!-- end hotel_px -->
+    </div><!-- end col-md-5 -->
+  </div><!-- end hotelDetail -->
+</div><!-- end hotel_wrap -->

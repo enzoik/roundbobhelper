@@ -1,0 +1,378 @@
+<div class="wrap">
+  <div class="app-wrapper">
+    <topNav></topNav>
+    <div class="app-container">
+      <div class="app-content hotel-theme">
+        <div class="app-feed">
+          <div class="container">
+
+            <div class="item_nav_e">
+
+            </div><!-- end item_nav_e -->
+
+            <div class="app-feed-roll" id="app-feed">
+
+              <div class="ajax-content">
+                <div class="app-content-view">
+
+                  <div class="col-md-3 no-padding">
+                    <div class="side-bar-info">
+                      <div class="hotel_info">
+                        <div class="hotel_nr">
+                          <div class="hotel_name"><h3><%= model.get("name") %></h3> </div><!-- end hotel_name -->
+                          <div class="hItem_rating">
+                            <div class="_stars">
+                              <fieldset class="rating">
+                                <span class="lstars">
+                                  <%= model.get("starsLevelHtml") %>
+                                </span>
+                              </fieldset>
+                            </div><!-- end starts -->
+                            <div class="hItem_location">
+                              <span>Entebbe | Uganda</span>
+                              <a id="map_show" class="map_show btn btn-small radius btn-link">view map</a>
+                            </div><!-- end hItem_location -->
+                          </div><!-- end hItem_rating -->
+                        </div><!-- end hotel_nr -->
+                      </div><!-- end hotel_info -->
+
+                      <div class="query-summary-info">
+                        <span><strong>Adults</strong><small id="NumofAdults">: 1</small></span>
+                        <span><strong>Children</strong><small id="NumodChildren">: 0</small></span>
+                        <span><strong>Rooms</strong> <small id="NumOfRooms"> : 3</small></span>
+                      </div><!-- query-summary-info -->
+
+                      <div class="query-px-room">
+
+                        <div class="_qpRoomType">
+                          <span>Room Type: Deluxe room</span>
+                        </div><!-- end _qpRoomType -->
+
+                        <div class="_qpRoomPrice">
+                          <span class="priceLabel"><small>USD</small> 46</span>
+                          <span class="perNightLabel">Average per night</span>
+                          <span class="policyLabel"><a>Policies</a></span>
+                        </div><!-- end _qpRoomType -->
+
+                      </div><!-- end query-px-room -->
+
+                      <div class="query-px-room">
+                        <div class="_qpRoomType">
+                          <span>Total for - 30 days -</span>
+                        </div><!-- end _qpRoomType -->
+
+                        <div class="_qpRoomPrice">
+                          <span class="priceLabel"><small>USD</small> 1380</span>
+                          <span class="perNightLabel">Includes Special Discounts, Taxes and Fees</span><br/>
+                          <span><a href="#" class="btn btn-yellow btn-small">BOOK NOW</a></span>
+                        </div><!-- end _qpRoomType -->
+                      </div><!-- end query-px-room -->
+
+
+
+                    </div><!-- end side-bar-info -->
+                  </div><!-- -end col-md-3 -->
+
+
+                  <div class="col-md-9">
+                    <div class="hotel_detail_wrap">
+
+                      <div class="more_d_hotel">
+
+                        <div class="hotel_item_action">
+                          <a class="btn btn-small btn-yellow radius more_plus" id="more_plus">
+                            <div> Go to Rooms <span class="icon-angle-up more_sign" id="more_sign"></span></div>
+                          </a>
+
+                        </div><!-- end hotel_item_action -->
+
+
+                        <div class="hotel_reveal_info">
+                          <div class="hotel-item-menu">
+                            <span><a href="#">Photos</a></span>
+                            <span><a href="#">Description</a></span>
+                            <span><a href="#">Amenities</a></span>
+                            <span><a href="#">Map and Directions</a></span>
+                          </div>
+
+                          <div class="row_wrap">
+
+                            <div class="item-gallery">
+
+                              <!-- main slider carousel -->
+                              <div class="col-md-5 no-padding" id="slider">
+
+                                <div  id="carousel-bounding-box">
+                                  <div id="myCarousel" class="carousel slide">
+                                    <!-- main slider carousel items -->
+                                    <div class="carousel-inner">
+                                      <div class="active item" data-slide-number="0">
+                                        <img src="images/vitoria.jpg">
+                                      </div>
+
+                                      <div class="item" data-slide-number="1">
+                                        <img src="images/8.jpg">
+                                      </div>
+                                      <div class="item" data-slide-number="2">
+                                        <img src="images/10.jpg">
+                                      </div>
+                                      <div class="item" data-slide-number="3">
+                                        <img src="images/atlantis.jpg">
+                                      </div>
+                                      <div class="item" data-slide-number="4">
+                                        <img src="images/balloon.jpg">
+                                      </div>
+                                      <div class="item" data-slide-number="5">
+                                        <img src="images/bangkok.jpg">
+                                      </div>
+                                      <div class="item" data-slide-number="6">
+                                        <img src="images/banner1.jpg">
+                                      </div>
+
+                                      <div class="item" data-slide-number="7">
+                                        <img src="images/balloon.jpg">
+                                      </div>
+                                      <div class="item" data-slide-number="8">
+                                        <img src="images/bangkok.jpg">
+                                      </div>
+
+                                    </div><!-- end carousel-inner -->
+
+                                    <!-- main slider carousel nav controls -->
+                                    <!--<a class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
+                                    <a class="carousel-control right" href="#myCarousel" data-slide="next">›</a>-->
+                                  </div><!-- end myCarousel -->
+                                </div><!-- end carousel-bounding-box -->
+                              </div><!-- end #slider -->
+
+                              <!-- thumb navigation carousel -->
+
+                              <div class="col-md-7" id="slider-thumbs">
+
+                                <!-- thumb navigation carousel items -->
+                                <ul class="thumb-inline">
+                                  <li>
+                                    <a id="carousel-selector-0" class="selected">
+                                      <img src="images/vitoria.jpg">
+                                    </a>
+                                  </li>
+
+                                  <li>
+                                    <a id="carousel-selector-1">
+                                      <img src="images/8.jpg">
+                                    </a>
+                                  </li>
+
+                                  <li>
+                                    <a id="carousel-selector-2">
+                                      <img src="images/10.jpg">
+                                    </a>
+                                  </li>
+
+                                  <li>
+                                    <a id="carousel-selector-3">
+                                      <img src="images/atlantis.jpg">
+                                    </a>
+                                  </li>
+
+                                  <li>
+                                    <a id="carousel-selector-4">
+                                      <img src="images/balloon.jpg">
+                                    </a>
+                                  </li>
+
+                                  <li>
+                                    <a id="carousel-selector-5">
+                                      <img src="images/bangkok.jpg">
+                                    </a>
+                                  </li>
+
+                                  <li>
+                                    <a id="carousel-selector-6">
+                                      <img src="images/banner1.jpg">
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a id="carousel-selector-7">
+                                      <img src="images/balloon.jpg">
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a id="carousel-selector-8">
+                                      <img src="images/bangkok.jpg">
+                                    </a>
+                                  </li>
+
+                                </ul>
+
+                              </div>
+
+                            </div><!-- end item-gallery -->
+
+
+                          </div><!-- end row_wrap -->
+
+                        </div><!-- end hotel_reveal_info -->
+
+                      </div><!-- end more_d_hotel -->
+
+
+                    </div><!-- end hotel_detail_wrap -->
+
+
+                    <div class="hotel_room_wrap" id="rooms">
+
+                      <div class="hotel_room_options">
+                        <div class="room-header">
+                          <div class="col-md-10 no-padding">
+
+                            <div class="col-md-4">
+                              <span>Room Type</span>
+                            </div><!-- end col-md-4 -->
+
+                            <div class="col-md-2">
+                              <div class="centred">
+                                <span>Status</span>
+                              </div><!-- end inluded -->
+                            </div><!-- end col-md-2 -->
+
+                            <div class="col-md-3">
+                              <span>Avg per night</span>
+                            </div><!-- end col-md-3-->
+
+                          </div><!-- end col-md-10 -->
+                        </div><!-- end room-header -->
+
+
+                        <div class="RoomWrap">
+                          <div class="room_contain">
+                            <div class="col-md-10 no-padding bordered">
+                              <div class="room-row">
+                                <div class="col-md-4 no-padding">
+                                  <div class="room_type">
+                                    <span class="room_name">Deluxe 3 Bedroom Apartment</span>
+                                  </div><!-- end room_type -->
+                                </div><!-- -->
+                                <div class="col-md-2">
+                                  <div class="included centred">
+                                    <span>available</span>
+                                  </div><!-- end inluded -->
+                                </div><!-- -->
+                                <div class="col-md-3">
+                                  <div class="_pxRoom">
+                                    <span class="normal chopped">$170</span>
+                                    <span class="discounted">$125.2</span>
+                                  </div><!-- end canc_policy -->
+                                </div><!-- end col-md-3-->
+
+                                <div class="col-md-1">
+                                  <div class="rmlink centred">
+                                    <a class="ratesBtn">Rates</a>
+                                  </div><!-- end rmlink -->
+                                </div><!-- end col-md-1 -->
+
+                                <div class="col-md-2">
+                                  <div class="rmlink centred">
+                                    <a>Policies</a>
+                                  </div><!-- end rmlink -->
+                                </div><!-- end col-md-3 -->
+                              </div><!-- end room-row -->
+                              <div class="room-row">
+                                <div class="specialDeals">
+                                  <span class="specialLabel">Special Deal</span>
+                                  <span class="special-discount"> - Get 15% off with you one night stay</span>
+                                </div><!-- end specialDeals -->
+                              </div><!-- end room-row -->
+
+                            </div><!-- end col-md-10 -->
+
+                            <div class="col-md-2">
+                              <div class="_pxBTN room_book">
+                                <a href="hotel-booker-info.php" class="btn btn-yellow btn-small">BOOK NOW</a>
+                              </div>
+                            </div><!-- end col-md-3 -->
+
+                          </div><!-- end room_contain -->
+
+                          <div class="col-md-10 RatesAndPolicyContainer">
+                          </div><!-- end RatesAndPolicyContainer -->
+
+
+                        </div><!-- end roomWrap -->
+
+
+                        <div class="room_contain">
+                          <div class="col-md-10 no-padding bordered">
+                            <div class="room-row">
+                              <div class="col-md-4 no-padding">
+                                <div class="room_type">
+                                  <span class="room_name">Deluxe 3 Bedroom Apartment</span>
+                                </div><!-- end room_type -->
+                              </div><!-- -->
+                              <div class="col-md-2">
+                                <div class="included centred">
+                                  <span>available</span>
+                                </div><!-- end inluded -->
+                              </div><!-- -->
+                              <div class="col-md-3">
+                                <div class="_pxRoom">
+                                  <span class="normal">$125.2</span>
+                                  <span class="discounted">$125.2</span>
+                                </div><!-- end canc_policy -->
+                              </div><!-- end col-md-3-->
+
+                              <div class="col-md-1">
+                                <div class="rmlink centred">
+                                  <a>Rates</a>
+                                </div><!-- end rmlink -->
+                              </div><!-- end col-md-1 -->
+
+                              <div class="col-md-2">
+                                <div class="rmlink centred">
+                                  <a>Policies</a>
+                                </div><!-- end rmlink -->
+                              </div><!-- end col-md-3 -->
+                            </div><!-- end room-row -->
+
+                            <div class="room-row">
+                              <div class="specialDeals">
+                                <span class="specialLabel">Special Deal</span>
+                                <span class="special-discount"> - Get 15% off with you one night stay</span>
+                              </div><!-- end specialDeals -->
+                            </div><!-- end room-row -->
+
+                          </div><!-- end col-md-10 -->
+
+                          <div class="col-md-2">
+                            <div class="_pxBTN room_book">
+                              <a href="hotel-booker-info.php" class="btn btn-yellow btn-small">BOOK NOW</a>
+                            </div>
+                          </div><!-- end col-md-3 -->
+
+                        </div><!-- end room_contain -->
+
+
+
+                      </div><!-- end hotl_room_options -->
+                    </div><!-- end hotel_room_wrap -->
+
+                    <!--<div class="review_wrap" id="reviews">
+                    <h4 class="section-title">REVIEWS</h4>
+                  </div> -->
+
+                </div><!-- end col-md-9 -->
+
+              </div><!-- end app-content-view -->
+            </div><!-- end app-container-feed -->
+          </div><!-- end wrap-AFR -->
+        </div><!-- end ajax-content -->
+      </div><!-- end app-feed -->
+
+      <div class="screen-overlay hide">
+          <div class="container">
+            <button class="close-map btn btn-default btn-small btn-link pull-right">Close</button>
+          </div><!-- end container -->
+      </div><!-- end screen-overlay -->
+    </div>
+  </div>
+</div>

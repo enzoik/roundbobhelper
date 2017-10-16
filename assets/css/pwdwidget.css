@@ -1,0 +1,48 @@
+.pwdwidgetdiv
+{
+	/*width:155px;*/
+	overflow: auto;
+}
+.pwdfield
+{
+	/*width:150px;*/
+}
+.pwdopsdiv
+{
+	display: block;
+	float: left;
+	margin-right:6px;	
+}
+.pwdopsdiv a
+{
+	font-size : 10px; 
+}
+
+.pwdstrengthbar
+{
+	display: inline-block;
+	background: #cccccc;
+	height: 4px;
+	margin:0;
+
+}
+
+.pwdstrength
+{
+	float:none; 
+	height:20px;
+	width:auto;
+	margin-top:3px;
+
+}
+.pwdstrengthstr
+{
+    display: inline-block;
+    margin-left: 10px;
+	height: 14px;
+	margin-top: 0px;
+	font-size : 9px;
+	text-transform: uppercase; 
+	color: #999;
+	font-weight: 700;
+}
