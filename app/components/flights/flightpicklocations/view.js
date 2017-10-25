@@ -2,7 +2,40 @@ define(function(require, exports, module) {
   "use strict";
 
   var app = require("app");
+    var User = Backbone.Model.extend({}); //Line 9
 
+    var UserList = Backbone.Collection.extend({ //Line 11
+      model: User,
+      url: 'http://localhost/roundbobhelperv1/dist/app/api/airports/airports.json',
+      parse: function(response) {
+		 
+        return response;
+      }
+    });
+    var SelectionView = Backbone.View.extend({ //Line 19
+      el : $('#user-selection'),
+      render: function() {
+        $(this.el).html("You Selected : " + this.model.get('name')); //Line 22
+        return this;
+      },
+    });
+    var users = new UserList(); //Line 26
+    users.fetch({async: false});
+    var userNames = users.pluck("name");
+	 console.log("data",userNames);
+	jQuery.noConflict();
+	//console.log( $("#flight_from"));
+	console.log( $("#flight_from"));
+    $("#flight_from").autocomplete({ //Line 30
+      source : userNames,
+      minLength : 1,
+      select: function(event, ui){ //Line 33
+	  console.log("uixxx",ui);
+        var selectedModel = users.where({name: ui.item.value})[0];
+        var view = new SelectionView({model: selectedModel});
+        view.render();
+      }
+    });	
   var Config = {
     // Views needed for this layout
     Views: {
@@ -11,6 +44,7 @@ define(function(require, exports, module) {
     },
   };
 
+	
   module.exports = Backbone.Layout.extend({
     template: require("ldsh!./template"),
 
@@ -20,12 +54,25 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
-	
+	afterRender: function(){
+		$('#selected_to').hide();
+		$('#selected').hide();
+	},
 	events: {
       'click .continue_to_flight_pick_dates' : 'continue_to_flight_pick_dates',
+
     },
-	
+
 	continue_to_flight_pick_dates:function(e){
+	/*	new AutoCompleteView({
+			input: $("#flight_to"),
+			model: plugins,
+			onSelect: function (model) {
+				$("#selected").show().find("p").html(model.label());
+			},
+			highlight: "classname"	// optional, wrap keyword in <b class="classname"></b>
+		}).render();*/
+		
 			var flight_from = document.getElementById("flight_from").value;
 			var flight_to = document.getElementById("flight_to").value;
 		if(flight_from === null || flight_from === undefined || flight_from === ""){

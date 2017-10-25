@@ -1,29 +1,34 @@
 /*variables*/
 /*mixins*/
 /* line 4, ../sass/bobhelper.scss */
+strong {
+  font-weight: 700;
+}
+
+/* line 8, ../sass/bobhelper.scss */
 .helper-content {
   padding: 0;
   background-size: contain;
 }
 
-/* line 9, ../sass/bobhelper.scss */
+/* line 13, ../sass/bobhelper.scss */
 .color-banner-top {
   padding-top: 4%;
 }
 
-/* line 14, ../sass/bobhelper.scss */
+/* line 18, ../sass/bobhelper.scss */
 .app-account-menu .menu-icons-container {
   display: block;
   padding: 5px 0 20px;
   position: relative;
   overflow: hidden;
 }
-/* line 20, ../sass/bobhelper.scss */
-.app-account-menu .menu-icons-container .menu-bar-icon {
+/* line 24, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-bar-icon, .app-account-menu .menu-icons-container .logged-in-user, .app-account-menu .menu-icons-container .logged-in-user-config {
   display: inline-block;
 }
-/* line 23, ../sass/bobhelper.scss */
-.app-account-menu .menu-icons-container .menu-bar-icon button {
+/* line 27, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-bar-icon button, .app-account-menu .menu-icons-container .logged-in-user button, .app-account-menu .menu-icons-container .logged-in-user-config button {
   background: transparent;
   border: 0;
   background: #638b02;
@@ -33,11 +38,54 @@
   position: relative;
   z-index: 100;
 }
-/* line 33, ../sass/bobhelper.scss */
-.app-account-menu .menu-icons-container .menu-bar-icon button:hover {
+/* line 37, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .menu-bar-icon button:hover, .app-account-menu .menu-icons-container .logged-in-user button:hover, .app-account-menu .menu-icons-container .logged-in-user-config button:hover {
   color: #ffffff;
 }
-/* line 39, ../sass/bobhelper.scss */
+/* line 46, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .logged-in-user .user-icon {
+  width: 40px;
+  height: 40px;
+  background: #09f;
+  border-radius: 50%;
+}
+/* line 52, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .logged-in-user .user-icon .circled-dp {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 10px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+/* line 64, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .logged-in-user-config {
+  line-height: 1.3;
+  position: relative;
+  padding-left: 10px;
+  top: 5px;
+}
+/* line 71, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .logged-in-user-config .name {
+  font-weight: 700;
+  text-transform: capitalize;
+}
+/* line 76, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .logged-in-user-config .logged-in-menu {
+  text-transform: uppercase;
+  font-size: 11px;
+}
+/* line 80, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .logged-in-user-config .logged-in-menu span {
+  display: inline-block;
+  margin-right: 8px;
+}
+/* line 84, ../sass/bobhelper.scss */
+.app-account-menu .menu-icons-container .logged-in-user-config .logged-in-menu span a:hover {
+  color: #2c80dc;
+}
+/* line 92, ../sass/bobhelper.scss */
 .app-account-menu .menu-icons-container .menu-item-slide {
   display: inline-block;
   position: absolute;
@@ -50,7 +98,7 @@
   z-index: 80;
   opacity: 0;
 }
-/* line 48, ../sass/bobhelper.scss */
+/* line 101, ../sass/bobhelper.scss */
 .app-account-menu .menu-icons-container .menu-item-slide button.btn {
   border-radius: 0;
   background: #ffffff;
@@ -67,23 +115,23 @@
   -moz-transition: all 0.1s ease-in-out;
   -ms-transition: all 0.1s ease-in-out;
 }
-/* line 61, ../sass/bobhelper.scss */
+/* line 114, ../sass/bobhelper.scss */
 .app-account-menu .menu-icons-container .menu-item-slide button.btn:hover {
   text-decoration: underline;
   text-decoration-style: wavy;
   text-decocation-color: #638b02;
 }
-/* line 70, ../sass/bobhelper.scss */
+/* line 123, ../sass/bobhelper.scss */
 .app-account-menu .menu-icons-container .menu-item-slide-out {
   top: 5px;
   opacity: 1;
 }
-/* line 75, ../sass/bobhelper.scss */
+/* line 128, ../sass/bobhelper.scss */
 .app-account-menu .menu-icons-container .app-nav-button {
   float: right;
   display: inline-block;
 }
-/* line 79, ../sass/bobhelper.scss */
+/* line 132, ../sass/bobhelper.scss */
 .app-account-menu .menu-icons-container .app-nav-button button {
   width: 40px;
   height: 40px;
@@ -98,17 +146,17 @@
   background: -ms-linear-gradient(#dcdcdc, #e1e1e1);
   color: #515050 !important;
 }
-/* line 93, ../sass/bobhelper.scss */
+/* line 146, ../sass/bobhelper.scss */
 .app-account-menu .menu-icons-container .app-nav-button button:hover {
   background: #f1f1f1 !important;
 }
-/* line 97, ../sass/bobhelper.scss */
+/* line 150, ../sass/bobhelper.scss */
 .app-account-menu .menu-icons-container .app-nav-button button i:before {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
-/* line 108, ../sass/bobhelper.scss */
+/* line 161, ../sass/bobhelper.scss */
 .card-paper {
   height: auto !important;
   overflow: auto;
@@ -118,35 +166,35 @@
   padding: 0 15px;
 }
 
-/* line 117, ../sass/bobhelper.scss */
+/* line 170, ../sass/bobhelper.scss */
 .card-component {
   overflow: auto !important;
 }
 
-/* line 121, ../sass/bobhelper.scss */
+/* line 174, ../sass/bobhelper.scss */
 .button-div {
   padding: 5px 0 10px 0;
 }
 
-/* line 125, ../sass/bobhelper.scss */
+/* line 178, ../sass/bobhelper.scss */
 .card-content {
   padding: 10px 20px;
   overflow: auto;
 }
 
-/* line 130, ../sass/bobhelper.scss */
+/* line 183, ../sass/bobhelper.scss */
 .card-content-1 {
   padding: 10px 20px;
   overflow: none !important;
 }
 
-/* line 135, ../sass/bobhelper.scss */
+/* line 188, ../sass/bobhelper.scss */
 .card-content-x {
   padding: 0 1px;
   overflow: none !important;
 }
 
-/* line 140, ../sass/bobhelper.scss */
+/* line 193, ../sass/bobhelper.scss */
 .seperator {
   width: auto;
   height: 1px;
@@ -154,17 +202,17 @@
   background: #e1e1e1;
 }
 
-/* line 147, ../sass/bobhelper.scss */
+/* line 200, ../sass/bobhelper.scss */
 .mdl-button.mdl-button--yellow {
   background: #f9e503;
   color: #2d2f01;
 }
-/* line 151, ../sass/bobhelper.scss */
+/* line 204, ../sass/bobhelper.scss */
 .mdl-button.mdl-button--yellow:focus {
   background: #f9e503;
 }
 
-/* line 156, ../sass/bobhelper.scss */
+/* line 209, ../sass/bobhelper.scss */
 .bob-communicator {
   background: blue;
   /* For browsers that do not support gradients */
@@ -179,7 +227,7 @@
   overflow: auto !important;
 }
 
-/* line 165, ../sass/bobhelper.scss */
+/* line 218, ../sass/bobhelper.scss */
 .bob-character {
   width: 60px;
   height: 60px;
@@ -190,7 +238,7 @@
   position: relative;
 }
 
-/* line 175, ../sass/bobhelper.scss */
+/* line 228, ../sass/bobhelper.scss */
 .bob-talking {
   padding: 32px 0 24px 0;
   font-family: "Roboto", sans-serif;
@@ -201,7 +249,7 @@
   padding: 1.2em 0 0;
 }
 
-/* line 185, ../sass/bobhelper.scss */
+/* line 238, ../sass/bobhelper.scss */
 .field-label {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
@@ -211,7 +259,7 @@
   display: block;
 }
 
-/* line 196, ../sass/bobhelper.scss */
+/* line 249, ../sass/bobhelper.scss */
 .switch-el .switch-label {
   font-weight: 400;
   font-size: 13px;
@@ -222,7 +270,7 @@
   padding-right: 10px;
 }
 
-/* line 208, ../sass/bobhelper.scss */
+/* line 261, ../sass/bobhelper.scss */
 .bob-x-icon {
   width: 100px;
   height: 100px;
@@ -248,7 +296,7 @@
   -moz-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 3px 1px rgba(255, 255, 255, 0.6);
   -ms-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 3px 1px rgba(255, 255, 255, 0.6);
 }
-/* line 223, ../sass/bobhelper.scss */
+/* line 276, ../sass/bobhelper.scss */
 .bob-x-icon img {
   width: 100%;
   transform: scale(0.8);
@@ -263,7 +311,7 @@
   display: block;
 }
 
-/* line 232, ../sass/bobhelper.scss */
+/* line 285, ../sass/bobhelper.scss */
 .x-icon-package {
   border: 2px solid #aefd04;
   background: -webkit-linear-gradient(left top, #aefd04, #83be03);
@@ -276,7 +324,7 @@
   /* Standard syntax (must be last) */
 }
 
-/* line 236, ../sass/bobhelper.scss */
+/* line 289, ../sass/bobhelper.scss */
 .x-icon-hotel {
   border: 2px solid #03fe67;
   background: -webkit-linear-gradient(left top, #03fe67, #03b64b);
@@ -289,7 +337,7 @@
   /* Standard syntax (must be last) */
 }
 
-/* line 240, ../sass/bobhelper.scss */
+/* line 293, ../sass/bobhelper.scss */
 .x-icon-flight {
   border: 2px solid #02e6fa;
   background: -webkit-linear-gradient(left top, #02e6fa, #02747e);
@@ -302,7 +350,7 @@
   /* Standard syntax (must be last) */
 }
 
-/* line 244, ../sass/bobhelper.scss */
+/* line 297, ../sass/bobhelper.scss */
 .x-icon-trip {
   border: 2px solid #fd6002;
   background: -webkit-linear-gradient(left top, #fd6002, #a23e02);
@@ -315,7 +363,7 @@
   /* Standard syntax (must be last) */
 }
 
-/* line 248, ../sass/bobhelper.scss */
+/* line 301, ../sass/bobhelper.scss */
 .x-icon-request {
   border: 2px solid #fb023d;
   background: -webkit-linear-gradient(left top, #fb023d, #a70329);
@@ -328,7 +376,7 @@
   /* Standard syntax (must be last) */
 }
 
-/* line 252, ../sass/bobhelper.scss */
+/* line 305, ../sass/bobhelper.scss */
 .x-icon-save {
   border: 2px solid #f3fc01;
   background: -webkit-linear-gradient(left top, #f3fc01, #c0c701);
@@ -341,7 +389,7 @@
   /* Standard syntax (must be last) */
 }
 
-/* line 257, ../sass/bobhelper.scss */
+/* line 310, ../sass/bobhelper.scss */
 .bob-x-el {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
@@ -351,18 +399,18 @@
   color: #000;
 }
 
-/* line 266, ../sass/bobhelper.scss */
+/* line 319, ../sass/bobhelper.scss */
 .bob-item {
   padding: 10px 0 0;
 }
-/* line 271, ../sass/bobhelper.scss */
+/* line 324, ../sass/bobhelper.scss */
 .bob-item:hover .bob-x-icon {
   box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 6px 2px rgba(255, 255, 255, 0.6);
   -webkit-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 6px 2px rgba(255, 255, 255, 0.6);
   -moz-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 6px 2x rgba(255, 255, 255, 0.6);
   -ms-box-shadow: 0 8px 6px -3px rgba(0, 0, 0, 0.4), inset 6px 2px rgba(255, 255, 255, 0.6);
 }
-/* line 277, ../sass/bobhelper.scss */
+/* line 330, ../sass/bobhelper.scss */
 .bob-item:hover .bob-x-icon img {
   transform: scale(1.3);
   -webkit-transform: scale(1.3);
@@ -370,19 +418,19 @@
   -ms-transform: scale(1.3);
 }
 
-/* line 284, ../sass/bobhelper.scss */
+/* line 337, ../sass/bobhelper.scss */
 a.bob-x-el {
   color: #000e1b;
 }
 
-/* line 288, ../sass/bobhelper.scss */
+/* line 341, ../sass/bobhelper.scss */
 .icon-paper {
   transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
 }
-/* line 290, ../sass/bobhelper.scss */
+/* line 343, ../sass/bobhelper.scss */
 .icon-paper:hover {
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
@@ -390,7 +438,7 @@ a.bob-x-el {
   -ms-box-shadow: none !important;
 }
 
-/* line 299, ../sass/bobhelper.scss */
+/* line 352, ../sass/bobhelper.scss */
 .btn-number {
   height: auto;
   padding: 12px 10px;
@@ -401,17 +449,17 @@ a.bob-x-el {
   border-left: 1px solid #fff !important;
   border-right: 1px solid #fff !important;
 }
-/* line 309, ../sass/bobhelper.scss */
+/* line 362, ../sass/bobhelper.scss */
 .btn-number:active {
   background: #f9e503;
 }
 
-/* line 314, ../sass/bobhelper.scss */
+/* line 367, ../sass/bobhelper.scss */
 .input-number {
   text-align: center;
 }
 
-/* line 318, ../sass/bobhelper.scss */
+/* line 371, ../sass/bobhelper.scss */
 .icon-option {
   font-size: 40px;
   text-align: center;
@@ -419,7 +467,7 @@ a.bob-x-el {
   color: #000 !important;
 }
 
-/* line 325, ../sass/bobhelper.scss */
+/* line 378, ../sass/bobhelper.scss */
 span.heads-up {
   color: #969696;
   font-size: 12px;
@@ -429,36 +477,36 @@ span.heads-up {
   padding: 6px 0 0 5px;
 }
 
-/* line 334, ../sass/bobhelper.scss */
+/* line 387, ../sass/bobhelper.scss */
 .mdl-button {
   text-transform: none !important;
 }
 
-/* line 338, ../sass/bobhelper.scss */
+/* line 391, ../sass/bobhelper.scss */
 input.no-radius {
   border-radius: 0 !important;
   background: #d1d1d1;
 }
 
-/* line 343, ../sass/bobhelper.scss */
+/* line 396, ../sass/bobhelper.scss */
 .login-temp {
   overflow: auto;
   padding: 0 45px;
 }
 @media (max-width: 767px) {
-  /* line 343, ../sass/bobhelper.scss */
+  /* line 396, ../sass/bobhelper.scss */
   .login-temp {
     padding: 0;
   }
 }
 
-/* line 352, ../sass/bobhelper.scss */
+/* line 405, ../sass/bobhelper.scss */
 .progress-metre {
   position: relative;
   padding: 0 15px;
 }
 
-/* line 357, ../sass/bobhelper.scss */
+/* line 410, ../sass/bobhelper.scss */
 .centage-label {
   position: absolute;
   display: inline-block;
@@ -470,7 +518,7 @@ input.no-radius {
   color: #656565;
 }
 
-/* line 368, ../sass/bobhelper.scss */
+/* line 421, ../sass/bobhelper.scss */
 .side-fixed-menu {
   position: fixed;
   right: 0;
@@ -478,14 +526,14 @@ input.no-radius {
   text-align: right;
   font-family: "Roboto", sans-serif;
 }
-/* line 375, ../sass/bobhelper.scss */
+/* line 428, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item {
   display: block;
   overflow: hidden;
   text-align: right;
   margin-bottom: 1px;
 }
-/* line 381, ../sass/bobhelper.scss */
+/* line 434, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item i {
   display: inline-block;
   float: right;
@@ -497,7 +545,7 @@ input.no-radius {
   position: relative;
   z-index: 200;
 }
-/* line 393, ../sass/bobhelper.scss */
+/* line 446, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item span {
   display: inline-block;
   float: right;
@@ -514,7 +562,7 @@ input.no-radius {
   position: relative;
   z-index: 100;
 }
-/* line 407, ../sass/bobhelper.scss */
+/* line 460, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item .link {
   padding: 6px 10px;
   background: #0094ca;
@@ -523,50 +571,50 @@ input.no-radius {
   font-weight: 900;
   display: inline-block;
 }
-/* line 415, ../sass/bobhelper.scss */
+/* line 468, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item .link:hover {
   text-decoration: underline;
   text-decoration-style: wavy;
 }
-/* line 422, ../sass/bobhelper.scss */
+/* line 475, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item:hover span {
   margin-right: 0;
 }
-/* line 426, ../sass/bobhelper.scss */
+/* line 479, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item:hover i.facebook {
   background: #063ddc !important;
   color: #ffffff !important;
 }
-/* line 431, ../sass/bobhelper.scss */
+/* line 484, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item:hover i.twitter {
   background: #0698dc !important;
   color: #ffffff !important;
 }
-/* line 436, ../sass/bobhelper.scss */
+/* line 489, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item:hover i.instagram {
   background: #dc06b6 !important;
   color: #ffffff !important;
 }
-/* line 441, ../sass/bobhelper.scss */
+/* line 494, ../sass/bobhelper.scss */
 .side-fixed-menu .side-fixed-item:hover i.youtube {
   background: #dc2906 !important;
   color: #ffffff !important;
 }
 
-/* line 449, ../sass/bobhelper.scss */
+/* line 502, ../sass/bobhelper.scss */
 .footer {
   margin: 15px 0;
 }
 
-/* line 453, ../sass/bobhelper.scss */
+/* line 506, ../sass/bobhelper.scss */
 .footer-content {
   padding: 20 15px;
 }
-/* line 456, ../sass/bobhelper.scss */
+/* line 509, ../sass/bobhelper.scss */
 .footer-content .links {
   text-align: center;
 }
-/* line 458, ../sass/bobhelper.scss */
+/* line 511, ../sass/bobhelper.scss */
 .footer-content .links a {
   display: inline-block;
   text-transform: capitalize;
@@ -576,14 +624,19 @@ input.no-radius {
   font-family: "Roboto", sans-serif;
   margin-right: 15px;
 }
-/* line 467, ../sass/bobhelper.scss */
+/* line 520, ../sass/bobhelper.scss */
+.footer-content .links a.home {
+  color: #333;
+  font-size: 16px;
+}
+/* line 525, ../sass/bobhelper.scss */
 .footer-content .links a:hover {
   color: #2c80dc;
   text-decoration: underline;
   text-decoration-color: #2c80dc;
 }
 
-/* line 476, ../sass/bobhelper.scss */
+/* line 534, ../sass/bobhelper.scss */
 h4.cum-room-number {
   font-size: 14px;
   font-weight: 700;
@@ -591,13 +644,13 @@ h4.cum-room-number {
   text-transform: uppercase;
 }
 
-/* line 483, ../sass/bobhelper.scss */
+/* line 541, ../sass/bobhelper.scss */
 .spinner-btn {
   overflow: hidden;
   padding: 20px 0 0;
   text-align: center;
 }
-/* line 488, ../sass/bobhelper.scss */
+/* line 546, ../sass/bobhelper.scss */
 .spinner-btn button {
   border: 1px solid #f9e503;
   background: #f9e503;
@@ -608,21 +661,65 @@ h4.cum-room-number {
   font-family: "Roboto", sans-serif;
 }
 
-/* line 501, ../sass/bobhelper.scss */
+/* line 559, ../sass/bobhelper.scss */
 .switch-el input[type=radio] {
   display: inline;
 }
-/* line 505, ../sass/bobhelper.scss */
+/* line 563, ../sass/bobhelper.scss */
 .switch-el input[type=checkbox] {
   display: inline;
 }
-/* line 509, ../sass/bobhelper.scss */
+/* line 567, ../sass/bobhelper.scss */
 .switch-el label.mdl-switch {
   display: inline !important;
   margin-top: -3px;
 }
-/* line 513, ../sass/bobhelper.scss */
+/* line 571, ../sass/bobhelper.scss */
 .switch-el label.mdl-switch span {
   display: inline-block;
   padding-left: 5px;
+}
+
+/* line 578, ../sass/bobhelper.scss */
+.notice-wrap {
+  padding: 15px 0;
+  text-align: center;
+}
+
+/* line 583, ../sass/bobhelper.scss */
+.request-summary {
+  padding: 10px 0;
+  font-family: "Roboto", sans-serif !important;
+}
+/* line 588, ../sass/bobhelper.scss */
+.request-summary .item-label {
+  display: block !important;
+  padding: 8px 0 6px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+/* line 595, ../sass/bobhelper.scss */
+.request-summary .detail {
+  font-size: 14px;
+  color: #666666;
+  padding: 0 0 5px 0;
+  text-transform: capitalize;
+  font-weight: 400;
+  color: #09f;
+}
+/* line 603, ../sass/bobhelper.scss */
+.request-summary .detail span {
+  font-size: 11px;
+  color: #323232;
+}
+/* line 609, ../sass/bobhelper.scss */
+.request-summary .date {
+  margin-top: 10px;
+}
+/* line 612, ../sass/bobhelper.scss */
+.request-summary .date span {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: #e1e1e1;
 }

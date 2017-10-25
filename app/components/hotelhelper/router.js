@@ -9,6 +9,7 @@ define(function(require, exports, module) {
         Hotelbookingnumber: require("./hotelpeoplebooking/view"),
         Hotelbookingcalloption: require("./calloption/view"),
         Hotelbookingemailoption: require("./emailoption/view"),
+        RequestDetails: require("./hotelssumary/view"),
       },
     };
 
@@ -33,6 +34,11 @@ define(function(require, exports, module) {
             "picklocation/:selectlocation_h/:travel_dates_m_h/:multiple_h/:multibookeroption_h/:media": "multipleemailoption",
 			//#picklocation/nn/2017-09-17_2017-09-17_round_m/m/adlts_1_chldn_0_rooms_1/call/true_
 			"picklocation/:selectlocation_h/:travel_dates_m_h/:multiple_h/:multibookeroption_h/:media/:status": "multiplecalloption",
+			"picklocation/:selectlocation_h/:travel_dates_m_h/:multiple_h/:multibookeroption_h/:media/:status/:m_code/:m_send_to/:calling_state/:user_details": "summarycalloption",
+			"picklocation/:selectlocation_h/:travel_dates_m_h/:multiple_h/:multibookeroption_h/:media/:status/:email_code/:email_state/:user_details": "summaryemailoption",
+			////http://localhost/roundbobhelperv1/dist/#picklocation/kkk/26-10-2017_31-10-2017_s/s/single/true_/calling/sen_to/patrick_256701256896_call m_code/m_send_to
+			//http://localhost/roundbobhelperv1/dist/#picklocation/hhhh/26-10-2017_31-10-2017_s/s/single/true_/calling/sen_to/kkk_5465655465_call
+			//http://localhost/roundbobhelperv1/dist/#picklocation/kkekeke/26-10-2017_28-10-2017_m/m/adlts_1_chldn_0_rooms_1/call/true_/m_call/pppp_2568958566_call
         },
 
         flightpeoplebookeroptions: function() {
@@ -150,6 +156,24 @@ define(function(require, exports, module) {
 			var url_ = current_url.split("#picklocation/")[1];	
 			console.log("call",url_);			
 			new Hotelhelper.Views.Hotelbookingemailoption({selectlocation_h:url_.split('/')[0],travel_dates_m_h:url_.split('/')[1],multiple_h:"m",multibookeroption_h:url_.split('/')[3],media:media_}).render();
+		},
+		/*	"picklocation/:selectlocation_h/:travel_dates_m_h/:multiple_h/:multibookeroption_h/:media/:status/:calling_state/:user_details": "summarycalloption",
+			"picklocation/:selectlocation_h/:travel_dates_m_h/:multiple_h/:multibookeroption_h/:media/:status/:email_code/:email_state/:user_details": "summaryemailoption",*/
+			//http://localhost/roundbobhelperv1/dist/#picklocation/hotel/27-10-2017_31-10-2017_s/s/single/true_/calling/sen_to/patr_256701254658_call
+			//hotel/27-10-2017_31-10-2017_s/s/single/true_/calling/sen_to/patr_256701254658_call
+		summarycalloption: function(){
+			var media_ = "email";
+			var current_url  = window.location.href.toString();
+			var url_ = current_url.split("#picklocation/")[1];	
+			console.log("call",url_);			
+			new Hotelhelper.Views.RequestDetails({selectlocation_h:url_.split('/')[0],travel_dates_m_h:url_.split('/')[1],multiple_h:"m",multibookeroption_h:url_.split('/')[3],media:media_,status:"status",m_code:"m_code",m_send_to:"m_send_to",calling_state:"calling_state",user_details:"user_details"}).render();
+		},
+		summaryemailoption: function(){
+			var media_ = "email";
+			var current_url  = window.location.href.toString();
+			var url_ = current_url.split("#picklocation/")[1];	
+			console.log("call",url_);			
+			new Hotelhelper.Views.RequestDetails({selectlocation_h:url_.split('/')[0],travel_dates_m_h:url_.split('/')[1],multiple_h:"m",multibookeroption_h:url_.split('/')[3],media:media_,status:"status",email_code:"email_code",email_state:"email_state",user_details:"user_details"}).render();
 		},
 
     });

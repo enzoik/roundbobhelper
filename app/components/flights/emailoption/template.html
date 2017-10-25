@@ -75,12 +75,12 @@
     <div class="card-content-1">
       <div class="switch-el">
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-            <input type="radio" id="option-1" class="mdl-radio__button options" name="options" value="1" checked>
+            <input type="radio" id="option-1" class="mdl-radio-button options" name="options" value="1" checked>
             <span class="mdl-radio__label switch-label">send by email </span>
           </label>
 
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-            <input type="radio" id="option-2" class="mdl-radio__button options" name="options" value="2">
+            <input type="radio" id="option-2" class="mdl-radio-button options" name="options" value="2">
             <span class="mdl-radio__label switch-label">Send by WhatsApp</span>
           </label>
       </div>
@@ -97,13 +97,23 @@
       </div>
     </div> 
     
-    <div class="col-md-12">
+    <div class="col-md-12 send-emai-option">
       <div class="row">
         <div class="card-content">
           <input id="clients_email" type="text" class="form-element" id="send_user_contact"  placeholder="Your email address">
         </div><!-- end card-content -->
       </div>
-    </div>    
+    </div>   
+
+    <div class="col-md-12 sendto-whatsapp-option hide">
+      <div class="row">
+        <div class="card-content">
+          <input id="client_email" type="text" class="form-element" id="send_user_contact"  placeholder="Your WhatsApp number">
+		  <span class="heads-up">Use International format e.g 18908908900</span>
+        </div><!-- end card-content -->
+      </div>
+    </div>
+	
     </div><!-- end card-component -->  <br/>
     </div><!-- end card-paper -->
 	<div class="email_quote">

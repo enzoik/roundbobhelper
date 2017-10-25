@@ -32,6 +32,8 @@
     "backbone.layoutmanager": "^1.0.0",
     "bower": "^1.8.0",
     "esprima": "^4.0.0",
+    "generator-backbone": "^0.4.0",
+    "generator-backbone-mocha": "^0.1.1",
     "generator-bbb": "^0.3.5",
     "grunt-bbb-requirejs": "0.1.0-alpha.8",
     "grunt-bbb-server": "^0.1.2",

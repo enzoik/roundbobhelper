@@ -15,7 +15,8 @@ define(function(require, exports, module) {
       List: require("../categorieslist/view"),
      // CountriesSelector: require("../countries/view"),
       TopIconHolder: require("../common/topIconHolder/view"),
-     // NotificationView: require("../../notifications/default/view"),
+	   HeaderNav: require("../../common/header/view"),
+      FooterNav: require("../../common/footer/view"),
     },
   };
 
@@ -40,10 +41,14 @@ define(function(require, exports, module) {
 
     // Add All the view Elements
     views: {
-      "topNav": new Category.Views.TopNav(),
+      "headernav": new Category.Views.HeaderNav(),
+      "footernav": new Category.Views.FooterNav(),
+	  
+     // "topNav": new Category.Views.TopNav(),
       //"countriesSelector": new Package.Views.CountriesSelector(),
-      ".item_nav_e": new Category.Views.TopIconHolder(),
-      ".package-category-container": new Category.Views.List({ collection: categoriesCollection }),
+     // ".item_nav_e": new Category.Views.TopIconHolder(),
+      //".package-category-container": new Category.Views.List({ collection: categoriesCollection }),
+      ".row": new Category.Views.List({ collection: categoriesCollection }),
     },
 
     afterRender: function(){

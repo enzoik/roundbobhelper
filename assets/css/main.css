@@ -21,7 +21,6 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  outline: 0 !important;
 }
 
 /* line 22, ../sass/_reset.scss */

@@ -25,6 +25,8 @@ define(function(require, exports, module) {
 		'click .submit_call' : 'submit_call',
 	},
 	submit_call:function(){
+
+		
 		var client_phone = document.getElementById("clients_phone_number").value;
 		var client_name = document.getElementById("clients_name").value;
 		var current_url  = window.location.href.toString();
@@ -51,40 +53,28 @@ define(function(require, exports, module) {
 			  'error'
 			);			
 		}else{
-			/*console.log(current_url.split("#flights")[0]);
-			console.log(current_url.split("#flights")[1]);
-			var url_ = current_url.split("#flights")[1];
-			var redirectTo = '';
-			app.router.go(redirectTo);	*/	
-			swal({
-			  title: 'Are you sure?',
-			  text: "You won't be able to revert this!",
-			  type: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Submit!',
-			  cancelButtonText: 'cancel!',
-			  confirmButtonClass: 'btn btn-success',
-			  cancelButtonClass: 'btn btn-danger',
-			  buttonsStyling: false
-			}).then(function () {
-			  swal(
-				'Deleted!',
-				'Your file has been deleted.',
-				'success'
-			  );
-			}, function (dismiss) {
-			  // dismiss can be 'cancel', 'overlay',
-			  // 'close', and 'timer'
-			  if (dismiss === 'cancel') {
-				swal(
-				  'Cancelled',
-				  'Your imaginary file is safe :)',
-				  'error'
-				);
-			  }
-			});			
+
+				//var current_url  = window.location.href.toString();
+				console.log(current_url.split("#flights")[1]);
+				var url_ = current_url.split("#flights")[1];
+				//hhh_rf_Economy/2017-09-17_2017-10-17_round_m/m/2017-09-17_2017-10-17_round_m/m
+				var redirectTo = '/flights';
+				if(url_.split('/')[3] == "m"){
+					console.log("many travellers");
+					redirectTo += current_url.split("#flights")[1];
+					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";m_mail/m_client/name_email_email
+					redirectTo += '/m_mail/m_client/' + client_name+"_"+client_phone+"_call";
+					console.log("call many",redirectTo);
+					console.log("mmmmm",url_.split('/')[3]);
+				}else{
+					redirectTo += current_url.split("#flights")[1];
+					//redirectTo += '/' + "call/true_";
+					console.log("call single",redirectTo);	
+					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";s_client/name_email_email
+					redirectTo += '/s_client/'+client_name+"_"+client_phone+"_call";
+				}
+
+				app.router.go(redirectTo);			
 			
 		}
 

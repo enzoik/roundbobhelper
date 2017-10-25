@@ -23,33 +23,112 @@ define(function(require, exports, module) {
 	events: {
       'click .multiplepeopleGetDate' : 'multiplepeopleGetDate',
       'click .alonepeopleGetDate' : 'alonepeopleGetDate',
+	  'mouseover #departure-date' : 'departure_date',
+	  'mouseover #return-date' : 'return_date',
     },
 	
+	departure_date:function(e){
+		var view = this;
+		//console.log($(e.currentTarget));
+		//$.noConflict();
+		jQuery.noConflict();
+		$(e.currentTarget).datepicker({
+		  minDate:'2',
+		  dateFormat: 'dd-mm-yy',
+		  defaultDate:view.selectedDate,
+		  onSelect:function(dateText,datePicker) {
+			console.log('onSelect',dateText);
+			view.selectedDate = dateText;  
+			//$("#departure-date").val("");
+		  }
+		});
+	
+	},
+	return_date:function(e){
+		var that = this;
+		var date = new Date();
+		var value_t = date.getTime();
+		
+		var parts = document.getElementById("departure-date").value.split("-");
+		var final_d_date=new Date(parts[2], parts[1] - 1, parts[0]);
+		
+		var ONE_DAY = 1000 * 60 * 60 * 24;
+		var difference_ms = Math.abs(final_d_date.getTime() - value_t);
+		var days =Math.round(difference_ms/ONE_DAY) + 1;
+	//	console.log(parts+" date","final_d_date"+ final_d_date.getTime()+"value"+value_t+" days "+days);
+		//console.log($(e.currentTarget));
+		//$.noConflict();
+		jQuery.noConflict();
+		$(e.currentTarget).datepicker({
+		  minDate:days,
+		  dateFormat: 'dd-mm-yy',
+		  defaultDate:that.selectedDate,
+		  onSelect:function(dateText,datePicker) {
+			console.log('onSelect',dateText);
+			that.selectedDate = dateText;  
+			//$("#departure-date").val("");
+		  }
+		});
+	},
+	date_picker:function(){
+		
+	},
 	multiplepeopleGetDate:function(e){
 		//console.log("multiple");
 			var departure_date = document.getElementById("departure-date").value;
 			var return_date = document.getElementById("return-date").value;
 			var roundtrip = document.getElementById("switch-1");
+			var travel_trip="";
+				
+			if(!roundtrip.checked){
+					travel_trip="oneway";
+
+			}else{
+				travel_trip="round";
+			}
 		if(departure_date === null || departure_date === undefined || departure_date === ""){
 			swal(
 			  'Empty',
 			  ' Departure Date Field Should not Be Left Empty',
 			  'error'
 			);			
-		}else if(return_date === null || return_date === undefined || return_date === "" ){
-			swal(
-			  'Empty',
-			  'Return Date Field Should not Be Left Empty',
-			  'error'
-			);				
+	/*	}else if(!roundtrip.checked ){
+			if(return_date === null || return_date === undefined || return_date === "" ){
+				swal(
+				  'Empty',
+				  'Return Date Field Should not Be Left Empty',
+				  'error'
+				);
+			}*/				
+		}else if(roundtrip.checked && return_date === null){
+			travel_trip="round";
+			console.log("xxx");
+				swal(
+				  'Empty',
+				  'Return Date Field Should not Be Left Empty!',
+				  'error'
+				);
+
+		}else if(roundtrip.checked && return_date === undefined){
+			travel_trip="round";
+			console.log("xxx");
+				swal(
+				  'Empty',
+				  'Return Date Field Should not Be Left Empty!',
+				  'error'
+				);
+
+		}else if(roundtrip.checked && return_date === ""){
+			travel_trip="round";
+			console.log("xxx");
+				swal(
+				  'Empty',
+				  'Return Date Field Should not Be Left Empty!',
+				  'error'
+				);
+				//}
+	
 		}else{
-			
-			var travel_trip="";
-			if(roundtrip.checked){
-				travel_trip="round";
-			}else{
-				travel_trip="oneway";
-			}
 			var current_url  = window.location.href.toString();
 		//	console.log("multiple "+departure_date+" return "+return_date+"trip type"+travel_trip+"current_url"+current_url);
 			//console.log(current_url.split("#flights")[1]);
@@ -72,25 +151,49 @@ define(function(require, exports, module) {
 		var departure_date = document.getElementById("departure-date").value;
 		var return_date = document.getElementById("return-date").value;
 		var roundtrip = document.getElementById("switch-1");
+		var travel_trip="";
+		
+		if(!roundtrip.checked){
+			travel_trip="oneway";
+		}else{
+			travel_trip="round";
+		}
 		if(departure_date === null || departure_date === undefined || departure_date === ""){
 			swal(
 			  'Empty',
 			  ' Departure Date Field Should not Be Left Empty',
 			  'error'
 			);			
-		}else if(return_date === null || return_date === undefined || return_date === "" ){
+		/*}else if(return_date === null || return_date === undefined || return_date === "" ){
 			swal(
 			  'Empty',
 			  'Return Date Field Should not Be Left Empty',
 			  'error'
-			);				
-		}else{
-			var travel_trip="";
-			if(roundtrip.checked){
+			);	*/			
+		}else if(roundtrip.checked && return_date === null){
+			swal(
+			  'Empty',
+			  'Return Date Field Should not Be Left Empty!',
+			  'error'
+			);
+		}else if(roundtrip.checked && return_date === undefined){
+			swal(
+			  'Empty',
+			  'Return Date Field Should not Be Left Empty!',
+			  'error'
+			);
+
+		}else if(roundtrip.checked && return_date === ""){
 				travel_trip="round";
-			}else{
-				travel_trip="oneway";
-			}
+				//if(return_date === null || return_date === undefined || return_date === "" ){
+					swal(
+					  'Empty',
+					  'Return Date Field Should not Be Left Empty!',
+					  'error'
+					);
+				//}
+
+		}else{
 			var current_url  = window.location.href.toString();
 			//console.log("multiple "+departure_date+" return "+return_date+"trip type"+travel_trip+"current_url"+current_url);
 			//console.log(current_url.split("#flights")[1]);

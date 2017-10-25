@@ -70,25 +70,16 @@
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
 
-    <div class="card-paper">
+   <!-- <div class="card-paper">
     <div class="card-content-1" style="margin: 3px auto;">
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
           <input  type="checkbox" id="switch-1" class="mdl-switch__input" checked>
           <span class="mdl-switch__label switch-label">Return flight (Off/On)</span>
           </label>
-      </div><!-- end card-content-1 -->
-    </div><!-- end card-paper -->
+      </div>
+    </div> -->
 
-    <script>
-      $(document).ready(function(){
-        $(document).on('change','.mdl-switch__input',function(){
-          $('.card-content-flight-return-date').toggle();
-          // if($('.mdl-switch').hasClass('is-checked')){
-          //
-          // }
-        });
-      });
-    </script>
+
 
 
     <div class="card-paper">
@@ -99,9 +90,9 @@
     <div class="col-md-6">
       <div class="row">
         <div class="card-content">
-          <label class="field-label"><i class="icon-calendar-1"></i> Travel date</label>
+          <label class="field-label"><i class="icon-calendar-1"></i> Check In</label>
          <!-- <input id="travel_date_id" type="date" class="form-element" value="2017-09-17" name="date" placeholder="dd/mm/yyyy" readonly="readonly">-->
-          <input id="travel_date_id" type="date" class="form-element" value="" name="date" placeholder="dd/mm/yyyy" readonly="readonly">
+          <input id="check_in_id"  class="form-element" value="" name="date" placeholder="dd/mm/yyyy" readonly="readonly">
         </div><!-- end card-content -->
       </div>
     </div>
@@ -109,9 +100,9 @@
     <div class="col-md-6">
       <div class="row">
         <div class="card-content card-content-flight-return-date">
-          <label class="field-label"><i class="icon-calendar-1"></i> Return date</label>
+          <label class="field-label"><i class="icon-calendar-1"></i> Check Out</label>
          <!-- <input id="return_date_id" type="date" value="2017-09-17" class="form-element input-flight-return-date" placeholder="dd/mm/yyyy" readonly="readonly">-->
-          <input id="return_date_id" type="date" value="" class="form-element input-flight-return-date" placeholder="dd/mm/yyyy" readonly="readonly">
+          <input id="check_out_id"  value="" class="form-element input-flight-return-date" placeholder="dd/mm/yyyy" readonly="readonly">
         </div><!-- end card-content -->
       </div>
     </div>

@@ -25,6 +25,7 @@ define(function(require, exports, module) {
   app.packagesApi = "app/api/packages/";
   app.countriesApi = "app/api/countries/";
   app.categoriesApi = "app/api/categories/";
+  app.airportsApi = "app/api/airports/";
   // app.hotelsApi = "http://reacting.azurewebsites.net/app/api/hotels/";
 
   // attach notificationAlertHelpers

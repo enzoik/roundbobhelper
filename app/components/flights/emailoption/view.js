@@ -51,40 +51,34 @@ define(function(require, exports, module) {
 			  'error'
 			);		
 		}else{
-			/*console.log(current_url.split("#flights")[0]);
-			console.log(current_url.split("#flights")[1]);
-			var url_ = current_url.split("#flights")[1];
-			var redirectTo = '';
-			app.router.go(redirectTo);	*/	
-			swal({
-			  title: 'Are you sure?',
-			  text: "You won't be able to revert this!",
-			  type: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Submit!',
-			  cancelButtonText: 'cancel!',
-			  confirmButtonClass: 'btn btn-success',
-			  cancelButtonClass: 'btn btn-danger',
-			  buttonsStyling: false
-			}).then(function () {
-			  swal(
-				'Deleted!',
-				'Your file has been deleted.',
-				'success'
-			  );
-			}, function (dismiss) {
-			  // dismiss can be 'cancel', 'overlay',
-			  // 'close', and 'timer'
-			  if (dismiss === 'cancel') {
-				swal(
-				  'Cancelled',
-				  'Your imaginary file is safe :)',
-				  'error'
-				);
-			  }
-			});			
+
+				//var current_url  = window.location.href.toString();
+				console.log(current_url.split("#flights")[1]);
+				var url_ = current_url.split("#flights")[1];
+				//hhh_rf_Economy/2017-09-17_2017-10-17_round_m/m/2017-09-17_2017-10-17_round_m/m
+				var redirectTo = '/flights';
+				if(url_.split('/')[3] == "m"){
+					console.log("many travellers");
+					redirectTo += current_url.split("#flights")[1];
+					//redirectTo += '/' + "email/summary_email";
+					//redirectTo += '/' + client_name+"/"+clients_email+"/summary_email";
+					redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+clients_email+"_email";
+					console.log("email multiple",redirectTo);
+					console.log("mmmmm",url_.split('/')[3]);
+				}else{
+		//http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/26-10-2017_30-10-2017_s/s/single/email/sdng_mail/p234/sent_to  8
+		//mutiple email
+		//http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/26-10-2017_31-10-2017_m/m/adlts_1_chldn_0_rooms_1/email    5				
+				//http://localhost/roundbobhelperv1/dist/#picklocation/kkk/26-10-2017_25-10-2017_s/s/single/email/sdng_mail/p234/sent_to/kkk_kkk@gmail.com_email
+					redirectTo += current_url.split("#flights")[1];
+					//redirectTo += '/' + "s/single/email/sdng_mail/p234/sent_to/summary_email";
+					redirectTo += '/' + client_name+"_"+clients_email+"_email";
+					//name_email_email
+					console.log("email single",redirectTo);
+					console.log("mmmmm",url_.split('/')[3]);
+				}
+
+				app.router.go(redirectTo);			
 			
 		}
 	},

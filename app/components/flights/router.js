@@ -10,6 +10,7 @@ define(function(require, exports, module) {
         Flightpickdates: require("./flightpickdates/view"),
         Flightpicklocations: require("./flightpicklocations/view"),
         Travelpeople: require("./travelpeople/view"),
+        FinalSummary: require("./flightssumary/view"),
       },
     };
 
@@ -29,7 +30,12 @@ define(function(require, exports, module) {
 			//flights/rr_dd_Economy/2017-09-17_2017-10-17_round_s//s/single/email/sdng_mail
 			"flights/:destination_location_/:flightpickdates_/:travelpeople_/:no_of_travelers_/:quotation_media_/:calling/:call_one": "onepersoncalloption",
 			"flights/:destination_location_single/:flightpickdates_single/:single_traveller/:no_of_travelers_one/:quotation_media_single/:emailing_single/:email_one_single/:sending": "onepersonemailoption",
-        },
+			
+			"flights/:destination_location_single/:flightpickdates_single/:single_traveller/:no_of_travelers_one/:quotation_media_single/:emailing_single/:email_one_single/:sending/:summary": "final_details_summary",
+      //http://localhost/roundbobhelperv1/dist/#flights/jjj_jjjj_Economy/27-10-2017_31-10-2017__m/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/kkk_op@gmail.com_email
+//many email
+	  //http://localhost/roundbobhelperv1/dist/#flights/nnn_qqq_Economy/27-10-2017_30-10-2017__s/s/single/email/sdng_mail/p234/sent_to/kkk_p@gmail.com_email
+	  },
 
         getflight: function() {
           
@@ -52,19 +58,7 @@ define(function(require, exports, module) {
 		//selecting the departure and arrival places or airports
 		pickdates: function(){
 			console.log("flight details");
-		/*	var flight_from = document.getElementById("flight_from").value;
-			var flight_to = document.getElementById("flight_to").value;
-			var economy = document.getElementById("option-1");
-			var business = document.getElementById("option-2");
-			var first_class = document.getElementById("option-3");
-			var flight_class="";
-			if(economy.checked) {
-				flight_class="Economy";
-			}else if(business.checked){
-				flight_class="Business";
-			}else if(first_class.checked){
-				flight_class="First";
-			}*/
+
 
 		var current_url  = window.location.href.toString();
 		var url_ = current_url.split("#flights/")[1].split("/")[0];
@@ -156,6 +150,7 @@ define(function(require, exports, module) {
 			new Flight.Views.Emailoption({destination_location_single:url_.split('/')[0],flightpickdates_single:url_.split('/')[1],single_traveller:"s",no_of_travelers_one:"single",quotation_media_single:"email",emailing_single:"sdng_mail",email_one_single:"p234",sending:"sent_to"}).render();
 		
 		},
+		
 		onepersoncalloption: function(){
 			console.log("book");
 			var media_ = "email";
@@ -190,6 +185,17 @@ define(function(require, exports, module) {
 			//multiple /flights/hj_as_Economy/2017-09-17_2017-10-17_round_m/m/adlts_1_chldn_0_infnts_0/email
 			//destination_location/:flightpickdates/:travelpeople/:no_of_travelers/:quotation_media
 			new Flight.Views.Calloption({destination_location_:url_.split('/')[0],flightpickdates_:url_.split('/')[1],travelpeople_:url_.split('/')[2],no_of_travelers_:url_.split('/')[3],quotation_media_:media_,calling:"true_"}).render();
+		
+		},
+		
+
+		final_details_summary: function(){
+			var media_ = "call";
+			var current_url  = window.location.href.toString();
+			var url_ = current_url.split("#flights/")[1];	
+			console.log("call",url_);
+			//s/single/email/sdng_mail/p234/sent_to
+			new Flight.Views.FinalSummary({destination_location_single:url_.split('/')[0],flightpickdates_single:url_.split('/')[1],single_traveller:"s",no_of_travelers_one:"single",quotation_media_single:"email",emailing_single:"sdng_mail",email_one_single:"p234",sending:"sent_to",summary:"summary"}).render();
 		
 		},
     });

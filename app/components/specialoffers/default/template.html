@@ -1,6 +1,6 @@
-
 <div class="dashboard-bar">
   <div class="container">
+
     <div class="col-md-3 col-xs-6">
       
       <div class="application-logo">
@@ -27,7 +27,9 @@
 <div class="color-banner-top">
   <div class="container">
   <div class="col-md-8 col-md-offset-2">
+
   <headernav></headernav>
+
     <div class="card-paper">
     <div class="card-component row">
       <div class="bob-communicator">
@@ -64,7 +66,8 @@
     <div class="col-md-6">
       <div class="row">
         <div class="card-content">
-          <input id="clients_name" type="text" class="form-element" placeholder="What's you name?">
+        <label class="field-label">Destination</label>
+          <input id="destination_d" type="text" class="form-element" placeholder="Which city are you going to?">
         </div><!-- end card-content -->
       </div><!-- end row -->
     </div><!-- end col-md-6 -->
@@ -72,7 +75,17 @@
     <div class="col-md-6">
       <div class="row">
         <div class="card-content">
-          <input id="departure_place" type="text" class="form-element" placeholder="Where are you from">
+          <label class="field-label">Activity category</label>
+          <select id="category_id" class="form-element" style="text-align: left;">
+            <option>City Gateaway</option>
+            <option>Signature Holidays</option>
+            <option>Honeymoon</option>
+            <option>Special Offers</option>
+            <option>Sports Holiday</option>
+            <option>Business class</option>
+            <option>Rugby</option>
+            <option>Formula 1</option>
+          </select>
         </div><!-- end card-content -->
       </div><!-- end row -->
     </div><!-- end col-md-6 -->    
@@ -84,7 +97,8 @@
     <div class="col-md-6">
       <div class="row">
         <div class="card-content">
-          <input id="destination_place" type="text" class="form-element" placeholder="Whats you holiday destination?">
+          <label>Travel date</label>
+          <input id="travel_date" type="text" class="form-element datepicker" placeholder="Pick a date">
         </div><!-- end card-content -->
       </div><!-- end row -->
     </div><!-- end col-md-6 -->
@@ -92,6 +106,8 @@
     <div class="col-md-6">
       <div class="row">
         <div class="card-content">
+          <label class="field-label">Additional Request</label>
+          <textarea id="addtitional_request_id" class="form-element"></textarea>
         </div><!-- end card-content -->
       </div><!-- end row -->
     </div><!-- end col-md-6 -->    
@@ -100,117 +116,6 @@
 
     </div><!-- end card-paper -->
 
-
-
-    <div class="card-paper">
-
-    <div class="card-component">
-    <div class="col-md-4">
-      <div class="row">        
-          <div class="card-content">
-            <label class="field-label">Travel date</label>
-            <input id="travel_date" type="text" class="form-element" placeholder="mm/dd/yyyy">
-          </div><!-- end card-content -->
-
-          <div class="card-content">
-            <label class="field-label">Departure date</label>
-            <input id="departure_date" type="text" class="form-element" placeholder="mm/dd/yyyy">
-          </div><!-- end card-content -->
-
-
-      </div><!-- end row -->
-    </div><!-- end col-md-4 -->
-
-
-
-    <div class="col-md-8">
-      <div class="row">
-        <div class="card-content-1">
-          
-
-          <div class="col-md-4">
-      <div class="row">
-      
-        <div class="card-content-x">
-          <label class="field-label">Adults</label>
-          <div class="input-group">
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-number room-number"  data-type="minus" data-field="quant[3]">
-                    <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-              </span>
-
-              <input id="no_of_adults" type="text" name="quant[3]" class="form-element input-number input-room-number no-radius" value="1" min="1" max="100" />
-
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-number room-number" data-type="plus" data-field="quant[3]">
-                      <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-              </span>
-          </div>
-
-        </div><!-- end card-content -->
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="row">
-        <div class="card-content-x">
-          <label class="field-label">Children</label>
-          <div class="input-group">
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-number adult-number"  data-type="minus" data-field="quant[2]">
-                    <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-              </span>
-
-              <input id="no_of_children" type="text" name="quant[2]" class="form-element input-number input-adult-number no-radius" value="1" min="1" max="100" />
-
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-number adult-number" data-type="plus" data-field="quant[2]">
-                      <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-              </span>
-          </div>
-
-        </div><!-- end card-content -->
-      </div><!-- end row -->
-    </div><!-- end col-md-6 -->
-
-
-    <div class="col-md-4">
-      <div class="row">
-        <div class="card-content-x">
-          <label class="field-label">Infants</label>
-          
-          <div class="input-group">
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-number child-number"  data-type="minus" data-field="quant[1]">
-                    <span class="glyphicon glyphicon-minus"></span>
-                  </button>
-              </span>
-
-              <input id="no_of_infants" type="text" name="quant[1]" class="form-element input-number input-child-number no-radius" value="0" min="0" max="100" />
-
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-number child-number" data-type="plus" data-field="quant[1]">
-                      <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-              </span>
-          </div>
-
-        </div><!-- end card-content -->
-      </div><!-- end row -->
-    </div><!-- end col-md-6 -->
-
-
-        </div><!-- end card-content -->
-      </div><!-- end row -->
-    </div><!-- end col-md-6 -->    
-
-    </div><!-- end card-component --> <br/>
-
-    </div><!-- end card-paper -->
 
     <div class="card-paper"><br/>
     <div class="card-component">
@@ -233,7 +138,7 @@
     <div class="col-md-6">
       <div class="row">
         <div class="card-content">
-          <textarea id="clients_additional_info" class="form-element" placeholder="Provide Additional Iformation here"></textarea>
+          <textarea  id="clients_additional_info" class="form-element" placeholder="Provide additional information here"></textarea>
         </div><!-- end card-content -->
       </div><!-- end row -->
     </div><!-- end col-md-6 -->    
@@ -242,16 +147,11 @@
 
 
     </div><!-- end card-paper -->
+
     <div class="card-component button-div">
-        <div class="submit_request"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--yellow pull-right">Submit your request</button></div>     
-    </div>
-
+       <div class="submit_request"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--yellow pull-right">Submit your request</button></div>     
+      </div>
     </div><!-- end card-component -->
-
-  
-
-
-
   </div><!-- end col-md-8 -->
 
   
