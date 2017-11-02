@@ -76,9 +76,138 @@ define(function(require, exports, module) {
       'click .more_plus': 'showRoomsOnly',
       'click .showAll': 'showAll',
       'click #map_show': 'onShowMapBntClicked',
+      'click #submit_booking_details': 'submit_booking_details',
       'click .close-map': 'onCloseMapBntClicked',
+	  'mouseover #travel_date' : 'travel_date',
     },
+	travel_date:function(e){
+		var view = this;
+		jQuery.noConflict();
+		$(e.currentTarget).datepicker({
+		  minDate:'2',
+		  dateFormat: 'dd-mm-yy',
+		  defaultDate:view.selectedDate,
+		  onSelect:function(dateText,datePicker) {
+			console.log('onSelect',dateText);
+			view.selectedDate = dateText;  
+			//$("#departure-date").val("");
+		  }
+		});		
+	},
+	submit_booking_details:function(){
+		console.log("submit details");
+		var e = document.getElementById("infants_id");
+		var infants = e.options[e.selectedIndex].value;
+		var a = document.getElementById("adults_id");
+		var adults = a.options[e.selectedIndex].value;
+		var c = document.getElementById("children_id");
+		var children = c.options[e.selectedIndex].value;
+		var client_name_id = document.getElementById("client_name_id").value;
+		var travel_date = document.getElementById("travel_date").value;
+		var phone_number = document.getElementById("phone_number").value;
+		var client_email = document.getElementById("client_email").value;
+		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		var data_info = {};
+		data_info.DepartureDate = travel_date;
+		 var jsonString= JSON.stringify(data_info);
+		console.log("infants "+infants+" adults "+adults+" children "+children);
+		if(client_name_id === null || client_name_id === undefined || client_name_id === ""){
+			swal(
+			  'Empty',
+			  ' Name Field Should not Be Left Empty',
+			  'error'
+			);			
+		}else if(travel_date === null || travel_date === undefined || travel_date === "" ){
+			swal(
+			  'Empty',
+			  'Departure Date Field Should not Be Left Empty',
+			  'error'
+			);				
+		}else if(phone_number === null || phone_number === undefined || phone_number === "" ){
+			swal(
+			  'Empty',
+			  'Phone Number Field Should not Be Left Empty',
+			  'error'
+			);				
+		}else if(client_email === null || client_email === undefined || client_email === ""|| !filter.test(client_email) ){
+			swal(
+			  'Empty',
+			  'Provide a valid email e.g bob@roundbob.com',
+			  'error'
+			);				
+		}else{
+			$.ajax({
+				url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+				type: 'POST',
+				dataType: 'jsonp',
+				//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+				data: jQuery.param({
+					email: client_email,
+					phone : phone_number,
+					name : client_name_id,
+					request_type : "PACKAGE", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+					adults : adults,
+					children : children,
+					infants : infants,
+					//description  : "hello2"
+					//price   : "hello2"
+					//currency    : "hello2"
+					//meta_data    : "hello2"
+					//respond_via    : "hello2"[email, phone, whatsapp]
+					meta_data :jsonString,
+					}) ,
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				success: function (response) {
+					  swal({
+						type: 'success',
+						html: 'Reply will be sent to' + email
+					  });
+				},
+				error: function () {
+					console.log("error");
+				}
+			});			
+		}		 
+		 
+	/*	swal({
+		  title: 'Input email address',
+		  input: 'email',
+		  inputPlaceholder: 'Enter your email address'
+		}).then(function (email) {
 
+		$.ajax({
+			url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+			type: 'POST',
+			dataType: 'jsonp',
+			//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+			data: jQuery.param({
+				email: email,
+				phone : phone,
+				name : name,
+				request_type : "FLIGHT", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+				adults : adults,
+				children : child,
+				infants : infants,
+				//description  : "hello2"
+				//price   : "hello2"
+				//currency    : "hello2"
+				//meta_data    : "hello2"
+				//respond_via    : "hello2"[email, phone, whatsapp]
+				meta_data :jsonString,
+				}) ,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function (response) {
+				  swal({
+					type: 'success',
+					html: 'Reply will be sent to' + email
+				  });
+			},
+			error: function () {
+				console.log("error");
+			}
+		});
+		});*/
+	},
  
     serialize: function() {
       return {

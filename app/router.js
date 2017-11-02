@@ -11,7 +11,7 @@ define(function(require, exports, module) {
     //Packages: require("components/packages/countriesrouter"),
    // Popular: require("components/packages/popularrouter"),
     Home: require("components/home/router"),
-    Surprise: require("components/surprise/router"),
+    Surprise: require("components/packages/countriesrouter"),
     Tripplanner: require("components/tripplanner/router"),
     Common: require("components/common/router"),
   };

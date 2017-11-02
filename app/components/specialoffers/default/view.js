@@ -66,13 +66,13 @@ define(function(require, exports, module) {
 		if(addtitional_request_id === null || addtitional_request_id === undefined || addtitional_request_id === "" || addtitional_request_id.length < 5){
 			swal(
 			  'Empty',
-			  ' Name Field Should not Be atleast 6 characters long',
+			  ' Additional request Field Should not Be atleast 6 characters long',
 			  'error'
 			);			
 		}else if(category_id === null || category_id === undefined || category_id === "" || category_id.length <3 ){
 			swal(
 			  'Empty',
-			  ' Departure Field Should not Be atleast 3 characters long',
+			  ' Select a category to proceed',
 			  'error'
 			);			
 		}else if(destination_d === null || destination_d === undefined || destination_d === "" || destination_d.length <3 ){
@@ -115,6 +115,7 @@ define(function(require, exports, module) {
 			  cancelButtonClass: 'btn btn-danger',
 			  buttonsStyling: false,
 			}).then(function () {
+				console.log("clients_email_address"+clients_email_address+"clients_phone_number"+clients_phone_number+"jsonString"+jsonString);
 				$.ajax({
 					url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
 					type: 'POST',

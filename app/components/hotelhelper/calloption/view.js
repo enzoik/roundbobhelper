@@ -6,7 +6,8 @@ define(function(require, exports, module) {
   var Config = {
     // Views needed for this layout
     Views: {
-     // TopNav: require("../../common/topNav/view"),
+      HeaderNav: require("../../common/header/view"),
+      FooterNav: require("../../common/footer/view"),
     },
   };
 
@@ -16,9 +17,9 @@ define(function(require, exports, module) {
     el: "main",
 
     views: {
-     // "topNav": new Config.Views.TopNav(),
+      "headernav": new Config.Views.HeaderNav(),
+      "footernav": new Config.Views.FooterNav(),
     },
-
 	events: {
       'click .submit_call_details' : 'submit_call_details',
     },
@@ -53,18 +54,29 @@ define(function(require, exports, module) {
 			  'error'
 			);
 		}else{
-			//http://localhost/roundbobhelperv1/dist/#picklocation/hhhh/26-10-2017_31-10-2017_s/s/single/true_/calling/sen_to/kkk_5465655465_call
-			//http://localhost/roundbobhelperv1/dist/#picklocation/kkekeke/26-10-2017_28-10-2017_m/m/adlts_1_chldn_0_rooms_1/call/true_/m_call/pppp_2568958566_call
+
 			var redirectTo = '/picklocation';
+			var splitted = current_url.split("#picklocation")[1].split("/");
+			//http://localhost/roundbobhelperv1/dist/#picklocation/hhyy/15-11-2017_30-11-2017_s/s/single/true_/calling/sen_to/m_code/m_send_to/pa_234567798990_call
+			//http://localhost/roundbobhelperv1/dist/#picklocation/pat/15-11-2017_23-11-2017_s/s/single/single/true_/calling/sen_to/m_code/m_send_to/paa_123455666_call
+			//http://localhost/roundbobhelperv1/dist/#picklocation/jjjjj/16-11-2017_30-11-2017_m/m/adlts_1_chldn_0_rooms_1/call/true_/m_call/m_code/m_send_to/paa_3456677777_call
 			if(no_ == "m"){
-					redirectTo += current_url.split("#picklocation")[1];
+					//redirectTo += current_url.split("#picklocation")[1];
+					redirectTo += '/'+splitted[1];
+					redirectTo += '/'+splitted[2];
+					redirectTo += '/'+splitted[3];
+					redirectTo += '/'+splitted[4]+'/call/true_';
 					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";m_mail/m_client/name_email_email
 					redirectTo += '/m_call/m_code/m_send_to/' + clients_name+"_"+clients_phone_number+"_call";
 					console.log("call many",redirectTo);
 					//console.log("mmmmm",url_.split('/')[3]);				
 			}else{
-					redirectTo += current_url.split("#picklocation")[1];
+					//redirectTo += current_url.split("#picklocation")[1];
 					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";m_mail/m_client/name_email_email
+					redirectTo += '/'+splitted[1];
+					redirectTo += '/'+splitted[2];
+					redirectTo += '/'+splitted[3];
+					redirectTo += '/'+splitted[4]+'/true_/calling/sen_to';
 					redirectTo += '/m_code/m_send_to/' + clients_name+"_"+clients_phone_number+"_call";
 					//console.log("call many",redirectTo);
 					//console.log("mmmmm",url_.split('/')[3]);				

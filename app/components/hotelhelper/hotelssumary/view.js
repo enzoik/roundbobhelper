@@ -27,6 +27,7 @@ define(function(require, exports, module) {
 		 var current_url  = window.location.href.toString();
 		 //http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/28-10-2017_31-10-2017_s/s/single/email/sdng_mail/p234/sent_to/patrick_patrick@gmail.com_email
 		 //http://localhost/roundbobhelperv1/dist/#picklocation/dubai/27-10-2017_30-10-2017_m/m/adlts_1_chldn_0_rooms_1/email/m_mail/m_client/m_summary/ppp_patric@gmail.com_email
+		 //http://localhost/roundbobhelperv1/dist/#picklocation/kampa/30-10-2017_31-10-2017_s/s/single/email/sdng_mail/p234/sent_to/patrick_25670123456_email/patrick_25670123456_email
 		 var destination = current_url.split("#picklocation")[1].split("/")[1];
 		 var check_in_date = current_url.split("#picklocation")[1].split("/")[2].split("_")[0];
 		 var check_out_date = current_url.split("#picklocation")[1].split("/")[2].split("_")[1];
@@ -50,7 +51,12 @@ define(function(require, exports, module) {
 		 }else if(media != "email"){
 			 phone=client_summary.split("_")[1];
 		 }
-		 
+		 console.log("destination "+destination+" check_in_date "+check_in_date+" check_out_date "+ check_out_date+" number_of_people "+number_of_people);
+		// $('#check_in_date').text(check_in_date);
+		 $('#check_in_date').html('<span><i class="icon-calendar"></i>'+ check_in_date.replace(/%20/g,'')+'</i></span>');
+		 $('#check_out_date').html('<span><i class="icon-calendar"></i>'+ check_out_date.replace(/%20/g,'')+'</i></span>');
+		 $('#destination').text(destination.replace(/%20/g,''));
+		 $('#no_of_people').text(number_of_people.replace(/%20/g,''));
 	 },
 	events:{
 		'click .send_confirmed_request' : 'send_confirmed_request',
@@ -62,7 +68,62 @@ define(function(require, exports, module) {
 		//kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
 		//http://localhost/roundbobhelperv1/dist/#flights/kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
 		//http://localhost/roundbobhelperv1/dist/#flights/kkk_jjjj_Economy/27-10-2017_31-10-2017_round_m/m/adlts_1_chldn_0_infnts_0/call/true_/m_mail/m_client/patrick_256702458965_call
-		//http://localhost/roundbobhelperv1/dist/#flights/kam_dub_Economy/26-10-2017__oneway_s/s/single/email/sdng_mail/p234/sent_to/patrick_patrick@gmail.com_email
+		//http://localhost/roundbobhelperv1/dist/#picklocation/kampa/30-10-2017_31-10-2017_s/s/single/email/sdng_mail/p234/sent_to/patr_2567012568_watsapp
+		 var destination = current_url.split("#picklocation")[1].split("/")[1];
+		 var check_in_date = current_url.split("#picklocation")[1].split("/")[2].split("_")[0];
+		 var check_out_date = current_url.split("#picklocation")[1].split("/")[2].split("_")[1];
+		 var number_of_people ="";
+		 var no_ = current_url.split("#picklocation")[1].split("/")[3];
+		 var media = current_url.split("#picklocation")[1].split("/")[5];
+		 var client_summary = current_url.split("#picklocation")[1].split("/")[9];
+		var name=client_summary.split("_")[0];
+		var email=client_summary.split("_")[1];
+		var phone ="";
+		var adults="";
+		var infants ="";
+		var child="";
+		var data_info = {};
+		data_info.CheckInDate = escape(check_in_date).replace(/%20/g,'');
+		data_info.CheckOutDate = escape(check_out_date).replace(/%20/g,'');
+		 if(no_ == "s"){
+			  number_of_people = "people: 1 adults , 0 child, 0 infants";
+		 }else if(no_ == "m"){
+			adults = current_url.split("#picklocation")[1].split("/")[4].split("_")[1];
+			child = current_url.split("#picklocation")[1].split("/")[4].split("_")[3];
+			infants = current_url.split("#picklocation")[1].split("/")[4].split("_")[5];
+			number_of_people = "people: "+adults+" adults , "+child+"child, "+infants+" infants";		 
+		 }else if(media != "email"){
+			 phone=client_summary.split("_")[1];
+		 }	
+		 var jsonString= JSON.stringify(data_info);
+		$.ajax({
+			url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+			type: 'POST',
+			dataType: 'jsonp',
+			//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+			data: jQuery.param({
+				email: escape(email).replace(/%20/g,''),
+				phone : escape(phone).replace(/%20/g,''),
+				name : escape(name).replace(/%20/g,''),
+				request_type : "FLIGHT", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+				adults : escape(adults),
+				children : escape(child),
+				infants : escape(infants),
+				//description  : "hello2"
+				//price   : "hello2"
+				//currency    : "hello2"
+				//meta_data    : "hello2"
+				//respond_via    : "hello2"[email, phone, whatsapp]
+				meta_data :jsonString,
+				}) ,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function (response) {
+				console.log(response.status);
+			},
+			error: function () {
+				console.log("error");
+			}
+		});
 	/*	var coming_from = current_url.split("#flights")[1].split("/")[1].split("_")[0];
 		var going_to = current_url.split("#flights")[1].split("/")[1].split("_")[1];
 		var flight_class = current_url.split("#flights")[1].split("/")[1].split("_")[2];

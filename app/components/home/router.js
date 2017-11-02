@@ -20,6 +20,8 @@ define(function(require, exports, module) {
           $('mainHotelDetails').html("");
           $('main').show();
           app.activeRouteFunction = 'Home.home';
+	
+			
         },
     });
 });

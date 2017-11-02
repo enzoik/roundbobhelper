@@ -16,7 +16,8 @@ require.config({
     "ldsh": "../vendor/bower/lodash-template-loader/loader",
 
     // Map remaining vendor dependencies.
-    "jquery": "../vendor/bower/jquery/jquery",
+    "jquery": "../vendor/bower/jquery/jquery.min",
+    "jqueryui": "../vendor/bower/jquery/jquery-ui",
     "backbone": "../vendor/bower/backbone/backbone",
     "bootstrap": "../vendor/bower/bootstrap/dist/js/bootstrap",
     "layoutmanager": "../vendor/bower/layoutmanager/backbone.layoutmanager",
@@ -27,6 +28,13 @@ require.config({
   shim: {
     // This is required to ensure Backbone works as expected within the AMD
     // environment.
+	"jqueryui": {
+		exports: "$",
+		deps: ['jquery']
+	},
+	"underscore": {
+		exports: "_"
+	},
     "backbone": {
       // These are the two hard dependencies that will be loaded first.
       deps: ["jquery", "underscore"],

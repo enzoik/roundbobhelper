@@ -33,13 +33,13 @@ define(function(require, exports, module) {
 		  
 	  }
 	  this.collections.countries.each(function(Countries_model) {
-		  console.log("countries check",Countries_model.attributes.Country);
-		  console.log("countries check name",Countries_model.attributes.Country.name);
+		//  console.log("countries check",Countries_model.attributes.Country);
+		 // console.log("countries check name",Countries_model.attributes.Country.name);
 			var optn = document.createElement("OPTION");
 			optn.text = Countries_model.attributes.Country.name;
 			optn.value = Countries_model.attributes.Country.id;
 		//	dropdown.options.add(optn); 
-			console.log("select element",dropdown);
+			//console.log("select element",dropdown);
 		  
 	  });
 

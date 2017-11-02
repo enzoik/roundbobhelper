@@ -57,7 +57,8 @@ define(function(require, exports, module) {
 	 var resultIndex = this.model.attributes.Destination.id;
 
       // Easily create a URL.
-      app.router.go("packages","details", id, resultIndex);
+	  console.log("xxxxx");
+      app.router.go("surprise","details", id, resultIndex);
 
       return false;
     },

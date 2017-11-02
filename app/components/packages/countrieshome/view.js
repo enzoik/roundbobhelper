@@ -11,6 +11,8 @@ define(function(require, exports, module) {
 
     // Views needed for this layout
     Views: {
+	HeaderNav: require("../../common/header/view"),
+      FooterNav: require("../../common/footer/view"),
      // TopNav: require("../../common/topNav/view"),
 		List: require("../countrieslist/view"),
      // CountriesSelector: require("../countries/view"),
@@ -43,7 +45,9 @@ define(function(require, exports, module) {
      // "topNav": new Category.Views.TopNav(),
       //"countriesSelector": new Package.Views.CountriesSelector(),
      // ".item_nav_e": new Category.Views.TopIconHolder(),
-      ".criteria-choice-element": new Countries.Views.List({ collection: countriescollection }),
+      "headernav": new Countries.Views.HeaderNav(),
+      "footernav": new Countries.Views.FooterNav(),
+      ".content-row": new Countries.Views.List({ collection: countriescollection }),
     },
 
     afterRender: function(){
@@ -68,7 +72,7 @@ define(function(require, exports, module) {
     },
 
     beforeRender: function(){
-		//this.collections.countries.fetch();
+		this.collections.countries.fetch();
     },
 
     events: {

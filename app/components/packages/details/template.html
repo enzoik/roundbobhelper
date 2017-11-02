@@ -1,7 +1,7 @@
-<div class="wrap">
-  <div class="app-wrapper">
+<div class="wrap1">
+  <div class="app-wrapper1">
     <topNav></topNav>
-    <div class="app-container">
+    <div class="app-container1">
 	<div class="app-content hotel-theme">
         <div class="app-feed">
 		
@@ -115,11 +115,11 @@
 					<div class="package-item-form-row">
 					  <div class="col-md-6">
 						<label>Your name</label>
-						<input type="text" class="form-element" placeholder="Enter your full name">
+						<input id="client_name_id" type="text" class="form-element" placeholder="Enter your full name">
 					  </div>
 					  <div class="col-md-6">
 						<label>Date of travel</label>
-						<input type="text" name="" class="form-element" placeholder="pick a date">
+						<input id="travel_date" type="text" name="" class="form-element" placeholder="pick a date">
 					  </div>
 					</div><!-- end package-item-form-row -->
 
@@ -132,7 +132,7 @@
 					<div class="package-item-form-row">
 					  <div class="col-md-2">
 						<label>Adult</label>
-						<select class="form-element package-adults">
+						<select id="adults_id" class="form-element package-adults">
 						  <option value="1">1</option>
 						  <option value="2">2</option>
 						  <option value="3">3</option>
@@ -143,7 +143,7 @@
 
 					  <div class="col-md-2">
 						<label>Children</label>
-						<select class="form-element package-children">
+						<select id="children_id" class="form-element package-children">
 						  <option value="0">0</option>
 						  <option value="1">1</option>
 						  <option value="2">2</option>
@@ -163,7 +163,7 @@
 
 					  <div class="col-md-2">
 						<label>Infants</label>
-						<select class="form-element package-infants">
+						<select id="infants_id" class="form-element package-infants">
 						  <option value="0">0</option>
 						  <option value="1">1</option>
 						  <option value="2">2</option>
@@ -185,11 +185,11 @@
 					<div class="package-item-form-row">
 					  <div class="col-md-6">
 						<label>Phone</label>
-						<input type="text" name="" class="form-element" placeholder="Enter your phone">
+						<input id="phone_number" type="text" name="" class="form-element" placeholder="Enter your phone">
 					  </div>
 					  <div class="col-md-6">
 						<label>Email</label>
-						<input type="text" name="" class="form-element" placeholder="Enter your Email">
+						<input id="client_email" type="text" name="" class="form-element" placeholder="Enter your Email">
 					  </div>
 
 					</div><!-- end package-item-form-row -->
@@ -261,7 +261,7 @@
 					  </div>
 
 					  <div class="expected-guest package-selected-guest-children">
-						<div id="numberOfChildren"><span>Children:</span> 1</div>
+						<div id="numberOfChildren"><span>Children:</span> 0</div>
 					  </div>
 
 					  <div class="expected-guest package-selected-guests-infants">
@@ -295,7 +295,7 @@
 				  </div><!-- end sidebar-item -->
 
 				<div class="sidebar-item">
-					<button class="button-block">continue</button>
+					<div id="submit_booking_details"><button class="button-block">continue</button></div>
 				</div><!-- end sidebar-item -->
 
 				</div><!-- end sidebar -->

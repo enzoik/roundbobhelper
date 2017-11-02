@@ -27,7 +27,7 @@ define(function(require, exports, module) {
   app.categoriesApi = "app/api/categories/";
   app.airportsApi = "app/api/airports/";
   // app.hotelsApi = "http://reacting.azurewebsites.net/app/api/hotels/";
-
+//https://api.github.com/app/api/hotels/get-hotels.php
   // attach notificationAlertHelpers
   app.notifications = {
     flash: require("components/notifications/flash"),

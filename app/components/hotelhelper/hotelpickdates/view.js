@@ -91,13 +91,14 @@ define(function(require, exports, module) {
 		}else{
 
 				var current_url  = window.location.href.toString();
-			//	console.log("multiple "+departure_date+" return "+return_date+"trip type"+travel_trip+"current_url"+current_url);
-				//console.log(current_url.split("#flights")[1]);
+				var splitted = current_url.split("#picklocation")[1].split("/");
+//http://localhost/roundbobhelperv1/dist/#picklocation/kamp/15-11-2017_12-10-2017_m/m
 				var redirectTo = '/picklocation';
 				console.log("multiple users",current_url.split("#picklocation").length);
 				if(current_url.split("#picklocation").length < 3)
 				{
-					redirectTo += current_url.split("#picklocation")[1];
+					//redirectTo += current_url.split("#picklocation")[1];
+					redirectTo += '/'+splitted[1];
 				}else{
 					redirectTo += current_url.split("#picklocation")[1].split("/")[0];
 				}
@@ -128,15 +129,17 @@ define(function(require, exports, module) {
 			);				
 		}else{
 			
-
+//http://localhost/roundbobhelperv1/dist/#picklocation/kampa/12-12-2017_30-12-2017_s
 			var current_url  = window.location.href.toString();
+			var splitted = current_url.split("#picklocation")[1].split("/");
 			//console.log("multiple "+departure_date+" return "+return_date+"trip type"+travel_trip+"current_url"+current_url);
 			console.log("current url",current_url);
 			var redirectTo = '/picklocation';
 			console.log("single users",current_url.split("#picklocation").length);
 			if(current_url.split("#picklocation").length < 3)
 			{
-				redirectTo += current_url.split("#picklocation")[1];
+				//redirectTo += current_url.split("#picklocation")[1];
+				redirectTo += '/'+splitted[1];
 			}else{
 				redirectTo += current_url.split("#picklocation")[1].split("/")[0];
 			}

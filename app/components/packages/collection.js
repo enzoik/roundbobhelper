@@ -13,7 +13,7 @@ define(function(require, exports, module) {
         // You can pre configure the hotel object from here
     }
   });
-
+	var category_id="2344";
   var Packages = Backbone.Collection.extend({
     model: Packages_model,
 //define the filters used to filter data as Get or Post variables
@@ -27,12 +27,23 @@ define(function(require, exports, module) {
     },
 
     url: function() {
-      return app.packagesApi + 'get-packages.php';
+		console.log("category_id0",this.category_id);
+     // return app.packagesApi + 'get-packages.php';
+      return "http://m.roundbob.com/API/roundbob_get_destinations.php?&country_id="+this.country_id+"&keyword=&subcategory=&key=destinations&user_id=eb94fb88074d11c2e1561653b07fd914&un=pkanyerezi&pw=210013634&page=1&start=0&limit=50";
 	  // return app.hotelsApi + 'get-hotels.php';
     },
 
-    initialize: function(){
-
+    initialize: function(modal,options){
+		this.country_id = 2;
+		if(options != undefined){
+		console.log("options",options);
+		console.log("opt1",options.split("-")[0]);
+		this.country_id = options.split("-")[0];
+		console.log("opt2",options.split("-")[1]);
+		}
+		/*this.country_id = options.opt1;
+		this.country_name = options.opt2;
+		console.log("details"+this.country_name+" id "+this.country_id);*/
       this.on({
         request: function() {
           this.isRequest = true;

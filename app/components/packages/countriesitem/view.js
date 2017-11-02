@@ -3,7 +3,12 @@ define(function(require, exports, module) {
 
   var Layout = require("layoutmanager");
   var app = require("app");
+  var Countriessort = {
+    // Collections needed for this view
+    Collection: require("../collection"),
 
+  };
+    var packagesCollection = new Countriessort.Collection();
   module.exports = Layout.extend({
     template: require("ldsh!./template"),
 
@@ -11,19 +16,22 @@ define(function(require, exports, module) {
 
     beforeRender: function() {
 
-	// this.model.set("name",this.model.attributes.Category.name);
-	/* var wallet_percentage =(parseFloat(this.model.attributes.Destination.cost)/1000)*100 ;
-	 this.model.set("name",this.model.attributes.Destination.name);
-	 this.model.set("cost","USD "+this.model.attributes.Destination.cost);
-	 this.model.set("location",this.model.attributes.Destination.location);
-	 this.model.set("wallet_position",wallet_percentage);
-	 
-	 
-	 this.model.set("brief_description",this.model.attributes.Destination.brief_description);
-	 this.model.set("image_file","http://www.roundbob.com/img/destinations/"+this.model.attributes.Destination.image_file);
-	 */
-	
-	 this.model.set("country","country name");
+	if(this.model.attributes.Country == undefined){
+		console.log("undefined shit");
+	 this.model.set("country","Rwanda");
+	 this.model.set("img","https://www.roundbob.com/img/countries/index_images/"+"4.jpg");	
+	}else{
+	console.log("thismodel",this.model.attributes.Country.name);
+		if(this.model.attributes.Country.image_file == "default.png"){
+		 this.model.set("country",this.model.attributes.Country.name);
+		
+		 this.model.set("img","https://www.roundbob.com/assets/bobtraveldeals.jpg");			
+		}else{
+		 this.model.set("country",this.model.attributes.Country.name);
+		 this.model.set("img","https://www.roundbob.com/img/countries/index_images/"+this.model.attributes.Country.image_file);		
+		}
+	}
+
     },
 
     serialize: function() {
@@ -44,14 +52,39 @@ define(function(require, exports, module) {
 //Reservations123!@#
     onPackageItemSelected: function(ev) {
 		//alert("tapped category");
-   /* var id = this.model.cid;
-      var resultIndex = this.model.attributes.Category.id;
-      //var resultIndex = this.model.get("resultIndex");
-
+    var id = this.model.cid;
+	console.log("thisclick", this.model.attributes);
+	console.log("thatclick", this.model.cid);
+     var resultIndex = this.model.attributes.Country.id;
+	 new Countriessort.Collection(null, this.model.attributes.Country.id+"-"+this.model.attributes.Country.name);
+    // var resultIndex = this.model.get("resultIndex");
+	console.log("collectionxx", packagesCollection);
+	// packagesCollection.category_id=this.model.attributes.Country.id;
+	 // console.log("collectionxx", packagesCollection.category_id);
       // Easily create a URL.
-      app.router.go("packages", id, resultIndex);
+      var that = this;
+      this.listenTo(packagesCollection, "reset sync request", this.render);
+      this.listenTo(packagesCollection, "fetchError", function(){
+        that.collection.isRequest = false;
+        that.render();
+      });
+	  packagesCollection.fetch({
+		   dataType: 'jsonp',
+		   success : function (data) {
+			/* console.log("package collection",data);
+			// packagesCollection.reset(data,"filtered");
+			 
+			  that.listenTo(packagesCollection, "reset sync request", that.render);
+			  that.listenTo(packagesCollection, "fetchError", function(){
+				that.collection.isRequest = false;
+				that.render();
+			  });
+			  packagesCollection.fetch();*/
+		   }
+		 });
+      app.router.go("surprise", id, resultIndex);
 
-      return false;*/
+      return false;
     },
 
 

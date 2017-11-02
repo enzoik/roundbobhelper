@@ -19,7 +19,11 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
+	afterRender : function() {
+		$('#go_backward_btn').show();
+		$('#go_forward_btn').show();
 
+	},
 	events: {
       'click .multiplepeopleGetDate' : 'multiplepeopleGetDate',
       'click .alonepeopleGetDate' : 'alonepeopleGetDate',
@@ -34,7 +38,7 @@ define(function(require, exports, module) {
 		jQuery.noConflict();
 		$(e.currentTarget).datepicker({
 		  minDate:'2',
-		  dateFormat: 'dd-mm-yy',
+		  dateFormat: 'yy-mm-dd',
 		  defaultDate:view.selectedDate,
 		  onSelect:function(dateText,datePicker) {
 			console.log('onSelect',dateText);
@@ -50,7 +54,7 @@ define(function(require, exports, module) {
 		var value_t = date.getTime();
 		
 		var parts = document.getElementById("departure-date").value.split("-");
-		var final_d_date=new Date(parts[2], parts[1] - 1, parts[0]);
+		var final_d_date=new Date(parts[0], parts[1] - 1, parts[2]);
 		
 		var ONE_DAY = 1000 * 60 * 60 * 24;
 		var difference_ms = Math.abs(final_d_date.getTime() - value_t);
@@ -61,7 +65,7 @@ define(function(require, exports, module) {
 		jQuery.noConflict();
 		$(e.currentTarget).datepicker({
 		  minDate:days,
-		  dateFormat: 'dd-mm-yy',
+		  dateFormat: 'yy-mm-dd',
 		  defaultDate:that.selectedDate,
 		  onSelect:function(dateText,datePicker) {
 			console.log('onSelect',dateText);
@@ -132,18 +136,35 @@ define(function(require, exports, module) {
 			var current_url  = window.location.href.toString();
 		//	console.log("multiple "+departure_date+" return "+return_date+"trip type"+travel_trip+"current_url"+current_url);
 			//console.log(current_url.split("#flights")[1]);
-			var redirectTo = '/flights';
+			
 			console.log("length",current_url.split("#flights").length);
-			if(current_url.split("#flights").length < 3)
-			{
+
+			var last_check="";
+			if(current_url.split("#flights")[1].split("/").length > 2){
+				var last_spliter = current_url.split("#flights")[1].split("/")[2];
+				 last_check = last_spliter.split("_")[3];				
+			}
+		console.log("last_checker",last_check);
+		var redirectTo = '';
+		if(last_check =="m" && current_url.split("#flights")[1].split("/").length > 2 ){
+			
+		}else if(current_url.split("#flights").length < 3)
+			{	
+				redirectTo = '/flights';
 				redirectTo += current_url.split("#flights")[1];
+			   redirectTo += '/' + departure_date+"_"+return_date+"_"+travel_trip+"_m/m";
+				console.log("multiple_view",redirectTo);
+			   app.router.go(redirectTo);
+
 			}else{
+				redirectTo = '/flights';
 				redirectTo += current_url.split("#flights")[1].split("/")[0];
+			  redirectTo += '/' + departure_date+"_"+return_date+"_"+travel_trip+"_m/m";
+				console.log("multiple_view",redirectTo);
+			  app.router.go(redirectTo);
 			}
 		  
-		  redirectTo += '/' + departure_date+"_"+return_date+"_"+travel_trip+"_m/m";
-			console.log("multiple_view",redirectTo);
-		  app.router.go(redirectTo);
+
 		}
 	},
 	alonepeopleGetDate:function(e){
@@ -152,7 +173,7 @@ define(function(require, exports, module) {
 		var return_date = document.getElementById("return-date").value;
 		var roundtrip = document.getElementById("switch-1");
 		var travel_trip="";
-		
+		var redirectTo="";
 		if(!roundtrip.checked){
 			travel_trip="oneway";
 		}else{
@@ -195,21 +216,39 @@ define(function(require, exports, module) {
 
 		}else{
 			var current_url  = window.location.href.toString();
-			//console.log("multiple "+departure_date+" return "+return_date+"trip type"+travel_trip+"current_url"+current_url);
-			//console.log(current_url.split("#flights")[1]);
-			var redirectTo = '/flights';
-			console.log("length",current_url.split("#flights").length);
-			if(current_url.split("#flights").length < 3)
+			var splitted = current_url.split("#flights")[1].split("/");
+
+			var last_check="";
+			if(current_url.split("#flights")[1].split("/").length > 2){
+				var last_spliter = current_url.split("#flights")[1].split("/")[2];
+				 last_check = last_spliter.split("_")[3];				
+			}
+	//http://localhost/roundbobhelperv1/dist/#flights/(WNH) Wenshan Puzhehei Airport, Wensha/2017-11-24_2017-11-29_round_s		
+	//http://localhost/roundbobhelperv1/dist/#flights/(BMN) Bamerny, Bamerny Iraq_(BGC) Braganca, Braganca Portugal_Economy/2017-11-22_2017-11-30_round_m/m
+			console.log("uuuuuuu",last_check);
+		if(last_check =="m" && current_url.split("#flights")[1].split("/").length > 2 ){
+			
+		}else if(current_url.split("#flights").length < 3)
 			{
-				redirectTo += current_url.split("#flights")[1];
+				 redirectTo = '/flights';
+				//redirectTo += current_url.split("#flights")[1];
+					redirectTo += '/'+splitted[1];
+				  redirectTo += '/' + departure_date+"_"+return_date+"_"+travel_trip+"_s";
+				 console.log("single_view",redirectTo);
+				 //flights/www_ww_Economy/2017-09-17_2017-10-17_round_m/m/adlts_1_chldn_0_infnts_0
+				  app.router.go(redirectTo);
 			}else{
-				redirectTo += current_url.split("#flights")[1].split("/")[0];
+			  redirectTo = '/flights';
+				//redirectTo += current_url.split("#flights")[1].split("/")[0];
+				
+			  redirectTo += '/'+splitted[1];
+			  redirectTo += '/' + departure_date+"_"+return_date+"_"+travel_trip+"_s";
+			 console.log("single_view",redirectTo);
+			 //flights/www_ww_Economy/2017-09-17_2017-10-17_round_m/m/adlts_1_chldn_0_infnts_0
+			  app.router.go(redirectTo);
 			}
 		  
-		  redirectTo += '/' + departure_date+"_"+return_date+"_"+travel_trip+"_s";
-		 console.log("single_view",redirectTo);
-		 //flights/www_ww_Economy/2017-09-17_2017-10-17_round_m/m/adlts_1_chldn_0_infnts_0
-		  app.router.go(redirectTo);
+
 		}
 	},
   });

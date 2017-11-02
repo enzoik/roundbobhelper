@@ -20,20 +20,7 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
-	/*afterRender : function() {
-		$('#go_backward_btn').show();
-		$('#go_forward_btn').show();
-
-	},
-		afterRender : function() {
-		$('#selected_to').hide();
-		$('#selected').hide();
-
-
-	}*/
     afterRender: function(){
-		$('#go_backward_btn').show();
-		$('#go_forward_btn').hide();
 		var current_url  = window.location.href.toString();
 		var coming_from = current_url.split("#flights")[1].split("/")[1].split("_")[0];
 		var going_to = current_url.split("#flights")[1].split("/")[1].split("_")[1];
@@ -88,14 +75,14 @@ define(function(require, exports, module) {
 		destination_id = going_to;
 		no_of_people = number_of_people;	*/
 		console.log("return_date "+return_date+" departure_date"+ departure_date +"flight_type"+flight_type);
-		 $('#flight_type').text(escape(flight_type).replace(/%20/g,''));
-		 $('#departure_date_id').html('<span><i class="icon-calendar"></i>'+ escape(departure_date).replace(/%20/g,'') +'</i></span>');
+		 $('#flight_type').text(flight_type);
+		 $('#departure_date_id').html('<span><i class="icon-calendar"></i>'+ departure_date+'</i></span>');
 		 
-		 $('#departure_place_id').text(escape(coming_from).replace(/%20/g,''));
-		 $('#departure_place_id2').text(escape(going_to).replace(/%20/g,''));
-		 $('#destination_id').text(escape(going_to).replace(/%20/g,''));
-		 $('#destination_id2').text(escape(coming_from).replace(/%20/g,''));
-		 $('#no_of_people').text(escape(number_of_people).replace(/%20/g,''));
+		 $('#departure_place_id').text(coming_from);
+		 $('#departure_place_id2').text(going_to);
+		 $('#destination_id').text(going_to);
+		 $('#destination_id2').text( coming_from);
+		 $('#no_of_people').text(number_of_people);
    },
 	 beforeRender: function() {
 		console.log("xxxxxx"); 
@@ -174,10 +161,10 @@ define(function(require, exports, module) {
 		var adults="";
 		var infants ="";
 		var child="";
-		var data_info = {};
-		data_info.DepartureDate = escape(departure_date).replace(/%20/g,'');
-		data_info.DeparturePlace = escape(coming_from).replace(/%20/g,'');
-		data_info.DestinationPlace = escape(coming_from).replace(/%20/g,'');
+		var data = {};
+		data.DepartureDate = departure_date;
+		data.DeparturePlace = coming_from;
+		data.DestinationPlace = coming_from;
 		/*var flight_type_id = document.getElementById("flight_type");
 		var departure_date_id = document.getElementById("departure_date_id");
 		var departure_place_id = document.getElementById("departure_place_id");
@@ -195,7 +182,7 @@ define(function(require, exports, module) {
 		if(no_ == "s"){
 			
 		}else if(flight_type == "round"){
-			data_info.ReturnDate = current_url.split("#flights")[1].split("/")[2].split("_")[1];
+			data.ReturnDate = current_url.split("#flights")[1].split("/")[2].split("_")[1];
 		}else if(no_ == "m"){
 			adults = current_url.split("#flights")[1].split("/")[4].split("_")[1];
 			child = current_url.split("#flights")[1].split("/")[4].split("_")[3];
@@ -208,7 +195,7 @@ define(function(require, exports, module) {
 			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
 			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1];			
 		}
-		var jsonString= JSON.stringify(data_info);
+		var jsonString= JSON.stringify(data);
 		console.log(current_url.split("#flights")[1].split("/")[9]);
 		console.log("media","media "+media+" name "+current_url.split("#flights")[1].split("/")[9].split("_")[0]+" email "+email+" phone "+ phone);
 		//console.log(jsonString);
@@ -225,9 +212,9 @@ define(function(require, exports, module) {
 			dataType: 'jsonp',
 			//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
 			data: jQuery.param({
-				email: escape(email).replace(/%20/g,''),
-				phone : escape(phone).replace(/%20/g,'') ,
-				name :  escape(name).replace(/%20/g,''),
+				email: email,
+				phone : phone,
+				name : name,
 				request_type : "FLIGHT", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
 				adults : adults,
 				children : child,
@@ -247,65 +234,7 @@ define(function(require, exports, module) {
 				console.log("error");
 			}
 		}); 		
-		/*var client_phone = document.getElementById("clients_phone_number").value;
-		var client_name = document.getElementById("clients_name").value;
-		var current_url  = window.location.href.toString();
-		console.log("client_phone_"+client_phone+"client_name"+client_name);
-		//http://localhost/helperbob/dist/#flights/dd_ff_Economy/2017-09-17_2017-10-17_round_s/s/single/true_/calling/sen_to
-		var coming_from = current_url.split("#flights")[0].split("/")[0].split("_")[0];
-		var going_to = current_url.split("#flights")[0].split("/")[0].split("_")[1];
-		var flight_class = current_url.split("#flights")[0].split("/")[0].split("_")[2];
-		var departure_date = current_url.split("#flights")[0].split("/")[1].split("_")[0];
-		var return_date = current_url.split("#flights")[0].split("/")[1].split("_")[1];
-		var flight_type = current_url.split("#flights")[0].split("/")[1].split("_")[2];
-		var no_ = current_url.split("#flights")[0].split("/")[1].split("_")[3];
-		//http://localhost/helperbob/dist/#flights/nnhj_jkjlk_Economy/2017-09-17_2017-10-17_round_m/m/adlts_1_chldn_0_infnts_0/call/true_/call/true_
-		http://localhost/roundbobhelperv1/dist/#flights/kkkkk_kkkkk_Business/26-10-2017_31-10-2017_round_m/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/pppp_p@gmail.com_email
-		if(client_name === null || client_name === undefined || client_name === ""){
-			swal(
-			  'Empty',
-			  ' Name Field Should not Be Left Empty',
-			  'error'
-			);			
-		}else if(client_phone === null || client_phone === undefined || client_phone === "" ){
-			swal(
-			  'Empty',
-			  'Phone Number Should not Be Left Empty',
-			  'error'
-			);			
-		}else{
 
-			swal({
-			  title: 'Are you sure?',
-			  text: "You won't be able to revert this!",
-			  type: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#3085d6',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Submit!',
-			  cancelButtonText: 'cancel!',
-			  confirmButtonClass: 'btn btn-success',
-			  cancelButtonClass: 'btn btn-danger',
-			  buttonsStyling: false
-			}).then(function () {
-			  swal(
-				'Deleted!',
-				'Your file has been deleted.',
-				'success'
-			  );
-			}, function (dismiss) {
-			  // dismiss can be 'cancel', 'overlay',
-			  // 'close', and 'timer'
-			  if (dismiss === 'cancel') {
-				swal(
-				  'Cancelled',
-				  'Your imaginary file is safe :)',
-				  'error'
-				);
-			  }
-			});		
-			
-		}*/
 
 	
 	},

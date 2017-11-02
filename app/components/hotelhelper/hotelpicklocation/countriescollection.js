@@ -22,7 +22,7 @@ define(function(require, exports, module) {
     },
 
     url: function() {
-      return app.countriesApi + 'get-countries.php';
+      return app.countriesApi + 'get-all-countries.php';
 	  // return app.hotelsApi + 'get-hotels.php';
     },
 
@@ -65,13 +65,13 @@ define(function(require, exports, module) {
 	  		//console.log("length count", JSON.stringify(obj));
 			 
 		//console.log("length count", obj.Response.countries);
-		//console.log("xxxxx", obj.Response.countries);
-        cache.setCountriesSearchResults(obj.Response.countries || []);
+		console.log( "countries",obj);
+        cache.setCountriesSearchResults(obj || []);
 		
 		
 		 
-      if (obj.Response.countries.length) {
-        return obj.Response.countries;
+      if (obj.length) {
+        return obj;
 		
       }
 

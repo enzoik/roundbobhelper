@@ -53,6 +53,7 @@ define(function(require, exports, module) {
 		//alert("tapped category");
     var id = this.model.cid;
       var resultIndex = this.model.attributes.Category.id;
+	 
       //var resultIndex = this.model.get("resultIndex");
 
       // Easily create a URL.

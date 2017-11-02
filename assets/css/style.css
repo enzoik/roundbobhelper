@@ -822,7 +822,6 @@
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
       flex-direction: column;
-      display: none;
   }
   .flow_sidebar {
       width: 400px;
@@ -858,7 +857,7 @@
   }
   .app-content {
       position: relative;
-      overflow-y: scroll;
+     /* overflow-y: scroll;*/
       height: 100vh;
   }
   .app-content-view {

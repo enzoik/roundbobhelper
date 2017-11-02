@@ -19,6 +19,12 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
+	
+	afterRender : function() {
+		$('#go_backward_btn').hide();
+		$('#go_forward_btn').hide();
+
+	},
   });
 
 });

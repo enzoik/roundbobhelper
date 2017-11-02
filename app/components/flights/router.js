@@ -161,6 +161,8 @@ define(function(require, exports, module) {
 		
 			//new Flight.Views.Calloption({destination_location_:url_.split('/')[0],flightpickdates_:url_.split('/')[1],travelpeople_:"s",no_of_travelers_:"single",quotation_media_:"call",calling:"calling",call_one:"sen_to"}).render();
 			//s/single/call/true_/calling/sen_to
+			//http://localhost/roundbobhelperv1/dist/#flights/(EBB) Entebbe, Entebbe Uganda_(NBO) Jomo Kenyatta Intl., Nairobi Kenya_Economy/2017-11-07_2017-11-13_round_s/2017-11-07_2017-11-13_round_s/2017-11-07_2017-11-13_round_s/s/single/true_/calling/sen_to/s/single/true_/calling/sen_to
+			//http://localhost/roundbobhelperv1/dist/#flights/(EBB) Entebbe, Entebbe Uganda_(NBO) Jomo Kenyatta Intl., Nairobi Kenya_Economy/2017-10-30_2017-11-20_round_m/m/adlts_1_chldn_0_infnts_0/call/true_
 			new Flight.Views.Calloption({destination_location_:url_.split('/')[0],flightpickdates_:url_.split('/')[1],travelpeople_:"s",no_of_travelers_:"single",quotation_media_:"true_",calling:"calling",call_one:"sen_to"}).render();
 		},
 		//quotation request for more than one person

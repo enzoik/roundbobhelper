@@ -92,7 +92,7 @@ define(function(require, exports, module) {
 			data.Destinationplace = destination_place;
 /*	{"Duration":"3","DepartureCountry":"Uganda","DestinationCountry":"Dubai","DepartureDate":"2016-12-13","NumberOfPeople":null,"OtherDetails":"1 adult","img":"","Location":""}*/
 			
-		if(clients_name === null || clients_name === undefined || clients_name === "" || clients_name.length < 5){
+		if(clients_name === null || clients_name === undefined || clients_name === "" || clients_name.length < 3){
 			swal(
 			  'Empty',
 			  ' Name Field Should not Be atleast 6 characters long',

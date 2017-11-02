@@ -7,6 +7,9 @@ define(function(require, exports, module) {
         Home: require("./countrieshome/view"),
         Item: require("./countriesitem/view"),
         //Details: require("./details/view"),
+		
+		CategoryPackages:require("./home/view"),
+        Details: require("./details/view"),
       },
 
       Api: require("./api"),
@@ -18,7 +21,9 @@ define(function(require, exports, module) {
         },
 
         routes: {
-            "packages": "home",
+            "surprise": "home",
+			"surprise/:id/:resultIndex": "categoriesresults",
+            "surprise/:details/:id/:resultIndex": "details",
 			//"packages/categories": "categories",
            // "hotel/:id/:resultIndex": "details",
         },
@@ -56,7 +61,48 @@ define(function(require, exports, module) {
             homeView.getCached();
           }*/
         },
+		categoriesresults:function(id, resultIndex){
+			console.log("xxxx router cat tap");
+			 if(!$('ContentPackagesListView').length){
+				$('main').html('<ContentPackagesListView style="display:block !important;">load..</ContentPackagesListView>');
+				console.log("loading from home");
+			 }
 
+			  $('ContentPackagesListView').show();
+			 // $('ContentDetailsView').hide();
+
+			  // Only rerender the hotels list when it has been removed.
+			  // This helps to maitain the scroll of the list
+			  
+			 
+				var homeView = new Countries.Views.CategoryPackages();
+				this.packages = homeView.collections.packages;
+				
+				homeView.render();
+				
+
+				// Lets render what might be in the cache for the start
+				 homeView.getCached();		
+		},
+        details: function(popular,resultIndex,id,details) {
+
+			  if(!this.packages || !this.packages.models || !this.packages.models.length){
+				// Redirect if the hotel collection is empty
+				this.go(['/']);
+			  }else{
+
+				if(!$('ContentPackageDetailsView').length){
+				  $('main').append('<ContentPackageDetailsView style="display:block !important;"></ContentPackageDetailsView>');
+				}
+				$('ContentPackagesListView').hide();
+				$('ContentPackageDetailsView').show();
+
+				// Get the hotel selected and pass it to the view
+				// Each record in a collection has an Auto uniqueId
+
+				new Countries.Views.Details({ model:  this.packages._byId[resultIndex]}).render();
+          }
+        },
        /* details: function(id, resultIndex) {
           // app.routerCurrentView ='Hotel.details';
           if(!this.hotels || !this.hotels.models || !this.hotels.models.length){

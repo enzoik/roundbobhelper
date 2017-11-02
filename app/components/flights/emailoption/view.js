@@ -19,7 +19,11 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
+	afterRender : function() {
+		$('#go_backward_btn').show();
+		$('#go_forward_btn').show();
 
+	},
 
 	events:{
 		'click .email_quote' : 'email_quote',
@@ -27,58 +31,118 @@ define(function(require, exports, module) {
 	email_quote:function(){
 		var client_name = document.getElementById("clients_name").value;
 		var clients_email = document.getElementById("clients_email").value;
+		var send_by_email = document.getElementById("option-1");
+		var send_by_watsap = document.getElementById("option-2");
+		var client_watsapp = document.getElementById("client_watsapp").value.replace(/[^\d]/g, '');
+		var watsapp_number = "";
+		var client_contact = "";
+		var media = "email";
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		//var phone_filter = /^\+{0,2}([\-\. ])?(\(?\d{0,3}\))?([\-\. ])?\(?\d{0,3}\)?([\-\. ])?\d{3}([\-\. ])?\d{4};
 		var current_url  = window.location.href.toString();
-		//http://localhost/helperbob/dist/#flights/ffff_fffffff_Economy/2017-09-17_2017-10-17_round_s/s/single/email/sdng_mail/p234/sent_to
-		
-		//http://localhost/helperbob/dist/#flights/nnhj_jkjlk_Economy/2017-09-17_2017-10-17_round_m/m/adlts_1_chldn_0_infnts_0/email
-		if(client_name === null || client_name === undefined || client_name === ""){
+		if(send_by_watsap.checked){
+			media="watsapp";
+			client_contact = document.getElementById("client_watsapp").value;
+		}else{
+			client_contact = clients_email;
+		}
+		console.log("send_by_watsap.checked"+send_by_watsap.checked+" send_by_email "+send_by_email.checked);
+		if(send_by_watsap.checked && client_watsapp === null){
+							swal(
+					  'Empty',
+					  ' Whatsapp No. Field Should not Be Left Empty',
+					  'error'
+					);
+		}else if(send_by_watsap.checked && client_watsapp === ""){
+					swal(
+					  'Empty',
+					  ' Whatsapp No. Field Should not Be Left Empty',
+					  'error'
+					);
+		//}else if(send_by_watsap.checked && phone_filter.test(client_watsapp) && client_watsapp.length < 6 && client_watsapp.length > 12){
+		}else if(send_by_watsap.checked && client_watsapp.match(/^[0-9\s(-)]*$/) && client_watsapp.length < 6 && client_watsapp.length > 12){
+					swal(
+					  'Empty',
+					  'Provide a valid watsapp number',
+					  'error'
+					);				
+				
+		}else if(client_name === null || client_name === undefined || client_name === ""){
 			swal(
 			  'Empty',
 			  ' Name Field Should not Be Left Empty',
 			  'error'
 			);			
-		}else if(clients_email === null || clients_email === undefined || clients_email === "" ){
+		}else if(clients_email === null && !send_by_watsap.checked ){
 			swal(
 			  'Empty',
 			  'Email Field Should not Be Left Empty',
 			  'error'
 			);				
-		}else if(!filter.test(clients_email) ){
+		}else if( clients_email === undefined && !send_by_watsap.checked ){
+			swal(
+			  'Empty',
+			  'Email Field Should not Be Left Empty',
+			  'error'
+			);				
+		}else if(!send_by_watsap.checked && clients_email === null  ){
+			swal(
+			  'Empty',
+			  'Email Field Should not Be Left Empty',
+			  'error'
+			);				
+		}else if(!send_by_watsap.checked && !filter.test(clients_email) ){
 			swal(
 			  'Not Valid',
 			  'Provide a valid email e.g bob@roundbob.com',
 			  'error'
 			);		
 		}else{
-
-				//var current_url  = window.location.href.toString();
-				console.log(current_url.split("#flights")[1]);
+			
 				var url_ = current_url.split("#flights")[1];
 				//hhh_rf_Economy/2017-09-17_2017-10-17_round_m/m/2017-09-17_2017-10-17_round_m/m
-				var redirectTo = '/flights';
-				if(url_.split('/')[3] == "m"){
+				
+				var last_spliter = current_url.split("#flights")[1].split("/");
+				var last_check = last_spliter[last_spliter.length - 2];
+				var last_check2 = last_spliter[last_spliter.length - 1];
+				var splitted = current_url.split("#flights")[1].split("/");
+				//hhh_rf_Economy/2017-09-17_2017-10-17_round_m/m/2017-09-17_2017-10-17_round_m/m
+				console.log("last_checker",last_check);
+				var redirectTo = '';
+				if(last_check =="m_summary" || last_check2 =="watsapp" ){
+					
+				}else if(url_.split('/')[3] == "m"){
 					console.log("many travellers");
-					redirectTo += current_url.split("#flights")[1];
+					redirectTo = '/flights';
+					redirectTo += '/'+splitted[1];
+					redirectTo += '/'+splitted[2];
+					redirectTo += '/'+splitted[3];
+					redirectTo += '/'+splitted[4];
+					redirectTo += '/'+splitted[5];
+					//redirectTo += current_url.split("#flights")[1];
 					//redirectTo += '/' + "email/summary_email";
 					//redirectTo += '/' + client_name+"/"+clients_email+"/summary_email";
-					redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+clients_email+"_email";
+					//redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+clients_email+"-"+client_watsapp+"_"+media;
+					redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+client_contact+"_"+media;
 					console.log("email multiple",redirectTo);
 					console.log("mmmmm",url_.split('/')[3]);
+					app.router.go(redirectTo);	
 				}else{
-		//http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/26-10-2017_30-10-2017_s/s/single/email/sdng_mail/p234/sent_to  8
-		//mutiple email
-		//http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/26-10-2017_31-10-2017_m/m/adlts_1_chldn_0_rooms_1/email    5				
-				//http://localhost/roundbobhelperv1/dist/#picklocation/kkk/26-10-2017_25-10-2017_s/s/single/email/sdng_mail/p234/sent_to/kkk_kkk@gmail.com_email
-					redirectTo += current_url.split("#flights")[1];
+	//http://localhost/roundbobhelperv1/dist/#flights/(WNH) Wenshan Puzhehei Airport, Wenshan China_(BDJ) Sjamsudin Noor, Banjarmasin Indonesia_Economy/s/single/email/sdng_mail/p234/sent_to/bssaa_pa@gmail.com_email
+//http://localhost/roundbobhelperv1/dist/#flights/(BMN)_(BHE) /2017-11-21_2017-10-18_round_m/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/pa_pa@gmail.com-_email
+				//http://localhost/roundbobhelperv1/dist/#flights/(Poland_(NBS) Changbaishan Airpor/s/single/email/sdng_mail/p234/sent_to/patr_pa@gmail.com_watsapp
+					redirectTo = '/flights';
+					//redirectTo += current_url.split("#flights")[1];
+					redirectTo += '/'+splitted[1]+"/s/single/email/sdng_mail/p234/sent_to/summary_email";
 					//redirectTo += '/' + "s/single/email/sdng_mail/p234/sent_to/summary_email";
-					redirectTo += '/' + client_name+"_"+clients_email+"_email";
+					redirectTo += '/' +client_name+"_"+client_contact+"_"+media;
 					//name_email_email
 					console.log("email single",redirectTo);
 					console.log("mmmmm",url_.split('/')[3]);
+					app.router.go(redirectTo);	
 				}
 
-				app.router.go(redirectTo);			
+						
 			
 		}
 	},

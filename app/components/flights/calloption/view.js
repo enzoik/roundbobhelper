@@ -20,7 +20,11 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
+	afterRender : function() {
+		$('#go_backward_btn').show();
+		$('#go_forward_btn').show();
 
+	},
 	events:{
 		'click .submit_call' : 'submit_call',
 	},
@@ -58,23 +62,50 @@ define(function(require, exports, module) {
 				console.log(current_url.split("#flights")[1]);
 				var url_ = current_url.split("#flights")[1];
 				//hhh_rf_Economy/2017-09-17_2017-10-17_round_m/m/2017-09-17_2017-10-17_round_m/m
-				var redirectTo = '/flights';
-				if(url_.split('/')[3] == "m"){
+				var last_spliter = current_url.split("#flights")[1].split("/");
+				var last_check = last_spliter[last_spliter.length - 2];
+				var splitted = current_url.split("#flights")[1].split("/");
+				//hhh_rf_Economy/2017-09-17_2017-10-17_round_m/m/2017-09-17_2017-10-17_round_m/m
+				console.log("last_checker",last_check);
+				var redirectTo = '';
+				if(last_check =="m_client" || last_check =="s_client" ){
+					
+				}else if(url_.split('/')[3] == "m"){
 					console.log("many travellers");
-					redirectTo += current_url.split("#flights")[1];
+					redirectTo = '/flights';
+					redirectTo += '/'+splitted[1];
+					redirectTo += '/'+splitted[2];
+					redirectTo += '/'+splitted[3];
+					redirectTo += '/'+splitted[4];
+					redirectTo += '/'+splitted[5];
+					redirectTo += '/'+splitted[6];
+					//redirectTo += current_url.split("#flights")[1];
 					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";m_mail/m_client/name_email_email
 					redirectTo += '/m_mail/m_client/' + client_name+"_"+client_phone+"_call";
 					console.log("call many",redirectTo);
 					console.log("mmmmm",url_.split('/')[3]);
+					app.router.go(redirectTo);	
 				}else{
-					redirectTo += current_url.split("#flights")[1];
+		//http://localhost/roundbobhelperv1/dist/#flights/SANTS RAILWAY /2017-11-15_2017-11-28_round_s/s/single/true_/calling/sen_to/s_client/pa_256890988776_call
+		//#flights/(MWX) Muan International Airport, Gwangju /2017-11-14_2017-11-29_round_m/m/adlts_1_chldn_0_infnts_0/call/true_/m_mail/m_client/paa_239897876767_call
+					redirectTo = '/flights';
+					//redirectTo += current_url.split("#flights")[1];
 					//redirectTo += '/' + "call/true_";
-					console.log("call single",redirectTo);	
+					console.log("call single",redirectTo);
+					redirectTo += '/'+splitted[1];
+					//redirectTo += '/'+splitted[2]+"/s/single/true_/calling/sen_to";
+					redirectTo += '/'+splitted[2];
+					redirectTo += '/'+splitted[3];
+					redirectTo += '/'+splitted[4];
+					redirectTo += '/'+splitted[5];
+					redirectTo += '/'+splitted[6];
+					redirectTo += '/'+splitted[7];
 					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";s_client/name_email_email
 					redirectTo += '/s_client/'+client_name+"_"+client_phone+"_call";
+					app.router.go(redirectTo);	
 				}
 
-				app.router.go(redirectTo);			
+						
 			
 		}
 
