@@ -24,6 +24,9 @@ define(function(require, exports, module) {
 		console.log("xxxxxx"); 
 	 },
 	 afterRender: function(){
+		 $("send_confirmation_id2").removeAttr('disabled');
+		$('#go_backward_btn').show();
+		$('#go_forward_btn').hide();
 		 var current_url  = window.location.href.toString();
 		 //http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/28-10-2017_31-10-2017_s/s/single/email/sdng_mail/p234/sent_to/patrick_patrick@gmail.com_email
 		 //http://localhost/roundbobhelperv1/dist/#picklocation/dubai/27-10-2017_30-10-2017_m/m/adlts_1_chldn_0_rooms_1/email/m_mail/m_client/m_summary/ppp_patric@gmail.com_email
@@ -64,7 +67,7 @@ define(function(require, exports, module) {
 	send_confirmed_request:function(){
 		console.log("send details");
 		var current_url  = window.location.href.toString();
-		
+		$("#send_confirmation_id2").attr("disabled","disabled");
 		//kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
 		//http://localhost/roundbobhelperv1/dist/#flights/kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
 		//http://localhost/roundbobhelperv1/dist/#flights/kkk_jjjj_Economy/27-10-2017_31-10-2017_round_m/m/adlts_1_chldn_0_infnts_0/call/true_/m_mail/m_client/patrick_256702458965_call
@@ -74,17 +77,25 @@ define(function(require, exports, module) {
 		 var check_out_date = current_url.split("#picklocation")[1].split("/")[2].split("_")[1];
 		 var number_of_people ="";
 		 var no_ = current_url.split("#picklocation")[1].split("/")[3];
-		 var media = current_url.split("#picklocation")[1].split("/")[5];
+		 var divisar =current_url.split("#picklocation")[1].split("/");
+		 
+		 var media = current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[2];
 		 var client_summary = current_url.split("#picklocation")[1].split("/")[9];
 		var name=client_summary.split("_")[0];
-		var email=client_summary.split("_")[1];
+		var email="";
+		var notification_summary="";
+		var get_response_via="";
 		var phone ="";
 		var adults="";
 		var infants ="";
 		var child="";
 		var data_info = {};
+		//http://localhost/roundbobhelperv1/dist/#picklocation/Johannesburg, GT, South Africa/22-11-2017_30-11-2017_s/s/single/email/sdng_mail/p234/sent_to/patrick_patrickkanyerezi@gmail.com_email
 		data_info.CheckInDate = escape(check_in_date).replace(/%20/g,'');
 		data_info.CheckOutDate = escape(check_out_date).replace(/%20/g,'');
+		//console.log("media",current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1]);
+		 console.log("media",media+"="+current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1]);
+		 console.log("length",media+"="+current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[2].length);
 		 if(no_ == "s"){
 			  number_of_people = "people: 1 adults , 0 child, 0 infants";
 		 }else if(no_ == "m"){
@@ -92,38 +103,131 @@ define(function(require, exports, module) {
 			child = current_url.split("#picklocation")[1].split("/")[4].split("_")[3];
 			infants = current_url.split("#picklocation")[1].split("/")[4].split("_")[5];
 			number_of_people = "people: "+adults+" adults , "+child+"child, "+infants+" infants";		 
-		 }else if(media != "email"){
-			 phone=client_summary.split("_")[1];
-		 }	
+		 }
+		 if(media === "email"){
+			 email=current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1];
+			 console.log("media",email);
+			get_response_via="email";	
+			notification_summary="You will get response via your Email "+	email +" after request submission";
+		 }else if(media === "watsapp"){
+			get_response_via="watsapp";
+			 phone=current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1];	
+			notification_summary="You will get response via your watsapp number "+	watsapp_no +" after request submission";	
+		}else if(media === "call"){
+			get_response_via="phone";
+			 phone=current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1];	
+			notification_summary="You will receive a call on your phone number "+	phone +" after request submission";		
+		}	
 		 var jsonString= JSON.stringify(data_info);
-		$.ajax({
-			url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
-			type: 'POST',
-			dataType: 'jsonp',
-			//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
-			data: jQuery.param({
-				email: escape(email).replace(/%20/g,''),
-				phone : escape(phone).replace(/%20/g,''),
-				name : escape(name).replace(/%20/g,''),
-				request_type : "FLIGHT", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
-				adults : escape(adults),
-				children : escape(child),
-				infants : escape(infants),
-				//description  : "hello2"
-				//price   : "hello2"
-				//currency    : "hello2"
-				//meta_data    : "hello2"
-				//respond_via    : "hello2"[email, phone, whatsapp]
-				meta_data :jsonString,
-				}) ,
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			success: function (response) {
-				console.log(response.status);
-			},
-			error: function () {
-				console.log("error");
-			}
-		});
+		 
+
+			swal({
+			  title: 'confirmation',
+			  text: ""+notification_summary,
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Submit!',
+			  cancelButtonText: 'cancel!',
+			  confirmButtonClass: 'btn btn-success',
+			  cancelButtonClass: 'btn btn-danger',
+			  buttonsStyling: false
+			}).then(function () {
+				$("#send_confirmation_id2").attr("disabled","disabled");
+				$.ajax({
+					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					headers: { "Accept-Encoding" : "gzip" },
+					type: 'POST',
+					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error
+					data: jQuery.param({
+						email: email,
+						phone : phone,
+						name : escape(name).replace(/%20/g,''),
+						request_type : "HOTEL", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+						adults : escape(adults),
+						children : escape(child),
+						infants : escape(infants),
+						respond_via    : get_response_via,
+						meta_data :jsonString,
+						}) ,
+				})
+				.done(function(response) {
+					console.log("success");
+					console.log(response);
+							swal({
+							  position: 'center',
+							  type: 'success',
+							  title: 'Your Request has been sent successfully',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
+				})
+				.fail(function() {
+						console.log("error");
+						/*swal(
+						  'Failed',
+						  'Your request has not been sent!',
+						  'error'
+						);*/
+				})
+				.always(function() {
+					console.log("complete");
+							swal({
+							  position: 'center',
+							  type: 'success',
+							  title: 'Your Request has been sent successfully',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
+				});
+				/*$.ajax({
+					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					type: 'POST',
+					dataType: 'jsonp',
+					//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+					data: jQuery.param({
+						email: escape(email).replace(/%20/g,''),
+						phone : escape(phone).replace(/%20/g,''),
+						name : escape(name).replace(/%20/g,''),
+						request_type : "FLIGHT", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+						adults : escape(adults),
+						children : escape(child),
+						infants : escape(infants),
+						respond_via    : get_response_via,
+						meta_data :jsonString,
+						}) ,
+					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+					success: function (response) {
+						console.log(response.status);
+							swal({
+							  position: 'center',
+							  type: 'success',
+							  title: 'Your custom Request has been sent successfully',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
+					},
+					error: function () {
+							swal({
+							  position: 'center',
+							  type: 'error',
+							  title: 'An error occured while sbmitting your custom request',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
+							$("send_confirmation_id2").removeAttr('disabled');
+					}
+				});*/
+			}, function (dismiss) {
+			  // dismiss can be 'cancel', 'overlay',
+			  // 'close', and 'timer'
+			  $("send_confirmation_id2").removeAttr('disabled');
+			  if (dismiss === 'cancel') {
+					$("send_confirmation_id2").removeAttr('disabled');
+			  }
+			});	
+
 	/*	var coming_from = current_url.split("#flights")[1].split("/")[1].split("_")[0];
 		var going_to = current_url.split("#flights")[1].split("/")[1].split("_")[1];
 		var flight_class = current_url.split("#flights")[1].split("/")[1].split("_")[2];

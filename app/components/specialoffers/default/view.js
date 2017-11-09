@@ -20,9 +20,46 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
+	//$("submit_activity_details").removeAttr('disabled');
+	afterRender: function(){
+		 $("submit_activity_details").removeAttr('disabled');
+		$('#go_backward_btn').show();
+		$('#go_forward_btn').show();
+	},
 	events:{
 		'click .submit_request':'submit_request',
-		'mouseover #travel_date':'ontravel_date'
+		'mouseover #travel_date':'ontravel_date',
+		'keydown #destination_d': 'citysearchfield_d'
+	},
+	citysearchfield_d:function(el){
+		console.log("test");
+	 jQuery.noConflict();
+	 $("#destination_d").autocomplete({
+		source: function (request, response) {
+		 $.getJSON(
+			"http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+document.getElementById('destination_d').value,
+			function (data) {
+			//	console.log("data",data);
+			 response(data);
+			 
+			}
+		 );
+		},
+		minLength: 3,
+		select: function (event, ui) {
+		 var selectedObj = ui.item;
+		 $("#destination_d").val(selectedObj.value);
+		//getcitydetails(selectedObj.value);
+		 return false;
+		},
+		open: function () {
+		 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+		},
+		close: function () {
+		 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+		}
+	 });
+	 $("#destination_d").autocomplete("option", "delay", 100);		
 	},
 	ontravel_date: function(e){
 		var view = this;
@@ -41,6 +78,8 @@ define(function(require, exports, module) {
 		});	
 	},
 	submit_request: function(){
+		
+		
 		var addtitional_request_id = document.getElementById("addtitional_request_id").value;
 		var category_id = document.getElementById("category_id").value;
 		var destination_d = document.getElementById("destination_d").value;
@@ -59,6 +98,8 @@ define(function(require, exports, module) {
 			data.Destination = destination_d;
 			data.DepartureDate = travel_date;
 			data.OtherDetails = clients_additional_info;
+			
+
 		//console.log("clients_name "+clients_name+" departure_place "+destination_place+" travel_date "+departure_date+"no_of_adults"+no_of_adults);
 		//console.log("no_of_children "+no_of_children+" no_of_infants "+no_of_infants+" clients_phone_number "+clients_phone_number+"clients_email_address"+clients_email_address+"clients_additional_info"+clients_additional_info);
 /*	{"Duration":"3","DepartureCountry":"Uganda","DestinationCountry":"Dubai","DepartureDate":"2016-12-13","NumberOfPeople":null,"OtherDetails":"1 adult","img":"","Location":""}*/
@@ -101,10 +142,12 @@ define(function(require, exports, module) {
 			  'error'
 			);			
 		}else{
+			$("#submit_activity_details").attr("disabled","disabled");
+			var notification_summary="You will get response via "+	clients_email_address +" after request submission";
 			var jsonString= JSON.stringify(data);
 			swal({
-			  title: 'Are you sure?',
-			  text: "You won't be able to revert this!",
+			  title: 'Confirmation',
+			  text: notification_summary,
 			  type: 'warning',
 			  showCancelButton: true,
 			  confirmButtonColor: '#3085d6',
@@ -117,23 +160,68 @@ define(function(require, exports, module) {
 			}).then(function () {
 				console.log("clients_email_address"+clients_email_address+"clients_phone_number"+clients_phone_number+"jsonString"+jsonString);
 				$.ajax({
-					url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					headers: { "Accept-Encoding" : "gzip" },
 					type: 'POST',
-					dataType: 'jsonp',
-					//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error
 					data: jQuery.param({
 						email: clients_email_address,
 						phone : clients_phone_number,
 						//name : name,
 						request_type : "ACTIVITY", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
 						meta_data :jsonString,
-						
-						//description  : "hello2"
-						//price   : "hello2"
-						//currency    : "hello2"
-						//meta_data    : "hello2"
-						//respond_via    : "hello2"[email, phone, whatsapp]
-						//description  : "hello2",
+						}) ,
+				})
+				.done(function(response) {
+					console.log("success");
+					console.log(response);
+					/*	swal(
+						  'Sent',
+						  'Your request has been sent!',
+						  'success'
+						);
+					$('#addtitional_request_id').text("");
+					$('#category_id').text("");
+					$('#destination_d').text("");
+					$('#travel_date').text("");
+					$('#clients_phone_number').text("");
+					$('#clients_email_address').text("");
+					$('#clients_additional_info').text("");*/
+				})
+				.fail(function() {
+					console.log("error");
+						$("submit_activity_details").removeAttr('disabled');
+						console.log("error");
+						swal(
+						  'Failed',
+						  'Your request has not been sent!',
+						  'error'
+						);
+				})
+				.always(function() {
+					console.log("complete");
+					swal({
+					  position: 'center',
+					  type: 'success',
+					  title: 'Your Request has been sent successfully',
+					  showConfirmButton: false,
+					  timer: 1500
+					});
+
+				});
+				var redirectTo = '/specialoffer/successpage';
+			   app.router.go(redirectTo);
+				/*$.ajax({
+					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					  traditional: true,
+						method: "POST",
+					dataType: 'jsonp',
+					data: jQuery.param({
+						email: clients_email_address,
+						phone : clients_phone_number,
+						//name : name,
+						request_type : "ACTIVITY", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+						meta_data :jsonString,
 						}) ,
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 					success: function (response) {
@@ -145,6 +233,7 @@ define(function(require, exports, module) {
 						);
 					},
 					error: function () {
+						$("submit_activity_details").removeAttr('disabled');
 						console.log("error");
 						swal(
 						  'Failed',
@@ -152,11 +241,10 @@ define(function(require, exports, module) {
 						  'error'
 						);
 					}
-				});
+				});*/
 			}, function (dismiss) {
-			  // dismiss can be 'cancel', 'overlay',
-			  // 'close', and 'timer'
 			  if (dismiss === 'cancel') {
+				  $("submit_activity_details").removeAttr('disabled');
 				swal(
 				  'Cancelled',
 				  'Your imaginary file is safe :)',

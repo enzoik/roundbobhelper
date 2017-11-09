@@ -56,7 +56,7 @@ define(function(require, exports, module) {
       ].join('\n'));*/
 		var that = this;
 	// this.model.set("location",this.model.attributes.Destination.location);
-		console.log("Countries rendered ",this);
+		//console.log("Countries rendered ",this);
 	  
     },
     initialize: function() {
@@ -64,19 +64,13 @@ define(function(require, exports, module) {
 	 // console.log("in the collection view");
       var that = this;
 	  
-	  console.log("countries category",that.collections.countries.models);
+	 /* console.log("countries category",that.collections.countries.models);
 	  this.collections.countries.each(function(Countries_model) {
 		  console.log("countries check"+Countries_model);
 	  });
-	  // this.collections.countries = new ItemCollection();            
+	  
         this.collections.countries.on('sync',this.render,this);            
-        this.collections.countries.fetch();
-      /*this.listenTo(this.collection, "reset sync request", this.render);
-      this.listenTo(this.collection, "fetchError", function(){
-        that.collection.isRequest = false;
-        that.render();
-      });
-	  that.collection.fetch();*/
+        this.collections.countries.fetch();*/
     },
     serialize: function() {
       return {

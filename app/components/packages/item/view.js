@@ -6,7 +6,9 @@ define(function(require, exports, module) {
 
   module.exports = Layout.extend({
     template: require("ldsh!./template"),
-
+    initialize: function(){
+		//this.model.on('change', this.render, this);
+    },
     // el: false,
 
     beforeRender: function() {

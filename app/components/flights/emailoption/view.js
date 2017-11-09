@@ -128,12 +128,14 @@ define(function(require, exports, module) {
 					console.log("mmmmm",url_.split('/')[3]);
 					app.router.go(redirectTo);	
 				}else{
-	//http://localhost/roundbobhelperv1/dist/#flights/(WNH) Wenshan Puzhehei Airport, Wenshan China_(BDJ) Sjamsudin Noor, Banjarmasin Indonesia_Economy/s/single/email/sdng_mail/p234/sent_to/bssaa_pa@gmail.com_email
-//http://localhost/roundbobhelperv1/dist/#flights/(BMN)_(BHE) /2017-11-21_2017-10-18_round_m/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/pa_pa@gmail.com-_email
-				//http://localhost/roundbobhelperv1/dist/#flights/(Poland_(NBS) Changbaishan Airpor/s/single/email/sdng_mail/p234/sent_to/patr_pa@gmail.com_watsapp
+//http://localhost/roundbobhelperv1/dist/#flights/EBB- Entebbe Uganda_DXB- Dubai United Arab Emirates_Business/2017-11-23_2017-11-30_round_s/s/single/email/sdng_mail/p234/sent_to
+//http://localhost/roundbobhelperv1/dist/#flights/EBB- Entebbe Uganda_DXB- Dubai United Arab Emirates_Economy/2017-11-23_2017-11-30_round_s/s/single/email/sdng_mail/p234/sent_to/summary_email/patrick_patrickkanyere@gmail.com_email
 					redirectTo = '/flights';
+					redirectTo += '/'+splitted[1];
+					redirectTo += '/'+splitted[2];
 					//redirectTo += current_url.split("#flights")[1];
-					redirectTo += '/'+splitted[1]+"/s/single/email/sdng_mail/p234/sent_to/summary_email";
+					//redirectTo += "/s/single/email/sdng_mail/p234/sent_to/summary_email";
+					redirectTo += "/s/single/email/sdng_mail/p234/sent_to";
 					//redirectTo += '/' + "s/single/email/sdng_mail/p234/sent_to/summary_email";
 					redirectTo += '/' +client_name+"_"+client_contact+"_"+media;
 					//name_email_email

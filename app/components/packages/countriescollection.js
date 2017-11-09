@@ -22,8 +22,8 @@ define(function(require, exports, module) {
     },
 
     url: function() {
-      return app.countriesApi + 'get-countries.php';
-	  // return app.hotelsApi + 'get-hotels.php';
+     // return app.countriesApi + 'get-countries2.php';
+	   return 'http://m.roundbob.com/API/roundbob_get_countries.php?user_id=b34a758d762edb799b6c305e58d0ef06';
     },
 
     initialize: function(){
@@ -41,13 +41,15 @@ define(function(require, exports, module) {
       // By default the collection is not in a request.
       this.isRequest = false;
     },
-//0704746384
+	sync: function(method, model, options){   
+		//this.isRequest = false;
+	   options.dataType = "jsonp";  
+	   return Backbone.sync(method, model, options);  
+	},
     getCached: function(){
       this.reset();
       var countries = cache.getCountriesSearchResults();
       var countriesCount = countries.length;
-	   console.log("length count through getcached", countriesCount);
-	   console.log("getcached countries");
       if(countriesCount){
 		 
         for(var i=0; i<countriesCount; i++){
@@ -65,12 +67,20 @@ define(function(require, exports, module) {
 	  		//console.log("length count", JSON.stringify(obj));
 			 
 		//console.log("length count", obj.Response.countries);
-		//console.log("xxxxx", obj.Response.countries);
+		console.log("xxxxxcollector", obj.Response.countries);
         cache.setCountriesSearchResults(obj.Response.countries || []);
 		
 		
 		 
       if (obj.Response.countries.length) {
+		  var countries = obj.Response.countries;
+		  var countriesCount = countries.length;
+		  if(countriesCount){
+			 
+			for(var i=0; i<countriesCount; i++){
+			  this.add(new Countries_model(countriesCount[i]));
+			}
+		  }
         return obj.Response.countries;
 		
       }

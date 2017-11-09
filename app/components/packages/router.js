@@ -41,7 +41,7 @@ define(function(require, exports, module) {
 		  
          
             var homeView = new Package.Views.Home();
-            this.packages = homeView.collections.packages;
+            //this.packages = homeView.collections.packages;
 			
             homeView.render();
 			

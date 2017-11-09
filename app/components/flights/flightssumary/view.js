@@ -34,6 +34,7 @@ define(function(require, exports, module) {
     afterRender: function(){
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').hide();
+		$("send_confirmation_id").removeAttr('disabled');
 		var current_url  = window.location.href.toString();
 		var coming_from = current_url.split("#flights")[1].split("/")[1].split("_")[0];
 		var going_to = current_url.split("#flights")[1].split("/")[1].split("_")[1];
@@ -95,7 +96,7 @@ define(function(require, exports, module) {
 		 $('#departure_place_id2').text(escape(going_to).replace(/%20/g,''));
 		 $('#destination_id').text(escape(going_to).replace(/%20/g,''));
 		 $('#destination_id2').text(escape(coming_from).replace(/%20/g,''));
-		 $('#no_of_people').text(escape(number_of_people).replace(/%20/g,''));
+		 $('#no_of_people').text(number_of_people);
    },
 	 beforeRender: function() {
 		console.log("xxxxxx"); 
@@ -151,8 +152,9 @@ define(function(require, exports, module) {
 	events:{
 		'click .send_confirmed_request' : 'send_confirmed_request',
 	},
-	send_confirmed_request:function(){
+	send_confirmed_request:function(el){
 		console.log("send details");
+		 $("#send_confirmation_id").attr("disabled","disabled");
 		var current_url  = window.location.href.toString();
 		
 		//kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
@@ -168,8 +170,11 @@ define(function(require, exports, module) {
 		var flight_type = dates_details[dates_details.length - 2];
 		var no_ = current_url.split("#flights")[1].split("/")[3];
 		var media = current_url.split("#flights")[1].split("/")[9].split("_")[2];
+		var notification_summary="";
+		var get_response_via="";
 		var name="";
 		var email="";
+		var watsapp_no="";
 		var phone ="";
 		var adults="";
 		var infants ="";
@@ -200,53 +205,136 @@ define(function(require, exports, module) {
 			adults = current_url.split("#flights")[1].split("/")[4].split("_")[1];
 			child = current_url.split("#flights")[1].split("/")[4].split("_")[3];
 			infants = current_url.split("#flights")[1].split("/")[4].split("_")[5];
+		}
+		if(media == "watsapp"){
+			console.log("memem");
+			get_response_via="watsapp";
+			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
+			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1];	
+			notification_summary="You will get response via your watsapp number "+	watsapp_no +"after request submission";	
 		}else if(media == "email"){
 			console.log("memem");
+			get_response_via="email";
 			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
-			 email=current_url.split("#flights")[1].split("/")[9].split("_")[1];			
+			 email=current_url.split("#flights")[1].split("/")[9].split("_")[1];	
+			notification_summary="You will get response via your Email "+	email +"after request submission";
 		}else if(media == "call"){
+			get_response_via="phone";
 			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
-			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1];			
+			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1];	
+			notification_summary="You will receive a call on your phone number "+	phone +"after request submission";		
 		}
 		var jsonString= JSON.stringify(data_info);
 		console.log(current_url.split("#flights")[1].split("/")[9]);
 		console.log("media","media "+media+" name "+current_url.split("#flights")[1].split("/")[9].split("_")[0]+" email "+email+" phone "+ phone);
 		//console.log(jsonString);
-/*
-   var data = new Object();
-   obj.name = "Raj";
-   obj.age  = 32;
-   obj.married = false;
-   var jsonString= JSON.stringify(obj);
-*/
-		$.ajax({
-			url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
-			type: 'POST',
-			dataType: 'jsonp',
-			//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
-			data: jQuery.param({
-				email: escape(email).replace(/%20/g,''),
-				phone : escape(phone).replace(/%20/g,'') ,
-				name :  escape(name).replace(/%20/g,''),
-				request_type : "FLIGHT", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
-				adults : adults,
-				children : child,
-				infants : infants,
-				//description  : "hello2"
-				//price   : "hello2"
-				//currency    : "hello2"
-				//meta_data    : "hello2"
-				//respond_via    : "hello2"[email, phone, whatsapp]
-				meta_data :jsonString,
-				}) ,
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			success: function (response) {
-				console.log(response.status);
-			},
-			error: function () {
-				console.log("error");
-			}
-		}); 		
+			swal({
+			  title: 'confirmation',
+			  text: ""+notification_summary,
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Submit!',
+			  cancelButtonText: 'cancel!',
+			  confirmButtonClass: 'btn btn-success',
+			  cancelButtonClass: 'btn btn-danger',
+			  buttonsStyling: false
+			}).then(function () {
+				$("#send_confirmation_id").attr("disabled","disabled");
+				$.ajax({
+					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					headers: { "Accept-Encoding" : "gzip" },
+					type: 'POST',
+					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error
+					data: jQuery.param({
+						email: escape(email).replace(/%20/g,''),
+						phone : escape(phone).replace(/%20/g,'') ,
+						name :  escape(name).replace(/%20/g,''),
+						request_type : "FLIGHT", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+						adults : adults,
+						children : child,
+						infants : infants,
+						respond_via    : get_response_via,
+						meta_data :jsonString,
+						}) ,
+				})
+				.done(function(response) {
+					console.log("success");
+					console.log(response);
+							swal({
+							  position: 'center',
+							  type: 'success',
+							  title: 'Your Request has been sent successfully',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
+				})
+				.fail(function() {
+						console.log("error");
+						/*swal(
+						  'Failed',
+						  'Your request has not been sent!',
+						  'error'
+						);*/
+				})
+				.always(function() {
+					console.log("complete");
+							swal({
+							  position: 'center',
+							  type: 'success',
+							  title: 'Your Request has been sent successfully',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
+				});
+				/*$.ajax({
+					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					type: 'POST',
+					dataType: 'jsonp',
+					data: jQuery.param({
+						email: escape(email).replace(/%20/g,''),
+						phone : escape(phone).replace(/%20/g,'') ,
+						name :  escape(name).replace(/%20/g,''),
+						request_type : "FLIGHT", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+						adults : adults,
+						children : child,
+						infants : infants,
+						respond_via    : get_response_via,
+						meta_data :jsonString,
+						}) ,
+					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+					success: function (response) {
+						console.log(response.status);
+							swal({
+							  position: 'center',
+							  type: 'success',
+							  title: 'Your custom Request has been sent successfully',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
+					},
+					error: function () {
+						console.log("error");
+							swal({
+							  position: 'center',
+							  type: 'error',
+							  title: 'An error occured while sbmitting your custom request',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
+							$("send_confirmation_id").removeAttr('disabled');
+					}
+				}); */
+			}, function (dismiss) {
+			  // dismiss can be 'cancel', 'overlay',
+			  // 'close', and 'timer'
+			  $("send_confirmation_id").removeAttr('disabled');
+			  if (dismiss === 'cancel') {
+					$("send_confirmation_id").removeAttr('disabled');
+			  }
+			});	
+		
 		/*var client_phone = document.getElementById("clients_phone_number").value;
 		var client_name = document.getElementById("clients_name").value;
 		var current_url  = window.location.href.toString();

@@ -68,20 +68,13 @@ define(function(require, exports, module) {
         that.collection.isRequest = false;
         that.render();
       });
-	  packagesCollection.fetch({
+	 /* packagesCollection.fetch({
 		   dataType: 'jsonp',
 		   success : function (data) {
-			/* console.log("package collection",data);
-			// packagesCollection.reset(data,"filtered");
-			 
-			  that.listenTo(packagesCollection, "reset sync request", that.render);
-			  that.listenTo(packagesCollection, "fetchError", function(){
-				that.collection.isRequest = false;
-				that.render();
-			  });
-			  packagesCollection.fetch();*/
+			   console.log("package",data);
+	
 		   }
-		 });
+		 });*/
       app.router.go("surprise", id, resultIndex);
 
       return false;

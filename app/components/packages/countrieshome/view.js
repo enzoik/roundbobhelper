@@ -51,25 +51,24 @@ define(function(require, exports, module) {
     },
 
     afterRender: function(){
-      // Enable DatePicker
-      var that = this;
-	  
-	 /* console.log(this.collections.countries.length);
-	  if(this.collections.countries.length >1){
-		  
-	  }
-	  this.collections.countries.each(function(Countries_model) {
-		  console.log("countries check"+Countries_model);
-	  });
-      $(document).ready(function(){
-        that.$el.find('.input-daterange').datepicker({
-          startDate: new Date(),
-          todayHighlight: true
-        });
-      });*/
-	  
-		//this.collections.packages.fetch();	
+		//this.collections.packages.url = "";
+	/*	var that = this;
+		that.collections.countries.fetch({
+		type: "GET",
+			data: {
+				user_id:'b34a758d762edb799b6c305e58d0ef06'
+			},
+			error: function(model,resp) {
+			  that.collections.countries.trigger("fetchError");
+			  if(resp.status==404){
+				app.notifications.error404();
+			  }else{
+				app.notifications.errorUnknown();
+			  }
+			}
+		});*/
     },
+
 
     beforeRender: function(){
 		this.collections.countries.fetch();
@@ -176,7 +175,7 @@ define(function(require, exports, module) {
     },*/
 
     getCached: function(){
-      countriescollection.getCached();
+    //  countriescollection.f();
     }
   });
 

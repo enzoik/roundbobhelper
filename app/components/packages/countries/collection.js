@@ -59,7 +59,7 @@ define(function(require, exports, module) {
 
     parse: function(obj) {
       // Safety check ensuring only valid data is used.
-	  		//console.log("parse",obj);
+	  		console.log("CountriesLog");
 	  		//console.log("length count", obj.Response);
 	  		//console.log("length count", obj.Response.destinations.length);
 	  		//console.log("length count", JSON.stringify(obj));

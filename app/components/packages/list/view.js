@@ -16,11 +16,14 @@ define(function(require, exports, module) {
     template: require("ldsh!./template"),
 
     beforeRender: function() {
+		
+		console.log("Packages","ListViewBeforeRender");
 //123ReservationsRB!@#
       var filters = this.collection.filters;
 	 // console.log("before check data");
 	  //console.log("check data", this.collection);
       this.collection.each(function(packages_model) {
+		  console.log("packages_model",packages_model);
         // Start Filters
         // FilterBy: starsLevel
        /* if(filters.starsLevel.length){
@@ -76,8 +79,8 @@ define(function(require, exports, module) {
     initialize: function() {
       // app.hotels = this.collection;
       var that = this;
-      this.listenTo(this.collection, "reset sync request", this.render);
-      this.listenTo(this.collection, "fetchError", function(){
+      that.listenTo(that.collection, "reset sync request", that.render);
+      that.listenTo(that.collection, "fetchError", function(){
         that.collection.isRequest = false;
         that.render();
       });

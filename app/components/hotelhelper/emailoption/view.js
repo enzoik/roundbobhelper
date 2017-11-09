@@ -24,9 +24,9 @@ define(function(require, exports, module) {
       'click .submit_email' : 'submit_email',
     },
 	submit_email:function(){
-		var client_name = document.getElementById("client_name").value;
-		var clients_email = document.getElementById("client_email").value;
-		var client_watsapp = document.getElementById("client_watsapp_no").value.replace(/[^\d]/g, '');
+		var client_name = document.getElementById("client_name_hotel").value;
+		var clients_email = document.getElementById("client_email_hotel").value;
+		var client_watsapp = document.getElementById("client_watsapp_no_hotel").value.replace(/[^\d]/g, '');
 		var send_by_email = document.getElementById("option-1");
 		var send_by_watsap = document.getElementById("option-2");
 		var watsapp_number = "";

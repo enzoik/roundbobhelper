@@ -20,10 +20,77 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
+	afterRender: function(){
+		 $("submit_trip_details_id").removeAttr('disabled');
+		$('#go_backward_btn').show();
+		$('#go_forward_btn').hide();
+	},
 	events:{
 		'click .submit_planner_requests':'submit_planner_requests',
 		'mouseover #travel_date' : 'departure_date',
 		'mouseover #return_date' : 'return_date',
+		'keydown #destination_place': 'destination_place',
+		'keydown #departure_place': 'departure_place',
+	},
+	departure_place:function(){
+		console.log("test");
+	 jQuery.noConflict();
+	 $("#departure_place").autocomplete({
+		source: function (request, response) {
+		 $.getJSON(
+			"http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+document.getElementById('departure_place').value,
+			function (data) {
+			//	console.log("data",data);
+			 response(data);
+			 
+			}
+		 );
+		},
+		minLength: 3,
+		select: function (event, ui) {
+		 var selectedObj = ui.item;
+		 $("#departure_place").val(selectedObj.value);
+		//getcitydetails(selectedObj.value);
+		 return false;
+		},
+		open: function () {
+		 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+		},
+		close: function () {
+		 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+		}
+	 });
+	 $("#departure_place").autocomplete("option", "delay", 100);		
+	},
+	destination_place:function(){
+		console.log("test");
+	 jQuery.noConflict();
+	 $("#destination_place").autocomplete({
+		source: function (request, response) {
+		 $.getJSON(
+			"http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+document.getElementById('destination_place').value,
+			function (data) {
+			//	console.log("data",data);
+			 response(data);
+			 
+			}
+		 );
+		},
+		minLength: 3,
+		select: function (event, ui) {
+		 var selectedObj = ui.item;
+		 $("#destination_place").val(selectedObj.value);
+		//getcitydetails(selectedObj.value);
+		 return false;
+		},
+		open: function () {
+		 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+		},
+		close: function () {
+		 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+		}
+	 });
+	 $("#destination_place").autocomplete("option", "delay", 100);		
 	},
 	departure_date:function(e){
 		var view = this;
@@ -69,7 +136,7 @@ define(function(require, exports, module) {
 	},
 	submit_planner_requests:function(){
 		console.log("submited requests");
-		
+		$("#submit_trip_details_id").attr("disabled","disabled");		
 		var clients_name = document.getElementById("clients_name").value;
 		var departure_place = document.getElementById("departure_place").value;
 		var destination_place = document.getElementById("destination_place").value;
@@ -137,6 +204,7 @@ define(function(require, exports, module) {
 			);			
 		}else{
 			var jsonString= JSON.stringify(data);
+			var notification_summary="You will get response via "+	clients_email_address +"and "+clients_phone_number+" after request submission";
 			swal({
 			  title: 'Are you sure?',
 			  text: "You won't be able to revert this!",
@@ -151,10 +219,49 @@ define(function(require, exports, module) {
 			  buttonsStyling: false,
 			}).then(function () {
 				$.ajax({
-					url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					headers: { "Accept-Encoding" : "gzip" },
+					type: 'POST',
+					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error
+					data: jQuery.param({
+						email: clients_email_address,
+						phone : clients_phone_number,
+						name : clients_name,
+						request_type : "PACKAGE", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+						meta_data :jsonString,
+						adults  :	no_of_adults,	
+						children :	no_of_children,	
+						infants :	no_of_infants,
+						}) ,
+				})
+				.done(function(response) {
+					console.log("success");
+					console.log(response);
+						swal(
+						  'Sent',
+						  'Your request has been sent!',
+						  'success'
+						);
+				})
+				.fail(function() {
+					console.log("error");
+						$("submit_activity_details").removeAttr('disabled');
+						console.log("error");
+						swal(
+						  'Failed',
+						  'Your request has not been sent!',
+						  'error'
+						);
+				})
+				.always(function() {
+					console.log("complete");
+				});
+				var redirectTo = '/tripplanner/successpage';
+			   app.router.go(redirectTo);
+			/*	$.ajax({
+					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
 					type: 'POST',
 					dataType: 'jsonp',
-					//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
 					data: jQuery.param({
 						email: clients_email_address,
 						phone : clients_phone_number,
@@ -165,12 +272,6 @@ define(function(require, exports, module) {
 						children :	no_of_children,	
 						infants :	no_of_infants,
         						
-						//description  : "hello2"
-						//price   : "hello2"
-						//currency    : "hello2"
-						//meta_data    : "hello2"
-						//respond_via    : "hello2"[email, phone, whatsapp]
-						//description  : "hello2",
 						}) ,
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 					success: function (response) {
@@ -183,17 +284,19 @@ define(function(require, exports, module) {
 					},
 					error: function () {
 						console.log("error");
+						$("submit_trip_details_id").removeAttr('disabled');
 						swal(
 						  'Failed',
 						  'Your request has not been sent!',
 						  'error'
 						);
 					}
-				});
+				});*/
 			}, function (dismiss) {
 			  // dismiss can be 'cancel', 'overlay',
 			  // 'close', and 'timer'
 			  if (dismiss === 'cancel') {
+				  $("submit_trip_details_id").removeAttr('disabled');
 				swal(
 				  'Cancelled',
 				  'Your imaginary file is safe :)',

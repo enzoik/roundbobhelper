@@ -27,19 +27,24 @@ define(function(require, exports, module) {
     },
 
     url: function() {
-		console.log("category_id0",this.category_id);
-     // return app.packagesApi + 'get-packages.php';
-      return "http://m.roundbob.com/API/roundbob_get_destinations.php?&country_id="+this.country_id+"&keyword=&subcategory=&key=destinations&user_id=eb94fb88074d11c2e1561653b07fd914&un=pkanyerezi&pw=210013634&page=1&start=0&limit=50";
-	  // return app.hotelsApi + 'get-hotels.php';
+		return "http://m.roundbob.com/API/roundbob_get_destinations.php";
     },
 
     initialize: function(modal,options){
-		this.country_id = 2;
+		//this.country_id = 2;
+		console.log("options", + options);
 		if(options != undefined){
-		console.log("options",options);
-		console.log("opt1",options.split("-")[0]);
-		this.country_id = options.split("-")[0];
-		console.log("opt2",options.split("-")[1]);
+			console.log("options",options);
+			console.log("opt1",options.split("-")[0]);
+			this.country_id = options.split("-")[0];
+			console.log("opt2",options.split("-")[1]);
+			 var that = this;
+			  this.listenTo(that, "reset sync request", this.render);
+			  this.listenTo(that, "fetchError", function(){
+				that.collection.isRequest = false;
+				that.render();
+			  });
+				this.fetch();
 		}
 		/*this.country_id = options.opt1;
 		this.country_name = options.opt2;
@@ -49,15 +54,22 @@ define(function(require, exports, module) {
           this.isRequest = true;
         },
 
+	
         sync: function() {
           this.isRequest = false;
         },
+		
       });
 
       // By default the collection is not in a request.
       this.isRequest = false;
     },
 //0704746384
+	sync: function(method, model, options){   
+		//this.isRequest = false;
+	   options.dataType = "jsonp";  
+	   return Backbone.sync(method, model, options);  
+	},
     getCached: function(){
       this.reset();
       var packages = cache.getPackagesSearchResults();
@@ -65,6 +77,7 @@ define(function(require, exports, module) {
       if(packagesCount){
 		 
         for(var i=0; i<packagesCount; i++){
+			console.log("objective", packages[i]);
           this.add(new Packages_model(packages[i]));
         }
       }
@@ -72,18 +85,19 @@ define(function(require, exports, module) {
     },
 
     parse: function(obj) {
-      // Safety check ensuring only valid data is used.
-	  		//console.log("parse",obj);
-	  		//console.log("length count", obj.Response);
-	  		//console.log("length count", obj.Response.destinations.length);
-	  		//console.log("length count", JSON.stringify(obj));
-			 
-		//console.log( obj);
-        cache.setPackagesSearchResults(obj.Response.destinations || []);
+		// console.log("objective", obj);
+        //cache.setPackagesSearchResults(obj.Response.destinations || []);
 		
-		
-		 
+		if(!obj) return this.models;
+		console.log("PackagesParserData", obj);
+	 
       if (obj.Response.destinations.length) {
+		 var packagesCount = obj.Response.destinations.length;
+        for(var i=0; i<packagesCount; i++){
+			console.log("objective", obj.Response.destinations[i]);
+          this.add(new Packages_model(obj.Response.destinations[i]));
+        }
+		console.log("PackagesParser","DestinationsFound");
         return obj.Response.destinations;
 		
       }

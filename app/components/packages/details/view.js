@@ -111,6 +111,7 @@ define(function(require, exports, module) {
 		data_info.DepartureDate = travel_date;
 		 var jsonString= JSON.stringify(data_info);
 		console.log("infants "+infants+" adults "+adults+" children "+children);
+
 		if(client_name_id === null || client_name_id === undefined || client_name_id === ""){
 			swal(
 			  'Empty',
@@ -136,10 +137,68 @@ define(function(require, exports, module) {
 			  'error'
 			);				
 		}else{
-			$.ajax({
-				url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+				$("#submit_booking_details").attr("disabled","disabled");
+				$.ajax({
+					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					headers: { "Accept-Encoding" : "gzip" },
+					type: 'POST',
+					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error
+					data: jQuery.param({
+						email: client_email,
+						phone : phone_number,
+						name : client_name_id,
+						request_type : "PACKAGE", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+						adults : adults,
+						children : children,
+						infants : infants,
+						meta_data :jsonString,
+						}) ,
+				})
+				.done(function(response) {
+					console.log("success");
+					console.log(response);
+					swal({
+					  position: 'center',
+					  type: 'success',
+					  title: 'Your Request has been sent successfully',
+					  showConfirmButton: false,
+					  timer: 1500
+					});
+
+					$('#travel_date').text("");
+					$('#phone_number').text("");
+					$('#client_email').text("");
+					$('#client_name_id').text("");
+				})
+				.fail(function() {
+					console.log("error");
+						$("submit_activity_details").removeAttr('disabled');
+					$('#travel_date').text("");
+					$('#phone_number').text("");
+					$('#client_email').text("");
+					$('#client_name_id').text("");
+						console.log("error");
+						/*swal(
+						  'Failed',
+						  'Your request has not been sent!',
+						  'error'
+						);*/
+				})
+				.always(function() {
+					console.log("complete");
+					swal({
+					  position: 'center',
+					  type: 'success',
+					  title: 'Your Request has been sent successfully',
+					  showConfirmButton: false,
+					  timer: 1500
+					});
+				});
+			/*$.ajax({
+				url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.jso',
+				headers: { "Accept-Encoding" : "gzip" },
 				type: 'POST',
-				dataType: 'jsonp',
+				dataType: 'json',
 				//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
 				data: jQuery.param({
 					email: client_email,
@@ -149,11 +208,6 @@ define(function(require, exports, module) {
 					adults : adults,
 					children : children,
 					infants : infants,
-					//description  : "hello2"
-					//price   : "hello2"
-					//currency    : "hello2"
-					//meta_data    : "hello2"
-					//respond_via    : "hello2"[email, phone, whatsapp]
 					meta_data :jsonString,
 					}) ,
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -166,7 +220,7 @@ define(function(require, exports, module) {
 				error: function () {
 					console.log("error");
 				}
-			});			
+			});	*/			
 		}		 
 		 
 	/*	swal({
