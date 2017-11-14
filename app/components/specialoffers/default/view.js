@@ -84,10 +84,11 @@ define(function(require, exports, module) {
 		var category_id = document.getElementById("category_id").value;
 		var destination_d = document.getElementById("destination_d").value;
 		var travel_date = document.getElementById("travel_date").value;
-		/*var return_date = document.getElementById("departure_date").value;
+		/*var return_date = document.getElementById("departure_date").value;*/
+
 		var no_of_adults = document.getElementById("no_of_adults").value;
 		var no_of_children = document.getElementById("no_of_children").value;
-		var no_of_infants = document.getElementById("no_of_infants").value;*/
+		var no_of_infants = document.getElementById("no_of_infants").value;
 		var clients_phone_number = document.getElementById("clients_phone_number").value;
 		var clients_email_address = document.getElementById("clients_email_address").value;
 		var clients_additional_info = document.getElementById("clients_additional_info").value;
@@ -170,17 +171,20 @@ define(function(require, exports, module) {
 						//name : name,
 						request_type : "ACTIVITY", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
 						meta_data :jsonString,
+						adults  :	no_of_adults,	
+						children :	no_of_children,	
+						infants :	no_of_infants,
 						}) ,
 				})
 				.done(function(response) {
 					console.log("success");
 					console.log(response);
-					/*	swal(
+						swal(
 						  'Sent',
 						  'Your request has been sent!',
 						  'success'
 						);
-					$('#addtitional_request_id').text("");
+					/*$('#addtitional_request_id').text("");
 					$('#category_id').text("");
 					$('#destination_d').text("");
 					$('#travel_date').text("");
@@ -192,11 +196,11 @@ define(function(require, exports, module) {
 					console.log("error");
 						$("submit_activity_details").removeAttr('disabled');
 						console.log("error");
-						swal(
+						/*swal(
 						  'Failed',
 						  'Your request has not been sent!',
 						  'error'
-						);
+						);*/
 				})
 				.always(function() {
 					console.log("complete");

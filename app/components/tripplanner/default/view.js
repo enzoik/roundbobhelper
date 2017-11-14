@@ -206,8 +206,8 @@ define(function(require, exports, module) {
 			var jsonString= JSON.stringify(data);
 			var notification_summary="You will get response via "+	clients_email_address +"and "+clients_phone_number+" after request submission";
 			swal({
-			  title: 'Are you sure?',
-			  text: "You won't be able to revert this!",
+			  title: 'Confirmation',
+			  text: notification_summary,
 			  type: 'warning',
 			  showCancelButton: true,
 			  confirmButtonColor: '#3085d6',
@@ -247,11 +247,11 @@ define(function(require, exports, module) {
 					console.log("error");
 						$("submit_activity_details").removeAttr('disabled');
 						console.log("error");
-						swal(
+						/*swal(
 						  'Failed',
 						  'Your request has not been sent!',
 						  'error'
-						);
+						);*/
 				})
 				.always(function() {
 					console.log("complete");

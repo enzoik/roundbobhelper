@@ -67,6 +67,7 @@ define(function(require, exports, module) {
 	send_confirmed_request:function(){
 		console.log("send details");
 		var current_url  = window.location.href.toString();
+		var redirectTo = '';
 		$("#send_confirmation_id2").attr("disabled","disabled");
 		//kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
 		//http://localhost/roundbobhelperv1/dist/#flights/kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
@@ -172,6 +173,8 @@ define(function(require, exports, module) {
 						);*/
 				})
 				.always(function() {
+					$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="100%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">100%</span>');
+					
 					console.log("complete");
 							swal({
 							  position: 'center',
@@ -180,6 +183,7 @@ define(function(require, exports, module) {
 							  showConfirmButton: false,
 							  timer: 1500
 							});
+					app.router.go(redirectTo);
 				});
 				/*$.ajax({
 					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',

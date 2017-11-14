@@ -41,72 +41,78 @@ define(function(require, exports, module,jqueryui) {
 
     },
 	flight_from:function(){
-		var UserList = Backbone.Collection.extend({ //Line 11
-		  model: User,
-		  url: 'https://raw.githubusercontent.com/pkanyerezi/roundbobhelper/master/app/api/airports/airports.json',
-		  //C:\wamp\www\roundbobhelperv1\dist\app\api\airports
-		  parse: function(response) {
-			 
-			return response;
-		  }
-		});
-		var SelectionView = Backbone.View.extend({ //Line 19
-		  el : $('#user-selection'),
-		  render: function() {
-			//$(this.el).html("You Selected : " + this.model.get('name')); //Line 22
-			return this;
-		  },
-		});
-		var users = new UserList(); //Line 26
-		users.fetch({async: false});
-		var userNames = users.pluck("name");
-		// console.log("data",userNames);
-		jQuery.noConflict();
-		var flight_from = $('#flight_from');
-	   flight_from.autocomplete({ //Line 30
-		  source : userNames,
-		  minLength : 2,
-		  select: function(event, ui){ //Line 33
-		  console.log("uixxx",ui);
-			var selectedModel = users.where({name: ui.item.value})[0];
-			var view = new SelectionView({model: selectedModel});
-			view.render();
-		  }
-		});			
+		var search_word = document.getElementById('flight_from').value.trim();
+		 jQuery.noConflict();
+		 $("#flight_from").autocomplete({
+			source: function (request, response) {
+			 $.getJSON(
+				//'http://localhost/roundbobhelperv1/dist/app/api/airports/airports_autocomplete_search_service.php?q='+search_word,
+				'http://reacting.azurewebsites.net/app/api/airports/airports_autocomplete_search_service.php?q='+search_word,
+				function (data) {
+				// response(data);
+					response( $.map( data, function( item ) {
+					  return {
+						label: item.name,
+						value: item.name
+					  };
+					}));				 
+				}
+			 );
+			},
+			
+			minLength: 2,
+			select: function (event, ui) {
+			 var selectedObj = ui.item;
+			 $("#flight_from").val(selectedObj.value);
+			//getcitydetails(selectedObj.value);
+			 return false;
+			},
+			open: function () {
+			 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+			},
+			close: function () {
+			 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+			}
+		 });
+		 $("#flight_from").autocomplete("option", "delay", 100);
+
+		
 	},
 	flight_to:function(){
-		var UserList = Backbone.Collection.extend({ //Line 11
-		  model: User,
-		  url: 'https://raw.githubusercontent.com/pkanyerezi/roundbobhelper/master/app/api/airports/airports.json',
-		  //C:\wamp\www\roundbobhelperv1\dist\app\api\airports
-		  parse: function(response) {
-			 
-			return response;
-		  }
-		});
-		var SelectionView = Backbone.View.extend({ //Line 19
-		  el : $('#user-selection'),
-		  render: function() {
-			//$(this.el).html("You Selected : " + this.model.get('name')); //Line 22
-			return this;
-		  },
-		});
-		var users = new UserList(); //Line 26
-		users.fetch({async: false});
-		var userNames = users.pluck("name");
-		// console.log("data",userNames);
-		jQuery.noConflict();
-		var flight_to = $('#flight_to');
-	   flight_to.autocomplete({ //Line 30
-		  source : userNames,
-		  minLength : 2,
-		  select: function(event, ui){ //Line 33
-		  console.log("uixxx",ui);
-			var selectedModel = users.where({name: ui.item.value})[0];
-			var view = new SelectionView({model: selectedModel});
-			view.render();
-		  }
-		});			
+		var search_word_to = document.getElementById('flight_to').value.trim();
+
+		 jQuery.noConflict();
+		 $("#flight_to").autocomplete({
+			source: function (request, response) {
+			 $.getJSON(
+				//'http://localhost/roundbobhelperv1/dist/app/api/airports/airports_autocomplete_search_service.php?q='+search_word_to,
+				'http://reacting.azurewebsites.net/app/api/airports/airports_autocomplete_search_service.php?q='+search_word_to,
+				function (data) {
+					response( $.map( data, function( item ) {
+					  return {
+						label: item.name,
+						value: item.name
+					  };
+					}));				 
+				}
+			 );
+			},
+			
+			minLength: 2,
+			select: function (event, ui) {
+			 var selectedObj = ui.item;
+			 $("#flight_to").val(selectedObj.value);
+			//getcitydetails(selectedObj.value);
+			 return false;
+			},
+			open: function () {
+			 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+			},
+			close: function () {
+			 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+			}
+		 });
+		 $("#flight_to").autocomplete("option", "delay", 100);
 	},
 	continue_to_flight_pick_dates:function(e){
 	/*	new AutoCompleteView({

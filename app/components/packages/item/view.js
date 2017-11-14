@@ -32,7 +32,8 @@ define(function(require, exports, module) {
 	 
 	 
 	 this.model.set("brief_description",this.model.attributes.Destination.brief_description);
-	 this.model.set("image_file","http://www.roundbob.com/img/destinations/"+this.model.attributes.Destination.image_file);
+	// this.model.set("image_file","http://www.roundbob.com/img/destinations/"+this.model.attributes.Destination.image_file);
+	 this.model.set("image_file","https://www.roundbob.com/img/imagecache/destinations/"+this.model.attributes.Destination.image_file);
 	 
 	 
     },

@@ -61,10 +61,17 @@ define(function(require, exports, module) {
 		  console.log("response data",data);
 		  var info_data = data.Response.destination_details.Destinations.Destination.brief_description;
 		  var ref_number = data.Response.destination_details.Destinations.Destination.ref_number;
-		  
+		  var cost = data.Response.destination_details.Destinations.Destination.cost;
+		  var double_book = cost * 2;
+		  var tripple_book = cost * 3;
+		  console.log("cost",cost);
 		  that.model.set("brief",info_data);
 		  $('.brief-info').html(info_data);
 		  $('.ref-number-info').html(ref_number);
+		  $('.package-item-total-price').html(cost);
+		  $('.individualbasis').html("On single basis ($"+cost+")");
+		  $('.indoublebasis').html("On double basis ($"+double_book+")");
+		  $('.tripplebasis').html("On tripple basis ($"+tripple_book+")");
 		}
     },
 
@@ -138,6 +145,7 @@ define(function(require, exports, module) {
 			);				
 		}else{
 				$("#submit_booking_details").attr("disabled","disabled");
+				var redirectTo = '';
 				$.ajax({
 					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
 					headers: { "Accept-Encoding" : "gzip" },
@@ -193,6 +201,7 @@ define(function(require, exports, module) {
 					  showConfirmButton: false,
 					  timer: 1500
 					});
+					app.router.go(redirectTo);
 				});
 			/*$.ajax({
 				url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.jso',

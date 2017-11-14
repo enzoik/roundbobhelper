@@ -33,7 +33,7 @@ define(function(require, exports, module) {
 	 $("#hotel_destination").autocomplete({
 		source: function (request, response) {
 		 $.getJSON(
-			"http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+document.getElementById('hotel_destination').value,
+			"http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+document.getElementById('hotel_destination').value.trim(),
 			function (data) {
 			//	console.log("data",data);
 			 response(data);

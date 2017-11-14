@@ -37,6 +37,8 @@ define(function(require, exports, module) {
 			 }
 
 			  $('ContentCountriesListView').show();
+			  $('ContentPackagesListView').hide();
+			  $('ContentPackageDetailsView').hide();
 				var homeView = new Countries.Views.Home();
 				this.packages = homeView.collections.packages;
 				
@@ -54,6 +56,8 @@ define(function(require, exports, module) {
 			 }
 
 			  $('ContentPackagesListView').show();
+			  $('ContentCountriesListView').hide();
+			  $('ContentPackageDetailsView').hide();
 			 // $('ContentDetailsView').hide();
 
 			  // Only rerender the hotels list when it has been removed.
@@ -80,6 +84,7 @@ define(function(require, exports, module) {
 				  $('main').append('<ContentPackageDetailsView style="display:block !important;"></ContentPackageDetailsView>');
 				}
 				$('ContentPackagesListView').hide();
+				$('ContentCountriesListView').show();
 				$('ContentPackageDetailsView').show();
 
 				// Get the hotel selected and pass it to the view

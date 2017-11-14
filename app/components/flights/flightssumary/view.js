@@ -36,8 +36,8 @@ define(function(require, exports, module) {
 		$('#go_forward_btn').hide();
 		$("send_confirmation_id").removeAttr('disabled');
 		var current_url  = window.location.href.toString();
-		var coming_from = current_url.split("#flights")[1].split("/")[1].split("_")[0];
-		var going_to = current_url.split("#flights")[1].split("/")[1].split("_")[1];
+		var coming_from = current_url.split("#flights")[1].split("/")[1].split("_")[0].replace(" ", "");
+		var going_to = current_url.split("#flights")[1].split("/")[1].split("_")[1].replace(" ", "");
 		var flight_class = current_url.split("#flights")[1].split("/")[1].split("_")[2];
 		var departure_date = current_url.split("#flights")[1].split("/")[2].split("_")[0];
 		//var return_date = current_url.split("#flights")[1].split("/")[2].split("_")[1];
@@ -62,18 +62,21 @@ define(function(require, exports, module) {
 		var no_of_people = document.getElementById("no_of_people").innerText;  */
 
 		//return_date_id = going_to;
+		//http://localhost/roundbobhelperv1/dist/#flights/ACI-%20Alderney%20United%20Kingdom_BBF-%20Burlington%20United%20States_Economy/2017-11-23_2017-11-21_round_m/m/adlts_1_chldn_1_infnts_0/call/true_/m_mail/m_client/patrick_256701203975_call
 		if(no_ == "s"){
 			 number_of_people = "people: 1 adults , 0 child, 0 infants";
-		}if(flight_type == "round"){
-			//data.ReturnDate = current_url.split("#flights")[1].split("/")[2].split("_")[1];
-			return_date = current_url.split("#flights")[1].split("/")[2].split("_")[1];
-			$('#return_date_id').html('<span><i class="icon-calendar"></i>'+ return_date+'</i></span>');
-			console.log("return_date "+return_date);
 		}else if(no_ == "m"){
 			adults = current_url.split("#flights")[1].split("/")[4].split("_")[1];
 			child = current_url.split("#flights")[1].split("/")[4].split("_")[3];
 			infants = current_url.split("#flights")[1].split("/")[4].split("_")[5];
 			number_of_people = "people: "+adults+" adults , "+child+"child, "+infants+" infants";
+		}
+	
+		if(flight_type == "round"){
+			//data.ReturnDate = current_url.split("#flights")[1].split("/")[2].split("_")[1];
+			return_date = current_url.split("#flights")[1].split("/")[2].split("_")[1];
+			$('#return_date_id').html('<span><i class="icon-calendar"></i>'+ return_date+'</i></span>');
+			console.log("return_date "+return_date);
 		}else if(media == "email"){
 			console.log("memem");
 			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
@@ -155,6 +158,7 @@ define(function(require, exports, module) {
 	send_confirmed_request:function(el){
 		console.log("send details");
 		 $("#send_confirmation_id").attr("disabled","disabled");
+		 var redirectTo = '';
 		var current_url  = window.location.href.toString();
 		
 		//kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
@@ -279,6 +283,8 @@ define(function(require, exports, module) {
 						);*/
 				})
 				.always(function() {
+					$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="100%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">100%</span>');
+					
 					console.log("complete");
 							swal({
 							  position: 'center',
@@ -287,6 +293,7 @@ define(function(require, exports, module) {
 							  showConfirmButton: false,
 							  timer: 1500
 							});
+					app.router.go(redirectTo);
 				});
 				/*$.ajax({
 					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
