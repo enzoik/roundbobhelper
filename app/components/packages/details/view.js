@@ -50,7 +50,7 @@ define(function(require, exports, module) {
 		var destination_id = that.model.attributes.Destination.id;
 		$.ajax({
 		  dataType: 'jsonp',
-		  url: "http://m.roundbob.com/API/roundbob_get_destination_details.php?user_id=b34a758d762edb799b6c305e58d0ef06&did="+destination_id,
+		  url: "//m.roundbob.com/API/roundbob_get_destination_details.php?user_id=b34a758d762edb799b6c305e58d0ef06&did="+destination_id,
 		 	data: {
 				user_id:"b34a758d762edb799b6c305e58d0ef06"
 			},
@@ -65,6 +65,7 @@ define(function(require, exports, module) {
 		  var double_book = cost * 2;
 		  var tripple_book = cost * 3;
 		  console.log("cost",cost);
+	// this.model.set("image_file","http://www.roundbob.com/img/destinations/"+this.model.attributes.Destination.image_file);package-item-selected-image
 		  that.model.set("brief",info_data);
 		  $('.brief-info').html(info_data);
 		  $('.ref-number-info').html(ref_number);
@@ -147,7 +148,7 @@ define(function(require, exports, module) {
 				$("#submit_booking_details").attr("disabled","disabled");
 				var redirectTo = '';
 				$.ajax({
-					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					url: '//customrequests.roundbob.com/public-api/custom-requests/add.json',
 					headers: { "Accept-Encoding" : "gzip" },
 					type: 'POST',
 					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error

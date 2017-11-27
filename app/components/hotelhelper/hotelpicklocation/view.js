@@ -9,6 +9,10 @@ define(function(require, exports, module) {
       HeaderNav: require("../../common/header/view"),
       FooterNav: require("../../common/footer/view"),
     },
+    api: {
+      cities: 'app/api/cities/locations_autocomplete_search_service.php'
+    },
+    typingDelay: 500
   };
 
   module.exports = Backbone.Layout.extend({
@@ -21,15 +25,58 @@ define(function(require, exports, module) {
       "footernav": new Config.Views.FooterNav(),
     },
 	afterRender : function() {
-	
+		$("#pick_destination_location_id").hide();
 	},
 	events: {
       'click .pick_destination_location' : 'pick_destination_location',
-	  'keydown #hotel_destination': 'hotel_destination',
+	    'keyup #hotel_destination': 'hotel_destination',
     },
 	hotel_destination: function(el){
-		console.log("xxxx");
-	 jQuery.noConflict();
+		var hotel_search = document.getElementById('hotel_destination').value.trim();
+		 jQuery.noConflict();
+		 $("#hotel_destination").autocomplete({
+			source: function (request, response) {
+			 $.getJSON(
+				 Config.api.cities + '?q='+hotel_search,
+				function (data) {
+				// response(data);
+					response( $.map( data, function( item ) {
+					  return {
+						label: item.desc,
+						//value: item.city+","+item.country+","+item.countryCode+","+item.id+","+item.tbo,
+						value: item.desc+" - "+item.id,
+					  };
+					}));
+				}
+			 );
+			},
+			//category_id 5900186
+			minLength: 2,
+			select: function (event, ui) {
+			 var selectedObj = ui.item;
+			 $("#hotel_destination").val(selectedObj.value);
+			//getcitydetails(selectedObj.value);
+			var redirectTo = '/picklocation';
+		 // redirectTo += current_url.split("#picklocation")[1];
+		  redirectTo += '/' + selectedObj.value;
+		  console.log("link",redirectTo);
+		  app.router.go(redirectTo);
+			 return false;
+			},
+			search: function () {
+			 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+			},
+			open: function () {
+			 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+			},
+			close: function () {
+			 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+			}
+
+
+		 });
+		 $("#hotel_destination").autocomplete("option", "delay", Config.typingDelay);
+	/* jQuery.noConflict();
 	 $("#hotel_destination").autocomplete({
 		source: function (request, response) {
 		 $.getJSON(
@@ -37,7 +84,7 @@ define(function(require, exports, module) {
 			function (data) {
 			//	console.log("data",data);
 			 response(data);
-			 
+
 			}
 		 );
 		},
@@ -55,47 +102,8 @@ define(function(require, exports, module) {
 		 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
 		}
 	 });
-	 $("#hotel_destination").autocomplete("option", "delay", 100);
-	
-	/*	var CityList = Backbone.Collection.extend({ //Line 11
-		  model: Cities,
-		//  url: 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+document.getElementById('hotel_destination').value+'&types=(cities)&key=AIzaSyAVqSfeHJPJ94_Xb68ZEwFBp-DKp3rZuhw',
-		  url: 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+document.getElementById('hotel_destination').value+'&types=(cities)&key=AIzaSyAVqSfeHJPJ94_Xb68ZEwFBp-DKp3rZuhw',
-		  //C:\wamp\www\roundbobhelperv1\dist\app\api\airports
-		  parse: function(response) {
-			 console.log("response",response);
-			return response;
-		  },
-		  sync : function(method, collection, options) {
-			options.dataType = "jsonp";
-			return Backbone.sync(method, collection, options);
-		  },
-		});
-		var SelectionView = Backbone.View.extend({ //Line 19
-		  el : $('#city-selection'),
-		  render: function() {
-			//$(this.el).html("You Selected : " + this.model.get('name')); //Line 22
-			return this;
-		  },
-		});
-		var cityz = new CityList(); //Line 26
-		cityz.fetch({async: false});
-		console.log("cityz",cityz);
-		var cityNames = cityz.pluck("description");
-		// console.log("data",userNames);
-		jQuery.noConflict();
-	
-		var hotel_destination = $('#hotel_destination');
-	   hotel_destination.autocomplete({ //Line 30
-		  source : cityNames,
-		  minLength : 2,
-		  select: function(event, ui){ //Line 33
-		  console.log("uixxx",ui);
-			var selectedModel = users.where({name: ui.item.value})[0];
-			var view = new SelectionView({model: selectedModel});
-			view.render();
-		  }
-		});*/
+	 $("#hotel_destination").autocomplete("option", "delay", Config.typingDelay);*/
+
 	},
 	pick_destination_location: function(){
 		var location_name = document.getElementById("hotel_destination").value;
@@ -104,13 +112,27 @@ define(function(require, exports, module) {
 			  'Empty',
 			  ' The Location Field Should not Be Left Empty',
 			  'error'
-			);			
-		}else{		
+			);
+		}else{
+		//var dest_id_check = location_name.split("-")[1];
+		var dest_id = location_name;
+		console.log("is dest_id_check",/\d/.test(dest_id));
+		console.log("check id",dest_id);
+		var has_number = /\d/.test(dest_id);
+		if(!has_number || location_name.length < 8){
+			swal(
+			  'Invalid',
+			  ' Select a destination from the options given',
+			  'error'
+			);
+		}else{
 			var redirectTo = '/picklocation';
 		 // redirectTo += current_url.split("#picklocation")[1];
 		  redirectTo += '/' + location_name;
 		  console.log("link",redirectTo);
 		  app.router.go(redirectTo);
+		}
+
 		}
 	},
   });

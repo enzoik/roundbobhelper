@@ -207,7 +207,7 @@ define(function(require, exports, module) {
    var jsonString= JSON.stringify(obj);
 */
 		$.ajax({
-			url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
+			url: '//www.roundbob.com/public-api/custom-requests/add.json',
 			type: 'POST',
 			dataType: 'jsonp',
 			//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',

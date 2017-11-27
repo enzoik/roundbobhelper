@@ -20,6 +20,20 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
+	 beforeRender: function() {
+		console.log("xxxxxx"); 
+	 },
+	 afterRender: function(){
+		if(localStorage.getItem('my_user_details')){
+			var retrieveduserdetails = JSON.parse(localStorage.getItem('my_user_details'));
+			$('#client_name_hotel').val(retrieveduserdetails.name);
+			$('#client_email_hotel').val(retrieveduserdetails.email);
+			$('#client_watsapp_no_hotel').val(retrieveduserdetails.watsapp);
+		}else{
+			console.log("Not Found",'Not defined');
+		}
+	 
+	 },
 	events: {
       'click .submit_email' : 'submit_email',
     },
@@ -31,16 +45,21 @@ define(function(require, exports, module) {
 		var send_by_watsap = document.getElementById("option-2");
 		var watsapp_number = "";
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		var regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 		var current_url  = window.location.href.toString();
 		var media ="email";
-
-		//single email
-		//http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/26-10-2017_30-10-2017_s/s/single/email/sdng_mail/p234/sent_to  8
-		//mutiple email
-		//http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/26-10-2017_31-10-2017_m/m/adlts_1_chldn_0_rooms_1/email    5	
+		var stored_email = clients_email;
 		if(send_by_watsap.checked){
 			clients_email  = client_watsapp;
 			media = "watsapp";
+		}
+		
+	if(send_by_watsap.checked && regex.test(client_watsapp)){
+			swal(
+			  'Invalid',
+			  'Requires an international format for a phone number',
+			  'error'
+			);			
 		}
 		if(send_by_watsap.checked && client_watsapp === null){
 							swal(
@@ -93,41 +112,34 @@ define(function(require, exports, module) {
 			  'error'
 			);		
 		}else{
+			var user_details = { 'name':client_name , 'email': stored_email, 'watsapp':client_watsapp };
+			localStorage.setItem('my_user_details', JSON.stringify(user_details));
+			//var current_url  = window.location.href.toString();
+			console.log(current_url.split("#picklocation")[1]);
+			var url_ = current_url.split("#picklocation")[1];
+			var splitted = current_url.split("#picklocation")[1].split("/");
+			var redirectTo = '/picklocation';
+			if(url_.split('/')[3] == "m"){
+				console.log("many travellers");
+				redirectTo += '/'+splitted[1];
+				redirectTo += '/'+splitted[2];
+				redirectTo += '/'+splitted[3];
+				redirectTo += '/'+splitted[4];
+				redirectTo += '/'+splitted[5];
+				redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+clients_email+"_"+media;
+				console.log("email multiple",redirectTo);
+				console.log("mmmmm",url_.split('/')[3]);
+			}else{
+				redirectTo += '/'+splitted[1];
+				redirectTo += '/'+splitted[2];
+				redirectTo += '/s/single/email/sdng_mail/p234/sent_to';
+				redirectTo += '/' + client_name+"_"+clients_email+"_"+media;
+				//name_email_email
+				console.log("email single",redirectTo);
+				console.log("mmmmm",url_.split('/')[3]);
+			}
 
-				//var current_url  = window.location.href.toString();
-				console.log(current_url.split("#picklocation")[1]);
-				var url_ = current_url.split("#picklocation")[1];
-				var splitted = current_url.split("#picklocation")[1].split("/");
-				//hhh_rf_Economy/2017-09-17_2017-10-17_round_m/m/2017-09-17_2017-10-17_round_m/m
-				//http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/26-10-2017_30-10-2017_m/m/adlts_1_chldn_0_rooms_1/email/m_mail/m_client/m_summary/lll_patrick@gmail.com_email
-				var redirectTo = '/picklocation';
-				if(url_.split('/')[3] == "m"){
-					console.log("many travellers");
-					//redirectTo += current_url.split("#picklocation")[1];
-					redirectTo += '/'+splitted[1];
-					redirectTo += '/'+splitted[2];
-					redirectTo += '/'+splitted[3];
-					redirectTo += '/'+splitted[4];
-					redirectTo += '/'+splitted[5];
-					//redirectTo += '/' + "email/summary_email";
-					//redirectTo += '/' + client_name+"/"+clients_email+"/summary_email";
-					redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+clients_email+"_"+media;
-					console.log("email multiple",redirectTo);
-					console.log("mmmmm",url_.split('/')[3]);
-				}else{
-//http://localhost/roundbobhelperv1/dist/#picklocation/kkkkk/15-11-2017_22-11-2017_s/s/single/email/sdng_mail/p234/sent_to/paaa_pa@gmail.com_email
-					//redirectTo += current_url.split("#picklocation")[1];
-					redirectTo += '/'+splitted[1];
-					redirectTo += '/'+splitted[2];
-					redirectTo += '/s/single/email/sdng_mail/p234/sent_to';
-					//redirectTo += '/' + "s/single/email/sdng_mail/p234/sent_to/summary_email";
-					redirectTo += '/' + client_name+"_"+clients_email+"_"+media;
-					//name_email_email
-					console.log("email single",redirectTo);
-					console.log("mmmmm",url_.split('/')[3]);
-				}
-
-				app.router.go(redirectTo);			
+			app.router.go(redirectTo);			
 			
 		}
 	},

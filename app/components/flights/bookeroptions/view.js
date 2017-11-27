@@ -141,7 +141,8 @@ define(function(require, exports, module) {
 		}else{
 			link_flight_type = "oneway";
 		}
-   
+  		$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="90%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">90%</span>');
+			 
 	   var linkstring = coming_from+"&to="+going_to+"&dept="+departure_date+"&retn="+return_date+"&adt="+adults+"&chd="+child+"&inf="+infants+"&cls="+flight_class+"&search="+link_flight_type;
 	   //var flight_url = "http://beta.roundbob.com/trip-builder/flights?from="+encodeURIComponent(linkstring);
 	   var flight_url = "http://beta.roundbob.com/trip-builder/flights?from="+linkstring;

@@ -68,7 +68,14 @@ define(function(require, exports, module) {
       }, this);
 
       if(this.collection.length){
-        $('.search-query-result').html(this.collection.length + " packages found");
+		var current_url  = window.location.href.toString();	
+		var category_id = current_url.split("#surprise")[1].split('/')[2];
+
+		if(category_id == '5900186' ){
+			$('.search-query-result').html(this.collection.length + " Activities found");
+		}else{
+			$('.search-query-result').html(this.collection.length + " packages found");	
+		}
       }
     },
 

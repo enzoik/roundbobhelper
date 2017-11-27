@@ -23,6 +23,14 @@ define(function(require, exports, module) {
 	afterRender : function() {
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').show();
+		if(localStorage.getItem('my_user_details')){
+			var retrieveduserdetails = JSON.parse(localStorage.getItem('my_user_details'));
+			$('#clients_name').val(retrieveduserdetails.name);
+			//$('#clients_email').val(retrieveduserdetails.email);
+			$('#clients_phone_number').val(retrieveduserdetails.watsapp);
+		}else{
+			console.log("Not Found",'Not defined');
+		}
 
 	},
 	events:{
@@ -43,6 +51,7 @@ define(function(require, exports, module) {
 		var return_date = current_url.split("#flights")[0].split("/")[1].split("_")[1];
 		var flight_type = current_url.split("#flights")[0].split("/")[1].split("_")[2];
 		var no_ = current_url.split("#flights")[0].split("/")[1].split("_")[3];
+		var regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 		//http://localhost/helperbob/dist/#flights/nnhj_jkjlk_Economy/2017-09-17_2017-10-17_round_m/m/adlts_1_chldn_0_infnts_0/call/true_/call/true_
 		if(client_name === null || client_name === undefined || client_name === ""){
 			swal(
@@ -56,8 +65,15 @@ define(function(require, exports, module) {
 			  'Phone Number Should not Be Left Empty',
 			  'error'
 			);			
+		}else if(regex.test(client_phone)){
+			swal(
+			  'Invalid',
+			  'Requires an international format for a phone number',
+			  'error'
+			);			
 		}else{
-
+				var user_details = { 'name':client_name , 'email': "", 'watsapp':client_phone };
+				localStorage.setItem('my_user_details', JSON.stringify(user_details));	
 				//var current_url  = window.location.href.toString();
 				console.log(current_url.split("#flights")[1]);
 				var url_ = current_url.split("#flights")[1];

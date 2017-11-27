@@ -10,9 +10,13 @@ define(function(require, exports, module,jqueryui) {
       HeaderNav: require("../../common/header/view"),
       FooterNav: require("../../common/footer/view"),
     },
+    api: {
+      airports: 'app/api/airports/airports_autocomplete_search_service.php'
+    },
+    typingDelay: 500
   };
 
-	
+
   module.exports = Backbone.Layout.extend({
     template: require("ldsh!./template"),
 
@@ -36,8 +40,8 @@ define(function(require, exports, module,jqueryui) {
 	},*/
 	events: {
       'click .continue_to_flight_pick_dates' : 'continue_to_flight_pick_dates',
-	  'keydown #flight_to': 'flight_to',
-	  'keydown #flight_from': 'flight_from',
+	  'keyup #flight_to': 'flight_to',
+	  'keyup #flight_from': 'flight_from',
 
     },
 	flight_from:function(){
@@ -46,8 +50,7 @@ define(function(require, exports, module,jqueryui) {
 		 $("#flight_from").autocomplete({
 			source: function (request, response) {
 			 $.getJSON(
-				//'http://localhost/roundbobhelperv1/dist/app/api/airports/airports_autocomplete_search_service.php?q='+search_word,
-				'http://reacting.azurewebsites.net/app/api/airports/airports_autocomplete_search_service.php?q='+search_word,
+				Config.api.airports + '?q='+search_word,
 				function (data) {
 				// response(data);
 					response( $.map( data, function( item ) {
@@ -55,12 +58,12 @@ define(function(require, exports, module,jqueryui) {
 						label: item.name,
 						value: item.name
 					  };
-					}));				 
+					}));
 				}
 			 );
 			},
-			
-			minLength: 2,
+
+			minLength: 1,
 			select: function (event, ui) {
 			 var selectedObj = ui.item;
 			 $("#flight_from").val(selectedObj.value);
@@ -74,9 +77,9 @@ define(function(require, exports, module,jqueryui) {
 			 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
 			}
 		 });
-		 $("#flight_from").autocomplete("option", "delay", 100);
+		 $("#flight_from").autocomplete("option", "delay", Config.typingDelay);
 
-		
+
 	},
 	flight_to:function(){
 		var search_word_to = document.getElementById('flight_to').value.trim();
@@ -85,20 +88,19 @@ define(function(require, exports, module,jqueryui) {
 		 $("#flight_to").autocomplete({
 			source: function (request, response) {
 			 $.getJSON(
-				//'http://localhost/roundbobhelperv1/dist/app/api/airports/airports_autocomplete_search_service.php?q='+search_word_to,
-				'http://reacting.azurewebsites.net/app/api/airports/airports_autocomplete_search_service.php?q='+search_word_to,
+				Config.api.airports + '?q='+search_word_to,
 				function (data) {
 					response( $.map( data, function( item ) {
 					  return {
 						label: item.name,
 						value: item.name
 					  };
-					}));				 
+					}));
 				}
 			 );
 			},
-			
-			minLength: 2,
+
+			minLength: 1,
 			select: function (event, ui) {
 			 var selectedObj = ui.item;
 			 $("#flight_to").val(selectedObj.value);
@@ -112,7 +114,7 @@ define(function(require, exports, module,jqueryui) {
 			 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
 			}
 		 });
-		 $("#flight_to").autocomplete("option", "delay", 100);
+		 $("#flight_to").autocomplete("option", "delay", Config.typingDelay);
 	},
 	continue_to_flight_pick_dates:function(e){
 	/*	new AutoCompleteView({
@@ -123,7 +125,7 @@ define(function(require, exports, module,jqueryui) {
 			},
 			highlight: "classname"	// optional, wrap keyword in <b class="classname"></b>
 		}).render();*/
-		
+
 			var flight_from = document.getElementById("flight_from").value;
 			var flight_to = document.getElementById("flight_to").value;
 
@@ -132,28 +134,28 @@ define(function(require, exports, module,jqueryui) {
 			  'Empty',
 			  ' From Location Field Should not Be Left Empty',
 			  'error'
-			);			
+			);
 		}else if(flight_to === null || flight_to === undefined || flight_to === "" ){
 			swal(
 			  'Empty',
 			  'Destination Field Should not Be Left Empty',
 			  'error'
-			);				
+			);
 		}else{
-			var current_url  = window.location.href.toString();			
+			var current_url  = window.location.href.toString();
 			var economy = document.getElementById("option-1");
 			var business = document.getElementById("option-2");
 			var first_class = document.getElementById("option-3");
 			var flight_class="";
-			
+
 			  var airport_code_from = flight_from.split('(')[1].split(')')[0];
 			  var airport_city_from = flight_from.split('(')[1].split(')')[1].split(',')[1];
 			  var airport_name_from = airport_code_from+ "-" +airport_city_from;
-			  
+
 			  var airport_code_to = flight_to.split('(')[1].split(')')[0];
 			  var airport_city_to = flight_to.split('(')[1].split(')')[1].split(',')[1];
 			  var airport_name_to = airport_code_to+ "-" +airport_city_to;
-			  
+
 			if(economy.checked) {
 				flight_class="Economy";
 			}else if(business.checked){
@@ -167,11 +169,11 @@ define(function(require, exports, module,jqueryui) {
 			console.log("last_checker",last_check);
 			var redirectTo = '';
 		if(last_check =="Economy" || last_check =="Business" || last_check =="First"){
-			
+
 		}else{
 		   redirectTo = '/flights';
 		  redirectTo += '/' + airport_name_from+"_"+airport_name_to+"_"+flight_class;
-		  app.router.go(redirectTo);			
+		  app.router.go(redirectTo);
 		}
 
 		}

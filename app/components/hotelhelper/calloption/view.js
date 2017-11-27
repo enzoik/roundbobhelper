@@ -20,24 +20,30 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
+	 beforeRender: function() {
+		console.log("xxxxxx"); 
+	 },
+	 afterRender: function(){
+		if(localStorage.getItem('my_user_details')){
+			var retrieveduserdetails = JSON.parse(localStorage.getItem('my_user_details'));
+			$('#clients_name').val(retrieveduserdetails.name);
+			$('#clients_phone_number').val(retrieveduserdetails.email);
+			//$('#client_watsapp_no_hotel').val(retrieveduserdetails.watsapp);
+		}else{
+			console.log("Not Found",'Not defined');
+		}
+	 
+	 },
 	events: {
       'click .submit_call_details' : 'submit_call_details',
     },
 	submit_call_details:function(){
-		//single call
-		//http://localhost/roundbobhelperv1/dist/#picklocation/kkkkk/26-10-2017_31-10-2017_s/s/single/true_/calling/sen_to     7
-		//single email
-		//http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/26-10-2017_30-10-2017_s/s/single/email/sdng_mail/p234/sent_to  8
-		//mutiple email
-		//http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/26-10-2017_31-10-2017_m/m/adlts_1_chldn_0_rooms_1/email    5
-		//multiple call
-		//http://localhost/roundbobhelperv1/dist/#picklocation/jjj/27-10-2017_31-10-2017_m/m/adlts_1_chldn_0_rooms_1/call/true_   6
 		var clients_name = document.getElementById("clients_name").value;
 		var clients_phone_number = document.getElementById("clients_phone_number").value;
 		console.log("clients_name "+clients_name+" clients_phone_number "+clients_phone_number);
 		var current_url  = window.location.href.toString();
 		var no_ = current_url.split("#picklocation")[1].split("/")[3];
-		
+		 var regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 		console.log("people",no_);
 		console.log("people",current_url.split("#picklocation")[1]);
 		if(clients_name === null || clients_name === undefined || clients_name === ""){
@@ -53,13 +59,17 @@ define(function(require, exports, module) {
 			  'Phone Field Should not Be Left Empty!',
 			  'error'
 			);
+		}else if(regex.test(clients_phone_number)){
+			swal(
+			  'Invalid',
+			  'Requires an international format for a phone number',
+			  'error'
+			);			
 		}else{
-
+			var user_details = { 'name':clients_name , 'email': "", 'watsapp':clients_phone_number };
+			localStorage.setItem('my_user_details', JSON.stringify(user_details));
 			var redirectTo = '/picklocation';
 			var splitted = current_url.split("#picklocation")[1].split("/");
-			//http://localhost/roundbobhelperv1/dist/#picklocation/hhyy/15-11-2017_30-11-2017_s/s/single/true_/calling/sen_to/m_code/m_send_to/pa_234567798990_call
-			//http://localhost/roundbobhelperv1/dist/#picklocation/pat/15-11-2017_23-11-2017_s/s/single/single/true_/calling/sen_to/m_code/m_send_to/paa_123455666_call
-			//http://localhost/roundbobhelperv1/dist/#picklocation/jjjjj/16-11-2017_30-11-2017_m/m/adlts_1_chldn_0_rooms_1/call/true_/m_call/m_code/m_send_to/paa_3456677777_call
 			if(no_ == "m"){
 					//redirectTo += current_url.split("#picklocation")[1];
 					redirectTo += '/'+splitted[1];

@@ -1,5 +1,5 @@
 <?php
-
+header("Content-Type: text/javascript");
 // Compose a php array using the airports string
 /*$array = file_get_contents('https://raw.githubusercontent.com/pkanyerezi/roundbobhelper/master/app/api/airports/airports.json');
 $array = json_decode($array, true);
@@ -19,7 +19,7 @@ exit();*/
 
 @$search_text = $_REQUEST['q'];
 
-if(strlen($search_text)<3){
+if(strlen($search_text)<1){
 	echo json_encode([]);
 	exit();
 }
@@ -9317,14 +9317,13 @@ $airports = [
 ["name"=>"(FLZ) Ferdinand Lumban Tobing Airport, Sibolga Indonesia","iata"=>"FLZ","iso"=>"Sibolga Indonesia"]
 ];
 
-$airports = array_filter($airports, function($el) use ($search_text) {
+$limit = (!empty($_GET['limit']))?$_GET['limit']:20;
+
+$results = array_filter($airports, function($el) use ($search_text) {
         return ( strpos(strtolower($el['name']), strtolower($search_text)) !== false );
 });
-header("Content-Type: text/javascript");
-echo json_encode(array_values($airports));
 
-//echo $_REQUEST["callback"]. "(" .json_encode(array_values($airports)). ");";
-			
+echo json_encode(array_slice(array_values($results), 0, $limit));
 exit();
 
 ?>

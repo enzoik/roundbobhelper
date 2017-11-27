@@ -37,7 +37,7 @@ define(function(require, exports, module) {
 	 $("#destination_d").autocomplete({
 		source: function (request, response) {
 		 $.getJSON(
-			"http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+document.getElementById('destination_d').value,
+			"//gd.geobytes.com/AutoCompleteCity?callback=?&q="+document.getElementById('destination_d').value,
 			function (data) {
 			//	console.log("data",data);
 			 response(data);
@@ -161,7 +161,7 @@ define(function(require, exports, module) {
 			}).then(function () {
 				console.log("clients_email_address"+clients_email_address+"clients_phone_number"+clients_phone_number+"jsonString"+jsonString);
 				$.ajax({
-					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					url: '//customrequests.roundbob.com/public-api/custom-requests/add.json',
 					headers: { "Accept-Encoding" : "gzip" },
 					type: 'POST',
 					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error

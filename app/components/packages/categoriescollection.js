@@ -27,7 +27,8 @@ define(function(require, exports, module) {
     },
 
     url: function() {
-      return app.categoriesApi + 'get-categories.php';
+    //  return app.categoriesApi + 'get-categories.php';
+      return 'http://m.roundbob.com/API/roundbob_get_categories.php?user_id=b34a758d762edb799b6c305e58d0ef06';
 	  // return app.hotelsApi + 'get-hotels.php';
     },
 
@@ -46,7 +47,11 @@ define(function(require, exports, module) {
       // By default the collection is not in a request.
       this.isRequest = false;
     },
-//0704746384
+	sync: function(method, model, options){   
+		//this.isRequest = false;
+	   options.dataType = "jsonp";  
+	   return Backbone.sync(method, model, options);  
+	},
     getCached: function(){
       this.reset();
 	  console.log("collection test", this);
@@ -74,6 +79,16 @@ define(function(require, exports, module) {
 		
 		 
       if (obj.Response.categories.length) {
+		  
+      var categories = obj.Response.categories;
+      var categoriesCount = categories.length;
+	   console.log("through getcached", categoriesCount);
+      if(categoriesCount){
+		 
+        for(var i=0; i<categoriesCount; i++){
+          this.add(new Categories_model(categories[i]));
+        }
+      }
         return obj.Response.categories;
 		
       }

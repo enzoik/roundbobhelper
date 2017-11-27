@@ -32,7 +32,7 @@ define(function(require, exports, module) {
 		jQuery.noConflict();
 		$(e.currentTarget).datepicker({
 		  minDate:'2',
-		  dateFormat: 'dd-mm-yy',
+		  dateFormat: 'yy-mm-dd',
 		  defaultDate:view.selectedDate,
 		  onSelect:function(dateText,datePicker) {
 			console.log('onSelect',dateText);
@@ -47,7 +47,7 @@ define(function(require, exports, module) {
 		var value_t = date.getTime();
 		
 		var parts = document.getElementById("check_in_id").value.split("-");
-		var final_d_date=new Date(parts[2], parts[1] - 1, parts[0]);
+		var final_d_date=new Date(parts[0], parts[1] - 1, parts[2]);
 		
 		var ONE_DAY = 1000 * 60 * 60 * 24;
 		var difference_ms = Math.abs(final_d_date.getTime() - value_t);
@@ -58,7 +58,7 @@ define(function(require, exports, module) {
 		jQuery.noConflict();
 		$(e.currentTarget).datepicker({
 		  minDate:days,
-		  dateFormat: 'dd-mm-yy',
+		  dateFormat: 'yy-mm-dd',
 		  defaultDate:that.selectedDate,
 		  onSelect:function(dateText,datePicker) {
 			console.log('onSelect',dateText);

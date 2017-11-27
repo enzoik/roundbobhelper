@@ -56,33 +56,69 @@ define(function(require, exports, module) {
     },
 
     afterRender: function(){
-		//this.collections.packages.url = "";
+		//this.collections.packages.url = 
+		//http://localhost/roundbobhelperv1/dist/#surprise/c746/5900186
+		var current_url  = window.location.href.toString();	
+		var category_id = current_url.split("#surprise")[1].split('/')[2];
 		var that = this;
-		that.collections.packages.fetch({
-		type: "GET",
-			data: {
-				country_id: that.country_id,
-				keyword: '',
-				subcategory: '',
-				key:'destinations',
-				user_id:'eb94fb88074d11c2e1561653b07fd914',
-				un:'pkanyerezi',
-				pw:'210013634',
-				page:1,
-				start:0,
-				limit:50,
-				//callback:'jQuery110106543720210892339_1509692080823',
-				//_:'1509692080826'
-			},
-			error: function(model,resp) {
-			  that.collections.packages.trigger("fetchError");
-			  if(resp.status==404){
-				app.notifications.error404();
-			  }else{
-				app.notifications.errorUnknown();
-			  }
-			}
-		});
+		console.log("category_id",category_id);
+		if(category_id == '5900186' ){
+			console.log("whattoshow","activities");
+			that.collections.packages.fetch({
+			type: "GET",
+				data: {
+					category: category_id,
+					keyword: '',
+					subcategory: '',
+					key:'destinations',
+					user_id:'eb94fb88074d11c2e1561653b07fd914',
+					un:'pkanyerezi',
+					pw:'210013634',
+					page:1,
+					start:0,
+					limit:50,
+					//callback:'jQuery110106543720210892339_1509692080823',
+					//_:'1509692080826'
+				},
+				error: function(model,resp) {
+				  that.collections.packages.trigger("fetchError");
+				  if(resp.status==404){
+					app.notifications.error404();
+				  }else{
+					app.notifications.errorUnknown();
+				  }
+				}
+			});
+		}else{
+			console.log("whattoshow","packages");
+			that.collections.packages.fetch({
+			type: "GET",
+				data: {
+					country_id: that.country_id,
+					keyword: '',
+					subcategory: '',
+					key:'destinations',
+					user_id:'eb94fb88074d11c2e1561653b07fd914',
+					un:'pkanyerezi',
+					pw:'210013634',
+					page:1,
+					start:0,
+					limit:50,
+					//callback:'jQuery110106543720210892339_1509692080823',
+					//_:'1509692080826'
+				},
+				error: function(model,resp) {
+				  that.collections.packages.trigger("fetchError");
+				  if(resp.status==404){
+					app.notifications.error404();
+				  }else{
+					app.notifications.errorUnknown();
+				  }
+				}
+			});
+		}
+		
+
     },
 
     beforeRender: function(){

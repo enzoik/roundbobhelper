@@ -86,8 +86,47 @@ define(function(require, exports, module) {
 	},
 	available_hotels:function(ev){
 		console.log("available hotels");
-		var redirectTo = '/hotels';
-		app.router.go(redirectTo);
+		var current_url  = window.location.href.toString();
+		console.log(current_url.split("#picklocation")[1]);
+		var url_ = current_url.split("#picklocation")[1];
+		var splitted = current_url.split("#picklocation")[1].split("/");
+		var destination="";
+		var chech_in_date="";
+		var chech_out_date="";
+		var adult="";
+		var children="";
+		var rooms="";
+		var dd_id ="";
+		//Kampala, Uganda - 17479
+		//http://localhost/roundbobhelperv1/dist/#picklocation/kamp/14-11-2017_30-11-2017_m/m/adlts_2_chldn_0_rooms_1/call/true_
+		var redirectTo = '/picklocation';
+		if(url_.split('/')[3] == "m"){
+			console.log("many travellers");
+			destination = splitted[1].split("-")[0];
+			dd_id = splitted[1].split("-")[1];
+			chech_in_date = splitted[2].split("_")[0];
+			chech_out_date = splitted[4].split("_")[1];
+			adult = splitted[4].split("_")[1];
+			children = splitted[4].split("_")[3];
+			rooms = splitted[4].split("_")[5];
+		}else{
+			//http://localhost/roundbobhelperv1/dist/#picklocation/liouu/15-11-2017_30-11-2017_s/s/single/true_/calling/sen_to
+			destination = splitted[1].split("-")[0];
+			dd_id = splitted[1].split("-")[1];
+			chech_in_date = splitted[2].split("_")[0];
+			chech_out_date = splitted[2].split("_")[1];
+
+			adult = "1";
+			children = "0";
+			rooms = "1";
+		}
+		$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="90%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">90%</span>');
+					
+		//http://beta.roundbob.com/trip-builder/hotels?q=Kampala%2C+Uganda&did=1007&checkin=2017-11-16&checkout=2017-11-17
+		var hotels_url_params = destination+"&did="+dd_id.trim()+"&checkin="+chech_in_date.trim()+"&checkout="+chech_out_date.trim();
+		console.log("hotels_url",hotels_url_params);
+		var hotel_url = "http://beta.roundbob.com/trip-builder/hotels?q="+hotels_url_params;
+		window.open(hotel_url,'_blank');
 	},
   });
 

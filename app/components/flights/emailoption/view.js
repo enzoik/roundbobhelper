@@ -22,6 +22,14 @@ define(function(require, exports, module) {
 	afterRender : function() {
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').show();
+		if(localStorage.getItem('my_user_details')){
+			var retrieveduserdetails = JSON.parse(localStorage.getItem('my_user_details'));
+			$('#clients_name').val(retrieveduserdetails.name);
+			$('#clients_email').val(retrieveduserdetails.email);
+			$('#client_watsapp').val(retrieveduserdetails.watsapp);
+		}else{
+			console.log("Not Found",'Not defined');
+		}
 
 	},
 
@@ -38,6 +46,7 @@ define(function(require, exports, module) {
 		var client_contact = "";
 		var media = "email";
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		var regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
 		//var phone_filter = /^\+{0,2}([\-\. ])?(\(?\d{0,3}\))?([\-\. ])?\(?\d{0,3}\)?([\-\. ])?\d{3}([\-\. ])?\d{4};
 		var current_url  = window.location.href.toString();
 		if(send_by_watsap.checked){
@@ -60,6 +69,12 @@ define(function(require, exports, module) {
 					  'error'
 					);
 		//}else if(send_by_watsap.checked && phone_filter.test(client_watsapp) && client_watsapp.length < 6 && client_watsapp.length > 12){
+		}else if(send_by_watsap.checked && regex.test(client_watsapp)){
+			swal(
+			  'Invalid',
+			  'Requires an international format for a phone number',
+			  'error'
+			);			
 		}else if(send_by_watsap.checked && client_watsapp.match(/^[0-9\s(-)]*$/) && client_watsapp.length < 6 && client_watsapp.length > 12){
 					swal(
 					  'Empty',
@@ -98,7 +113,8 @@ define(function(require, exports, module) {
 			  'error'
 			);		
 		}else{
-			
+				var user_details = { 'name':client_name , 'email': clients_email, 'watsapp':client_watsapp };
+				localStorage.setItem('my_user_details', JSON.stringify(user_details));		
 				var url_ = current_url.split("#flights")[1];
 				//hhh_rf_Economy/2017-09-17_2017-10-17_round_m/m/2017-09-17_2017-10-17_round_m/m
 				

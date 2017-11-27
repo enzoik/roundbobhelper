@@ -28,10 +28,7 @@ define(function(require, exports, module) {
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').hide();
 		 var current_url  = window.location.href.toString();
-		 //http://localhost/roundbobhelperv1/dist/#picklocation/kkkk/28-10-2017_31-10-2017_s/s/single/email/sdng_mail/p234/sent_to/patrick_patrick@gmail.com_email
-		 //http://localhost/roundbobhelperv1/dist/#picklocation/dubai/27-10-2017_30-10-2017_m/m/adlts_1_chldn_0_rooms_1/email/m_mail/m_client/m_summary/ppp_patric@gmail.com_email
-		 //http://localhost/roundbobhelperv1/dist/#picklocation/kampa/30-10-2017_31-10-2017_s/s/single/email/sdng_mail/p234/sent_to/patrick_25670123456_email/patrick_25670123456_email
-		 var destination = current_url.split("#picklocation")[1].split("/")[1];
+		 var destination = current_url.split("#picklocation")[1].split("/")[1].split("-")[0];
 		 var check_in_date = current_url.split("#picklocation")[1].split("/")[2].split("_")[0];
 		 var check_out_date = current_url.split("#picklocation")[1].split("/")[2].split("_")[1];
 		 var number_of_people ="";
@@ -69,11 +66,7 @@ define(function(require, exports, module) {
 		var current_url  = window.location.href.toString();
 		var redirectTo = '';
 		$("#send_confirmation_id2").attr("disabled","disabled");
-		//kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
-		//http://localhost/roundbobhelperv1/dist/#flights/kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
-		//http://localhost/roundbobhelperv1/dist/#flights/kkk_jjjj_Economy/27-10-2017_31-10-2017_round_m/m/adlts_1_chldn_0_infnts_0/call/true_/m_mail/m_client/patrick_256702458965_call
-		//http://localhost/roundbobhelperv1/dist/#picklocation/kampa/30-10-2017_31-10-2017_s/s/single/email/sdng_mail/p234/sent_to/patr_2567012568_watsapp
-		 var destination = current_url.split("#picklocation")[1].split("/")[1];
+		var destination = current_url.split("#picklocation")[1].split("/")[1].split("-")[0];
 		 var check_in_date = current_url.split("#picklocation")[1].split("/")[2].split("_")[0];
 		 var check_out_date = current_url.split("#picklocation")[1].split("/")[2].split("_")[1];
 		 var number_of_people ="";
@@ -94,6 +87,7 @@ define(function(require, exports, module) {
 		//http://localhost/roundbobhelperv1/dist/#picklocation/Johannesburg, GT, South Africa/22-11-2017_30-11-2017_s/s/single/email/sdng_mail/p234/sent_to/patrick_patrickkanyerezi@gmail.com_email
 		data_info.CheckInDate = escape(check_in_date).replace(/%20/g,'');
 		data_info.CheckOutDate = escape(check_out_date).replace(/%20/g,'');
+		data_info.Destination = escape(destination).replace(/%20/g,'');
 		//console.log("media",current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1]);
 		 console.log("media",media+"="+current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1]);
 		 console.log("length",media+"="+current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[2].length);
@@ -137,7 +131,7 @@ define(function(require, exports, module) {
 			}).then(function () {
 				$("#send_confirmation_id2").attr("disabled","disabled");
 				$.ajax({
-					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					url: '//customrequests.roundbob.com/public-api/custom-requests/add.json',
 					headers: { "Accept-Encoding" : "gzip" },
 					type: 'POST',
 					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error
