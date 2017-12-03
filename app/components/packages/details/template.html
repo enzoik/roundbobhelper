@@ -7,109 +7,93 @@
 		
 		<div class="container">	
 
-            <div class="item_nav_e">
+		<div class="col-md-12">
+          <div class="item_nav_e">
+          </div><!-- end item_nav_e -->
+        </div><!-- end col-md-12 -->
 
-            </div><!-- end item_nav_e -->
 
 		</div>
 			<div class="container">	
-				  <div class="col-md-9">
+				 <div class="col-md-9">
+
+				  <div class="card-paper">
+
 				  <div class="package-item-white-board">
 					<div class="package-item-selected-content">
+					
+
+					<div class="package-item-selected-mini-info">
+
+				     <div class="col-md-12">
+				      <div class="package-name">
+						  <%= model.get("name") %>
+					</div>
+
+					<div class="package-location">
+						 <%= model.get("location") %>						  
+					</div>
+
+				   </div><!-- end col-md-12 -->
 
 					<div class="col-md-4">
-					  <div class="row">
 						<div class="package-item-selected-image">
 						  <img src="<%= model.get("image_file_large") %>">
 						</div><!-- end package-item-selected-image -->
-					  </div>
 					</div><!-- end col-md-4 -->
 
 					<div class="col-md-8">
-					  <div class="package-item-selected-mini-info">
-
-						<div class="package-name">
-						  <%= model.get("name") %>
-						</div>
-						<div class="package-location">
-						 <%= model.get("location") %>
-						  
-						</div>
+						
 
 						<h4>Package Reference</h4>
 						<div class="mini-info-sub-text">
 							<div class="ref-number-info">
-								.....
+							 ...
 							</div>
 						</div>
 
 						<div class="package-item-selected-inquiry">
-						<div class="col-md-6">
-						<div class="mini-info-sub-text">       
-						  <button class="button-small">Inquire about this package</button>
-						 </div>
-						 </div>
+						
+						 <div class="package-item-selected-buttons">
+					        <button class="button-info open-package-info">show info</button>
+						 	<button class="button-info btn-yellow">Inquire</button>
+						</div><!-- end package-item-selected-buttons -->
+						
+						</div><!-- end package-item-selected-inquiry -->
 
-						 <div class="col-md-6">
-						<div class="mini-info-sub-text">
+						<!--<div class="mini-info-sub-text">
 						  <span>SHARE  </span>
 						  <span class="share-on-social-media"><i class="icon-facebook"></i></span>
 						  <span class="share-on-social-media"><i class="icon-twitter"></i></span>
 						  <span class="share-on-social-media"><i class="icon-gplus"></i></span>
 						  <span class="share-on-social-media"><i class="icon-mail"></i></span>
 						  <span class="share-on-social-media"><i class="icon-whatsapp"></i></span>
-						</div>
-						</div>
-						</div><!-- end package-item-selected-inquiry -->
+						</div> -->
 
-						<div class="package-item-selected-buttons">
-							<button class="button-info open-package-info">show info</button>
-						</div><!-- end package-item-selected-buttons -->
-
+					</div><!-- end col-md-8 -->
 					  </div><!-- end package-item-selected-mini-info -->
-					</div><!-- end col-md-6 -->
+    				
+    				</div><!-- end package-item-selected-content --> 
+				  </div><!-- end package-item-white-boad -->
+				</div><!-- end card-paper -->
 
+			  	<div class="package-item-selected-info">
+				  <div class="col-md-8">
 
-					
+				  <div class="brief-info">
+				  	<center> Loading...</center>					  
+				  </div>					
+				
+				  </div><!-- end col-md-8 -->					  
+				</div><!-- end package-item-selected-info -->
 
-					<div class="col-md-12">   
-					<div class="row">
-
-					<div class="package-item-selected-info">
-					  <div class="col-md-8">
-					  <div class="row">
-					  <div class="brief-info">
-					 <center> Loading...</center>
-					  <!--
-					  Property Location With a stay at El Misti Hostel & Pousada Botafogo in Rio de Janeiro (Botafogo), you'll be minutes from Pasmado Viewpoint and Fundação Casa de Rui Barbosa. This hostel is close to Corcovado and Sugar Loaf Mountain.Rooms Make yourself at home in one of the 21 air-conditioned guestrooms. Prepare your meals in the shared/communal kitchen. Complimentary wireless Internet access is available to keep you connected. Shared bathrooms are provided.Rec, Spa, Premium Amenities Make use of convenient amenities such as complimentary wireless Internet access, a television in the lobby, and tour/ticket assistance.Dining Quench your thirst with your favorite drink at a bar/lounge. A complimentary continental breakfast is included.Business, Other Amenities Featured amenities include dry cleaning/laundry services, a 24-hour front desk, and multilingual staff.The El Misti Hostel amp; Pousada Botafogo is a hotel. Located in Beach area. 
-					-->
-					</div>					
-					</div><!-- end row -->
-					  </div><!-- end col-md-8 -->
-
-					  <div class="col-md-4">
-						<h4>Activities</h4>
-						<ul>
-						<li>Camping</li>
-						<li>Bird seeing</li>
-						<li>Fishing</li>
-						<li>Ocean cruises</li>
-						<li>Deep see diving</li>
-						<li>Forest treks</li>
-						</ul>
-					  </div>
-					</div><!-- end package-item-selected-info -->
-
-					</div><!-- end row -->
-					</div><!-- end col-md-12 -->
-
-					</div><!-- end package-item-selected-content -->     
-				  </div><!-- end hotel-item-white-boad -->
-
+				<div class="card-paper">
 				  <div class="section-title">
 					<div class="col-md-12"><h4>Booking Information</h4></div>
 				  </div>
+				</div><!-- end card-paper -->
 
+				 <div class="card-paper">
 				  <div class="package-item-white-board">
 
 					<div class="package-item-form-row">
@@ -122,6 +106,8 @@
 						<input id="travel_date" type="text" name="" class="form-element" placeholder="pick a date">
 					  </div>
 					</div><!-- end package-item-form-row -->
+
+					<div class="divider"></div><!-- end divider -->
 
 					<div class="form-row-title">
 					  <div class="col-md-12">
@@ -175,6 +161,8 @@
 
 					</div><!-- end package-item-form-row -->
 
+					<div class="divider"></div><!-- end divider -->
+
 					<div class="form-row-title">
 					  <div class="col-md-12">
 						Contact information
@@ -193,17 +181,20 @@
 					  </div>
 
 					</div><!-- end package-item-form-row -->
-
 				  </div><!-- end hotel-item-white-board -->
+				</div><!-- end card-paper -->
 
+				<div class="card-paper">
 				  <div class="section-title">
 					<div class="col-md-12">
 					  <h4>Payment options</h4>
 					</div>
 				  </div>
+				</div><!-- end card-paper -->
 
+				<div class="card-paper">
 				  <div class="package-item-white-board">
-				   <div class="col-md-3">
+				   <div class="col-md-4">
 					<div class="row">
 					 <div class="package-item-payment-option">
 					   <input type="radio" id="package-single-basis" class="payment-option" checked="checked"  name="package-payment-option" value="1800">
@@ -215,7 +206,7 @@
 					</div><!-- end row -->
 				   </div><!-- end col-md-3 -->
 
-				   <div class="col-md-3">
+				   <div class="col-md-4">
 					<div class="row">
 					  <div class="package-item-payment-option">
 						 <input type="radio" id="package-double-basis"  class="payment-option" name="package-payment-option" value="2800">
@@ -228,7 +219,7 @@
 				   </div><!-- end col-md-3 -->
 
 
-				   <div class="col-md-3">
+				   <div class="col-md-4">
 					<div class="row">
 					<div class="package-item-payment-option">
 					 <input type="radio" id="package-tripple-basis"  class="payment-option"  name="package-payment-option" value="3800">
@@ -240,11 +231,13 @@
 					</div><!-- end row -->
 				   </div><!-- end col-md-3 -->
 				  </div><!-- end package-item-white-board -->
+				</div><!-- end card-paper -->
 
 				</div><!-- end col-md-9 -->
 
 				<div class="col-md-3">
 
+				<div class="card-paper">
 				<div class="sidebar">
 				  <div class="sidebar-item">
 					<div class="package-name">
@@ -261,7 +254,7 @@
 					  </div>
 
 					  <div class="expected-guest package-selected-guest-children">
-						<div id="numberOfChildren"><span>Children:</span> 0</div>
+						<div id="numberOfChildren"><span>Child(ren):</span> 0</div>
 					  </div>
 
 					  <div class="expected-guest package-selected-guests-infants">
@@ -282,12 +275,12 @@
 
 					  <div class="guest-room-choice-price">
 						<div class="guest-room-choice-price-value">
-						 <span>USD</span><div class="package-item-total-price" id="packageItemPrice"> .... </div>
+						 <span>USD</span><div class="package-item-total-price" id="packageItemPrice"> ... </div>
 						</div><!-- end guest-room-choice-price-value -->
 
-						<div class="guest-room-choice-price-value-average" id="combinedNumberOfGuests">
-						for 2 adults, 1 child, 0 infants
-						</div><!-- end guest-room-choice-price-value-average -->
+						<!--<div class="guest-room-choice-price-value-average" id="combinedNumberOfGuests">
+						..
+						</div>end guest-room-choice-price-value-average -->
 
 					  </div>
 					</div><!-- end package-item-sidebar --> 
@@ -299,6 +292,7 @@
 				</div><!-- end sidebar-item -->
 
 				</div><!-- end sidebar -->
+			    </div><!-- end card-paper-->
 
 				</div><!-- end col-md-3 -->
 

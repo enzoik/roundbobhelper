@@ -1,9 +1,9 @@
 {
-  "name": "roundbob-ui",
+  "name": "yes",
   "version": "1.0.0",
   "devDependencies": {
     "bbb": "~2.0.0",
-    "grunt": "~1.0.1",
+    "grunt": "^1.0.1",
     "grunt-contrib-clean": "~1.1.0",
     "grunt-contrib-compress": "~1.4.3",
     "grunt-contrib-copy": "~1.0.0",
@@ -45,5 +45,20 @@
     "layoutmanager": "^0.9.7",
     "qunitjs": "^2.4.0",
     "uuid": "^3.1.0"
-  }
+  },
+  "description": "GitHub Viewer\r =============",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pkanyerezi/roundbobhelper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pkanyerezi/roundbobhelper/issues"
+  },
+  "homepage": "https://github.com/pkanyerezi/roundbobhelper#readme"
 }

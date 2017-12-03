@@ -25,6 +25,7 @@ define(function(require, exports, module) {
 		 $("submit_activity_details").removeAttr('disabled');
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').show();
+		$('#menu-icon-id').show();
 	},
 	events:{
 		'click .submit_request':'submit_request',

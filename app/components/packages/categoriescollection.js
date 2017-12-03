@@ -28,7 +28,7 @@ define(function(require, exports, module) {
 
     url: function() {
     //  return app.categoriesApi + 'get-categories.php';
-      return 'http://m.roundbob.com/API/roundbob_get_categories.php?user_id=b34a758d762edb799b6c305e58d0ef06';
+      return '//m.roundbob.com/API/roundbob_get_categories.php?user_id=b34a758d762edb799b6c305e58d0ef06';
 	  // return app.hotelsApi + 'get-hotels.php';
     },
 

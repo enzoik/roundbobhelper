@@ -24,6 +24,7 @@ define(function(require, exports, module) {
 		 $("submit_trip_details_id").removeAttr('disabled');
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').hide();
+		$('#menu-icon-id').show();
 	},
 	events:{
 		'click .submit_planner_requests':'submit_planner_requests',

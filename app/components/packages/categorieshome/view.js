@@ -54,7 +54,7 @@ define(function(require, exports, module) {
     afterRender: function(){
       // Enable DatePicker
       var that = this;
-	  
+	  $('#menu-icon-id').show();
 	 /* console.log(this.collections.countries.length);
 	  if(this.collections.countries.length >1){
 		  

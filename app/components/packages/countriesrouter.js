@@ -4,6 +4,7 @@ define(function(require, exports, module) {
       Collection: require("./countriescollection"),
 
       Views: {
+        CountriesSorter: require("./packageslocation/view"),
         Home: require("./countrieshome/view"),
         Item: require("./countriesitem/view"),
         //Details: require("./details/view"),
@@ -31,7 +32,8 @@ define(function(require, exports, module) {
 
 
         home: function() {
-			  if(!$('ContentCountriesListView').length){
+			new Countries.Views.CountriesSorter().render();
+			/*  if(!$('ContentCountriesListView').length){
 				$('main').html('<ContentCountriesListView style="display:block !important;">load..</ContentCountriesListView>');
 				console.log("loading from home");
 			 }
@@ -45,11 +47,19 @@ define(function(require, exports, module) {
 				homeView.render();
 				
 
-				 homeView.getCached();
+				 homeView.getCached();*/
           
         },
 		categoriesresults:function(id, country_id){
+		//categoriesresults:function(){
 			console.log("Packages","xxxx router cat tap");
+			var current_url  = window.location.href.toString();
+
+			var country_id_set = current_url.split("#surprise")[1].split("/")[2];
+			if (typeof country_id === 'undefined'){
+				country_id=country_id_set;
+			}
+			console.log("country_id_set",country_id_set);
 			 if(!$('ContentPackagesListView').length){
 				$('main').html('<ContentPackagesListView style="display:block !important;">load..</ContentPackagesListView>');
 				console.log("loading from home");
@@ -58,20 +68,12 @@ define(function(require, exports, module) {
 			  $('ContentPackagesListView').show();
 			  $('ContentCountriesListView').hide();
 			  $('ContentPackageDetailsView').hide();
-			 // $('ContentDetailsView').hide();
 
-			  // Only rerender the hotels list when it has been removed.
-			  // This helps to maitain the scroll of the list
-			  
-			 
 				var homeView = new Countries.Views.CategoryPackages({country_id: country_id});
 				this.packages = homeView.collections.packages;
 				
 				homeView.render();
-				
-
-				// Lets render what might be in the cache for the start
-				homeView.getCached();		
+				homeView.getCached();	
 		},
         details: function(popular,resultIndex,id,details) {
 

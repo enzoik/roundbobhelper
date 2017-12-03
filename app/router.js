@@ -12,6 +12,7 @@ define(function(require, exports, module) {
    // Popular: require("components/packages/popularrouter"),
     Home: require("components/home/router"),
     Surprise: require("components/packages/countriesrouter"),
+    Activities: require("components/packages/activitiesrouter"),
     Tripplanner: require("components/tripplanner/router"),
     Common: require("components/common/router"),
   };
@@ -30,6 +31,7 @@ define(function(require, exports, module) {
           'packagesRouter' : new MyRounters.Packages(),
           'specialrouter' : new MyRounters.Specials(),
           'surpriserouter' : new MyRounters.Surprise(),
+          'activitiesrouter' : new MyRounters.Activities(),
           'tripplannerrouter' : new MyRounters.Tripplanner(),
           'commonrouter' : new MyRounters.Common(),
 		  

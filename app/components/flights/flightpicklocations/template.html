@@ -5,10 +5,12 @@
 <div class="color-banner-top">
   <div class="container">
   <div class="col-md-6 col-md-offset-3">
-  <headernav></headernav>
+   <div class="row">
+    <headernav></headernav>
+  </div><!-- end row -->
+
     <div class="col-md-12">
     <div class="row">
-
 
     <div class="progress-metre row">
     <svg height="10" width="100%" style="background:#ccc;">
@@ -76,7 +78,7 @@
 
     <div class="card-paper">
     <div class="card-content-1">
-      <div class="switch-el">
+    <!--  <div class="switch-el">
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
             <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
             <span class="mdl-radio__label switch-label">Economy class</span>
@@ -91,8 +93,43 @@
             <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="3">
             <span class="mdl-radio__label switch-label">First class</span>
           </label>
+       </div>-->
 
-       </div>
+       <div class="col-md-4">
+       <div class="row">
+           <div class="package-item-payment-option">
+             <input type="radio" id="economy" class="payment-option" checked="checked"  name="package-payment-option" value="1800">
+             <label for="economy" class="radio-input">
+             <span>Economy</span>
+             </label>
+           </div><!-- end package-item-payment-option -->
+          </div><!-- end row -->
+           </div><!-- end col-md-3 -->
+
+           <div class="col-md-4">
+          <div class="row">
+            <div class="package-item-payment-option">
+             <input type="radio" id="business"  class="payment-option" name="package-payment-option" value="2800">
+             <label for="business" class="radio-input">
+               <span>Business</span>
+             </label>
+            </div><!-- end package-item-payment-option -->
+          </div><!-- end row -->
+           </div><!-- end col-md-3 -->
+
+
+           <div class="col-md-4">
+          <div class="row">
+          <div class="package-item-payment-option">
+           <input type="radio" id="firstc"  class="payment-option"  name="package-payment-option" value="3800">
+           <label for="firstc" class="radio-input">
+               <span>First Class</span>
+           </label>
+          </div><!-- end package-item-payment-option -->
+          </div><!-- end row -->
+           </div><!-- end col-md-3 -->
+
+
     </div><!-- end card-content-1 -->
     </div><!-- end card-paper -->
 

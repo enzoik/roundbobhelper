@@ -1,0 +1,307 @@
+<div class="wrap1">
+  <div class="app-wrapper1">
+   <!-- <topNav></topNav>-->
+    <div class="app-container1">
+	<div class="app-content hotel-theme">
+        <div class="app-feed">
+		
+		<div class="container">	
+
+		<div class="col-md-12">
+          <div class="item_nav_e">
+          </div><!-- end item_nav_e -->
+        </div><!-- end col-md-12 -->
+
+
+		</div>
+			<div class="container">	
+				 <div class="col-md-9">
+
+				  <div class="card-paper">
+
+				  <div class="package-item-white-board">
+					<div class="package-item-selected-content">
+					
+
+					<div class="package-item-selected-mini-info">
+
+				     <div class="col-md-12">
+				      <div class="package-name">
+						  <%= model.get("name") %>
+					</div>
+
+					<div class="package-location">
+						 <%= model.get("location") %>						  
+					</div>
+
+				   </div><!-- end col-md-12 -->
+
+					<div class="col-md-4">
+						<div class="package-item-selected-image">
+						  <img src="<%= model.get("image_file_large") %>">
+						</div><!-- end package-item-selected-image -->
+					</div><!-- end col-md-4 -->
+
+					<div class="col-md-8">
+						
+
+						<h4>Package Reference</h4>
+						<div class="mini-info-sub-text">
+							<div class="ref-number-info">
+							 ...
+							</div>
+						</div>
+
+						<div class="package-item-selected-inquiry">
+						
+						 <div class="package-item-selected-buttons">
+					        <button class="button-info open-package-info">show info</button>
+						 	<button class="button-info btn-yellow">Inquire</button>
+						</div><!-- end package-item-selected-buttons -->
+						
+						</div><!-- end package-item-selected-inquiry -->
+
+						<!--<div class="mini-info-sub-text">
+						  <span>SHARE  </span>
+						  <span class="share-on-social-media"><i class="icon-facebook"></i></span>
+						  <span class="share-on-social-media"><i class="icon-twitter"></i></span>
+						  <span class="share-on-social-media"><i class="icon-gplus"></i></span>
+						  <span class="share-on-social-media"><i class="icon-mail"></i></span>
+						  <span class="share-on-social-media"><i class="icon-whatsapp"></i></span>
+						</div> -->
+
+					</div><!-- end col-md-8 -->
+					  </div><!-- end package-item-selected-mini-info -->
+    				
+    				</div><!-- end package-item-selected-content --> 
+				  </div><!-- end package-item-white-boad -->
+				</div><!-- end card-paper -->
+
+			  	<div class="package-item-selected-info">
+				  <div class="col-md-8">
+
+				  <div class="brief-info">
+				  	<center> Loading...</center>					  
+				  </div>					
+				
+				  </div><!-- end col-md-8 -->					  
+				</div><!-- end package-item-selected-info -->
+
+				<div class="card-paper">
+				  <div class="section-title">
+					<div class="col-md-12"><h4>Booking Information</h4></div>
+				  </div>
+				</div><!-- end card-paper -->
+
+				 <div class="card-paper">
+				  <div class="package-item-white-board">
+
+					<div class="package-item-form-row">
+					  <div class="col-md-6">
+						<label>Your name</label>
+						<input id="client_name_id" type="text" class="form-element" placeholder="Enter your full name">
+					  </div>
+					  <div class="col-md-6">
+						<label>Date of travel</label>
+						<input id="travel_date" type="text" name="" class="form-element" placeholder="pick a date">
+					  </div>
+					</div><!-- end package-item-form-row -->
+
+					<div class="divider"></div><!-- end divider -->
+
+					<div class="form-row-title">
+					  <div class="col-md-12">
+					  How many people are you?
+					  </div>
+					</div><!-- end form-row-title -->
+
+					<div class="package-item-form-row">
+					  <div class="col-md-2">
+						<label>Adult</label>
+						<select id="adults_id" class="form-element package-adults">
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+						</select>
+					  </div><!-- end col-md-4 -->
+
+					  <div class="col-md-2">
+						<label>Children</label>
+						<select id="children_id" class="form-element package-children">
+						  <option value="0">0</option>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+						</select>
+					  </div><!-- end col-md-4 -->
+
+					  <div class="col-md-3 child-pricing" id="child-pricing">
+						<label>&nbsp;</label>
+						<select class="form-element package-children-fee" >
+						  <option value="20">child with bed</option>
+						  <option value="40">child without bed</option>
+						</select>
+					  </div>
+
+					  <div class="col-md-2">
+						<label>Infants</label>
+						<select id="infants_id" class="form-element package-infants">
+						  <option value="0">0</option>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+						</select>
+					  </div><!-- end col-md-4 -->
+
+					</div><!-- end package-item-form-row -->
+
+					<div class="divider"></div><!-- end divider -->
+
+					<div class="form-row-title">
+					  <div class="col-md-12">
+						Contact information
+					  </div>
+					</div><!-- end form-row-title -->
+
+
+					<div class="package-item-form-row">
+					  <div class="col-md-6">
+						<label>Phone</label>
+						<input id="phone_number" type="text" name="" class="form-element" placeholder="Enter your phone">
+					  </div>
+					  <div class="col-md-6">
+						<label>Email</label>
+						<input id="client_email" type="text" name="" class="form-element" placeholder="Enter your Email">
+					  </div>
+
+					</div><!-- end package-item-form-row -->
+				  </div><!-- end hotel-item-white-board -->
+				</div><!-- end card-paper -->
+
+				<div class="card-paper">
+				  <div class="section-title">
+					<div class="col-md-12">
+					  <h4>Payment options</h4>
+					</div>
+				  </div>
+				</div><!-- end card-paper -->
+
+				<div class="card-paper">
+				  <div class="package-item-white-board">
+				   <div class="col-md-4">
+					<div class="row">
+					 <div class="package-item-payment-option">
+					   <input type="radio" id="package-single-basis" class="payment-option" checked="checked"  name="package-payment-option" value="1800">
+					   <label for="package-single-basis" class="radio-input">
+						 <span>Individual Payment</span>
+						 <small class="individualbasis">On single basis ($1800)</small>
+					   </label>
+					 </div><!-- end package-item-payment-option -->
+					</div><!-- end row -->
+				   </div><!-- end col-md-3 -->
+
+				   <div class="col-md-4">
+					<div class="row">
+					  <div class="package-item-payment-option">
+						 <input type="radio" id="package-double-basis"  class="payment-option" name="package-payment-option" value="2800">
+						 <label for="package-double-basis" class="radio-input">
+						   <span>Individual Payment</span>
+						   <small class="indoublebasis">On double basis ($2800)</small>
+						 </label>
+					  </div><!-- end package-item-payment-option -->
+					</div><!-- end row -->
+				   </div><!-- end col-md-3 -->
+
+
+				   <div class="col-md-4">
+					<div class="row">
+					<div class="package-item-payment-option">
+					 <input type="radio" id="package-tripple-basis"  class="payment-option"  name="package-payment-option" value="3800">
+					 <label for="package-tripple-basis" class="radio-input">
+						   <span>Individual Payment</span>
+						   <small class="tripplebasis">On tripple basis ($3800)</small>
+					 </label>
+					</div><!-- end package-item-payment-option -->
+					</div><!-- end row -->
+				   </div><!-- end col-md-3 -->
+				  </div><!-- end package-item-white-board -->
+				</div><!-- end card-paper -->
+
+				</div><!-- end col-md-9 -->
+
+				<div class="col-md-3">
+
+				<div class="card-paper">
+				<div class="sidebar">
+				  <div class="sidebar-item">
+					<div class="package-name">
+					  Request summary
+					</div>    
+				  
+				  </div><!-- end sidebar-item -->
+
+				  <div class="sidebar-item">
+					<div class="package-item-sidebar">
+
+					  <div class="expected-guest package-selected-guest-adult">
+						<div id="numberOfAdults"><span>Adult(s): </span> 1</div>
+					  </div>
+
+					  <div class="expected-guest package-selected-guest-children">
+						<div id="numberOfChildren"><span>Child(ren):</span> 0</div>
+					  </div>
+
+					  <div class="expected-guest package-selected-guests-infants">
+						<div id="numberOfInfants"><span>Infant(s): </span> 0</div>
+					  </div>
+					
+					</div><!-- end package-item-sidebar -->
+					
+				  </div><!-- end sidebar-item -->
+
+				  <div class="sidebar-item">
+
+					<div class="package-item-sidebar">
+
+					  <div class="guest-room-choice">
+						<span>Total Due: </span> 
+					  </div>
+
+					  <div class="guest-room-choice-price">
+						<div class="guest-room-choice-price-value">
+						 <span>USD</span><div class="package-item-total-price" id="packageItemPrice"> ... </div>
+						</div><!-- end guest-room-choice-price-value -->
+
+						<!--<div class="guest-room-choice-price-value-average" id="combinedNumberOfGuests">
+						..
+						</div>end guest-room-choice-price-value-average -->
+
+					  </div>
+					</div><!-- end package-item-sidebar --> 
+
+				  </div><!-- end sidebar-item -->
+
+				<div class="sidebar-item">
+					<div id="submit_booking_details"><button class="button-block">continue</button></div>
+				</div><!-- end sidebar-item -->
+
+				</div><!-- end sidebar -->
+			    </div><!-- end card-paper-->
+
+				</div><!-- end col-md-3 -->
+
+
+				</div><!-- end container -->
+
+            </div><!-- end app-container-feed -->
+          </div><!-- end wrap-AFR -->
+      </div><!-- end app-container -->
+
+  </div>
+

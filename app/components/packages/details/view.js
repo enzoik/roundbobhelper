@@ -73,6 +73,9 @@ define(function(require, exports, module) {
 		  $('.individualbasis').html("On single basis ($"+cost+")");
 		  $('.indoublebasis').html("On double basis ($"+double_book+")");
 		  $('.tripplebasis').html("On tripple basis ($"+tripple_book+")");
+		  $('#package-single-basis').val(cost);
+		  $('#package-double-basis').val(double_book);
+		  $('#package-tripple-basis').val(tripple_book);
 		}
     },
 

@@ -32,6 +32,7 @@ define(function(require, exports, module,jqueryui) {
 
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').show();
+		$('#menu-icon-id').show();
 	},
 
 	/*afterRender: function(){
@@ -143,9 +144,9 @@ define(function(require, exports, module,jqueryui) {
 			);
 		}else{
 			var current_url  = window.location.href.toString();
-			var economy = document.getElementById("option-1");
-			var business = document.getElementById("option-2");
-			var first_class = document.getElementById("option-3");
+			var economy = document.getElementById("economy");
+			var business = document.getElementById("business");
+			var first_class = document.getElementById("firstc");
 			var flight_class="";
 
 			  var airport_code_from = flight_from.split('(')[1].split(')')[0];

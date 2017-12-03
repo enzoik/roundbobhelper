@@ -26,6 +26,7 @@ define(function(require, exports, module) {
     },
 	afterRender : function() {
 		$("#pick_destination_location_id").hide();
+		$('#menu-icon-id').show();
 	},
 	events: {
       'click .pick_destination_location' : 'pick_destination_location',

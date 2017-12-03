@@ -23,7 +23,7 @@ define(function(require, exports, module) {
 
     url: function() {
      // return app.countriesApi + 'get-countries2.php';
-	   return 'http://m.roundbob.com/API/roundbob_get_countries.php?user_id=b34a758d762edb799b6c305e58d0ef06';
+	   return '//m.roundbob.com/API/roundbob_get_countries.php?user_id=b34a758d762edb799b6c305e58d0ef06';
     },
 
     initialize: function(){

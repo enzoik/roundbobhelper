@@ -40,22 +40,12 @@ define(function(require, exports, module) {
         getflight: function() {
           
 		  
-         // $('mainhome').hide();
-		 //$('main').html('<Flightspicklocaion style="display:block !important;"></Flightspicklocaion>');
-          //$('Flightspicklocaion').show();
 		 
 			new Flight.Views.Flight().render();
          // app.activeRouteFunction = 'Home.home';
         },
 		
-		/*picklocation: function(){
-			
-			         // $('mainhome').hide();
-        //  $('flightspicklocaion').show();
 
-			new Flight.Views.Flight().render();
-		},*/
-		//selecting the departure and arrival places or airports
 		pickdates: function(){
 			console.log("flight details");
 

@@ -23,6 +23,7 @@ define(function(require, exports, module) {
 	afterRender : function() {
 		$('#go_backward_btn').hide();
 		$('#go_forward_btn').hide();
+		$('#menu-icon-id').hide();
 
 	},
   });
