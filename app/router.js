@@ -14,6 +14,7 @@ define(function(require, exports, module) {
     Surprise: require("components/packages/countriesrouter"),
     Activities: require("components/packages/activitiesrouter"),
     Tripplanner: require("components/tripplanner/router"),
+    Planner: require("components/tripplanning/router"),
     Common: require("components/common/router"),
   };
 
@@ -33,6 +34,7 @@ define(function(require, exports, module) {
           'surpriserouter' : new MyRounters.Surprise(),
           'activitiesrouter' : new MyRounters.Activities(),
           'tripplannerrouter' : new MyRounters.Tripplanner(),
+          'planningrouter' : new MyRounters.Planner(),
           'commonrouter' : new MyRounters.Common(),
 		  
           'hotelscomp' : new MyRounters.Hotelscomp(),

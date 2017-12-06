@@ -10,13 +10,15 @@ define(function(require, exports, module) {
       TopNav: require("../../common/topNav/view"),
       TopIconHolder: require("../common/topIconHolder/view"),
     },
+	info:"",
+	did:""
   };
 
   module.exports = Layout.extend({
     template: require("ldsh!./template"),
 
     // el: 'main',
-    el: 'ContentActivitiesDetailsView',
+    el: 'ContentActivityeDetailsView',
 
     views: {
       "topNav": new Packages.Views.TopNav(),
@@ -24,34 +26,13 @@ define(function(require, exports, module) {
     },
 
     beforeRender: function() {
-      // Modify the data from here
-     /* this.model.set("starsLevelHtml", [
-        '<i class="icon-star yellow"></i>',
-        '<i class="icon-star yellow"></i>',
-        '<i class="icon-star yellow"></i>',
-        '<i class="icon-star"></i>',
-        '<i class="icon-star"></i>'
-      ].join('\n'));*/
-		//console.log("package details after render",this.model);
-		
-			/*$.ajax('http://localhost/client-backbone-js-ui-repo-fork/app/api/destinationdetails/roundbob_get_destination_details.php', {
-			jsonp: 'callback',
-			dataType: 'jsonp',
-			data: {
-				user_id:"b34a758d762edb799b6c305e58d0ef06"
-			}
-		}).then(function(response) {
-			// handle requested data from server
-			console.log("response",response);
-		});*/
 		var that = this;
-		//that.model.set("brief","loading...");
-		//console.log("this model",that.model.attributes.Destination.id);
+			console.log("that.model",that.model);
 		var destination_id = that.model.attributes.Destination.id;
 		$.ajax({
 		  dataType: 'jsonp',
 		  url: "//m.roundbob.com/API/roundbob_get_destination_details.php?user_id=b34a758d762edb799b6c305e58d0ef06&did="+destination_id,
-		 	data: {
+		  data: {
 				user_id:"b34a758d762edb799b6c305e58d0ef06"
 			},
 		  success: success
@@ -62,17 +43,36 @@ define(function(require, exports, module) {
 		  var info_data = data.Response.destination_details.Destinations.Destination.brief_description;
 		  var ref_number = data.Response.destination_details.Destinations.Destination.ref_number;
 		  var cost = data.Response.destination_details.Destinations.Destination.cost;
+		  
+		  var current_url  = window.location.href.toString();
+		  var splitted = current_url.split("#activities")[1].split("/");
+		  var no_of_people = splitted[4].split("_");
+		  var adults = no_of_people[1];
+		  var children = no_of_people[3];
+		  var infant = no_of_people[5];
+		  
 		  var double_book = cost * 2;
 		  var tripple_book = cost * 3;
-		  console.log("cost",cost);
-	// this.model.set("image_file","http://www.roundbob.com/img/destinations/"+this.model.attributes.Destination.image_file);package-item-selected-image
+		  var total_people = Number(adults)+Number(children)+Number(infant);
+		  console.log("total_people"+total_people);
+		  console.log("total_people"+cost);
+		  var total_cost = total_people*cost;
+		  Packages.info = data.Response.destination_details.Destinations.Destination.name;
+		  Packages.did = data.Response.destination_details.Destinations.Destination.id;
+		 // http://localhost/roundbobhelperv1/dist/#surprise/5900169_Christmas Holiday_1_Uganda/2017-12-12_2017-12-26_round_m/m/adlts_1_chldn_2_infnts_1/email/m_mail/m_client/m_summary/mydetails/results/packages/c169/5899d4ed-5e44-4fd4-91d4-1b1089ac00e9_090569001486476525-20170207050845-1486476525
 		  that.model.set("brief",info_data);
 		  $('.brief-info').html(info_data);
 		  $('.ref-number-info').html(ref_number);
-		  $('.package-item-total-price').html(cost);
+		  $('.package-item-total-price').html(total_cost);
 		  $('.individualbasis').html("On single basis ($"+cost+")");
 		  $('.indoublebasis').html("On double basis ($"+double_book+")");
 		  $('.tripplebasis').html("On tripple basis ($"+tripple_book+")");
+		  
+		  $('#numberOfAdults').html("<span>Adult(s): </span>"+ adults);
+		  $('#numberOfChildren').html("<span>Child(ren):</span>"+ children);
+		  $('#numberOfInfants').html("<span>Infant(s): </span>"+ infant);
+		  
+		  
 		  $('#package-single-basis').val(cost);
 		  $('#package-double-basis').val(double_book);
 		  $('#package-tripple-basis').val(tripple_book);
@@ -87,7 +87,7 @@ define(function(require, exports, module) {
       'click .more_plus': 'showRoomsOnly',
       'click .showAll': 'showAll',
       'click #map_show': 'onShowMapBntClicked',
-      'click #submit_booking_details': 'submit_booking_details',
+      'click #submit_booking_activity_details': 'submit_booking_details',
       'click .close-map': 'onCloseMapBntClicked',
 	  'mouseover #travel_date' : 'travel_date',
     },
@@ -107,7 +107,29 @@ define(function(require, exports, module) {
 	},
 	submit_booking_details:function(){
 		console.log("submit details");
-		var e = document.getElementById("infants_id");
+		//http://localhost/roundbobhelperv1/dist/#surprise/5900165_Honeymoon_1_Uganda/2017-12-13_2017-12-27_round_s_%202%20nights%20Chobe%20Honeymoon_582327d0-b3c0-4167-93b1-11cc89ac00e9_242169001478698960-20161109044240-1478698960
+		var current_url  = window.location.href.toString();
+		var splitted = current_url.split("#activities")[1].split("/");
+		var sorter = splitted[1];
+		var dates = splitted[2];
+		var redirectTo="";
+		var people_booking =dates.split("_")[3];
+		var no_of_people = splitted[4];
+			if(people_booking === "s"){
+			  redirectTo = '/activities';
+			  redirectTo += '/'+sorter;
+			  redirectTo += '/' + dates+"_"+Packages.info+"_"+Packages.did;	
+			  app.router.go(redirectTo);			  
+			}else{
+				var people_symb=splitted[3];
+			  redirectTo = '/activities';
+			  redirectTo += '/'+sorter;
+			  redirectTo += '/' + dates+"_"+Packages.info+"_"+Packages.did;
+			  redirectTo += "/m/"+no_of_people;
+			 console.log("single_view",redirectTo);
+			  app.router.go(redirectTo);
+			}
+		/*var e = document.getElementById("infants_id");
 		var infants = e.options[e.selectedIndex].value;
 		var a = document.getElementById("adults_id");
 		var adults = a.options[e.selectedIndex].value;
@@ -190,11 +212,7 @@ define(function(require, exports, module) {
 					$('#client_email').text("");
 					$('#client_name_id').text("");
 						console.log("error");
-						/*swal(
-						  'Failed',
-						  'Your request has not been sent!',
-						  'error'
-						);*/
+				
 				})
 				.always(function() {
 					console.log("complete");
@@ -207,73 +225,10 @@ define(function(require, exports, module) {
 					});
 					app.router.go(redirectTo);
 				});
-			/*$.ajax({
-				url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.jso',
-				headers: { "Accept-Encoding" : "gzip" },
-				type: 'POST',
-				dataType: 'json',
-				//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
-				data: jQuery.param({
-					email: client_email,
-					phone : phone_number,
-					name : client_name_id,
-					request_type : "PACKAGE", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
-					adults : adults,
-					children : children,
-					infants : infants,
-					meta_data :jsonString,
-					}) ,
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success: function (response) {
-					  swal({
-						type: 'success',
-						html: 'Reply will be sent to' + email
-					  });
-				},
-				error: function () {
-					console.log("error");
-				}
-			});	*/			
-		}		 
+				
+		}*/		 
 		 
-	/*	swal({
-		  title: 'Input email address',
-		  input: 'email',
-		  inputPlaceholder: 'Enter your email address'
-		}).then(function (email) {
 
-		$.ajax({
-			url: 'http://www.roundbob.com/public-api/custom-requests/add.json',
-			type: 'POST',
-			dataType: 'jsonp',
-			//type: 'http://www.roundbob.com/public-api/custom-requests/add.json',
-			data: jQuery.param({
-				email: email,
-				phone : phone,
-				name : name,
-				request_type : "FLIGHT", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
-				adults : adults,
-				children : child,
-				infants : infants,
-				//description  : "hello2"
-				//price   : "hello2"
-				//currency    : "hello2"
-				//meta_data    : "hello2"
-				//respond_via    : "hello2"[email, phone, whatsapp]
-				meta_data :jsonString,
-				}) ,
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			success: function (response) {
-				  swal({
-					type: 'success',
-					html: 'Reply will be sent to' + email
-				  });
-			},
-			error: function () {
-				console.log("error");
-			}
-		});
-		});*/
 	},
  
     serialize: function() {

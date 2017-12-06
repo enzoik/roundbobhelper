@@ -23,43 +23,6 @@ define(function(require, exports, module) {
 	 // console.log("before check data");
 	  //console.log("check data", this.collection);
       this.collection.each(function(packages_model) {
-		  console.log("packages_model",packages_model);
-        // Start Filters
-        // FilterBy: starsLevel
-       /* if(filters.starsLevel.length){
-          if(!(_.contains(filters.starsLevel, hotel.get("starsLevel")))){
-            return;
-          }
-        }*/
-		//console.log("check data", packages_model);
-        // FilterBy: name
-       
-	   /*
-	    if(filters.name.length){
-          if((packages_model.get("name").toLowerCase().indexOf(filters.name.trim()) === -1)){
-            return;
-          }
-        }*/
-
-        // FilterBy: priceRanges
-       /* var priceRangesCount = filters.priceRanges.length;
-        var price = hotel.get("minAverPrice");
-        if(priceRangesCount){
-          var includeHotel = false;
-          for(var i=0; i<priceRangesCount; i++){
-            if(price >= filters.priceRanges[i].min && price <= filters.priceRanges[i].max){
-              includeHotel = true;
-              break;
-            }
-          }
-          if(!includeHotel) return;
-        }else{
-          // console.log("filters.priceRanges", filters.priceRanges);
-        }*/
-
-        // End Filters
-		
-		
         this.insertView(".package-results", new Item({
           model: packages_model,
           index: 1,

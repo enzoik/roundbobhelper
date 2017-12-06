@@ -54,7 +54,7 @@ define(function(require, exports, module,jqueryui) {
                     var name = response.Response.countries[i].Country.name;
 					//console.log("countries_id",response.Response.countries[i].Country.name);
                     
-                    $("#countries_id").append("<option value='"+id+"'>"+name+"</option>");
+                    $("#countries_id").append("<option value='"+id+"_"+name+"'>"+name+"</option>");
 
                 }
             }
@@ -79,7 +79,7 @@ define(function(require, exports, module,jqueryui) {
 						var name = response.Response.categories[i].Category.name;
 						console.log("category_id",response.Response.categories[i]);
 						
-						$("#categories_id").append("<option value='"+id+"'>"+name+"</option>");						
+						$("#categories_id").append("<option value='"+id+"_"+name+"'>"+name+"</option>");						
 					}
 
 
@@ -105,7 +105,7 @@ define(function(require, exports, module,jqueryui) {
 		var catvalue = $('select[name=categories_selector]').val();
 		var redirectTo = '';
 		  redirectTo = '/surprise';
-		  redirectTo += '/'+catvalue+'/' + country;
+		  redirectTo += '/'+catvalue+'_' + country;
 		  app.router.go(redirectTo);
 	},
   });

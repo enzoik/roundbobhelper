@@ -32,7 +32,8 @@ define(function(require, exports, module) {
 			"flights/:destination_location_single/:flightpickdates_single/:single_traveller/:no_of_travelers_one/:quotation_media_single/:emailing_single/:email_one_single/:sending": "onepersonemailoption",
 			
 			"flights/:destination_location_single/:flightpickdates_single/:single_traveller/:no_of_travelers_one/:quotation_media_single/:emailing_single/:email_one_single/:sending/:summary": "final_details_summary",
-      //http://localhost/roundbobhelperv1/dist/#flights/jjj_jjjj_Economy/27-10-2017_31-10-2017__m/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/kkk_op@gmail.com_email
+     
+	 //http://localhost/roundbobhelperv1/dist/#flights/jjj_jjjj_Economy/27-10-2017_31-10-2017__m/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/kkk_op@gmail.com_email
 //many email
 	  //http://localhost/roundbobhelperv1/dist/#flights/nnn_qqq_Economy/27-10-2017_30-10-2017__s/s/single/email/sdng_mail/p234/sent_to/kkk_p@gmail.com_email
 	  },
@@ -63,22 +64,7 @@ define(function(require, exports, module) {
 		},
 		//filling in the travel dates and selecting multiple people for a trip
 		travelpeople: function(){
-			/*var departure_date = document.getElementById("departure-date").value;
-			var return_date = document.getElementById("return-date").value;
-			var roundtrip = document.getElementById("switch-1");
-			var current_url  = window.location.href.toString();
-			var travel_trip="";
-			if(roundtrip.checked){
-				travel_trip="round";
-			}else{
-				travel_trip="oneway";
-			}
-			//var current_url  = window.location.href.toString();
-			console.log("multiple_router"+departure_date+" return "+return_date+"trip type"+travel_trip+"current_url"+current_url);
-			var url_ = current_url.split("#flights/")[1].split("/")[0];
-			var dates_cont = departure_date+"_"+return_date+"_"+travel_trip+"_m";
-			var multiple_people="m";
-			console.log(url_+" "+dates_cont);*/
+
 
 		var current_url  = window.location.href.toString();
 		var url_ = current_url.split("#flights/")[1].split("/")[0];
@@ -95,21 +81,7 @@ define(function(require, exports, module) {
 		//filling in the travel dates and traveling as one individual
 		travelpeoplebookeroptions: function(){
 			console.log("book");
-		/*	var departure_date = document.getElementById("departure-date").value;
-			var return_date = document.getElementById("return-date").value;
-			var roundtrip = document.getElementById("switch-1");
-			var current_url  = window.location.href.toString();
-			var travel_trip="";
-			if(roundtrip.checked){
-				travel_trip="round";
-			}else{
-				travel_trip="oneway";
-			}
-			//var current_url  = window.location.href.toString();
-			console.log("one_router "+departure_date+" return "+return_date+"trip type"+travel_trip+"current_url"+current_url);
-			//one_router 2017-09-17 return 2017-10-17trip typeround current
-			//2017-09-17 return 2017-10-17trip typeroundcurrent_urlhttp://localhost/helperbob/dist/#flights/ww_dd_Economy/2017-09-17_2017-10-17_round_s
-			*/
+
 			var current_url  = window.location.href.toString();
 			var url_ = current_url.split("#flights/")[1].split("/")[0];
 			var date_from_flight=current_url.split("#flights/")[1].split("/")[1].split("_")[0];
@@ -130,7 +102,8 @@ define(function(require, exports, module) {
 			var current_url  = window.location.href.toString();
 			var url_ = current_url.split("#flights/")[1];
 			new Flight.Views.Bookingoption({location_travel_class:url_.split('/')[0],travel_dates:url_.split('/')[1],travel_cat_people:url_.split('/')[2],no_of_people_traveling:url_.split('/')[3]}).render();
-		},
+	
+	},
 		onepersonemailoption: function(){
 			var media_ = "call";
 			var current_url  = window.location.href.toString();

@@ -58,8 +58,10 @@ define(function(require, exports, module) {
     afterRender: function(){
 		//this.collections.packages.url = 
 		//http://localhost/roundbobhelperv1/dist/#surprise/c746/5900186
+		//http://localhost/roundbobhelperv1/dist/#surprise/5900165_Honeymoon_1_Uganda/2017-12-20_2017-12-20_round_s/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/mydetails/results/packages
 		var current_url  = window.location.href.toString();	
-		var category_id = current_url.split("#surprise")[1].split('/')[2];
+		var category_id = current_url.split("#surprise")[1].split('/')[1].split("_")[0];
+		var country_id = current_url.split("#surprise")[1].split('/')[1].split("_")[2];
 		var that = this;
 		console.log("category_id",category_id);
 		if(category_id == '5900186' ){
@@ -95,6 +97,7 @@ define(function(require, exports, module) {
 			type: "GET",
 				data: {
 					country_id: that.country_id,
+					category: category_id,
 					keyword: '',
 					subcategory: '',
 					key:'destinations',

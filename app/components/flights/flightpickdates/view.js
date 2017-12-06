@@ -77,6 +77,7 @@ define(function(require, exports, module) {
 	date_picker:function(){
 		
 	},
+	
 	multiplepeopleGetDate:function(e){
 		//console.log("multiple");
 			var departure_date = document.getElementById("departure-date").value;

@@ -48,13 +48,13 @@ define(function(require, exports, module,jqueryui) {
 
                 var len = response.Response.countries.length;
 				//console.log("countries",response.Response.countries);
-                $("#countries_id").empty();
+                $("#countries_id_activities").empty();
                 for( var i = 0; i<len; i++){
                     var id = response.Response.countries[i].Country.id;
                     var name = response.Response.countries[i].Country.name;
 					//console.log("countries_id",response.Response.countries[i].Country.name);
                     
-                    $("#countries_id").append("<option value='"+id+"'>"+name+"</option>");
+                    $("#countries_id_activities").append("<option value='"+id+"_"+name+"'>"+name+"</option>");
 
                 }
             }
@@ -71,15 +71,18 @@ define(function(require, exports, module,jqueryui) {
 
                 var len = response.Response.categories.length;
 				console.log("countries",response.Response.categories);
-                $("#categories_id").empty();
+                $("#categories_id_activities").empty();
                 for( var i = 0; i<len; i++){
-					console.log("category_id",response.Response.categories[i]);
+					console.log("category_id_activities",response.Response.categories[i]);
 					if(typeof response.Response.categories[i].Category.name != "undefined"){
-						var id = response.Response.categories[i].Category.id;
-						var name = response.Response.categories[i].Category.name;
-						console.log("category_id",response.Response.categories[i]);
+						var id = "5900186";
+						var name = "Activities";
+						//5900186_Activities
+						/*var id = response.Response.categories[i].Category.id;
+						var name = response.Response.categories[i].Category.name;*/
+						console.log("category_id_activities",response.Response.categories[i]);
 						
-						$("#categories_id").append("<option value='"+id+"'>"+name+"</option>");						
+						$("#categories_id_activities").append("<option value='"+id+"_"+name+"'>"+name+"</option>");						
 					}
 
 
@@ -94,21 +97,19 @@ define(function(require, exports, module,jqueryui) {
 		$('#selected').hide();
 	},*/
 	events: {
-      'click .continue_to_view_packages_activities' : 'continue_to_view_packages_activities',
+      'click #continue_to_view_activities' : 'continue_to_view_activities',
 	  'keyup #flight_to': 'flight_to',
 	  'keyup #flight_from': 'flight_from',
 
     },
 
-	continue_to_view_packages_activities:function(e){
-		var country = $('select[name=countries_selector_act]').val();
-		var catvalue = $('select[name=categories_selector_act]').val();
-		console.log("activities turn");
+	continue_to_view_activities:function(e){
+		console.log("continue_to_view_activities");
+		var country = $('select[name=countries_selector]').val();
+		var catvalue = $('select[name=categories_selector]').val();
 		var redirectTo = '';
 		  redirectTo = '/activities';
-		 // redirectTo += '/'+catvalue+'/' + country;
-		
-		  redirectTo += '/c746/5900186';
+		  redirectTo += '/'+catvalue+'_' + country;
 		  app.router.go(redirectTo);
 	},
   });
