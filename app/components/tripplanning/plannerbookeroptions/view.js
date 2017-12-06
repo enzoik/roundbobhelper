@@ -28,7 +28,7 @@ define(function(require, exports, module) {
 	events:{
 		'click .email_quotation_planner' : 'email_quotation_hotel',
 		'click .call_client_planner' : 'call_client_hotel',
-		'click .available_hotels' : 'available_hotels',
+		'click .available_planner' : 'available_hotels',
 	},
 	email_quotation_hotel:function(ev){
 		console.log("emailing");
