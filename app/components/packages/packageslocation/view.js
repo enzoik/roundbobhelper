@@ -45,7 +45,7 @@ define(function(require, exports, module,jqueryui) {
 				},
             dataType: 'jsonp',
             success:function(response){
-
+				console.log("respone",response.Response);
                 var len = response.Response.countries.length;
 				//console.log("countries",response.Response.countries);
                 $("#countries_id").empty();
@@ -68,7 +68,7 @@ define(function(require, exports, module,jqueryui) {
 				},
             dataType: 'jsonp',
             success:function(response){
-
+				console.log("respone",response.Response);
                 var len = response.Response.categories.length;
 				console.log("countries",response.Response.categories);
                 $("#categories_id").empty();
@@ -84,6 +84,7 @@ define(function(require, exports, module,jqueryui) {
 
 
                 }
+				
             }
         });
    

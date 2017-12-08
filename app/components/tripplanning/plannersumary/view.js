@@ -27,6 +27,8 @@ define(function(require, exports, module) {
 		 $("send_confirmation_id2").removeAttr('disabled');
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').hide();
+		
+		/*retrieving information froom the url*/
 		 var current_url  = window.location.href.toString();
 		 var destination = current_url.split("#planner")[1].split("/")[1].split("-")[0];
 		 var check_in_date = current_url.split("#planner")[1].split("/")[2].split("_")[0];
@@ -41,6 +43,7 @@ define(function(require, exports, module) {
 		var adults="";
 		var infants ="";
 		var child="";
+		
 		 if(no_ == "s"){
 			  number_of_people = "people: 1 adults , 0 child, 0 infants";
 		 }else if(no_ == "m"){
@@ -58,9 +61,13 @@ define(function(require, exports, module) {
 		 $('#destination').text(destination.replace(/%20/g,''));
 		 $('#no_of_people').text(number_of_people.replace(/%20/g,''));
 	 },
+	 
+	 
 	events:{
 		'click .send_confirmed_request_planner' : 'send_confirmed_request',
 	},
+	
+	
 	send_confirmed_request:function(){
 		console.log("send details");
 		var current_url  = window.location.href.toString();
@@ -114,7 +121,9 @@ define(function(require, exports, module) {
 			notification_summary="You will receive a call on your phone number "+	phone +" after request submission";		
 		}	
 		 var jsonString= JSON.stringify(data_info);
-		 
+		 console.log("media","email"+email+"phone"+phone+"name"+name+"adults"+adults+"child"+child);
+		 console.log("media",get_response_via);
+		 console.log("media",jsonString);
 
 			swal({
 			  title: 'confirmation',

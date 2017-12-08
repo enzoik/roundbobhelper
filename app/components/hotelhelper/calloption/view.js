@@ -27,7 +27,7 @@ define(function(require, exports, module) {
 		if(localStorage.getItem('my_user_details')){
 			var retrieveduserdetails = JSON.parse(localStorage.getItem('my_user_details'));
 			$('#clients_name').val(retrieveduserdetails.name);
-			$('#clients_phone_number').val(retrieveduserdetails.email);
+			$('#clients_phone_number').val(retrieveduserdetails.watsapp);
 			//$('#client_watsapp_no_hotel').val(retrieveduserdetails.watsapp);
 		}else{
 			console.log("Not Found",'Not defined');

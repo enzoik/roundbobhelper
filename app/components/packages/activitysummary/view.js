@@ -20,17 +20,7 @@ define(function(require, exports, module) {
       "headernav": new Config.Views.HeaderNav(),
       "footernav": new Config.Views.FooterNav(),
     },
-	/*afterRender : function() {
-		$('#go_backward_btn').show();
-		$('#go_forward_btn').show();
 
-	},
-		afterRender : function() {
-		$('#selected_to').hide();
-		$('#selected').hide();
-
-
-	}*/
     afterRender: function(){
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').hide();
@@ -39,6 +29,8 @@ define(function(require, exports, module) {
 		//_5899d4ed-5e44-4fd4-91d4-1b1089ac00e9_090569001486476525-20170207050845-1486476525/s/single/email/sdng_mail/p234/sent_to/patrick_patrickkanyerezi@gmail.com_email
 		//http://localhost/roundbobhelperv1/dist/#surprise/4_City%20getaway_1_Uganda/2017-12-13_2017-12-26_round_m_2%20Nights%20Fort%20portal%20weekend%20getaway%20package_590058dd-7e10-49ef-9070-0d1c89ac00e9_900018001493194973-20170426112253-1493194974/m/adlts_1_chldn_1_infnts_1
 		var current_url  = window.location.href.toString();
+		var destination = current_url.split("#activities")[1].split("/")[2].split("_")[2];
+		var category = current_url.split("#activities")[1].split("/")[2].split("_")[0];
 		var departure_date = current_url.split("#activities")[1].split("/")[2].split("_")[0];
 		var return_date = current_url.split("#activities")[1].split("/")[2].split("_")[1];
 		var no_ = current_url.split("#activities")[1].split("/")[2].split("_")[3];
@@ -46,7 +38,7 @@ define(function(require, exports, module) {
 		var did = current_url.split("#activities")[1].split("/")[2].split("_")[5];
 		var media = current_url.split("#activities")[1].split("/")[9].split("_")[2];
 		var number_of_people ="";
-		var adult="1";
+		var adults="1";
 		var child="0";
 		var infants="0";
 		var name="";
@@ -77,10 +69,10 @@ define(function(require, exports, module) {
 		 $('#flight_type').text(escape(flight_type).replace(/%20/g,''));
 		 $('#departure_date_id').html('<span><i class="icon-calendar"></i>'+ escape(departure_date).replace(/%20/g,'') +'</i></span>');
 		 
-		 $('#departure_place_id').text(escape(coming_from).replace(/%20/g,''));
-		 $('#departure_place_id2').text(escape(going_to).replace(/%20/g,''));
-		 $('#destination_id').text(escape(going_to).replace(/%20/g,''));
-		 $('#destination_id2').text(escape(coming_from).replace(/%20/g,''));
+		 $('#departure_place_id').text(escape(destination).replace(/%20/g,''));
+		 $('#departure_place_id2').text(escape(category).replace(/%20/g,''));
+		 $('#destination_id').text(escape(category).replace(/%20/g,''));
+		 $('#destination_id2').text(escape(destination).replace(/%20/g,''));
 		 $('#no_of_people').text(number_of_people);
    },
 	 beforeRender: function() {
@@ -109,6 +101,7 @@ define(function(require, exports, module) {
 		var name="";
 		var phone="";
 		var email="";
+		var get_response_via="";
 		var data_info = {};
 		data_info.DepartureDate = escape(departure_date).replace(/%20/g,'');
 		data_info.ReturnDate = escape(return_date).replace(/%20/g,'');
@@ -142,6 +135,9 @@ define(function(require, exports, module) {
 			notification_summary="You will receive a call on your phone number "+	phone +"after request submission";		
 		}
 		var jsonString= JSON.stringify(data_info);
+		console.log("media",jsonString);
+		console.log("media",get_response_via);
+		console.log("media","infants"+infants+"child"+child+"adults"+adults+"email"+email+"phone"+phone+"name"+name);
 			swal({
 			  title: 'confirmation',
 			  text: ""+notification_summary,
