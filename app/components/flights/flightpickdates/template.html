@@ -5,10 +5,9 @@
 <div class="color-banner-top">
   <div class="container">
   <div class="col-md-6 col-md-offset-3">
-    <headernav></headernav>
-    <div class="row">
 
-
+    <div class="row"><headernav></headernav></div>
+  
     <div class="progress-metre row">
     <svg height="10" width="100%" style="background:#ccc;">
       <line x1="0" y1="0" x2="40%" y2="0" style="stroke:#e7e874;stroke-width:20" />
@@ -17,7 +16,9 @@
     <span class="centage-label">40%</span>
   </div><!-- end progress-metre -->
     <div class="card-paper">
-    <div class="card-component row">
+      <div class="row">
+
+    <div class="card-component">
       <div class="bob-communicator">
         <div class="card-content">
           <div class="col-md-2">
@@ -28,7 +29,7 @@
           <div class="col-md-10">
             <div class="row">
               <div class="bob-talking">
-                 Turn off the switch below for a one way flight.
+                 Return flight or one way?
               </div>
             </div>
           </div>
@@ -36,8 +37,9 @@
       </div>
 
     </div><!-- end card-component -->
+  </div><!-- end row -->
     </div><!-- end card-paper -->
-    </div>
+
   </div><!-- end col-md-6 -->
   </div><!-- end container -->
 </div><!-- end color-banner-top -->
@@ -45,39 +47,34 @@
 
 <div class="container">
   <div class="col-md-6 col-md-offset-3">
-<!--
-    <div class="card-paper">
-    <div class="card-content-1" style="margin: 3px auto;">
-          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-          <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
-          <span class="mdl-switch__label switch-label">Return flight (Off/On)</span>
-          </label>
-      </div>
-    </div>
 
-    <script>
-     /* $(document).ready(function(){
-        $(document).on('change','.mdl-switch__input',function(){
-          $('.card-content-flight-return-date').toggle();
+      <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-3">
+             <div class="row">
+                 <div class="flight-item-option">
+                   <input type="radio" id="switch-1" class="flight-type" checked="checked"  name="package-payment-option" value="return">
+                    <label for="switch-1" class="radio-input">
+                   <span>Return</span>
+                   </label>
+                 </div><!-- end flight-item-option -->
+                </div><!-- end row -->
+            </div><!-- end col-md-3 -->
 
-        });
-      });*/
-    </script>
--->
-    <div class="card-paper">
-    <div class="card-content-1" style="margin: 3px auto;">
-        <div class="switch-el">
-          <input type="checkbox" id="switch-1" class="mdl-switch-input" checked>
-          <label class="mdl-switch" for="switch-1">
-          <span class=" switch-label">Return flight</span>
-          </label>
-        </div><!-- end switch-el -->
-      </div><!-- end card-content-1 -->
-    </div><!-- end card-paper -->
-	
-    <div class="card-paper">
+            <div class="col-md-4">
 
-    <div class="seperator"></div><!-- end seperator -->
+                 <div class="flight-item-option">
+                   <input type="radio" id="switch-2" class="flight-type"  name="package-payment-option" value="one">
+                    <label for="switch-2" class="radio-input">
+                   <span>One way</span>
+                   </label>
+                 </div><!-- end flight-item-option -->
+
+            </div><!-- end col-md-4 -->
+          </div><!-- end row -->
+        </div><!-- end col-md-12 -->
+
+    <div class="card-paper">
 
     <div class="card-component">
     <div class="col-md-6">
@@ -85,7 +82,7 @@
         <div class="card-content">
           <label class="field-label"><i class="icon-calendar-1"></i> Travel date</label>
         <!--  <input id="departure-date" value="2017-09-17" type="date" class="form-element" name="date" placeholder="YYYY-MM-DD" readonly="readonly">-->
-          <input id="departure-date" value=""  class="form-element" name="date" placeholder="YYYY-MM-DD" readonly="readonly">
+          <input id="departure-date" value=""  class="form-element" name="date" placeholder="Pick a date" readonly="readonly">
         </div><!-- end card-content -->
       </div>
     </div>
@@ -95,7 +92,7 @@
         <div class="card-content card-content-flight-return-date">
           <label class="field-label"><i class="icon-calendar-1"></i> Return date</label>
          <!-- <input id="return-date" value="2017-10-17" type="date" class="form-element input-flight-return-date" placeholder="YYYY-MM-DD" readonly="readonly">-->
-          <input id="return-date" value=""  class="form-element" name="date" placeholder="YYYY-MM-DD" readonly="readonly">
+          <input id="return-date" value=""  class="form-element" name="date" placeholder="Pick a date" readonly="readonly">
         </div><!-- end card-content -->
       </div>
     </div>

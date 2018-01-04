@@ -40,6 +40,8 @@ define(function(require, exports, module) {
 		function success(data) {
 		  // do something with data, which is an object
 		  console.log("response data",data);
+		  
+		  
 		  var info_data = data.Response.destination_details.Destinations.Destination.brief_description;
 		  var ref_number = data.Response.destination_details.Destinations.Destination.ref_number;
 		  var cost = data.Response.destination_details.Destinations.Destination.cost;
@@ -80,7 +82,8 @@ define(function(require, exports, module) {
     },
 
     afterRender: function(){
-		
+		$('#info_card').hide();
+		$('#info_card_title').hide();
     },
 
     events: {
@@ -88,6 +91,7 @@ define(function(require, exports, module) {
       'click .showAll': 'showAll',
       'click #map_show': 'onShowMapBntClicked',
       'click #submit_booking_activity_details': 'submit_booking_details',
+      'click #submit_to_book_now_activity': 'submit_to_book_now_activity',
       'click .close-map': 'onCloseMapBntClicked',
 	  'mouseover #travel_date' : 'travel_date',
     },
@@ -104,6 +108,13 @@ define(function(require, exports, module) {
 			//$("#departure-date").val("");
 		  }
 		});		
+	},
+	submit_to_book_now_activity:function(){
+			swal(
+			  'Comming Soon',
+			  'This functionality is still being tested',
+			  'info'
+			);			
 	},
 	submit_booking_details:function(){
 		console.log("submit details");

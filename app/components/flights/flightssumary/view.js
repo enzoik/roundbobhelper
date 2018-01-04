@@ -85,7 +85,7 @@ define(function(require, exports, module) {
 
 	 },
 	events:{
-		'click .send_confirmed_request' : 'send_confirmed_request',
+		'click .send_confirmed_request_flights' : 'send_confirmed_request',
 	},
 	send_confirmed_request:function(el){
 		console.log("send details");

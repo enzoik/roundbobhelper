@@ -35,7 +35,7 @@ define(function(require, exports, module) {
 	 
 	 },
 	events: {
-      'click .submit_email' : 'submit_email',
+      'click .submit_email_hotel' : 'submit_email',
     },
 	submit_email:function(){
 		var client_name = document.getElementById("client_name_hotel").value;

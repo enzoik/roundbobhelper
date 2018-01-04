@@ -64,6 +64,12 @@ define(function(require, exports, module) {
 		var country_id = current_url.split("#activities")[1].split('/')[1].split("_")[2];
 		var that = this;
 		console.log("category_id",category_id);
+		if(category_id == 'All' ){
+			category_id="";
+		}
+		if(country_id == 'All' ){
+			that.country_id="";
+		}
 		if(category_id == '5900186' ){
 			console.log("whattoshow","activities");
 			that.collections.packages.fetch({

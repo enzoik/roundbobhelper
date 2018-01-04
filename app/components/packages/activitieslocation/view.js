@@ -34,8 +34,7 @@ define(function(require, exports, module,jqueryui) {
 		$('#go_forward_btn').show();
 		$('#menu-icon-id').show();
 		
-  
-       
+	
 		jQuery.noConflict();
         $.ajax({
             url: '//m.roundbob.com/API/roundbob_get_countries.php',
@@ -47,8 +46,9 @@ define(function(require, exports, module,jqueryui) {
             success:function(response){
 
                 var len = response.Response.countries.length;
-				//console.log("countries",response.Response.countries);
-                $("#countries_id_activities").empty();
+ 		
+				$("#countries_id_activities").empty(); 
+			   $("#countries_id_activities").append("<option value='All_all'>All</option>");
                 for( var i = 0; i<len; i++){
                     var id = response.Response.countries[i].Country.id;
                     var name = response.Response.countries[i].Country.name;
@@ -71,15 +71,16 @@ define(function(require, exports, module,jqueryui) {
 
                 var len = response.Response.categories.length;
 				console.log("countries",response.Response.categories);
-                $("#categories_id_activities").empty();
+				 $("#categories_id_activities").empty();
+			   $("#categories_id_activities").append("<option value='All_all'>All</option>");	
                 for( var i = 0; i<len; i++){
 					console.log("category_id_activities",response.Response.categories[i]);
 					if(typeof response.Response.categories[i].Category.name != "undefined"){
-						var id = "5900186";
-						var name = "Activities";
+						/*var id = "5900186";
+						var name = "Activities";*/
 						//5900186_Activities
-						/*var id = response.Response.categories[i].Category.id;
-						var name = response.Response.categories[i].Category.name;*/
+						var id = response.Response.categories[i].Category.id;
+						var name = response.Response.categories[i].Category.name;
 						console.log("category_id_activities",response.Response.categories[i]);
 						
 						$("#categories_id_activities").append("<option value='"+id+"_"+name+"'>"+name+"</option>");						
@@ -106,7 +107,8 @@ define(function(require, exports, module,jqueryui) {
 	continue_to_view_activities:function(e){
 		console.log("continue_to_view_activities");
 		var country = $('select[name=countries_selector]').val();
-		var catvalue = $('select[name=categories_selector]').val();
+		//var catvalue = $('select[name=categories_selector]').val();
+		var catvalue = "5900186_Activities";
 		var redirectTo = '';
 		  redirectTo = '/activities';
 		  redirectTo += '/'+catvalue+'_' + country;

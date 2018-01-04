@@ -31,7 +31,7 @@ define(function(require, exports, module) {
 		var view = this;
 		jQuery.noConflict();
 		$(e.currentTarget).datepicker({
-		  minDate:'2',
+		  minDate:'0',
 		  dateFormat: 'yy-mm-dd',
 		  defaultDate:view.selectedDate,
 		  onSelect:function(dateText,datePicker) {
@@ -51,7 +51,7 @@ define(function(require, exports, module) {
 		
 		var ONE_DAY = 1000 * 60 * 60 * 24;
 		var difference_ms = Math.abs(final_d_date.getTime() - value_t);
-		var days =Math.round(difference_ms/ONE_DAY) + 2;
+		var days =Math.round(difference_ms/ONE_DAY) + 1;
 		console.log(parts+" date","final_d_date"+ final_d_date.getTime()+"value"+value_t+" days "+days);
 		//console.log($(e.currentTarget));
 		//$.noConflict();

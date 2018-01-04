@@ -30,7 +30,8 @@ define(function(require, exports, module) {
 		//http://localhost/roundbobhelperv1/dist/#surprise/4_City%20getaway_1_Uganda/2017-12-13_2017-12-26_round_m_2%20Nights%20Fort%20portal%20weekend%20getaway%20package_590058dd-7e10-49ef-9070-0d1c89ac00e9_900018001493194973-20170426112253-1493194974/m/adlts_1_chldn_1_infnts_1
 		var current_url  = window.location.href.toString();
 		var destination = current_url.split("#activities")[1].split("/")[2].split("_")[2];
-		var category = current_url.split("#activities")[1].split("/")[2].split("_")[0];
+		var country = current_url.split("#activities")[1].split("/")[1].split("_")[3];
+		var category = current_url.split("#activities")[1].split("/")[1].split("_")[1];
 		var departure_date = current_url.split("#activities")[1].split("/")[2].split("_")[0];
 		var return_date = current_url.split("#activities")[1].split("/")[2].split("_")[1];
 		var no_ = current_url.split("#activities")[1].split("/")[2].split("_")[3];
@@ -66,13 +67,14 @@ define(function(require, exports, module) {
 		
 		
 		console.log("departure_date"+departure_date+"return_date"+return_date+"package_info"+package_info+"did"+did+"media"+media+"number_of_people"+number_of_people);
-		 $('#flight_type').text(escape(flight_type).replace(/%20/g,''));
+		 $('#info_details').text(escape(package_info).replace(/%20/g,' '));
 		 $('#departure_date_id').html('<span><i class="icon-calendar"></i>'+ escape(departure_date).replace(/%20/g,'') +'</i></span>');
+		 $('#return_date_id').html('<span><i class="icon-calendar"></i>'+ escape(return_date).replace(/%20/g,'') +'</i></span>');
 		 
-		 $('#departure_place_id').text(escape(destination).replace(/%20/g,''));
+		 $('#departure_place_id').text(escape(country).replace(/%20/g,''));
 		 $('#departure_place_id2').text(escape(category).replace(/%20/g,''));
 		 $('#destination_id').text(escape(category).replace(/%20/g,''));
-		 $('#destination_id2').text(escape(destination).replace(/%20/g,''));
+		 $('#destination_id2').text(escape(country).replace(/%20/g,''));
 		 $('#no_of_people').text(number_of_people);
    },
 	 beforeRender: function() {
@@ -161,7 +163,7 @@ define(function(require, exports, module) {
 						email: escape(email).replace(/%20/g,''),
 						phone : escape(phone).replace(/%20/g,'') ,
 						name :  escape(name).replace(/%20/g,''),
-						request_type : "PACKAGE", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+						request_type : "ACTIVITY", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
 						adults : adults,
 						children : child,
 						infants : infants,

@@ -191,6 +191,7 @@ define(function(require, exports, module) {
 			  }else{
 
 				if(!$('ContentPackageDetailsView').length){
+					$('main').html('');
 				  $('main').append('<ContentPackageDetailsView style="display:block !important;"></ContentPackageDetailsView>');
 				}
 				$('ContentPackagesListView').hide();

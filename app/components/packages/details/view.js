@@ -28,6 +28,8 @@ define(function(require, exports, module) {
     beforeRender: function() {
 		var that = this;
 			console.log("that.model",that.model);
+			
+			
 		var destination_id = that.model.attributes.Destination.id;
 		$.ajax({
 		  dataType: 'jsonp',
@@ -80,7 +82,8 @@ define(function(require, exports, module) {
     },
 
     afterRender: function(){
-		
+		$('#info_card').hide();
+		$('#info_card_title').hide();
     },
 
     events: {
@@ -88,6 +91,7 @@ define(function(require, exports, module) {
       'click .showAll': 'showAll',
       'click #map_show': 'onShowMapBntClicked',
       'click #submit_booking_details': 'submit_booking_details',
+      'click #submit_to_book_now': 'submit_to_book_now',
       'click .close-map': 'onCloseMapBntClicked',
 	  'mouseover #travel_date' : 'travel_date',
     },
@@ -104,6 +108,13 @@ define(function(require, exports, module) {
 			//$("#departure-date").val("");
 		  }
 		});		
+	},
+	submit_to_book_now:function(){
+			swal(
+			  'Comming Soon',
+			  'This functionality is still being tested',
+			  'info'
+			);			
 	},
 	submit_booking_details:function(){
 		console.log("submit details");

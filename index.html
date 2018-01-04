@@ -239,8 +239,16 @@ $(document).on('change','.input-number',changeFieldVal);
 </script>
 
 <script>
-  $(document).on('change','.mdl-switch-input',function(){
-    $('.card-content-flight-return-date').toggle();
+  $(document).on('change','.flight-type',function(){
+
+    var val = $(this).val();
+
+    if(val == "one"){
+    $('.card-content-flight-return-date').hide();
+     } else{
+      $('.card-content-flight-return-date').show();
+     }
+
     // if($('.mdl-switch').hasClass('is-checked')){
     //
     // }
@@ -248,7 +256,7 @@ $(document).on('change','.input-number',changeFieldVal);
 </script>
 
 <script type="text/javascript">
-  $(document).on('change','.mdl-radio-button',function(){
+  $(document).on('change','.user-sendto-preference',function(){
     
     var curValue = $(this).val();
 
@@ -261,6 +269,132 @@ $(document).on('change','.input-number',changeFieldVal);
     }
 
   })
+</script>
+
+<script type="text/javascript">
+  function outputRoomRow(){
+    currentValue = parseInt($(this).val());
+    print="";
+
+    for(var i=1;i<currentValue;i++){
+      room = parseInt(i+1);
+      print += '<div class="card-paper">'+
+                  '<div class="card-component">'+
+                  '<div class="col-md-4"><h4 class="cum-room-number">Room '+room+'</div>'+
+                  '<div class="col-md-4">'+
+                    '<div class="row">'+
+                      '<div class="card-content">'+
+                        '<label class="field-label">Adults</label>'+
+                        
+                        '<div class="input-group">'+
+                            '<span class="input-group-btn">'+
+
+                                '<button  type="button" class="btn btn-number"  data-type="minus" data-field="adults'+i+'">'+
+                                  '<span class="glyphicon glyphicon-minus"></span>'+
+                                '</button>'+
+
+                            '</span>'+
+
+                            '<input type="text" name="adults'+i+'" class="form-element input-number no-radius" value="1" min="1" max="10" />'+
+
+                            '<span class="input-group-btn">'+
+
+                              '<button type="button" class="btn btn-number" data-type="plus" data-field="adults'+i+'">'+
+                                  '<span class="glyphicon glyphicon-plus"></span>'+
+                              '</button>'+
+
+                            '</span>'+
+                        '</div>'+
+
+                      '</div><!-- end card-content -->'+
+                    '</div><!-- end row -->'+
+                  '</div><!-- end col-md-4 -->'+
+
+                  '<div class="col-md-4">'+
+                    '<div class="row">'+
+                      '<div class="card-content">'+
+                        '<label class="field-label">children</label>'+
+                        
+                        '<div class="input-group">'+
+                            '<span class="input-group-btn">'+
+                                '<button type="button" class="btn btn-number"  data-type="minus" data-field="children'+i+'">'+
+                                  '<span class="glyphicon glyphicon-minus"></span>'+
+                                '</button>'+
+                            '</span>'+
+
+                            '<input type="text" name="children'+i+'" class="form-element children-no input-number no-radius" value="0" min="0" max="10" />'+
+
+                            '<span class="input-group-btn">'+
+                                '<button type="button" class="btn btn-number" data-type="plus" data-field="children'+i+'">'+
+                                    '<span class="glyphicon glyphicon-plus"></span>'+
+                                '</button>'+
+                            '</span>'+
+                        '</div>'+
+
+
+                      '</div><!-- end card-content -->'+
+                    '</div><!-- end row -->'+
+                  '</div><!-- end col-md-4 -->'+
+                '</div>'+
+
+                '<div class="card-component">'+
+                  '<div class="col-md-4"></div>'+
+                    '<div class="col-md-8">'+
+                      '<div class="children-ages" id="child-age-'+i+'"></div><!-- end child-age -->'+
+                    '</div><!-- end col-md-8 -->'+
+                '</div><!-- end card-component -->'+
+               '</div>';
+    }
+
+    document.getElementById('room-rows').innerHTML = print;
+  }
+
+  $(document).on('change','.room-input',outputRoomRow);
+</script>
+
+
+<script type="text/javascript">
+  
+  function addChildrenAge(){
+    currentVal = parseInt($(this).val());
+    print ="";
+
+    for(var i=1;i<=currentVal;i++){
+
+      print += '<div class="col-md-6">'+
+                '<div class="row">'+
+                  '<div class="card-content">'+
+                        '<label class="field-label">child Age '+i+'</label>'+
+                        
+                        '<div class="input-group">'+
+                            '<span class="input-group-btn">'+
+                                '<button type="button" class="btn btn-number"  data-type="minus" data-field="age'+i+'">'+
+                                  '<span class="glyphicon glyphicon-minus"></span>'+
+                                '</button>'+
+                            '</span>'+
+
+                            '<input type="text" name="age'+i+'" class="form-element input-number no-radius" value="0" min="0" max="10" />'+
+
+                            '<span class="input-group-btn">'+
+                                '<button type="button" class="btn btn-number" data-type="plus" data-field="age'+i+'">'+
+                                    '<span class="glyphicon glyphicon-plus"></span>'+
+                                '</button>'+
+                            '</span>'+
+                        '</div>'+
+
+                      '</div><!-- end card-content -->'+
+                '</div>'+
+              '</div>';
+         }
+
+  $id = $(this).parent().parent().parent().parent().parent().parent().find('.children-ages').attr('id');
+
+  console.log($id);
+
+  document.getElementById($id).innerHTML = print;
+  }
+
+  $(document).on('change','.children-no',addChildrenAge);
 </script>
 
 

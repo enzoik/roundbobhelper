@@ -34,8 +34,9 @@ define(function(require, exports, module,jqueryui) {
 		$('#go_forward_btn').show();
 		$('#menu-icon-id').show();
 		
-  
-       
+		
+
+           
 		jQuery.noConflict();
         $.ajax({
             url: '//m.roundbob.com/API/roundbob_get_countries.php',
@@ -47,13 +48,13 @@ define(function(require, exports, module,jqueryui) {
             success:function(response){
 				console.log("respone",response.Response);
                 var len = response.Response.countries.length;
-				//console.log("countries",response.Response.countries);
-                $("#countries_id").empty();
+					 $("#countries_id").empty();
+                     $("#countries_id").append("<option value='All_all'>All</option>"); 
                 for( var i = 0; i<len; i++){
                     var id = response.Response.countries[i].Country.id;
                     var name = response.Response.countries[i].Country.name;
 					//console.log("countries_id",response.Response.countries[i].Country.name);
-                    
+
                     $("#countries_id").append("<option value='"+id+"_"+name+"'>"+name+"</option>");
 
                 }
@@ -71,7 +72,8 @@ define(function(require, exports, module,jqueryui) {
 				console.log("respone",response.Response);
                 var len = response.Response.categories.length;
 				console.log("countries",response.Response.categories);
-                $("#categories_id").empty();
+			 $("#categories_id").empty();
+			$("#categories_id").append("<option value='All_all'>All</option>");	
                 for( var i = 0; i<len; i++){
 					console.log("category_id",response.Response.categories[i]);
 					if(typeof response.Response.categories[i].Category.name != "undefined"){

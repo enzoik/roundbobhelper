@@ -193,6 +193,7 @@ define(function(require, exports, module) {
 			  }else{
 
 				if(!$('ContentActivityeDetailsView').length){
+					$('main').html('');
 				  $('main').append('<ContentActivityeDetailsView style="display:block !important;"></ContentActivityeDetailsView>');
 				}
 				$('ContentActivitiesListView').hide();

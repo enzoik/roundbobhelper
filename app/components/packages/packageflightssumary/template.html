@@ -6,7 +6,7 @@
   <div class="container">
   <div class="col-md-6 col-md-offset-3">
 
-	<headernav></headernav>
+	   <div class="row"><headernav></headernav></div><!-- end row -->
 
     <div class="col-md-12">
     <div class="row">
@@ -56,41 +56,41 @@
 
       <div class="card-component">
         <div class="col-md-12">
-         <div class="item-label">Flight type</div>
-         <div id="flight_type" class="detail">return</div>
+         <div class="item-label">Info</div>
+         <div id="info_details" class="detail">return</div>
         </div><!-- end col-md-12 -->
 
       </div>
 
       <div class="seperator"></div>
 
-      <div class="card-component">  
-        
-        <div class="col-md-12">
-          <div id="departure_date_id"  class="detail date"><span><i class="icon-calendar"></i> 12/10/2017</i></span></div>
-        </div> 
+	  
+	  <table style="width:100%">
 
-        <div class="detail"> 
-          <div id="departure_place_id" class="col-md-4">Kigali</div>
-          <div class="col-md-3"><i class="icon-right"></i></div>
-          <div id="destination_id" class="col-md-4">Kampala</div>
-        </div>
-
-      </div><!-- end card-component -->   
-
-
-      <div class="card-component">  
-        <div class="col-md-12">
-          <div id="return_date_id" class="detail date"><span><i class="icon-calendar"></i> 12/10/2017</i></span></div>
-        </div>   
-
-        <div class="detail"> 
-          <div id="destination_id2" class="col-md-4">Kampala</div>
-          <div class="col-md-3"><i class="icon-right"></i></div>
-          <div id="departure_place_id2" class="col-md-4">Kigali</div>
-        </div>
-
-      </div><!-- end card-component --> <br/>  
+		  <tr>
+			<td>        
+				<div class="col-md-12">
+					<div id="departure_date_id"  class="detail date"><span><i class="icon-calendar"></i> 12/10/2017</i></span></div>
+				</div>
+		</td>
+			<td>
+				<div class="col-md-12">
+				  <div id="return_date_id" class="detail date"><span><i class="icon-calendar"></i> 12/10/2017</i></span></div>
+				</div>
+			</td>
+		  </tr>
+		  <tr>
+			<td>Category</td>
+			<td class="detail" ><div id="destination_id" class="col-md-4">Kigali</div></td>
+		  </tr>
+		  <tr>
+			<td>Country</td>
+			<td class="detail" >
+			<div id = "departure_place_id" class="col-md-4">Kampala</div>
+			</td>
+		  </tr>
+		</table>
+		<br/>  
 
 
       <div class="seperator"></div>

@@ -23,6 +23,8 @@ define(function(require, exports, module) {
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').show();
 		$('#return-flight-card').hide();
+		$('input[name=mdl-switch-input2]').attr('checked', false);
+		
 
 	},
 	events: {

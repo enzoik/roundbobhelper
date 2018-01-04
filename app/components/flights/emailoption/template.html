@@ -5,9 +5,8 @@
 <div class="color-banner-top">
   <div class="container">
   <div class="col-md-6 col-md-offset-3">
-    <headernav></headernav>
-    <div class="row">
-
+    
+    <div class="row"><headernav></headernav></div><!-- end row -->
 
     <div class="progress-metre row">
     <svg height="10" width="100%" style="background:#ccc;">
@@ -37,7 +36,6 @@
 
     </div><!-- end card-component -->
     </div><!-- end card-paper -->
-    </div>
     </div><!-- end col-md-12 -->
   </div><!-- end col-md-6 -->
   </div><!-- end container -->
@@ -47,22 +45,31 @@
 <div class="container">
 
   <div class="col-md-6 col-md-offset-3">
-    <div class="card-paper">
 
-    <div class="card-content-1">
-      <div class="switch-el">
-          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-            <input type="radio" id="option-1" class="mdl-radio-button options" name="options" value="1" checked>
-            <span class="mdl-radio__label switch-label">send by email </span>
-          </label>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-5">
+           <div class="row">
+               <div class="flight-item-option">
+                 <input type="radio" id="option-1" class="user-sendto-preference" checked="checked"  name="options" value="1">
+                  <label for="option-1" class="radio-input">
+                 <span>Send by email</span>
+                 </label>
+               </div><!-- end flight-item-option -->
+              </div><!-- end row -->
+               </div><!-- end col-md-5 -->
 
-          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-            <input type="radio" id="option-2" class="mdl-radio-button options" name="options" value="2">
-            <span class="mdl-radio__label switch-label">Send by WhatsApp</span>
-          </label>
-      </div>
-      </div><!-- end switch-el -->
-    </div><!-- card-paper -->
+               <div class="col-md-5">
+                <div class="flight-item-option">
+                 <input type="radio" id="option-2"  class="user-sendto-preference" name="options" value="2">
+                 <label for="option-2" class="radio-input">
+                   <span>Send by whatsApp</span>
+                 </label>
+                </div><!-- end flight-item-option -->
+              </div><!-- end row -->
+               </div><!-- end col-md-5 -->
+
+          </div><!-- end col-md-12 -->
 
     <div class="card-paper"><br/>
     <div class="card-component">
@@ -93,7 +100,7 @@
 	
     </div><!-- end card-component -->  <br/>
     </div><!-- end card-paper -->
-	<div class="email_quote">
+	<div class="email_quote_flights">
 		<div class="card-component button-div">
 		  <div class="submit_email">  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--yellow pull-right">Send me the quote</button></div>
 		</div><!-- end card-component -->

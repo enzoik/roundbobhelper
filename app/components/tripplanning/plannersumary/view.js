@@ -148,7 +148,7 @@ define(function(require, exports, module) {
 						email: email,
 						phone : phone,
 						name : escape(name).replace(/%20/g,''),
-						request_type : "HOTEL", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
+						request_type : "PACKAGE", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
 						adults : escape(adults),
 						children : escape(child),
 						infants : escape(infants),

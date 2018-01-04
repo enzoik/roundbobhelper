@@ -34,7 +34,7 @@ define(function(require, exports, module) {
 	},
 
 	events:{
-		'click .email_quote' : 'email_quote',
+		'click .email_quote_flights' : 'email_quote',
 	},
 	email_quote:function(){
 		var client_name = document.getElementById("clients_name").value;

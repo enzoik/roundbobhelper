@@ -5,9 +5,8 @@
 <div class="color-banner-top">
   <div class="container">
   <div class="col-md-6 col-md-offset-3">
-    <headernav></headernav>
-    <div class="row">
-
+    
+      <div class="row"><headernav></headernav></div><!-- end row -->
 
     <div class="progress-metre row">
     <svg height="10" width="100%" style="background:#ccc;">
@@ -28,7 +27,7 @@
           <div class="col-md-10">
             <div class="row">
               <div class="bob-talking">
-                Select Your Travel Date and When You Expect To Return For Activities.
+                Select Your Travel Date and When You Expect To Return From Activities.
               </div>
             </div>
           </div>
@@ -37,7 +36,6 @@
 
     </div><!-- end card-component -->
     </div><!-- end card-paper -->
-    </div>
   </div><!-- end col-md-6 -->
   </div><!-- end container -->
 </div><!-- end color-banner-top -->
@@ -67,7 +65,7 @@
     <div id="return-flight-card" class="card-paper">
     <div class="card-content-1" style="margin: 3px auto;">
         <div class="switch-el">
-          <input type="checkbox" id="switch-1" class="mdl-switch-input" checked>
+          <input id="activity_date" type="checkbox" id="switch-1" class="mdl-switch-input1" >
           <label class="mdl-switch" for="switch-1">
           <span class=" switch-label">Return flight</span>
           </label>
@@ -85,7 +83,7 @@
         <div class="card-content">
           <label class="field-label"><i class="icon-calendar-1"></i> Travel date</label>
         <!--  <input id="departure-date" value="2017-09-17" type="date" class="form-element" name="date" placeholder="YYYY-MM-DD" readonly="readonly">-->
-          <input id="departure-date" value=""  class="form-element" name="date" placeholder="YYYY-MM-DD" readonly="readonly">
+          <input id="departure-date" value=""  class="form-element" name="date" placeholder="Pick a date" readonly="readonly">
         </div><!-- end card-content -->
       </div>
     </div>
@@ -95,7 +93,7 @@
         <div class="card-content card-content-flight-return-date">
           <label class="field-label"><i class="icon-calendar-1"></i> Return date</label>
          <!-- <input id="return-date" value="2017-10-17" type="date" class="form-element input-flight-return-date" placeholder="YYYY-MM-DD" readonly="readonly">-->
-          <input id="return-date" value=""  class="form-element" name="date" placeholder="YYYY-MM-DD" readonly="readonly">
+          <input id="return-date" value=""  class="form-element" name="date" placeholder="Pick a date" readonly="readonly">
         </div><!-- end card-content -->
       </div>
     </div>
