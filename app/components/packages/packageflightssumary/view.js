@@ -51,9 +51,14 @@ define(function(require, exports, module) {
 		var adult="1";
 		var child="0";
 		var infants="0";
-		var name="";
-		var phone="";
-		var email="";
+		//var name="";
+		//var phone="";
+		//var email="";
+		
+		var	phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[0];
+		var email=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[1];
+		var name=current_url.split("#surprise")[1].split("/")[9].split("_")[0];
+		$('#info_details').text(name+" , "+email+" , "+phone);
 		if(no_ == "s"){
 			 number_of_people = "people: 1 adults , 0 child, 0 infants";
 		}else if(no_ == "m"){
@@ -65,17 +70,17 @@ define(function(require, exports, module) {
 		
 		if(media == "watsapp"){
 			 name=current_url.split("#surprise")[1].split("/")[9].split("_")[0];
-			 phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1];		
+			 phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[0];		
 		}else if(media == "email"){
 			 name=current_url.split("#surprise")[1].split("/")[9].split("_")[0];
-			 email=current_url.split("#surprise")[1].split("/")[9].split("_")[1];	
+			 email=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[1];	
 		}else if(media == "call"){
 			 name=current_url.split("#surprise")[1].split("/")[9].split("_")[0];
-			 phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1];		
+			 phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[0];		
 		}
+		console.log("phone",phone+email);
 		
-		
-		 $('#info_details').text(escape(package_info).replace(/%20/g,' '));
+		// $('#info_details').text(escape(package_info).replace(/%20/g,' '));
 		 $('#departure_date_id').html('<span><i class="icon-calendar"></i>'+ escape(departure_date).replace(/%20/g,'') +'</i></span>');
 		 $('#return_date_id').html('<span><i class="icon-calendar"></i>'+ escape(return_date).replace(/%20/g,'') +'</i></span>');
 		 
@@ -96,6 +101,7 @@ define(function(require, exports, module) {
 		console.log("send details");
 		 $("#send_confirmation_id").attr("disabled","disabled");
 		 var redirectTo = '';
+		var other_details_id = document.getElementById("other_details_id").value;
 		var current_url  = window.location.href.toString();
 		var departure_date = current_url.split("#surprise")[1].split("/")[2].split("_")[0];
 		var return_date = current_url.split("#surprise")[1].split("/")[2].split("_")[1];
@@ -116,6 +122,7 @@ define(function(require, exports, module) {
 		data_info.DepartureDate = escape(departure_date).replace(/%20/g,'');
 		data_info.ReturnDate = escape(return_date).replace(/%20/g,'');
 		data_info.PackageInfo = escape(package_info).replace(/%20/g,'');
+		data_info.OtherDetails = other_details_id;
 		
 		
 		/*if there r multiple people traveling*/
@@ -130,18 +137,21 @@ define(function(require, exports, module) {
 			console.log("memem");
 			get_response_via="watsapp";
 			 name=current_url.split("#surprise")[1].split("/")[9].split("_")[0];
-			 phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1];	
+			 email=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[0];		
+			 phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[1];		
 			notification_summary="You will get response via your watsapp number "+	watsapp_no +"after request submission";	
 		}else if(media == "email"){
 			console.log("memem");
 			get_response_via="email";
 			 name=current_url.split("#surprise")[1].split("/")[9].split("_")[0];
-			 email=current_url.split("#surprise")[1].split("/")[9].split("_")[1];	
+			 email=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[0];		
+			 phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[1];	
 			notification_summary="You will get response via your Email "+	email +"after request submission";
 		}else if(media == "call"){
 			get_response_via="phone";
 			 name=current_url.split("#surprise")[1].split("/")[9].split("_")[0];
-			 phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1];	
+			 email=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[0];		
+			 phone=current_url.split("#surprise")[1].split("/")[9].split("_")[1].split("-")[1];		
 			notification_summary="You will receive a call on your phone number "+	phone +"after request submission";		
 		}
 		var jsonString= JSON.stringify(data_info);
@@ -160,7 +170,8 @@ define(function(require, exports, module) {
 			}).then(function () {
 				$("#send_confirmation_id").attr("disabled","disabled");
 				$.ajax({
-					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					//url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					url: '//beta.roundbob.com/public/api/v1/custom-requests/add.json',
 					headers: { "Accept-Encoding" : "gzip" },
 					type: 'POST',
 					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error

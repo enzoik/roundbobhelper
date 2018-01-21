@@ -27,7 +27,10 @@ define(function(require, exports, module) {
     },
 
     url: function() {
-		return "http://m.roundbob.com/API/roundbob_get_destinations.php";
+		//return "http://m.roundbob.com/API/roundbob_get_destinations.php";
+		//return "http://localhost/roundbobhelperv1/app/api/raw/packages.php";
+		//return "https://beta.roundbob.com/public/api/v1/products.json?callback=?&";
+		return "https://beta.roundbob.com/public/api/v1/products.json?where[product_type_id]=1";
     },
 
     initialize: function(modal,options){
@@ -67,6 +70,7 @@ define(function(require, exports, module) {
 //0704746384
 	sync: function(method, model, options){   
 		//this.isRequest = false;
+	  // options.dataType = "jsonp";  
 	   options.dataType = "jsonp";  
 	   return Backbone.sync(method, model, options);  
 	},
@@ -85,20 +89,21 @@ define(function(require, exports, module) {
     },
 
     parse: function(obj) {
-		// console.log("objective", obj);
+		 console.log("objective");
+		 console.log("objective", obj);
         //cache.setPackagesSearchResults(obj.Response.destinations || []);
 		
 		if(!obj) return this.models;
-		console.log("PackagesParserData", obj);
+		console.log("PackagesParserData", obj.products);
 	 
-      if (obj.Response.destinations.length) {
-		 var packagesCount = obj.Response.destinations.length;
+      if (obj.products.length) {
+		 var packagesCount = obj.products.length;
         for(var i=0; i<packagesCount; i++){
-			console.log("objective", obj.Response.destinations[i]);
-          this.add(new Packages_model(obj.Response.destinations[i]));
+			console.log("objective", obj.products[i]);
+          this.add(new Packages_model(obj.products[i]));
         }
 		console.log("PackagesParser","DestinationsFound");
-        return obj.Response.destinations;
+        return obj.products;
 		
       }
 

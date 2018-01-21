@@ -23,17 +23,17 @@ define(function(require, exports, module) {
 
       // Make the image links protocol friendly if they are not HTTPS
      // this.model.set("thumb", this.model.get("thumb").replace("http:",""));
-	// console.log(this.model.attributes.Destination);
-	 var wallet_percentage =(parseFloat(this.model.attributes.Destination.cost)/1000)*100 ;
-	 this.model.set("name",this.model.attributes.Destination.name);
-	 this.model.set("cost","USD "+this.model.attributes.Destination.cost);
-	 this.model.set("location",this.model.attributes.Destination.location);
+	 console.log("object",this.model.attributes);
+	 var wallet_percentage =(parseFloat(this.model.attributes.display_price)/1000)*100 ;
+	 this.model.set("name",this.model.attributes.name);
+	 this.model.set("cost","USD "+this.model.attributes.display_price);
+	 this.model.set("location",this.model.attributes.country_name);
 	 this.model.set("wallet_position",wallet_percentage);
 	 
 	 
 	 this.model.set("brief_description",this.model.attributes.Destination.brief_description);
-	 this.model.set("image_file_large","//www.roundbob.com/img/destinations/"+this.model.attributes.Destination.image_file);
-	 this.model.set("image_file","//www.roundbob.com/img/imagecache/destinations/"+this.model.attributes.Destination.image_file);
+	 this.model.set("image_file_large",""+this.model.attributes.display_img);
+	 this.model.set("image_file",""+this.model.attributes.display_img);
 	 
 	 
     },
@@ -57,9 +57,10 @@ define(function(require, exports, module) {
    onPackageItemSelected: function(ev) {
 		
     var id = this.model.cid;    
-	var resultIndex = this.model.attributes.Destination.id;
+	var resultIndex = this.model.attributes.id;
 //http://localhost/roundbobhelperv1/dist/#surprise//4_City%20getaway_1_Uganda/2017-12-12_2017-12-27_round_s/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/mydetails/results/packages
 //http://localhost/roundbobhelperv1/dist/#surprise/5900169_Christmas%20Holiday_1_Uganda/2017-12-20_2017-12-28_round_m/m/adlts_1_chldn_1_infnts_0/email/m_mail/m_client/m_summary/mydetails/results/packages
+	
 	var current_url  = window.location.href.toString();
 	var splitted = current_url.split("#surprise")[1].split("/");   
 	var sorter = splitted[1];

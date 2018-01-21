@@ -48,6 +48,7 @@
   <script type="text/javascript" src="js/pnotify.js"></script>
   <script src="js/functions.js" type="text/javascript"></script>
   <script src="js/bobhelper.js" type="text/javascript"></script>
+  <script src="js/azure-search.min.js" type="text/javascript"></script>
  <!--
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
   HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -261,23 +262,33 @@ $(document).on('change','.input-number',changeFieldVal);
     var curValue = $(this).val();
 
     if(curValue == 2){
+        $('.send-email-option').addClass('show');
+        $('.sendto-whatsapp-option').addClass('show');
+    } else{
+        $('.send-email-option').addClass('show');
+        $('.sendto-whatsapp-option').addClass('show');
+    }
+   /* if(curValue == 2){
         $('.send-email-option').addClass('hide');
         $('.sendto-whatsapp-option').removeClass('hide');
     } else{
         $('.send-email-option').removeClass('hide');
         $('.sendto-whatsapp-option').addClass('hide');
-    }
+    }*/
 
   })
 </script>
 
 <script type="text/javascript">
-  function outputRoomRow(){
+
+    function outputRoomRow(){
+
     currentValue = parseInt($(this).val());
     print="";
 
     for(var i=1;i<currentValue;i++){
-      room = parseInt(i+1);
+      room = parseInt(i+1);      
+
       print += '<div class="card-paper">'+
                   '<div class="card-component">'+
                   '<div class="col-md-4"><h4 class="cum-room-number">Room '+room+'</div>'+
@@ -289,17 +300,17 @@ $(document).on('change','.input-number',changeFieldVal);
                         '<div class="input-group">'+
                             '<span class="input-group-btn">'+
 
-                                '<button  type="button" class="btn btn-number"  data-type="minus" data-field="adults'+i+'">'+
+                                '<button  type="button" class="btn btn-number"  data-type="minus" data-field="room-'+room+'-adults">'+
                                   '<span class="glyphicon glyphicon-minus"></span>'+
                                 '</button>'+
 
                             '</span>'+
 
-                            '<input type="text" name="adults'+i+'" class="form-element input-number no-radius" value="1" min="1" max="10" />'+
+                            '<input type="text" id="room-'+room+'-adult" name="room-'+room+'-adults" class="form-element input-number no-radius" value="1" min="1" max="10" />'+
 
                             '<span class="input-group-btn">'+
 
-                              '<button type="button" class="btn btn-number" data-type="plus" data-field="adults'+i+'">'+
+                              '<button type="button" class="btn btn-number" data-type="plus" data-field="room-'+room+'-adults">'+
                                   '<span class="glyphicon glyphicon-plus"></span>'+
                               '</button>'+
 
@@ -317,15 +328,15 @@ $(document).on('change','.input-number',changeFieldVal);
                         
                         '<div class="input-group">'+
                             '<span class="input-group-btn">'+
-                                '<button type="button" class="btn btn-number"  data-type="minus" data-field="children'+i+'">'+
+                                '<button type="button" class="btn btn-number"  data-type="minus" data-field="room-'+room+'-children">'+
                                   '<span class="glyphicon glyphicon-minus"></span>'+
                                 '</button>'+
                             '</span>'+
 
-                            '<input type="text" name="children'+i+'" class="form-element children-no input-number no-radius" value="0" min="0" max="10" />'+
+                            '<input type="text" id="room-'+room+'-child" name="room-'+room+'-children" class="form-element children-no input-number no-radius" value="0" min="0" max="10" />'+
 
                             '<span class="input-group-btn">'+
-                                '<button type="button" class="btn btn-number" data-type="plus" data-field="children'+i+'">'+
+                                '<button type="button" class="btn btn-number" data-type="plus" data-field="room-'+room+'-children">'+
                                     '<span class="glyphicon glyphicon-plus"></span>'+
                                 '</button>'+
                             '</span>'+
@@ -349,7 +360,9 @@ $(document).on('change','.input-number',changeFieldVal);
     document.getElementById('room-rows').innerHTML = print;
   }
 
-  $(document).on('change','.room-input',outputRoomRow);
+    jQuery.noConflict();
+
+  $(document).on('change','.input-room',outputRoomRow);
 </script>
 
 
@@ -358,6 +371,9 @@ $(document).on('change','.input-number',changeFieldVal);
   function addChildrenAge(){
     currentVal = parseInt($(this).val());
     print ="";
+
+    var inputID = this.id;
+
 
     for(var i=1;i<=currentVal;i++){
 
@@ -368,15 +384,15 @@ $(document).on('change','.input-number',changeFieldVal);
                         
                         '<div class="input-group">'+
                             '<span class="input-group-btn">'+
-                                '<button type="button" class="btn btn-number"  data-type="minus" data-field="age'+i+'">'+
+                                '<button type="button" class="btn btn-number"  data-type="minus" data-field="'+inputID+'-age-'+i+'">'+
                                   '<span class="glyphicon glyphicon-minus"></span>'+
                                 '</button>'+
                             '</span>'+
 
-                            '<input type="text" name="age'+i+'" class="form-element input-number no-radius" value="0" min="0" max="10" />'+
+                            '<input type="text" id="age-'+i+'-'+inputID+'" name="'+inputID+'-age-'+i+'" class="form-element input-number no-radius" value="0" min="0" max="10" />'+
 
                             '<span class="input-group-btn">'+
-                                '<button type="button" class="btn btn-number" data-type="plus" data-field="age'+i+'">'+
+                                '<button type="button" class="btn btn-number" data-type="plus" data-field="'+inputID+'-age-'+i+'">'+
                                     '<span class="glyphicon glyphicon-plus"></span>'+
                                 '</button>'+
                             '</span>'+
@@ -391,11 +407,37 @@ $(document).on('change','.input-number',changeFieldVal);
 
   console.log($id);
 
-  document.getElementById($id).innerHTML = print;
-  }
+  document.getElementById($id).innerHTML = print;  }
 
   $(document).on('change','.children-no',addChildrenAge);
 </script>
+
+<script type="text/javascript">
+  $(document).on('click','.addmore',function(){
+    $(this).toggleClass('icon-minus')
+    $('.addmore-content').toggleClass('show');
+  })
+</script>
+
+
+<script type="text/javascript">
+  $(document).on('change','.package-prefference',function(){
+    
+    var currValue = $(this).val();
+
+    if(currValue == 2){
+        $('.category-option').addClass('hide');
+        $('.country-option').removeClass('hide');
+
+    } else{
+        $('.category-option').removeClass('hide');
+        $('.country-option').addClass('hide');
+    }
+
+  })
+</script>
+
+
 
 
 

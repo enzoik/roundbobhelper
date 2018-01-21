@@ -1,0 +1,11 @@
+<countriesList>
+  <div class="package-results">
+  <% if (!Response.isRequest) { %>
+    <% if (!Response.length) { %>
+      <h5>No Results</h5>
+    <% } %>
+  <% } else { %>
+    <center><img src="img/spinner.svg" style="width: 80px;"></center>
+  <% } %>
+  </div>
+</countriesList>

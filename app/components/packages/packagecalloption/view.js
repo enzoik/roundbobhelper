@@ -41,6 +41,7 @@ define(function(require, exports, module) {
 		
 		var client_phone = document.getElementById("clients_phone_numberpackage").value;
 		var client_name = document.getElementById("clients_namepackage").value;
+		var client_email = document.getElementById("clients_emailpackage1").value;
 		var current_url  = window.location.href.toString();
 		console.log("client_phone_"+client_phone+"client_name"+client_name);
 		//http://localhost/helperbob/dist/#flights/dd_ff_Economy/2017-09-17_2017-10-17_round_s/s/single/true_/calling/sen_to
@@ -97,7 +98,7 @@ define(function(require, exports, module) {
 					redirectTo += '/'+splitted[6];
 					//redirectTo += current_url.split("#flights")[1];
 					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";m_mail/m_client/name_email_email
-					redirectTo += '/m_mail/m_client/' + client_name+"_"+client_phone+"_call";
+					redirectTo += '/m_mail/m_client/'+client_name+"_"+client_phone+"-"+client_email+"_call";
 					console.log("call many",redirectTo);
 					console.log("mmmmm",url_.split('/')[3]);
 					app.router.go(redirectTo);	
@@ -117,7 +118,7 @@ define(function(require, exports, module) {
 					redirectTo += '/'+splitted[6];
 					redirectTo += '/'+splitted[7];
 					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";s_client/name_email_email
-					redirectTo += '/s_client/'+client_name+"_"+client_phone+"_call";
+					redirectTo += '/s_client/'+client_name+"_"+client_phone+"-"+client_email+"_call";
 					app.router.go(redirectTo);	
 				}
 

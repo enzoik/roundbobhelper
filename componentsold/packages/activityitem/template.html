@@ -1,0 +1,27 @@
+    <div class="col-md-4">      
+      <div class="package-item">
+        <div class="package-item-image">
+          <img src="<%= model.get("image_file") %>">
+        </div>
+  
+        <div class="package-item-detail">
+          <div class="package-item-name"><%= model.get("name") %></div>
+          <div class="package-item-location"><%= model.get("location") %></div>
+        </div>
+
+        <div class="package-item-price">
+          <div class="package-item-price-value">
+            <small>from</small>
+             <%= model.get("cost") %>
+          </div>
+
+       <!--   <div class="package-item-price-wallet-bar">
+            <div class="package-item-price-wallet-bar-meter"></div>
+            <div class="package-item-price-wallet-bar-text"><%= model.get("wallet_position") %> %. In wallet</div>
+          </div>-->
+
+        </div>
+      </div><!-- end package-item -->
+    </div>
+
+

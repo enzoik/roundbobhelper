@@ -62,7 +62,106 @@ define(function(require, exports, module) {
 		var current_url  = window.location.href.toString();	
 		var category_id = current_url.split("#activities")[1].split('/')[1].split("_")[0];
 		var country_id = current_url.split("#activities")[1].split('/')[1].split("_")[2];
-		var that = this;
+var that = this;
+		console.log("category_id",category_id);
+		console.log("country_id",country_id);
+		/*No sorters Given for categories so we search countries*/
+		if(category_id == 'All' ){
+			category_id="";
+			that.country_id="";
+			that.collections.packages.fetch({
+			type: "GET",
+			url:"https://beta.roundbob.com/public/api/v1/products.json?where[product_type_id]=2&where[country_id]="+country_id,
+			
+				data: {
+					//country_id: that.country_id,
+					/*"where[country_id]": category_id,
+					page:1,
+					start:0,
+					limit:50,*/
+					//callback:'jQuery110106543720210892339_1509692080823',
+					//_:'1509692080826'
+				},
+				error: function(model,resp) {
+				  that.collections.packages.trigger("fetchError");
+				  if(resp.status==404){
+					app.notifications.error404();
+				  }else{
+					app.notifications.errorUnknown();
+				  }
+				}
+			});
+		}
+		/*No sorters Given for countries so we search categories*/
+		if(country_id == 'All' ){
+			that.country_id="";
+			that.collections.packages.fetch({
+			type: "GET",
+			url:"https://beta.roundbob.com/public/api/v1/products.json?where[product_type_id]=2&where[product_category_id]="+category_id,
+			
+				data: {
+					/*"where[product_category_id]": category_id,
+					page:1,
+					start:0,
+					limit:50,*/
+				},
+				error: function(model,resp) {
+				  that.collections.packages.trigger("fetchError");
+				  if(resp.status==404){
+					app.notifications.error404();
+				  }else{
+					app.notifications.errorUnknown();
+				  }
+				}
+			});
+		}
+		/*
+		if(category_id == '5900186' ){
+			console.log("whattoshow","activities");
+			that.collections.packages.fetch({
+			type: "GET",
+				data: {
+					category: category_id,
+					page:1,
+					start:0,
+					limit:50,
+					//callback:'jQuery110106543720210892339_1509692080823',
+					//_:'1509692080826'
+				},
+				error: function(model,resp) {
+				  that.collections.packages.trigger("fetchError");
+				  if(resp.status==404){
+					app.notifications.error404();
+				  }else{
+					app.notifications.errorUnknown();
+				  }
+				}
+			});
+		}else{
+			console.log("whattoshow","packages");
+			that.collections.packages.fetch({
+			type: "GET",
+				data: {
+					country_id: that.country_id,
+					category: category_id,
+					page:1,
+					start:0,
+					limit:50,
+					//callback:'jQuery110106543720210892339_1509692080823',
+					//_:'1509692080826'
+				},
+				error: function(model,resp) {
+				  that.collections.packages.trigger("fetchError");
+				  if(resp.status==404){
+					app.notifications.error404();
+				  }else{
+					app.notifications.errorUnknown();
+				  }
+				}
+			});
+		}
+			
+		/*var that = this;
 		console.log("category_id",category_id);
 		if(category_id == 'All' ){
 			category_id="";
@@ -125,7 +224,7 @@ define(function(require, exports, module) {
 				  }
 				}
 			});
-		}
+		}*/
 		
 
     },

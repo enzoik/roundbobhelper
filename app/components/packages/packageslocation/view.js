@@ -11,7 +11,8 @@ define(function(require, exports, module,jqueryui) {
       FooterNav: require("../../common/footer/view"),
     },
     api: {
-      airports: 'app/api/airports/airports_autocomplete_search_service.php'
+    //  airports: 'app/api/airports/airports_autocomplete_search_service.php'
+      categoriesurl: 'app/api/raw/categories.json'
     },
     typingDelay: 500
   };
@@ -39,21 +40,22 @@ define(function(require, exports, module,jqueryui) {
            
 		jQuery.noConflict();
         $.ajax({
-            url: '//m.roundbob.com/API/roundbob_get_countries.php',
+           // url: '//m.roundbob.com/API/roundbob_get_countries.php',
+            url: '//beta.roundbob.com/public/api/v1/countries.json',
             type: 'get',
             data: {
 				user_id:"b34a758d762edb799b6c305e58d0ef06"
 				},
             dataType: 'jsonp',
             success:function(response){
-				console.log("respone",response.Response);
-                var len = response.Response.countries.length;
+				console.log("respone",response.countries);
+                var len = response.countries.length;
 					 $("#countries_id").empty();
                      $("#countries_id").append("<option value='All_all'>All</option>"); 
                 for( var i = 0; i<len; i++){
-                    var id = response.Response.countries[i].Country.id;
-                    var name = response.Response.countries[i].Country.name;
-					//console.log("countries_id",response.Response.countries[i].Country.name);
+                    var id = response.countries[i].iso;
+                    var name = response.countries[i].name;
+					console.log("countries_id",response.countries[i].iso);
 
                     $("#countries_id").append("<option value='"+id+"_"+name+"'>"+name+"</option>");
 
@@ -62,24 +64,26 @@ define(function(require, exports, module,jqueryui) {
         });
 		
         $.ajax({
-            url: '//m.roundbob.com/API/roundbob_get_categories.php',
-            type: 'get',
+           // url: Config.api.categoriesurl,
+            url: "//beta.roundbob.com/public/api/v1/product-categories.json",
+            type: 'GET',
             data: {
-				user_id:"b34a758d762edb799b6c305e58d0ef06"
+				//user_id:"b34a758d762edb799b6c305e58d0ef06"
 				},
             dataType: 'jsonp',
             success:function(response){
-				console.log("respone",response.Response);
-                var len = response.Response.categories.length;
-				console.log("countries",response.Response.categories);
+				console.log("respone");
+				console.log("respone",response.productCategories);
+                var len = response.productCategories.length;
+				console.log("countries",response.productCategories);
 			 $("#categories_id").empty();
 			$("#categories_id").append("<option value='All_all'>All</option>");	
                 for( var i = 0; i<len; i++){
-					console.log("category_id",response.Response.categories[i]);
-					if(typeof response.Response.categories[i].Category.name != "undefined"){
-						var id = response.Response.categories[i].Category.id;
-						var name = response.Response.categories[i].Category.name;
-						console.log("category_id",response.Response.categories[i]);
+					console.log("category_id",response.productCategories[i]);
+					if(typeof response.productCategories[i].name != "undefined"){
+						var id = response.productCategories[i].id;
+						var name = response.productCategories[i].name;
+						console.log("category_id",response.productCategories[i]);
 						
 						$("#categories_id").append("<option value='"+id+"_"+name+"'>"+name+"</option>");						
 					}
@@ -106,9 +110,19 @@ define(function(require, exports, module,jqueryui) {
 	continue_to_view_packages:function(e){
 		var country = $('select[name=countries_selector]').val();
 		var catvalue = $('select[name=categories_selector]').val();
+		var sort_by_coutries = document.getElementById("option-1");
+		var sort_by_category = document.getElementById("option-2");
+		console.log("catvalue",catvalue+"-"+country);
 		var redirectTo = '';
 		  redirectTo = '/surprise';
-		  redirectTo += '/'+catvalue+'_' + country;
+		if(sort_by_category.checked ){
+			redirectTo += '/'+catvalue+'_' + "All_all";
+		}else{
+			redirectTo += '/All_all_' + country;
+		}
+
+		 // redirectTo += '/'+catvalue+'_' + country;
+		 // redirectTo += '/'+catvalue+'_' + "All_all";
 		  app.router.go(redirectTo);
 	},
   });

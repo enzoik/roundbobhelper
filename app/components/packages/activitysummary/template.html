@@ -6,11 +6,12 @@
   <div class="container">
   <div class="col-md-6 col-md-offset-3">
 
-	<headernav></headernav>
+	<div class="row">
+     <headernav></headernav>
+  </div><!-- end row -->
 
     <div class="col-md-12">
-    <div class="row">
-
+      <div class="row">
 
     <div id="progress_metre_id" class="progress-metre row">
     <svg height="10" width="100%" style="background:#ccc;">
@@ -40,7 +41,7 @@
 
     </div><!-- end card-component -->
     </div><!-- end card-paper -->
-    </div>
+  </div><!-- end row -->
     </div><!-- end col-md-12 -->
   </div><!-- end col-md-6 -->
   </div><!-- end container -->
@@ -64,33 +65,33 @@
 
       <div class="seperator"></div>
 
-	  
-	  <table style="width:100%">
+      <div class="card-component">  
+        
+        <div class="col-md-12">
+          <div id="departure_date_id"  class="detail date"><span><i class="icon-calendar"></i> 12/10/2017</i></span></div>
+        </div> 
 
-		  <tr>
-			<td>        
-				<div class="col-md-12">
-					<div id="departure_date_id"  class="detail date"><span><i class="icon-calendar"></i> 12/10/2017</i></span></div>
-				</div>
-		</td>
-			<td>
-				<div class="col-md-12">
-				  <div id="return_date_id" class="detail date"><span><i class="icon-calendar"></i> 12/10/2017</i></span></div>
-				</div>
-			</td>
-		  </tr>
-		  <tr>
-			<td>Category</td>
-			<td class="detail" ><div id="destination_id" class="col-md-4">Kigali</div></td>
-		  </tr>
-		  <tr>
-			<td>Country</td>
-			<td class="detail" >
-			<div id = "departure_place_id" class="col-md-4">Kampala</div>
-			</td>
-		  </tr>
-		</table>
-	 <br/>  
+        <div class="detail"> 
+          <div id="departure_place_id" class="col-md-4">Kigali</div>
+          <div class="col-md-3"><i class="icon-right"></i></div>
+          <div id="destination_id" class="col-md-4">Kampala</div>
+        </div>
+
+      </div><!-- end card-component -->   
+
+
+      <div class="card-component">  
+        <div class="col-md-12">
+          <div id="return_date_id" class="detail date"><span><i class="icon-calendar"></i> 12/10/2017</i></span></div>
+        </div>   
+<!--
+        <div class="detail"> 
+          <div id="destination_id" class="col-md-4">Kampala</div>
+          <div class="col-md-3"><i class="icon-right"></i></div>
+          <div id="departure_place_id" class="col-md-4">Kigali</div>
+        </div>-->
+
+      </div><!-- end card-component --> <br/>  
 
 
       <div class="seperator"></div>
@@ -105,7 +106,24 @@
       </div><!-- end card-component -->
 
     </div><!-- end request-summary --><br/>
+    </div><!-- end card-paper -->
 
+    <div class="card-component">
+          <div class="col-md-6">
+            <div class="row">
+             <button class="addmore icon-plus">Add more information</button><br/>
+           </div><!-- end row -->
+          </div><!-- end col-md-6 -->
+    </div><!-- end card-component --><br/>
+
+    <div class="card-paper addmore-content hide">
+      <div class="card-content" style="padding: 30px 0;">
+
+          <form>
+            <textarea id="other_details_id" class="form-element">Enter additional Information here</textarea>
+          </form>
+
+    </div><!-- end card-content -->
 
     </div><!-- end card-paper -->
 

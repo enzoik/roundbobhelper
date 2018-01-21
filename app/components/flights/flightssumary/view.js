@@ -59,10 +59,10 @@ define(function(require, exports, module) {
 		}else if(media == "email"){
 			console.log("memem");
 			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
-			 email=current_url.split("#flights")[1].split("/")[9].split("_")[1];			
+			 email=current_url.split("#flights")[1].split("/")[9].split("_")[1].split("-")[0];			
 		}else if(media == "call"){
 			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
-			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1];			
+			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1].split("-")[1];			
 		}
 		
 		/*flight_type_id = flight_type;
@@ -92,7 +92,7 @@ define(function(require, exports, module) {
 		 $("#send_confirmation_id").attr("disabled","disabled");
 		 var redirectTo = '';
 		var current_url  = window.location.href.toString();
-		
+		var other_details = document.getElementById("other_details").value;
 		//kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
 		//http://localhost/roundbobhelperv1/dist/#flights/kampala_dubai_Economy/26-10-2017_31-10-2017_round_s/s/single/email/sdng_mail/p234/sent_to/patrick_p@gmail.com_email
 		//http://localhost/roundbobhelperv1/dist/#flights/kkk_jjjj_Economy/27-10-2017_31-10-2017_round_m/m/adlts_1_chldn_0_infnts_0/call/true_/m_mail/m_client/patrick_256702458965_call
@@ -115,10 +115,12 @@ define(function(require, exports, module) {
 		var adults="";
 		var infants ="";
 		var child="";
+		var parent_data ={};
 		var data_info = {};
 		data_info.DepartureDate = escape(departure_date).replace(/%20/g,'');
 		data_info.DeparturePlace = escape(coming_from).replace(/%20/g,'');
 		data_info.DestinationPlace = escape(coming_from).replace(/%20/g,'');
+		data_info.OtherDetails = escape(other_details).replace(/%20/g,'');
 
 		
 		
@@ -142,26 +144,36 @@ define(function(require, exports, module) {
 			console.log("memem");
 			get_response_via="watsapp";
 			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
-			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1];	
+			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1].split("-")[1];		
 			notification_summary="You will get response via your watsapp number "+	watsapp_no +"after request submission";	
 		}else if(media == "email"){
 			console.log("memem");
 			get_response_via="email";
 			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
-			 email=current_url.split("#flights")[1].split("/")[9].split("_")[1];	
+			 email=current_url.split("#flights")[1].split("/")[9].split("_")[1].split("-")[0];		
 			notification_summary="You will get response via your Email "+	email +"after request submission";
 		}else if(media == "call"){
 			get_response_via="phone";
 			 name=current_url.split("#flights")[1].split("/")[9].split("_")[0];
-			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1];	
+			 phone=current_url.split("#flights")[1].split("/")[9].split("_")[1].split("-")[1];	
 			notification_summary="You will receive a call on your phone number "+	phone +"after request submission";		
 		}
 		var jsonString= JSON.stringify(data_info);
+		/*parent_data.email =escape(email).replace(/%20/g,'');
+		parent_data.phone =escape(phone).replace(/%20/g,'') ;
+		parent_data.name =escape(name).replace(/%20/g,'') ;
+		parent_data.request_type = "FLIGHT";
+		parent_data.adults = adults;
+		parent_data.children = child;
+		parent_data.infants = infants;
+		parent_data.respond_via = get_response_via;
+		parent_data.meta_data = jsonString;
+		var jsondata= JSON.stringify(parent_data);
 		console.log(current_url.split("#flights")[1].split("/")[9]);
 		console.log("adults", current_url.split("#flights")[1].split("/")[4].split("_")[1]);
 		console.log("media","media "+media+" name "+current_url.split("#flights")[1].split("/")[9].split("_")[0]+" email "+email+" phone "+ phone+"adults"+adults+"children"+child+"infants"+infants);
 		console.log("media",jsonString);
-		console.log("media",get_response_via);
+		console.log("media",get_response_via);*/
 			swal({
 			  title: 'confirmation',
 			  text: ""+notification_summary,
@@ -177,10 +189,11 @@ define(function(require, exports, module) {
 			}).then(function () {
 				$("#send_confirmation_id").attr("disabled","disabled");
 				$.ajax({
-					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					//url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',
+					url: '//beta.roundbob.com/public/api/v1/custom-requests/add.json',
 					headers: { "Accept-Encoding" : "gzip" },
 					type: 'POST',
-					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error
+					dataType: 'jsonp',//be sure you are receiving a valid json response or you'll get an error
 					data: jQuery.param({
 						email: escape(email).replace(/%20/g,''),
 						phone : escape(phone).replace(/%20/g,'') ,
@@ -203,17 +216,24 @@ define(function(require, exports, module) {
 							  showConfirmButton: false,
 							  timer: 1500
 							});
+					app.router.go(redirectTo);
 				})
 				.fail(function() {
 						console.log("error");
-						/*swal(
-						  'Failed',
-						  'Your request has not been sent!',
-						  'error'
-						);*/
+						$("#send_confirmation_id2").removeAttr("disabled");
+					$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="100%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">100%</span>');
+					
+					console.log("complete");
+							swal({
+							  position: 'center',
+							  type: 'error',
+							  title: 'Check your internet connection and try again',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
 				})
 				.always(function() {
-					$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="100%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">100%</span>');
+					/*$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="100%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">100%</span>');
 					
 					console.log("complete");
 							swal({
@@ -222,8 +242,8 @@ define(function(require, exports, module) {
 							  title: 'Your Request has been sent successfully',
 							  showConfirmButton: false,
 							  timer: 1500
-							});
-					app.router.go(redirectTo);
+							});*/
+					
 				});
 
 			}, function (dismiss) {

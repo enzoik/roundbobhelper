@@ -56,32 +56,71 @@ define(function(require, exports, module) {
     },
 
     afterRender: function(){
-		//this.collections.packages.url = 
-		//http://localhost/roundbobhelperv1/dist/#surprise/c746/5900186
-		//http://localhost/roundbobhelperv1/dist/#surprise/5900165_Honeymoon_1_Uganda/2017-12-20_2017-12-20_round_s/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/mydetails/results/packages
+		
 		var current_url  = window.location.href.toString();	
 		var category_id = current_url.split("#surprise")[1].split('/')[1].split("_")[0];
 		var country_id = current_url.split("#surprise")[1].split('/')[1].split("_")[2];
 		var that = this;
 		console.log("category_id",category_id);
+		console.log("country_id",country_id);
+		/*No sorters Given for categories so we search countries*/
 		if(category_id == 'All' ){
 			category_id="";
+			//that.country_id="";
+			that.collections.packages.fetch({
+			type: "GET",
+			url:"https://beta.roundbob.com/public/api/v1/products.json?where[product_type_id]=1&where[country_id]="+country_id,
+			
+			data: {
+					/*"where[country_id]": category_id,
+					page:1,
+					start:0,
+					limit:50,*/
+					//callback:'jQuery110106543720210892339_1509692080823',
+					//_:'1509692080826'
+				},
+				error: function(model,resp) {
+				  that.collections.packages.trigger("fetchError");
+				  if(resp.status==404){
+					app.notifications.error404();
+				  }else{
+					app.notifications.errorUnknown();
+				  }
+				}
+			});
 		}
+		/*No sorters Given for countries so we search categories*/
 		if(country_id == 'All' ){
 			that.country_id="";
+			that.collections.packages.fetch({
+			type: "GET",
+			url:"https://beta.roundbob.com/public/api/v1/products.json?where[product_type_id]=1&where[product_category_id]="+category_id,
+			
+				data: {
+					//country_id: that.country_id,
+					/*"where[product_category_id]": category_id,
+					page:1,
+					start:0,
+					limit:50,*/
+					//callback:'jQuery110106543720210892339_1509692080823',
+					//_:'1509692080826'
+				},
+				error: function(model,resp) {
+				  that.collections.packages.trigger("fetchError");
+				  if(resp.status==404){
+					app.notifications.error404();
+				  }else{
+					app.notifications.errorUnknown();
+				  }
+				}
+			});
 		}
-		if(category_id == '5900186' ){
+		/*if(category_id == '5900186' ){
 			console.log("whattoshow","activities");
 			that.collections.packages.fetch({
 			type: "GET",
 				data: {
 					category: category_id,
-					keyword: '',
-					subcategory: '',
-					key:'destinations',
-					user_id:'eb94fb88074d11c2e1561653b07fd914',
-					un:'pkanyerezi',
-					pw:'210013634',
 					page:1,
 					start:0,
 					limit:50,
@@ -104,12 +143,6 @@ define(function(require, exports, module) {
 				data: {
 					country_id: that.country_id,
 					category: category_id,
-					keyword: '',
-					subcategory: '',
-					key:'destinations',
-					user_id:'eb94fb88074d11c2e1561653b07fd914',
-					un:'pkanyerezi',
-					pw:'210013634',
 					page:1,
 					start:0,
 					limit:50,
@@ -125,7 +158,7 @@ define(function(require, exports, module) {
 				  }
 				}
 			});
-		}
+		}*/
 		
 
     },

@@ -25,9 +25,9 @@ define(function(require, exports, module) {
 		$('#go_forward_btn').show();
 		if(localStorage.getItem('my_user_details')){
 			var retrieveduserdetails = JSON.parse(localStorage.getItem('my_user_details'));
-			$('#clients_namepackage').val(retrieveduserdetails.name);
-			//$('#clients_email').val(retrieveduserdetails.email);
-			$('#clients_phone_numberpackage').val(retrieveduserdetails.watsapp);
+			$('#clients_namepackage1').val(retrieveduserdetails.name);
+			$('#clients_emailpackage1').val(retrieveduserdetails.email);
+			$('#clients_phone_numberpackage1').val(retrieveduserdetails.watsapp);
 		}else{
 			console.log("Not Found",'Not defined');
 		}
@@ -39,8 +39,9 @@ define(function(require, exports, module) {
 	submit_call:function(){
 
 		
-		var client_phone = document.getElementById("clients_phone_numberpackage").value;
-		var client_name = document.getElementById("clients_namepackage").value;
+		var client_phone = document.getElementById("clients_phone_numberpackage5").value;
+		var client_name = document.getElementById("clients_namepackage5").value;
+		var client_email = document.getElementById("clients_emailpackage5").value;
 		var current_url  = window.location.href.toString();
 		console.log("client_phone_"+client_phone+"client_name"+client_name);
 		//http://localhost/helperbob/dist/#flights/dd_ff_Economy/2017-09-17_2017-10-17_round_s/s/single/true_/calling/sen_to
@@ -72,7 +73,7 @@ define(function(require, exports, module) {
 			  'error'
 			);			
 		}else{
-				var user_details = { 'name':client_name , 'email': "", 'watsapp':client_phone };
+				var user_details = { 'name':client_name , 'email': client_email, 'watsapp':client_phone };
 				localStorage.setItem('my_user_details', JSON.stringify(user_details));	
 				//var current_url  = window.location.href.toString();
 				console.log(current_url.split("#activities")[1]);
@@ -97,7 +98,7 @@ define(function(require, exports, module) {
 					redirectTo += '/'+splitted[6];
 					//redirectTo += current_url.split("#flights")[1];
 					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";m_mail/m_client/name_email_email
-					redirectTo += '/m_mail/m_client/' + client_name+"_"+client_phone+"_call";
+					redirectTo += '/m_mail/m_client/'+client_name+"_"+client_phone+"-"+client_email+"_call";
 					console.log("call many",redirectTo);
 					console.log("mmmmm",url_.split('/')[3]);
 					app.router.go(redirectTo);	
@@ -117,7 +118,7 @@ define(function(require, exports, module) {
 					redirectTo += '/'+splitted[6];
 					redirectTo += '/'+splitted[7];
 					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";s_client/name_email_email
-					redirectTo += '/s_client/'+client_name+"_"+client_phone+"_call";
+					redirectTo += '/s_client/'+client_name+"_"+client_phone+"-"+client_email+"_call";
 					app.router.go(redirectTo);	
 				}
 

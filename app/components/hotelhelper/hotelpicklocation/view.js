@@ -34,6 +34,10 @@ define(function(require, exports, module) {
     },
 	hotel_destination: function(el){
 		var hotel_search = document.getElementById('hotel_destination').value.trim();
+		if(hotel_search.length > 3){
+		$('.hotels-loading').html("Searching...");	
+		}
+		
 		 jQuery.noConflict();
 		 $("#hotel_destination").autocomplete({
 			source: function (request, response) {
@@ -41,6 +45,7 @@ define(function(require, exports, module) {
 				 Config.api.cities + '?q='+hotel_search,
 				function (data) {
 				// response(data);
+				$('.hotels-loading').empty();
 					response( $.map( data, function( item ) {
 					  return {
 						label: item.desc,
@@ -65,13 +70,16 @@ define(function(require, exports, module) {
 			 return false;
 			},
 			search: function () {
+			$('.hotels-loading').html("Searching...");
 			 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
 			},
 			open: function () {
+			$('.hotels-loading').html("Searching...");
 			 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
 			},
 			close: function () {
 			 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+			 $('.hotels-loading').empty();
 			}
 
 

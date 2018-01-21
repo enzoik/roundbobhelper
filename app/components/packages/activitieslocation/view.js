@@ -11,7 +11,8 @@ define(function(require, exports, module,jqueryui) {
       FooterNav: require("../../common/footer/view"),
     },
     api: {
-      airports: 'app/api/airports/airports_autocomplete_search_service.php'
+    //  airports: 'app/api/airports/airports_autocomplete_search_service.php'
+      categoriesurl: 'app/api/raw/categories.json'
     },
     typingDelay: 500
   };
@@ -34,7 +35,9 @@ define(function(require, exports, module,jqueryui) {
 		$('#go_forward_btn').show();
 		$('#menu-icon-id').show();
 		
-	
+		
+
+           
 		jQuery.noConflict();
         $.ajax({
             url: '//m.roundbob.com/API/roundbob_get_countries.php',
@@ -44,16 +47,15 @@ define(function(require, exports, module,jqueryui) {
 				},
             dataType: 'jsonp',
             success:function(response){
-
+				console.log("respone",response.Response);
                 var len = response.Response.countries.length;
- 		
-				$("#countries_id_activities").empty(); 
-			   $("#countries_id_activities").append("<option value='All_all'>All</option>");
+					 $("#countries_id_activities").empty();
+                     $("#countries_id_activities").append("<option value='All_all'>All</option>"); 
                 for( var i = 0; i<len; i++){
                     var id = response.Response.countries[i].Country.id;
                     var name = response.Response.countries[i].Country.name;
 					//console.log("countries_id",response.Response.countries[i].Country.name);
-                    
+
                     $("#countries_id_activities").append("<option value='"+id+"_"+name+"'>"+name+"</option>");
 
                 }
@@ -61,33 +63,33 @@ define(function(require, exports, module,jqueryui) {
         });
 		
         $.ajax({
-            url: '//m.roundbob.com/API/roundbob_get_categories.php',
+           // url: Config.api.categoriesurl,
+            url: "http://localhost/roundbobhelperv1/app/api/raw/categories.php",
             type: 'get',
             data: {
-				user_id:"b34a758d762edb799b6c305e58d0ef06"
+				//user_id:"b34a758d762edb799b6c305e58d0ef06"
 				},
-            dataType: 'jsonp',
+            dataType: 'json',
             success:function(response){
-
-                var len = response.Response.categories.length;
-				console.log("countries",response.Response.categories);
-				 $("#categories_id_activities").empty();
-			   $("#categories_id_activities").append("<option value='All_all'>All</option>");	
+				console.log("respone");
+				console.log("respone",response.productCategories);
+                var len = response.productCategories.length;
+				console.log("countries",response.productCategories);
+			 $("#categories_id_activities").empty();
+			$("#categories_id_activities").append("<option value='All_all'>All</option>");	
                 for( var i = 0; i<len; i++){
-					console.log("category_id_activities",response.Response.categories[i]);
-					if(typeof response.Response.categories[i].Category.name != "undefined"){
-						/*var id = "5900186";
-						var name = "Activities";*/
-						//5900186_Activities
-						var id = response.Response.categories[i].Category.id;
-						var name = response.Response.categories[i].Category.name;
-						console.log("category_id_activities",response.Response.categories[i]);
+					console.log("category_id",response.productCategories[i]);
+					if(typeof response.productCategories[i].name != "undefined"){
+						var id = response.productCategories[i].id;
+						var name = response.productCategories[i].name;
+						console.log("category_id",response.productCategories[i]);
 						
 						$("#categories_id_activities").append("<option value='"+id+"_"+name+"'>"+name+"</option>");						
 					}
 
 
                 }
+				
             }
         });
    
@@ -106,12 +108,21 @@ define(function(require, exports, module,jqueryui) {
 
 	continue_to_view_activities:function(e){
 		console.log("continue_to_view_activities");
-		var country = $('select[name=countries_selector]').val();
+		/*var country = $('select[name=countries_selector]').val();
 		//var catvalue = $('select[name=categories_selector]').val();
 		var catvalue = "5900186_Activities";
 		var redirectTo = '';
 		  redirectTo = '/activities';
 		  redirectTo += '/'+catvalue+'_' + country;
+		  app.router.go(redirectTo);*/
+		  
+		var country = $('select[name=countries_selector]').val();
+		var catvalue = $('select[name=categories_selector]').val();
+		//console.log("catvalue",catvalue);
+		var redirectTo = '';
+		  redirectTo = '/activities';
+		  //redirectTo += '/'+catvalue+'_' + country;
+		  redirectTo += '/'+catvalue+'_' + "All_all";
 		  app.router.go(redirectTo);
 	},
   });

@@ -20,11 +20,15 @@ define(function(require, exports, module) {
       "footernav": new Config.Views.FooterNav(),
     },
 	afterRender : function() {
+		/*$('#go_backward_btn').show();
+		$('#go_forward_btn').show();
+		$('#return-flight-card').hide();
+		$('input[name=mdl-switch-input1]').attr('checked', false);*/
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').show();
 		$('#return-flight-card').hide();
-		$('input[name=mdl-switch-input1]').attr('checked', false);
-
+		$('#return_date_id').hide();
+		$('input[name=mdl-switch-input1]').attr('checked', true);
 	},
 	events: {
       'click .multiplepeopleGetDateactivity' : 'multiplepeopleGetDate',
@@ -91,7 +95,8 @@ define(function(require, exports, module) {
 					travel_trip="oneway";
 
 			}else{
-				travel_trip="round";
+				//travel_trip="round";
+				travel_trip="oneway";
 			}
 		if(departure_date === null || departure_date === undefined || departure_date === ""){
 			swal(
@@ -107,34 +112,6 @@ define(function(require, exports, module) {
 				  'error'
 				);
 			}*/				
-		}else if(roundtrip.checked && return_date === null){
-			travel_trip="round";
-			console.log("xxx");
-				swal(
-				  'Empty',
-				  'Return Date Field Should not Be Left Empty!',
-				  'error'
-				);
-
-		}else if(roundtrip.checked && return_date === undefined){
-			travel_trip="round";
-			console.log("xxx");
-				swal(
-				  'Empty',
-				  'Return Date Field Should not Be Left Empty!',
-				  'error'
-				);
-
-		}else if(roundtrip.checked && return_date === ""){
-			travel_trip="round";
-			console.log("xxx");
-				swal(
-				  'Empty',
-				  'Return Date Field Should not Be Left Empty!',
-				  'error'
-				);
-				//}
-	
 		}else{
 			var current_url  = window.location.href.toString();
 		//	console.log("multiple "+departure_date+" return "+return_date+"trip type"+travel_trip+"current_url"+current_url);
@@ -180,7 +157,8 @@ define(function(require, exports, module) {
 		if(!roundtrip.checked){
 			travel_trip="oneway";
 		}else{
-			travel_trip="round";
+			//travel_trip="round";
+			travel_trip="oneway";
 		}
 		if(departure_date === null || departure_date === undefined || departure_date === ""){
 			swal(
@@ -194,29 +172,6 @@ define(function(require, exports, module) {
 			  'Return Date Field Should not Be Left Empty',
 			  'error'
 			);	*/			
-		}else if(roundtrip.checked && return_date === null){
-			swal(
-			  'Empty',
-			  'Return Date Field Should not Be Left Empty!',
-			  'error'
-			);
-		}else if(roundtrip.checked && return_date === undefined){
-			swal(
-			  'Empty',
-			  'Return Date Field Should not Be Left Empty!',
-			  'error'
-			);
-
-		}else if(roundtrip.checked && return_date === ""){
-				travel_trip="round";
-				//if(return_date === null || return_date === undefined || return_date === "" ){
-					swal(
-					  'Empty',
-					  'Return Date Field Should not Be Left Empty!',
-					  'error'
-					);
-				//}
-
 		}else{
 			var current_url  = window.location.href.toString();
 			var splitted = current_url.split("#activities")[1].split("/");

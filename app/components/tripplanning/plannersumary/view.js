@@ -34,9 +34,10 @@ define(function(require, exports, module) {
 		 var check_in_date = current_url.split("#planner")[1].split("/")[2].split("_")[0];
 		 var check_out_date = current_url.split("#planner")[1].split("/")[2].split("_")[1];
 		 var number_of_people ="";
-		 var no_ = current_url.split("#planner")[1].split("/")[3];
-		 var media = current_url.split("#planner")[1].split("/")[5];
-		 var client_summary = current_url.split("#planner")[1].split("/")[9];
+		 var no_ = current_url.split("#planner")[1].split("/")[4];
+		 var media = current_url.split("#planner")[1].split("/")[6];
+		 var client_summary = current_url.split("#planner")[1].split("/")[10];
+		 var trip_details = current_url.split("#planner")[1].split("/")[5];
 		var name=client_summary.split("_")[0];
 		var email=client_summary.split("_")[1];
 		var phone ="";
@@ -47,14 +48,16 @@ define(function(require, exports, module) {
 		 if(no_ == "s"){
 			  number_of_people = "people: 1 adults , 0 child, 0 infants";
 		 }else if(no_ == "m"){
-			adults = current_url.split("#planner")[1].split("/")[4].split("_")[1];
-			child = current_url.split("#planner")[1].split("/")[4].split("_")[3];
-			infants = current_url.split("#planner")[1].split("/")[4].split("_")[5];
+			adults = current_url.split("#planner")[1].split("/")[5].split("_")[1];
+			child = current_url.split("#planner")[1].split("/")[5].split("_")[3];
+			infants = current_url.split("#planner")[1].split("/")[5].split("_")[5];
 			number_of_people = "people: "+adults+" adults , "+child+"child, "+infants+" infants";		 
 		 }else if(media != "email"){
 			 phone=client_summary.split("_")[1];
 		 }
-		 console.log("destination "+destination+" check_in_date "+check_in_date+" check_out_date "+ check_out_date+" number_of_people "+number_of_people);
+		// console.log("people",current_url.split("#planner")[1].split("/")[5]);
+		// console.log("people",current_url.split("#planner")[1].split("/")[3]);
+		// console.log("people","destination "+destination+" check_in_date "+check_in_date+" check_out_date "+ check_out_date+" number_of_people "+number_of_people);
 		// $('#check_in_date').text(check_in_date);
 		 $('#check_in_date').html('<span><i class="icon-calendar"></i>'+ check_in_date.replace(/%20/g,'')+'</i></span>');
 		 $('#check_out_date').html('<span><i class="icon-calendar"></i>'+ check_out_date.replace(/%20/g,'')+'</i></span>');
@@ -77,11 +80,12 @@ define(function(require, exports, module) {
 		 var check_in_date = current_url.split("#planner")[1].split("/")[2].split("_")[0];
 		 var check_out_date = current_url.split("#planner")[1].split("/")[2].split("_")[1];
 		 var number_of_people ="";
-		 var no_ = current_url.split("#planner")[1].split("/")[3];
+		 var no_ = current_url.split("#planner")[1].split("/")[4];
 		 var divisar =current_url.split("#planner")[1].split("/");
 		 
 		 var media = current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[2];
-		 var client_summary = current_url.split("#planner")[1].split("/")[9];
+		 var client_summary = current_url.split("#planner")[1].split("/")[10];
+		 var trip_details = current_url.split("#planner")[1].split("/")[5];
 		var name=client_summary.split("_")[0];
 		var email="";
 		var notification_summary="";
@@ -95,15 +99,16 @@ define(function(require, exports, module) {
 		data_info.CheckInDate = escape(check_in_date).replace(/%20/g,'');
 		data_info.CheckOutDate = escape(check_out_date).replace(/%20/g,'');
 		data_info.Destination = escape(destination).replace(/%20/g,'');
+		data_info.RequestDetails = trip_details;
 		//console.log("media",current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1]);
 		 console.log("media",media+"="+current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1]);
 		 console.log("length",media+"="+current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[2].length);
 		 if(no_ == "s"){
 			  number_of_people = "people: 1 adults , 0 child, 0 infants";
 		 }else if(no_ == "m"){
-			adults = current_url.split("#planner")[1].split("/")[4].split("_")[1];
-			child = current_url.split("#planner")[1].split("/")[4].split("_")[3];
-			infants = current_url.split("#planner")[1].split("/")[4].split("_")[5];
+			adults = current_url.split("#planner")[1].split("/")[5].split("_")[1];
+			child = current_url.split("#planner")[1].split("/")[5].split("_")[3];
+			infants = current_url.split("#planner")[1].split("/")[5].split("_")[5];
 			number_of_people = "people: "+adults+" adults , "+child+"child, "+infants+" infants";		 
 		 }
 		 if(media === "email"){
@@ -140,7 +145,8 @@ define(function(require, exports, module) {
 			}).then(function () {
 				$("#send_confirmation_id2").attr("disabled","disabled");
 				$.ajax({
-					url: '//customrequests.roundbob.com/public-api/custom-requests/add.json',
+					//url: '//customrequests.roundbob.com/public-api/custom-requests/add.json',
+					url: '//beta.roundbob.com/public/api/v1/custom-requests/add.json',
 					headers: { "Accept-Encoding" : "gzip" },
 					type: 'POST',
 					dataType: 'json',//be sure you are receiving a valid json response or you'll get an error
@@ -157,7 +163,6 @@ define(function(require, exports, module) {
 						}) ,
 				})
 				.done(function(response) {
-					console.log("success");
 					console.log(response);
 							swal({
 							  position: 'center',
@@ -166,17 +171,24 @@ define(function(require, exports, module) {
 							  showConfirmButton: false,
 							  timer: 1500
 							});
+					app.router.go(redirectTo);
 				})
 				.fail(function() {
 						console.log("error");
-						/*swal(
-						  'Failed',
-						  'Your request has not been sent!',
-						  'error'
-						);*/
+						$("#send_confirmation_id2").removeAttr("disabled");
+					$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="100%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">100%</span>');
+					
+					console.log("complete");
+							swal({
+							  position: 'center',
+							  type: 'error',
+							  title: 'Check your internet connection and try again',
+							  showConfirmButton: false,
+							  timer: 1500
+							});
 				})
 				.always(function() {
-					$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="100%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">100%</span>');
+					/*$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="100%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">100%</span>');
 					
 					console.log("complete");
 							swal({
@@ -185,8 +197,8 @@ define(function(require, exports, module) {
 							  title: 'Your Request has been sent successfully',
 							  showConfirmButton: false,
 							  timer: 1500
-							});
-					app.router.go(redirectTo);
+							});*/
+					
 				});
 				/*$.ajax({
 					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',

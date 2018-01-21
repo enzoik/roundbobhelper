@@ -28,6 +28,7 @@ define(function(require, exports, module) {
 			var retrieveduserdetails = JSON.parse(localStorage.getItem('my_user_details'));
 			$('#clients_name').val(retrieveduserdetails.name);
 			$('#clients_phone_number').val(retrieveduserdetails.watsapp);
+			$('#clients_email').val(retrieveduserdetails.email);
 			//$('#client_watsapp_no_hotel').val(retrieveduserdetails.watsapp);
 		}else{
 			console.log("Not Found",'Not defined');
@@ -39,11 +40,13 @@ define(function(require, exports, module) {
     },
 	submit_call_details:function(){
 		var clients_name = document.getElementById("clients_name").value;
+		var clients_email = document.getElementById("clients_email").value;
 		var clients_phone_number = document.getElementById("clients_phone_number").value;
 		console.log("clients_name "+clients_name+" clients_phone_number "+clients_phone_number);
 		var current_url  = window.location.href.toString();
 		var no_ = current_url.split("#picklocation")[1].split("/")[3];
 		 var regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		console.log("people",no_);
 		console.log("people",current_url.split("#picklocation")[1]);
 		if(clients_name === null || clients_name === undefined || clients_name === ""){
@@ -65,8 +68,14 @@ define(function(require, exports, module) {
 			  'Requires an international format for a phone number',
 			  'error'
 			);			
+		}else if( !filter.test(clients_email) ){
+			swal(
+			  'Not Valid',
+			  'Provide a valid email e.g bob@roundbob.com',
+			  'error'
+			);		
 		}else{
-			var user_details = { 'name':clients_name , 'email': "", 'watsapp':clients_phone_number };
+			var user_details = { 'name':clients_name , 'email': clients_email, 'watsapp':clients_phone_number };
 			localStorage.setItem('my_user_details', JSON.stringify(user_details));
 			var redirectTo = '/picklocation';
 			var splitted = current_url.split("#picklocation")[1].split("/");
@@ -77,7 +86,7 @@ define(function(require, exports, module) {
 					redirectTo += '/'+splitted[3];
 					redirectTo += '/'+splitted[4]+'/call/true_';
 					//redirectTo += '/' + client_name+"/"+client_phone+"/summary_call";m_mail/m_client/name_email_email
-					redirectTo += '/m_call/m_code/m_send_to/' + clients_name+"_"+clients_phone_number+"_call";
+					redirectTo += '/m_call/m_code/m_send_to/' + clients_name+"_"+clients_email+"-"+clients_phone_number+"_call";
 					console.log("call many",redirectTo);
 					//console.log("mmmmm",url_.split('/')[3]);				
 			}else{
@@ -87,7 +96,7 @@ define(function(require, exports, module) {
 					redirectTo += '/'+splitted[2];
 					redirectTo += '/'+splitted[3];
 					redirectTo += '/'+splitted[4]+'/true_/calling/sen_to';
-					redirectTo += '/m_code/m_send_to/' + clients_name+"_"+clients_phone_number+"_call";
+					redirectTo += '/m_code/m_send_to/' + clients_name+"_"+clients_email+"-"+clients_phone_number+"_call";
 					//console.log("call many",redirectTo);
 					//console.log("mmmmm",url_.split('/')[3]);				
 			}

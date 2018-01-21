@@ -50,62 +50,50 @@ define(function(require, exports, module) {
 		var media ="email";
 		var stored_email = clients_email;
 		if(send_by_watsap.checked){
-			clients_email  = client_watsapp;
+			//clients_email  = client_watsapp;
 			media = "watsapp";
 		}
 		
-	if(send_by_watsap.checked && regex.test(client_watsapp)){
+	if( regex.test(client_watsapp)){
 			swal(
 			  'Invalid',
 			  'Requires an international format for a phone number',
 			  'error'
 			);			
 		}
-		if(send_by_watsap.checked && client_watsapp === null){
+		if( client_watsapp === null){
 							swal(
 					  'Empty',
 					  ' Whatsapp No. Field Should not Be Left Empty',
 					  'error'
 					);
-		}else if(send_by_watsap.checked && client_watsapp === ""){
+		}else if(client_watsapp === ""){
 					swal(
 					  'Empty',
 					  ' Whatsapp No. Field Should not Be Left Empty',
 					  'error'
 					);
 		//}else if(send_by_watsap.checked && phone_filter.test(client_watsapp) && client_watsapp.length < 6 && client_watsapp.length > 12){
-		}else if(send_by_watsap.checked && client_watsapp.match(/^[0-9\s(-)]*$/) && client_watsapp.length < 6 && client_watsapp.length > 12){
+		}else if(client_watsapp.match(/^[0-9\s(-)]*$/) && client_watsapp.length < 6 && client_watsapp.length > 12){
 					swal(
 					  'Empty',
 					  'Provide a valid watsapp number',
 					  'error'
 					);					
 				
-		}else if(client_name === null  && send_by_email.checked ){
+		}else if(client_name === null ){
 			swal(
 			  'Empty',
 			  ' Name Field Should not Be Left Empty',
 			  'error'
 			);
-		}else if(client_name === ""  && send_by_email.checked ){
-			swal(
-			  'Empty',
-			  ' Name Field Should not Be Left Empty',
-			  'error'
-			);
-		}else if(clients_email === ""  && send_by_email.checked ){
+		}else if(clients_email === null ){
 			swal(
 			  'Empty',
 			  'Email Field Should not Be Left Empty',
 			  'error'
 			);			
-		}else if(clients_email === null  && send_by_email.checked ){
-			swal(
-			  'Empty',
-			  'Email Field Should not Be Left Empty',
-			  'error'
-			);			
-		}else if(!filter.test(clients_email) && send_by_email.checked ){
+		}else if(!filter.test(clients_email)){
 			swal(
 			  'Not Valid',
 			  'Provide a valid email e.g bob@roundbob.com',
@@ -126,14 +114,14 @@ define(function(require, exports, module) {
 				redirectTo += '/'+splitted[3];
 				redirectTo += '/'+splitted[4];
 				redirectTo += '/'+splitted[5];
-				redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+clients_email+"_"+media;
+				redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+clients_email+"-"+client_watsapp+"_"+media;
 				console.log("email multiple",redirectTo);
 				console.log("mmmmm",url_.split('/')[3]);
 			}else{
 				redirectTo += '/'+splitted[1];
 				redirectTo += '/'+splitted[2];
 				redirectTo += '/s/single/email/sdng_mail/p234/sent_to';
-				redirectTo += '/' + client_name+"_"+clients_email+"_"+media;
+				redirectTo += '/' + client_name+"_"+clients_email+"-"+client_watsapp+"_"+media;
 				//name_email_email
 				console.log("email single",redirectTo);
 				console.log("mmmmm",url_.split('/')[3]);
