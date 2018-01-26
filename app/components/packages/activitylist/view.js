@@ -17,7 +17,6 @@ define(function(require, exports, module) {
 
     beforeRender: function() {
 		
-		console.log("Packages","ListViewBeforeRender");
 //123ReservationsRB!@#
       var filters = this.collection.filters;
 	 // console.log("before check data");
@@ -32,12 +31,14 @@ define(function(require, exports, module) {
 
       if(this.collection.length){
 		var current_url  = window.location.href.toString();	
-		var category_id = current_url.split("#activities")[1].split('/')[2];
+		if(current_url.split("#activities")[1]){
+			var category_id = current_url.split("#activities")[1].split('/')[2];
 
-		if(category_id == '5900186' ){
-			$('.search-query-result').html(this.collection.length + " Activities found");
-		}else{
-			$('.search-query-result').html(this.collection.length + " packages found");	
+			if(category_id == '5900186' ){
+				$('.search-query-result').html(this.collection.length + " Activities found");
+			}else{
+				$('.search-query-result').html(this.collection.length + " packages found");	
+			}
 		}
       }
     },

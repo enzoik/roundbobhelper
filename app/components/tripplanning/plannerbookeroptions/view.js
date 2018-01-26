@@ -32,26 +32,30 @@ define(function(require, exports, module) {
 	},
 	email_quotation_hotel:function(ev){
 		console.log("emailing");
+		//http://localhost/roundbobhelperv1/dist/#planner/kampala/2018-01-29_2018-01-31_s/maan
 		var current_url  = window.location.href.toString();
-		console.log(current_url.split("#planner")[1]);
+		
 		var url_ = current_url.split("#planner")[1];
 		var splitted = current_url.split("#planner")[1].split("/");
 		var redirectTo = '/planner';
-		if(url_.split('/')[3] == "m"){
+		console.log("checkx",url_.split('/')[2].split("_")[2]);
+		//2018-01-29_2018-01-31_s
+		if(url_.split('/')[2].split("_")[2] == "m"){
 			console.log("many travellers");
 			//redirectTo += current_url.split("#picklocation")[1];
 			redirectTo += '/'+splitted[1];
 			redirectTo += '/'+splitted[2];
 			redirectTo += '/'+splitted[3];
 			redirectTo += '/'+splitted[4];
-			redirectTo += '/' + "email";
+			redirectTo += '/' + "check/email";
 			console.log("multiple",redirectTo);
 			console.log("mmmmm",url_.split('/')[3]);
 		}else{
 //http://localhost/roundbobhelperv1/dist/#picklocation/kamp/15-11-2017_30-11-2017_s/s/single/email/sdng_mail/p234/sent_to
 			redirectTo += '/'+splitted[1];
 			redirectTo += '/'+splitted[2];
-			redirectTo += '/' + "s/single/email/sdng_mail/p234/sent_to";
+			redirectTo += '/'+url_.split('/')[3];
+			redirectTo += '/' + "s/single/email/p234/check/sent_to";
 			console.log("single",redirectTo);
 			console.log("mmmmm",url_.split('/')[3]);
 		}

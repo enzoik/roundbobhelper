@@ -23,7 +23,7 @@ define(function(require, exports, module) {
 
       // Make the image links protocol friendly if they are not HTTPS
      // this.model.set("thumb", this.model.get("thumb").replace("http:",""));
-	 console.log("object",this.model.attributes);
+	 //console.log("object",this.model.attributes);
 	 var wallet_percentage =(parseFloat(this.model.attributes.display_price)/1000)*100 ;
 	 this.model.set("name",this.model.attributes.name);
 	 this.model.set("cost","USD "+this.model.attributes.display_price);

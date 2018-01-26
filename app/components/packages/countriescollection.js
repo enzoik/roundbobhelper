@@ -66,25 +66,27 @@ define(function(require, exports, module) {
 	  		//console.log("length count", obj.Response.destinations.length);
 	  		//console.log("length count", JSON.stringify(obj));
 			 
-		//console.log("length count", obj.Response.countries);
-		console.log("xxxxxcollector", obj.Response.countries);
-        cache.setCountriesSearchResults(obj.Response.countries || []);
-		
-		
-		 
-      if (obj.Response.countries.length) {
-		  var countries = obj.Response.countries;
-		  var countriesCount = countries.length;
-		  if(countriesCount){
-			 
-			for(var i=0; i<countriesCount; i++){
-			  this.add(new Countries_model(countriesCount[i]));
-			}
-		  }
-        return obj.Response.countries;
-		
-      }
+		//console.log("length count", obj);
+		if(obj.Response === null || obj.Response === ""){
 
+		}else{
+			cache.setCountriesSearchResults(obj.Response.countries || []);
+			
+			
+			 
+			  if (obj.Response.countries.length) {
+				  var countries = obj.Response.countries;
+				  var countriesCount = countries.length;
+				  if(countriesCount){
+					 
+					for(var i=0; i<countriesCount; i++){
+					  this.add(new Countries_model(countriesCount[i]));
+					}
+				  }
+				return obj.Response.countries;
+			
+		  }
+		}
       return this.models;
     },
   });

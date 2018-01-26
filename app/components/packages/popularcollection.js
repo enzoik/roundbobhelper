@@ -51,7 +51,6 @@ define(function(require, exports, module) {
       this.reset();
       var packages = cache.getPackagesSearchResults();
       var packagesCount = packages.length;
-	   console.log("length count through getcached", packagesCount);
       if(packagesCount){
 		 
         for(var i=0; i<packagesCount; i++){

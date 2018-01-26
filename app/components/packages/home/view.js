@@ -34,7 +34,6 @@ define(function(require, exports, module) {
 
     initialize: function(){
       this.typingTimer = null;
-	  console.log("initializing view",this.collections.packages);
 
     },
 
@@ -61,8 +60,7 @@ define(function(require, exports, module) {
 		var category_id = current_url.split("#surprise")[1].split('/')[1].split("_")[0];
 		var country_id = current_url.split("#surprise")[1].split('/')[1].split("_")[2];
 		var that = this;
-		console.log("category_id",category_id);
-		console.log("country_id",country_id);
+		that.collections.packages.reset();
 		/*No sorters Given for categories so we search countries*/
 		if(category_id == 'All' ){
 			category_id="";

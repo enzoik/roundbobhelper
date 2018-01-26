@@ -30,8 +30,8 @@
 						  <%= model.get("name") %>
 					</div>
 
-					<div class="package-location">
-						 <%= model.get("location") %>						  
+					<div id="brief_info_id" style="padding:2px;" class="package-location">
+											  
 					</div>
 
 				   </div><!-- end col-md-12 -->
@@ -45,7 +45,7 @@
 					<div class="col-md-8">
 						
 
-						<h4>Package Reference</h4>
+						<h4>Location</h4>
 						<div class="mini-info-sub-text">
 							<div class="ref-number-info">
 							 ...
@@ -56,7 +56,7 @@
 						
 						 <div class="package-item-selected-buttons">
 					        <button class="button-info open-package-info">show info</button>
-						 	<button class="button-info btn-yellow">Inquire</button>
+						 	<!--<button class="button-info btn-yellow">Inquire</button>-->
 						</div><!-- end package-item-selected-buttons -->
 						
 						</div><!-- end package-item-selected-inquiry -->
@@ -81,6 +81,9 @@
 				  <div class="col-md-8">
 
 				  <div class="brief-info">
+				  	<center> Loading...</center>					  
+				  </div></br>
+				  <div class="price-info">
 				  	<center> Loading...</center>					  
 				  </div>					
 				
@@ -247,7 +250,7 @@
 				  </div><!-- end sidebar-item -->
 
 				  <div class="sidebar-item">
-					<div class="package-item-sidebar">
+					<div style="padding:2px;" class="package-item-sidebar">
 
 					  <div class="expected-guest package-selected-guest-adult">
 						<div id="numberOfAdults"><span>Adult(s): </span> 1</div>

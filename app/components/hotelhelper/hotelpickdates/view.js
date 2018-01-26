@@ -2,6 +2,7 @@ define(function(require, exports, module) {
   "use strict";
 
   var app = require("app");
+  var date_ranges="";
   var Config = {
     // Views needed for this layout
     Views: {
@@ -29,6 +30,8 @@ define(function(require, exports, module) {
 	},
 	check_in_id:function(e){
 		var view = this;
+		var date = new Date();
+		var value_t = date.getTime();
 		jQuery.noConflict();
 		$(e.currentTarget).datepicker({
 		  minDate:'0',
@@ -37,7 +40,14 @@ define(function(require, exports, module) {
 		  onSelect:function(dateText,datePicker) {
 			console.log('onSelect',dateText);
 			view.selectedDate = dateText;  
-			//$("#departure-date").val("");
+			var parts = dateText.split("-");
+			var final_d_date=new Date(parts[0], parts[1] - 1, parts[2]);
+			
+			var ONE_DAY = 1000 * 60 * 60 * 24;
+			var difference_ms = Math.abs(final_d_date.getTime() - value_t);
+			var days =Math.round(difference_ms/ONE_DAY) + 1;
+			date_ranges=days;
+				console.log("date_range",date_ranges);
 		  }
 		});
 	},
@@ -57,7 +67,7 @@ define(function(require, exports, module) {
 		//$.noConflict();
 		jQuery.noConflict();
 		$(e.currentTarget).datepicker({
-		  minDate:days,
+		  minDate:date_ranges,
 		  dateFormat: 'yy-mm-dd',
 		  defaultDate:that.selectedDate,
 		  onSelect:function(dateText,datePicker) {

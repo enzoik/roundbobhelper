@@ -51,29 +51,82 @@
 
   <div class="col-md-6 col-md-offset-3">
 
+            <div class="col-md-12">
+        <div class="row">
+
+           <div class="col-md-2">
+           <div class="row">
+               <div class="flight-item-option">
+                <label class="radio-input" style="max-width: 90%;">
+                 <span>FILTER</span>
+                 </label>
+               </div><!-- end flight-item-option -->
+              </div><!-- end row -->
+            </div><!-- end col-md-5 -->
 
 
+          <div class="col-md-4">
+           <div class="row">
+               <div class="flight-item-option">
+
+                 <input type="radio" id="option-1" class="package-prefference" checked="checked"  name="p-options" value="1">
+                  <label for="option-1" class="radio-input">
+				  <span>BY COUNTRY</span>
+                 </label>
+			  </div><!-- end flight-item-option -->
+              </div><!-- end row -->
+               </div><!-- end col-md-4 -->
+
+               <div class="col-md-4">
+                <div class="flight-item-option">
+
+                 <input type="radio" id="option-2"  class="package-prefference"  name="p-options" value="2">
+                 <label for="option-2" class="radio-input">
+                 <span>BY CATEGORY</span>
+                   
+                 </label>
+              				 				
+				
+                </div><!-- end flight-item-option -->
+              </div><!-- end row -->
+               </div><!-- end col-md-4 -->
+
+          </div><!-- end col-md-12 -->
 
     <div class="card-paper"><br/>
-    <div class="card-component">
-        <div class="card-content">
-          <!--<input id="flight_from" type="text" class="form-element" placeholder="Where are you flying from?">-->
-		  <h2>Select a destination</h2>
-		<select id="countries_id_activities" class="form-element" name="countries_selector">
-		 <option value="volvo">Loading..</option>
-		</select>	
-		  <div id="user-selection" style="margin-top:10px;"></div>
 
-        </div><!-- end card-content -->
+
+    <div class="card-component category-option">
+      <div class="card-content">
+    		<!--
+			<select id="countries_id" class="form-element" name="categories_selector">
+          <option>Select category</option>
+          <option value="1">Honeymoon</option>
+          <option value="2">Formula 1</option>
+          <option value="3">Safaris</option>
+		   </select>-->	
+		<select id="countries_id_activities" class="form-element" name="countries_selector">
+		  <option value="volvo">Loading..</option>
+		</select>	
+		   <!--<div id="user-selection" style="margin-top:10px;"></div>-->
+
+    </div><!-- end card-content -->
     </div><!-- end card-component -->
-	    <div class="card-component">
+
+
+	    <div class="card-component country-option hide">
         <div class="card-content">
-         <!-- <input id="flight_to" type="text" class="form-element" placeholder="Where are you flying to?">-->
-		  <h2>Select a Category</h2>	
 		<select id="categories_id_activities" class="form-element" name="categories_selector">
-			 <option value="volvo">Loading..</option>
-			</select>	
-	  </div><!-- end card-content -->
+			  <option value="volvo">Loading..</option>
+			</select>
+			  <!--
+			  <select id="categories_id" class="form-element" name="countries_selector">
+			      <option>Select country</option>
+            <option>Uganda</option>
+            <option>United Arab Emirates</option>
+            <option>Kenya</option>
+			   </select>-->	
+	      </div><!-- end card-content -->
     </div><!-- end card-component --><br/>
 
     </div><!-- end card-paper -->
@@ -81,9 +134,9 @@
 
     
 	<!--<a id="flight_pick_dates" href="#flights/flightpicklocations/flightpickdates">-->
-	<div id="continue_to_view_activities" class="continue_to_view_activities">
+	<div id="continue_to_view_activities" class="continue_to_view_packages">
 		<div class="card-component button-div">
-			<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--yellow pull-right">Check what we have for you</button>
+			<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--yellow pull-right">See what we have for you</button>
 		</div><!-- end card-component -->
 	</div>
   
@@ -94,3 +147,5 @@
 
 </main>
  <footernav></footernav>
+
+ 

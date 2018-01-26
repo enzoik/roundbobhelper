@@ -38,8 +38,10 @@ define(function(require, exports, module) {
 		var no_ = current_url.split("#picklocation")[1].split("/")[3];
 		var media = current_url.split("#picklocation")[1].split("/")[5];
 		var client_summary = current_url.split("#picklocation")[1].split("/")[9];
+		var divisar =current_url.split("#picklocation")[1].split("/");
 		var name=client_summary.split("_")[0];
-		var email=client_summary.split("_")[1];
+		var email=client_summary.split("_")[1].split("-")[0];
+        var phone_no=current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1].split("-")[1];
 		var phone ="";
 		var adults=0;
 		var rooms =0;
@@ -52,10 +54,6 @@ define(function(require, exports, module) {
 			var adultscounter= current_url.split("#picklocation")[1].split("/")[4].split("adults")[1].split("children")[0];
 			var childrenscounter= current_url.split("#picklocation")[1].split("/")[4].split("children")[1].split("childrenage")[0];
 			var childrenages= current_url.split("#picklocation")[1].split("/")[4].split("childrenage")[1];
-			console.log("booked_rooms",booked_rooms);
-			console.log("adultscounter",adultscounter);
-			console.log("childrenscounter",childrenscounter);
-			console.log("childrenages",childrenages);
 
 			for(var x=1;x<=adultscounter.split("Room").length;x++){
 				
@@ -82,6 +80,9 @@ define(function(require, exports, module) {
 		 $('#check_out_date').html('<span><i class="icon-calendar"></i>'+ check_out_date.replace(/%20/g,'')+'</i></span>');
 		 $('#destination').text(destination.replace(/%20/g,''));
 		 $('#no_of_people').text(number_of_people.replace(/%20/g,''));
+		 $('#clientName5').text(name);
+		 $('#clientEmail5').text("Email - "+email);
+		 $('#clientPhone5').text("Phone - "+phone_no);
 	 },
 	events:{
 		'click .send_confirmed_request' : 'send_confirmed_request',
@@ -114,7 +115,13 @@ define(function(require, exports, module) {
 		var adultscounter="";
 		var childrenscounter="";
 		var childrenages="";
+		var date1 = new Date(escape(check_in_date).replace(/%20/g,''));
+		var date2 = new Date(escape(check_out_date).replace(/%20/g,''));
+		var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+		var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+
 		var data_info = {};
+		data_info.Duration = diffDays;
 		data_info.CheckInDate = escape(check_in_date).replace(/%20/g,'');
 		data_info.CheckOutDate = escape(check_out_date).replace(/%20/g,'');
 		data_info.Destination = escape(destination).replace(/%20/g,'');

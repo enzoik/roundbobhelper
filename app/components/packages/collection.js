@@ -34,13 +34,9 @@ define(function(require, exports, module) {
     },
 
     initialize: function(modal,options){
-		//this.country_id = 2;
-		console.log("options", + options);
 		if(options != undefined){
-			console.log("options",options);
-			console.log("opt1",options.split("-")[0]);
+
 			this.country_id = options.split("-")[0];
-			console.log("opt2",options.split("-")[1]);
 			 var that = this;
 			  this.listenTo(that, "reset sync request", this.render);
 			  this.listenTo(that, "fetchError", function(){
@@ -81,7 +77,6 @@ define(function(require, exports, module) {
       if(packagesCount){
 		 
         for(var i=0; i<packagesCount; i++){
-			console.log("objective", packages[i]);
           this.add(new Packages_model(packages[i]));
         }
       }
@@ -89,20 +84,15 @@ define(function(require, exports, module) {
     },
 
     parse: function(obj) {
-		 console.log("objective");
-		 console.log("objective", obj);
         //cache.setPackagesSearchResults(obj.Response.destinations || []);
-		
+		//this.reset();
 		if(!obj) return this.models;
-		console.log("PackagesParserData", obj.products);
 	 
       if (obj.products.length) {
 		 var packagesCount = obj.products.length;
         for(var i=0; i<packagesCount; i++){
-			console.log("objective", obj.products[i]);
           this.add(new Packages_model(obj.products[i]));
         }
-		console.log("PackagesParser","DestinationsFound");
         return obj.products;
 		
       }

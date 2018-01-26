@@ -26,9 +26,9 @@ define(function(require, exports, module) {
 	 afterRender: function(){
 		if(localStorage.getItem('my_user_details')){
 			var retrieveduserdetails = JSON.parse(localStorage.getItem('my_user_details'));
-			$('#client_name_hotel').val(retrieveduserdetails.name);
-			$('#client_email_hotel').val(retrieveduserdetails.email);
-			$('#client_watsapp_no_hotel').val(retrieveduserdetails.watsapp);
+			$('#clients_name_planner').val(retrieveduserdetails.name);
+			$('#clients_email_planner').val(retrieveduserdetails.email);
+			$('#client_watsapp_planner').val(retrieveduserdetails.watsapp);
 		}else{
 			console.log("Not Found",'Not defined');
 		}
@@ -38,11 +38,11 @@ define(function(require, exports, module) {
       'click .submit_email_planner' : 'submit_email',
     },
 	submit_email:function(){
-		var client_name = document.getElementById("client_name_hotel").value;
-		var clients_email = document.getElementById("client_email_hotel").value;
-		var client_watsapp = document.getElementById("client_watsapp_no_hotel").value.replace(/[^\d]/g, '');
-		var send_by_email = document.getElementById("option-1");
-		var send_by_watsap = document.getElementById("option-2");
+		var client_name = document.getElementById("clients_name_planner").value;
+		var clients_email = document.getElementById("clients_email_planner").value;
+		var client_watsapp = document.getElementById("client_watsapp_planner").value.replace(/[^\d]/g, '');
+		var send_by_email = document.getElementById("option1");
+		var send_by_watsap = document.getElementById("option2");
 		var watsapp_number = "";
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		var regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
@@ -50,62 +50,62 @@ define(function(require, exports, module) {
 		var media ="email";
 		var stored_email = clients_email;
 		if(send_by_watsap.checked){
-			clients_email  = client_watsapp;
+			//clients_email  = client_watsapp;
 			media = "watsapp";
 		}
 		
-	if(send_by_watsap.checked && regex.test(client_watsapp)){
+	if( regex.test(client_watsapp)){
 			swal(
 			  'Invalid',
 			  'Requires an international format for a phone number',
 			  'error'
 			);			
 		}
-		if(send_by_watsap.checked && client_watsapp === null){
+		if(client_watsapp === null){
 							swal(
 					  'Empty',
 					  ' Whatsapp No. Field Should not Be Left Empty',
 					  'error'
 					);
-		}else if(send_by_watsap.checked && client_watsapp === ""){
+		}else if( client_watsapp === ""){
 					swal(
 					  'Empty',
 					  ' Whatsapp No. Field Should not Be Left Empty',
 					  'error'
 					);
 		//}else if(send_by_watsap.checked && phone_filter.test(client_watsapp) && client_watsapp.length < 6 && client_watsapp.length > 12){
-		}else if(send_by_watsap.checked && client_watsapp.match(/^[0-9\s(-)]*$/) && client_watsapp.length < 6 && client_watsapp.length > 12){
+		}else if( client_watsapp.match(/^[0-9\s(-)]*$/) && client_watsapp.length < 6 && client_watsapp.length > 12){
 					swal(
 					  'Empty',
 					  'Provide a valid watsapp number',
 					  'error'
 					);					
 				
-		}else if(client_name === null  && send_by_email.checked ){
+		}else if(client_name === null ){
 			swal(
 			  'Empty',
 			  ' Name Field Should not Be Left Empty',
 			  'error'
 			);
-		}else if(client_name === ""  && send_by_email.checked ){
+		}else if(client_name === ""){
 			swal(
 			  'Empty',
 			  ' Name Field Should not Be Left Empty',
 			  'error'
 			);
-		}else if(clients_email === ""  && send_by_email.checked ){
+		}else if(clients_email === ""){
 			swal(
 			  'Empty',
 			  'Email Field Should not Be Left Empty',
 			  'error'
 			);			
-		}else if(clients_email === null  && send_by_email.checked ){
+		}else if(clients_email === null  ){
 			swal(
 			  'Empty',
 			  'Email Field Should not Be Left Empty',
 			  'error'
 			);			
-		}else if(!filter.test(clients_email) && send_by_email.checked ){
+		}else if(!filter.test(clients_email) ){
 			swal(
 			  'Not Valid',
 			  'Provide a valid email e.g bob@roundbob.com',
@@ -127,15 +127,16 @@ define(function(require, exports, module) {
 				redirectTo += '/'+splitted[4];
 				redirectTo += '/'+splitted[5];
 				redirectTo += '/'+splitted[6];
-				redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+clients_email+"_"+media;
-				console.log("email multiple",redirectTo);
+				redirectTo += '/'+splitted[7];
+				redirectTo += '/' + "m_mail/m_client/m_summary/"+client_name+"_"+clients_email+"-"+client_watsapp+"_"+media;
+				//+ clients_name+"_"+clients_email+"-"+clients_phone_number+
 				console.log("mmmmm",url_.split('/')[3]);
 			}else{
 				redirectTo += '/'+splitted[1];
 				redirectTo += '/'+splitted[2];
 				redirectTo += '/'+splitted[3];
-				redirectTo += '/s/single/email/sdng_mail/p234/sent_to';
-				redirectTo += '/' + client_name+"_"+clients_email+"_"+media;
+				redirectTo += '/s/single/email/sdng_mail/p234/check/sent_to';
+				redirectTo += '/' +client_name+"_"+clients_email+"-"+client_watsapp+"_"+media;
 				//name_email_email
 				console.log("email single",redirectTo);
 				console.log("mmmmm",url_.split('/')[3]);

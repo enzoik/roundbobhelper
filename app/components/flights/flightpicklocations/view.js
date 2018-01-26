@@ -52,7 +52,6 @@ define(function(require, exports, module,jqueryui) {
 	flight_from:function(){
 		//var search_word = document.getElementById('flight_from').value.trim();
 		var that = this;
-		console.log("that",that);
 	  var Item = Backbone.Model.extend({}),
 		  Items = Backbone.Collection.extend({model: Item});
 	  var choices = new Items();
@@ -89,7 +88,6 @@ define(function(require, exports, module,jqueryui) {
             $('.search-loading').empty();
             choices.reset(results);
             response(choices.filter(function(model) {
-             console.log("model",model.attributes.name);
 			  return model.attributes.name;
 			 /* return {
 				label: model.attributes.name,
@@ -100,12 +98,10 @@ define(function(require, exports, module,jqueryui) {
           });
 			},
         focus: function(event, ui) {
-			console.log("item",ui.item.attributes.name);
           $("#flight_from").val(ui.item.attributes.name);
           return false;
         },
         select: function(event, ui) {
-          console.log("item",ui);
 		  selected.add(ui.item);
           //if (!allowDupes) {
             choices.remove(ui.item);
@@ -115,7 +111,6 @@ define(function(require, exports, module,jqueryui) {
         }
 
 	 }).data('ui-autocomplete')._renderItem = function(ul, item) {
-		 console.log("item",item.attributes.name);
         return $('<li/>')
           .data('ui-autocomplete-item', item)
 		  .append( "<a>" + item.attributes.name + "</a>" )
@@ -220,7 +215,6 @@ define(function(require, exports, module,jqueryui) {
 	flight_to:function(){
 		//var search_word = document.getElementById('flight_from').value.trim();
 		var that = this;
-		console.log("that",that);
 	  var Item = Backbone.Model.extend({}),
 		  Items = Backbone.Collection.extend({model: Item});
 	  var choices = new Items();
@@ -257,7 +251,6 @@ define(function(require, exports, module,jqueryui) {
             $('.searchfrom-loading').empty();
             choices.reset(results);
             response(choices.filter(function(model) {
-             console.log("model",model.attributes.name);
 			  return model.attributes.name;
 			 /* return {
 				label: model.attributes.name,
@@ -268,12 +261,10 @@ define(function(require, exports, module,jqueryui) {
           });
 			},
         focus: function(event, ui) {
-			console.log("item",ui.item.attributes.name);
           $("#flight_to").val(ui.item.attributes.name);
           return false;
         },
         select: function(event, ui) {
-          console.log("item",ui);
 		  selected.add(ui.item);
           //if (!allowDupes) {
             choices.remove(ui.item);
@@ -283,7 +274,6 @@ define(function(require, exports, module,jqueryui) {
         }
 
 	 }).data('ui-autocomplete')._renderItem = function(ul, item) {
-		 console.log("item",item.attributes.name);
         return $('<li/>')
           .data('ui-autocomplete-item', item)
 		  .append( "<a>" + item.attributes.name + "</a>" )

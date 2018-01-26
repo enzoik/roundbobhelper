@@ -2,7 +2,7 @@ define(function(require, exports, module) {
   "use strict";
 
   var app = require("app");
-    app.sharableUrl = 'https://reacting.azurewebsites.net';
+    app.sharableUrl = 'https://roundbob.com';
   module.exports = Backbone.Layout.extend({
     template: require("ldsh!./template"),
 

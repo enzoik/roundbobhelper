@@ -73,26 +73,27 @@ define(function(require, exports, module) {
 	  		//console.log("length count", obj.Response.destinations.length);
 	  		//console.log("length count", JSON.stringify(obj));
 			 
-		//console.log("length count", obj.Response.categories.length);
-        cache.setCategoriesSearchResults(obj.Response.categories || []);
-		
-		
-		 
-      if (obj.Response.categories.length) {
-		  
-      var categories = obj.Response.categories;
-      var categoriesCount = categories.length;
-	   console.log("through getcached", categoriesCount);
-      if(categoriesCount){
-		 
-        for(var i=0; i<categoriesCount; i++){
-          this.add(new Categories_model(categories[i]));
-        }
-      }
-        return obj.Response.categories;
-		
-      }
+		//console.log("length count", obj);
+		if(obj.Response === null || obj.Response === ""){
 
+		}else{
+        cache.setCategoriesSearchResults(obj.Response.categories || []);
+		 
+		  if (obj.Response.categories.length) {
+			  
+		  var categories = obj.Response.categories;
+		  var categoriesCount = categories.length;
+		   console.log("through getcached", categoriesCount);
+		  if(categoriesCount){
+			 
+			for(var i=0; i<categoriesCount; i++){
+			  this.add(new Categories_model(categories[i]));
+			}
+		  }
+			return obj.Response.categories;
+			
+		  }			
+		}
       return this.models;
     },
   });

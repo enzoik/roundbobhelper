@@ -101,6 +101,7 @@ define(function(require, exports, module) {
 		
 		
 		singlecalloption: function(){
+			console.log("xxxcallersingle");
 			var media_ = "call";
 			var current_url  = window.location.href.toString();
 			var url_ = current_url.split("#planner/")[1];
@@ -109,6 +110,7 @@ define(function(require, exports, module) {
 			new Planner.Views.Plannerbookingcalloption({selectlocation_h:url_.split('/')[0],travel_dates_m_h:url_.split('/')[1],trip_details:details,multiple_h:"s",status:"single",media:media_,action:"calling_u",action_end:"calling_client"}).render();
 		},
 		singleemailoption: function(){
+			console.log("xxxemailsingle");
 			var media_ = "email";
 			var current_url  = window.location.href.toString();
 			var url_ = current_url.split("#planner/")[1];
@@ -120,6 +122,7 @@ define(function(require, exports, module) {
 		
 		
 		multiplecalloption: function(){
+			console.log("xxxcallermultiple");
 			var media_ = "call";
 			var current_url  = window.location.href.toString();
 			var url_ = current_url.split("#planner/")[1];
@@ -128,6 +131,7 @@ define(function(require, exports, module) {
 			new Planner.Views.Plannerbookingcalloption({selectlocation_h:url_.split('/')[0],travel_dates_m_h:url_.split('/')[1],trip_details:details,multiple_h:"m",multibookeroption_h:url_.split('/')[3],media:media_,status:"call_true"}).render();
 		},
 		multipleemailoption: function(){
+			console.log("xxxemailmultiple");
 			var media_ = "email";
 			var current_url  = window.location.href.toString();
 			var url_ = current_url.split("#planner/")[1];

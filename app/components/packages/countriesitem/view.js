@@ -19,16 +19,16 @@ define(function(require, exports, module) {
 	if(this.model.attributes.Country == undefined){
 		console.log("undefined shit");
 	 this.model.set("country","Rwanda");
-	 this.model.set("img","//www.roundbob.com/img/countries/index_images/"+"4.jpg");	
+	 //this.model.set("img","//www.roundbob.com/img/countries/index_images/"+"4.jpg");	
 	}else{
 	console.log("thismodel",this.model.attributes.Country.name);
 		if(this.model.attributes.Country.image_file == "default.png"){
 		 this.model.set("country",this.model.attributes.Country.name);
 		
-		 this.model.set("img","//www.roundbob.com/assets/bobtraveldeals.jpg");			
+		// this.model.set("img","//www.roundbob.com/assets/bobtraveldeals.jpg");			
 		}else{
 		 this.model.set("country",this.model.attributes.Country.name);
-		 this.model.set("img","//www.roundbob.com/img/countries/index_images/"+this.model.attributes.Country.image_file);		
+		 //this.model.set("img","//www.roundbob.com/img/countries/index_images/"+this.model.attributes.Country.image_file);		
 		}
 	}
 

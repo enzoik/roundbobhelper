@@ -41,14 +41,13 @@ define(function(require, exports, module,jqueryui) {
 		jQuery.noConflict();
         $.ajax({
            // url: '//m.roundbob.com/API/roundbob_get_countries.php',
-            url: '//beta.roundbob.com/public/api/v1/countries.json',
+            url: '//beta.roundbob.com/public/api/v1/countries.json?product_type_id=1',
             type: 'get',
             data: {
 				user_id:"b34a758d762edb799b6c305e58d0ef06"
 				},
             dataType: 'jsonp',
             success:function(response){
-				console.log("respone",response.countries);
                 var len = response.countries.length;
 					 $("#countries_id").empty();
                      $("#countries_id").append("<option value='All_all'>All</option>"); 
@@ -72,18 +71,13 @@ define(function(require, exports, module,jqueryui) {
 				},
             dataType: 'jsonp',
             success:function(response){
-				console.log("respone");
-				console.log("respone",response.productCategories);
                 var len = response.productCategories.length;
-				console.log("countries",response.productCategories);
 			 $("#categories_id").empty();
 			$("#categories_id").append("<option value='All_all'>All</option>");	
                 for( var i = 0; i<len; i++){
-					console.log("category_id",response.productCategories[i]);
 					if(typeof response.productCategories[i].name != "undefined"){
 						var id = response.productCategories[i].id;
 						var name = response.productCategories[i].name;
-						console.log("category_id",response.productCategories[i]);
 						
 						$("#categories_id").append("<option value='"+id+"_"+name+"'>"+name+"</option>");						
 					}
@@ -112,7 +106,6 @@ define(function(require, exports, module,jqueryui) {
 		var catvalue = $('select[name=categories_selector]').val();
 		var sort_by_coutries = document.getElementById("option-1");
 		var sort_by_category = document.getElementById("option-2");
-		console.log("catvalue",catvalue+"-"+country);
 		var redirectTo = '';
 		  redirectTo = '/surprise';
 		if(sort_by_category.checked ){

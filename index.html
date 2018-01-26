@@ -21,6 +21,7 @@
   <link href="css/sweetalert.css" rel="stylesheet" type="text/css">
   <link href="css/amaran.min.css" rel="stylesheet" type="text/css">
   <link href="css/pnotify.css" rel="stylesheet" type="text/css">
+  <link href="css/pnotify.css" rel="stylesheet" type="text/css">
  
  <link href="css/material.min.css" rel="stylesheet" type="text/css">
  <link href="css/flights.css" rel="stylesheet" type="text/css">
@@ -31,7 +32,8 @@
  <link href="css/fontello.css" rel="stylesheet" type="text/css">
  <link href="css/bobhelper.css" rel="stylesheet" type="text/css">
  <link href="css/jquery-ui.css" rel="stylesheet" type="text/css">
- <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+ <link href="css/jquery.growl.css" rel="stylesheet" type="text/css">
+ <link href="css/intlTelInput.css" rel="stylesheet" type="text/css">
  
 
   
@@ -48,6 +50,8 @@
   <script type="text/javascript" src="js/pnotify.js"></script>
   <script src="js/functions.js" type="text/javascript"></script>
   <script src="js/bobhelper.js" type="text/javascript"></script>
+  <script src="js/jquery.growl.js" type="text/javascript"></script>
+  <script src="js/intlTelInput.js" type="text/javascript"></script>
   <script src="js/azure-search.min.js" type="text/javascript"></script>
  <!--
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
@@ -127,6 +131,15 @@
 
 </style>
 	<script type="text/javascript">
+	 jQuery.noConflict();
+	$.growl({
+	title: "Please test our beta Version",
+	
+	message: " We have just launched our beta version please give us feedback using bob@roundbob.com." ,
+	duration: 920000
+
+	});
+
 	/*  $(function() {
 		function getNames() {
 		  var users = $.ajax({url : "/airports.json", async: false});

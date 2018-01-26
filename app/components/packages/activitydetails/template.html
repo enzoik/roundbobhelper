@@ -26,12 +26,12 @@
 					<div class="package-item-selected-mini-info">
 
 				     <div class="col-md-12">
-				      <div class="package-name">
+				      <div id="package_name_id" class="package-name">
 						  <%= model.get("name") %>
 					</div>
 
-					<div class="package-location">
-						 <%= model.get("location") %>						  
+					<div id="brief_info_id_activity" style="padding:2px;" class="package-location1">
+											  
 					</div>
 
 				   </div><!-- end col-md-12 -->
@@ -47,7 +47,7 @@
 
 						<h4>Package Reference</h4>
 						<div class="mini-info-sub-text">
-							<div class="ref-number-info">
+							<div class="ref-number-info1">
 							 ...
 							</div>
 						</div>
@@ -56,7 +56,7 @@
 						
 						 <div class="package-item-selected-buttons">
 					        <button class="button-info open-package-info">show info</button>
-						 	<button class="button-info btn-yellow">Inquire</button>
+						 	<!--<button class="button-info btn-yellow">Inquire</button>-->
 						</div><!-- end package-item-selected-buttons -->
 						
 						</div><!-- end package-item-selected-inquiry -->
@@ -80,9 +80,12 @@
 			  	<div class="package-item-selected-info">
 				  <div class="col-md-8">
 
-				  <div class="brief-info">
+				  <div class="brief-info1">
 				  	<center> Loading...</center>					  
-				  </div>					
+				  </div></br>
+				  <div class="price-info1">
+				  	<center> Loading...</center>					  
+				  </div>				
 				
 				  </div><!-- end col-md-8 -->					  
 				</div><!-- end package-item-selected-info -->
@@ -288,7 +291,7 @@
 				  </div><!-- end sidebar-item -->
 
 				<div class="sidebar-item">
-					<div id="submit_booking_activity_details"><button class="button-block">continue</button></div>
+					<div id="submit_booking_activity_details"><button class="button-block">Request To Book</button></div>
 					<br/>
 					<div id="submit_to_book_now_activity"><button class="button-block">Book Now</button></div>
 				</div><!-- end sidebar-item -->

@@ -3,7 +3,8 @@ define(function(require, exports, module) {
 
   var Layout = require("layoutmanager");
   var app = require("app");
-
+  var package_id = "";
+	
   var Packages = {
     // Views needed for this layout
     Views: {
@@ -28,9 +29,11 @@ define(function(require, exports, module) {
     beforeRender: function() {
 		var that = this;	
 		var destination_id = that.model.attributes.id;
+		var package_id = that.model.attributes.id;
 		var name = that.model.attributes.name;
 		var display_price = that.model.attributes.display_price;
-		var country_name = that.model.attributes.country_name;
+		var country_name = that.model.attributes.city_name+" , "+that.model.attributes.country_name;
+		var more_info = that.model.attributes.excerpt;
 		var city_name = that.model.attributes.city_name;
 		  var current_url  = window.location.href.toString();
 		  var splitted = current_url.split("#activities")[1].split("/");
@@ -41,8 +44,8 @@ define(function(require, exports, module) {
 			console.log("people",adults+children+infant);
 
 		$.ajax({
-		//  dataType: 'jsonp',
-		  dataType: 'json',
+		  dataType: 'jsonp',
+		//  dataType: 'json',
 		  //url: "//m.roundbob.com/API/roundbob_get_destination_details.php?user_id=b34a758d762edb799b6c305e58d0ef06&did="+destination_id,
 		 // url: "http://localhost/roundbobhelperv1/app/api/raw/packagedetails.php",
 		  url: "//beta.roundbob.com/public/api/v1/products/details/"+destination_id+".json",
@@ -101,9 +104,51 @@ define(function(require, exports, module) {
 				$('#phone_number').val(retrieveduserdetails.watsapp);
 			}else{
 				console.log("Not Found",'Not defined');
-			}		  
-		  $('.brief-info').html(info_data);
-		  $('.ref-number-info').html(ref_number);
+			}	
+
+			var info_d = info_data.split(".");
+			var html_data="";
+			if(typeof data.productContent.content !== 'undefined' && data.productContent.content.length > 0){
+				 html_data="<b>Other Details</b></br>";
+				//var html_data="";
+				for(var i=1;i<=data.productContent.content.length;i++){
+					console.log("info",data.productContent.content[i]);
+					if(data.productContent.content[i]){
+						html_data += data.productContent.content[i]+"</br>";	
+					}
+				
+				}
+			}
+			
+		/*	var gallery_list="";
+			//var html_data="";
+			for(var x=1;x<=gallery.length;x++){
+				console.log("info",gallery[x]);
+				if(gallery[x]){
+					//gallery_list += adult_price_option[x].title+" is USD "+adult_price_option[x].price+"</br>";	
+					gallery_list +=  '<li><a href="image-1-link"><img src='"/path/to/image-1-file" +'/></a></li>';	
+				}
+			
+			}*/
+			var price_data="";
+			if(typeof adult_price_option !== 'undefined' && adult_price_option.length > 0){
+				 price_data="<b>Other Price Options</b></br>";
+				//var html_data="";
+				for(var x=1;x<=adult_price_option.length;x++){
+					
+					if(adult_price_option[x]){
+						//price_data +=gallery[x].src+"->"+ adult_price_option[x].title+" is USD "+adult_price_option[x].price+"</br>";	
+						console.log("info",adult_price_option[x].title);
+						price_data += adult_price_option[x].title +" is USD "+ adult_price_option[x].price+"</br>";	
+					}
+				}
+			}
+
+			
+		  $('.brief-info1').html(html_data);
+		  $('.price-info1').html(price_data);
+		  $('.ref-number-info1').html(country_name);
+		  $('.package-location1').html(more_info);
 		  $('.package-item-total-price').html(total_cost);
 		  $('.individualbasis').html("On single basis ($"+cost+")");
 		  $('.indoublebasis').html("On double basis ($"+double_book+")");
@@ -163,7 +208,7 @@ define(function(require, exports, module) {
 			  'info'
 			);			
 	},
-	submit_booking_activity_details:function(){
+	submit_booking_details:function(){
 		console.log("submit details");
 		//http://localhost/roundbobhelperv1/dist/#surprise/5900165_Honeymoon_1_Uganda/2017-12-13_2017-12-27_round_s_%202%20nights%20Chobe%20Honeymoon_582327d0-b3c0-4167-93b1-11cc89ac00e9_242169001478698960-20161109044240-1478698960
 		/*var current_url  = window.location.href.toString();
@@ -187,13 +232,18 @@ define(function(require, exports, module) {
 			 console.log("single_view",redirectTo);
 			  app.router.go(redirectTo);
 			}*/
-		var e = document.getElementById("infants_id");
+		var e = document.getElementById("infants_id_activities");
 		var infants = e.options[e.selectedIndex].value;
-		var a = document.getElementById("adults_id");
+		var a = document.getElementById("adults_id_activities");
 		var adults = a.options[a.selectedIndex].value;
-		var c = document.getElementById("children_id");
+		
+		var package_name_id = document.getElementById("package_name_id");
+		
+		var c = document.getElementById("children_id_activities");
 		var children = c.options[c.selectedIndex].value;
 		var client_name_id = document.getElementById("client_name_id").value;
+		//var brief_info_id = document.getElementById("brief_info_id_activity").value;
+		var brief_info_id = $("#brief_info_id_activity").text();
 		var travel_date = document.getElementById("travel_date").value;
 		var phone_number = document.getElementById("phone_number").value;
 		var client_email = document.getElementById("client_email").value;
@@ -205,6 +255,8 @@ define(function(require, exports, module) {
 		final_info.request_type="ACTIVITY";
 		final_info.adults=adults;
 		final_info.children=children;
+		final_info.ActivityId=package_id;
+		final_info.ActivityName=package_name_id;
 		final_info.infants=infants;
 		var data_info = {};
 		data_info.DepartureDate = travel_date;
@@ -251,6 +303,7 @@ define(function(require, exports, module) {
 						email: client_email,
 						phone : phone_number,
 						name : client_name_id,
+						description : brief_info_id,
 						request_type : "ACTIVITY", //[PACKAGE,FLIGHT,HOTEL,ACTIVITY]
 						adults : adults,
 						children : children,

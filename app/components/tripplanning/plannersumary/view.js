@@ -21,7 +21,6 @@ define(function(require, exports, module) {
       "footernav": new Config.Views.FooterNav(),
     },
 	 beforeRender: function() {
-		console.log("xxxxxx"); 
 	 },
 	 afterRender: function(){
 		 $("send_confirmation_id2").removeAttr('disabled');
@@ -33,6 +32,7 @@ define(function(require, exports, module) {
 		 var destination = current_url.split("#planner")[1].split("/")[1].split("-")[0];
 		 var check_in_date = current_url.split("#planner")[1].split("/")[2].split("_")[0];
 		 var check_out_date = current_url.split("#planner")[1].split("/")[2].split("_")[1];
+		 var divisar =current_url.split("#planner")[1].split("/");
 		 var number_of_people ="";
 		 var no_ = current_url.split("#planner")[1].split("/")[4];
 		 var media = current_url.split("#planner")[1].split("/")[6];
@@ -40,6 +40,7 @@ define(function(require, exports, module) {
 		 var trip_details = current_url.split("#planner")[1].split("/")[5];
 		var name=client_summary.split("_")[0];
 		var email=client_summary.split("_")[1];
+		var client_name ="";
 		var phone ="";
 		var adults="";
 		var infants ="";
@@ -55,6 +56,9 @@ define(function(require, exports, module) {
 		 }else if(media != "email"){
 			 phone=client_summary.split("_")[1];
 		 }
+			 email=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1].split("-")[0];
+			  phone=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1].split("-")[1];
+			  client_name=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[0];
 		// console.log("people",current_url.split("#planner")[1].split("/")[5]);
 		// console.log("people",current_url.split("#planner")[1].split("/")[3]);
 		// console.log("people","destination "+destination+" check_in_date "+check_in_date+" check_out_date "+ check_out_date+" number_of_people "+number_of_people);
@@ -62,7 +66,10 @@ define(function(require, exports, module) {
 		 $('#check_in_date').html('<span><i class="icon-calendar"></i>'+ check_in_date.replace(/%20/g,'')+'</i></span>');
 		 $('#check_out_date').html('<span><i class="icon-calendar"></i>'+ check_out_date.replace(/%20/g,'')+'</i></span>');
 		 $('#destination').text(destination.replace(/%20/g,''));
-		 $('#no_of_people').text(number_of_people.replace(/%20/g,''));
+		 
+		 $('#clientName2').text(client_name.replace(/%20/g,''));
+		 $('#clientEmail2').text(email.replace(/%20/g,''));
+		 $('#clientPhone2').text(phone.replace(/%20/g,''));
 	 },
 	 
 	 
@@ -72,8 +79,10 @@ define(function(require, exports, module) {
 	
 	
 	send_confirmed_request:function(){
-		console.log("send details");
+		//console.log("send details");
 		var current_url  = window.location.href.toString();
+		var url_ = current_url.split("#planner")[1];
+		//console.log("yyyyy",url_.split('/')[3]);
 		var redirectTo = '';
 		$("#send_confirmation_id2").attr("disabled","disabled");
 		var destination = current_url.split("#planner")[1].split("/")[1].split("-")[0];
@@ -85,15 +94,15 @@ define(function(require, exports, module) {
 		 
 		 var media = current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[2];
 		 var client_summary = current_url.split("#planner")[1].split("/")[10];
-		 var trip_details = current_url.split("#planner")[1].split("/")[5];
+		 var trip_details = url_.split('/')[3];
 		var name=client_summary.split("_")[0];
 		var email="";
 		var notification_summary="";
 		var get_response_via="";
 		var phone ="";
-		var adults="";
-		var infants ="";
-		var child="";
+		var adults="1";
+		var infants ="0";
+		var child="0";
 		var data_info = {};
 		//http://localhost/roundbobhelperv1/dist/#picklocation/Johannesburg, GT, South Africa/22-11-2017_30-11-2017_s/s/single/email/sdng_mail/p234/sent_to/patrick_patrickkanyerezi@gmail.com_email
 		data_info.CheckInDate = escape(check_in_date).replace(/%20/g,'');
@@ -101,8 +110,8 @@ define(function(require, exports, module) {
 		data_info.Destination = escape(destination).replace(/%20/g,'');
 		data_info.RequestDetails = trip_details;
 		//console.log("media",current_url.split("#picklocation")[1].split("/")[divisar.length -1].split("_")[1]);
-		 console.log("media",media+"="+current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1]);
-		 console.log("length",media+"="+current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[2].length);
+		 //console.log("media",media+"="+current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1]);
+		 //console.log("length",media+"="+current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[2].length);
 		 if(no_ == "s"){
 			  number_of_people = "people: 1 adults , 0 child, 0 infants";
 		 }else if(no_ == "m"){
@@ -112,23 +121,26 @@ define(function(require, exports, module) {
 			number_of_people = "people: "+adults+" adults , "+child+"child, "+infants+" infants";		 
 		 }
 		 if(media === "email"){
-			 email=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1];
-			 console.log("media",email);
+			 email=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1].split("-")[0];
+			  phone=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1].split("-")[1];
+			 //console.log("media",email);
 			get_response_via="email";	
 			notification_summary="You will get response via your Email "+	email +" after request submission";
 		 }else if(media === "watsapp"){
 			get_response_via="watsapp";
-			 phone=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1];	
-			notification_summary="You will get response via your watsapp number "+	watsapp_no +" after request submission";	
+			  phone=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1].split("-")[1];	
+			  email=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1].split("-")[0];
+			notification_summary="You will get response via your watsapp number "+	phone +" after request submission";	
 		}else if(media === "call"){
 			get_response_via="phone";
-			 phone=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1];	
+			 phone=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1].split("-")[1];	
+			 email=current_url.split("#planner")[1].split("/")[divisar.length -1].split("_")[1].split("-")[0];
 			notification_summary="You will receive a call on your phone number "+	phone +" after request submission";		
 		}	
 		 var jsonString= JSON.stringify(data_info);
-		 console.log("media","email"+email+"phone"+phone+"name"+name+"adults"+adults+"child"+child);
-		 console.log("media",get_response_via);
-		 console.log("media",jsonString);
+		// console.log("media","email"+email+"phone"+phone+"name"+name+"adults"+adults+"child"+child);
+		 //console.log("media",get_response_via);
+		 //console.log("media",jsonString);
 
 			swal({
 			  title: 'confirmation',
@@ -163,22 +175,38 @@ define(function(require, exports, module) {
 						}) ,
 				})
 				.done(function(response) {
-					console.log(response);
-							swal({
+					if(response.responseStatus.status){
+						swal({
+						  position: 'center',
+						  type: 'success',
+						  title: 'Your Request has been sent successfully',
+						  showConfirmButton: false,
+						  timer: 1500
+						});
+
+						app.router.go(redirectTo);						
+					}else{
+						swal({
+						  position: 'center',
+						  type: 'error',
+						  title: ''+response.responseStatus.message,
+						  showConfirmButton: false,
+						  timer: 2500
+						});		
+						$("#send_confirmation_id").removeAttr('disabled');						
+					}
+						/*	swal({
 							  position: 'center',
 							  type: 'success',
 							  title: 'Your Request has been sent successfully',
 							  showConfirmButton: false,
 							  timer: 1500
-							});
-					app.router.go(redirectTo);
+							});*/
 				})
 				.fail(function() {
-						console.log("error");
-						$("#send_confirmation_id2").removeAttr("disabled");
+						$("#send_confirmation_id").removeAttr('disabled');
 					$('#progress_metre_id').html('<svg height="10" width="100%" style="background:#ccc;"><line x1="0" y1="0" x2="100%" y2="0" style="stroke:#e7e874;stroke-width:20" />  </svg><span class="centage-label">100%</span>');
 					
-					console.log("complete");
 							swal({
 							  position: 'center',
 							  type: 'error',
@@ -197,8 +225,8 @@ define(function(require, exports, module) {
 							  title: 'Your Request has been sent successfully',
 							  showConfirmButton: false,
 							  timer: 1500
-							});*/
-					
+							});
+					app.router.go(redirectTo);*/
 				});
 				/*$.ajax({
 					url: 'http://customrequests.roundbob.com/public-api/custom-requests/add.json',

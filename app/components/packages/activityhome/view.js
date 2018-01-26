@@ -34,7 +34,7 @@ define(function(require, exports, module) {
 
     initialize: function(){
       this.typingTimer = null;
-	  console.log("initializing view",this.collections.packages);
+	  //console.log("initializing view",this.collections.packages);
 
     },
 
@@ -50,21 +50,16 @@ define(function(require, exports, module) {
     // Add All the view Elements
     views: {
       "topNav": new Package.Views.TopNav(),
-     // "countriesSelector": new Package.Views.CountriesSelector(),
       ".item_nav_e": new Package.Views.TopIconHolder(),
       ".package-category-container": new Package.Views.List({ collection: packagesCollection }),
     },
 
     afterRender: function(){
-		//this.collections.packages.url = 
-		//http://localhost/roundbobhelperv1/dist/#surprise/c746/5900186
-		//http://localhost/roundbobhelperv1/dist/#surprise/5900165_Honeymoon_1_Uganda/2017-12-20_2017-12-20_round_s/m/adlts_1_chldn_0_infnts_0/email/m_mail/m_client/m_summary/mydetails/results/packages
 		var current_url  = window.location.href.toString();	
 		var category_id = current_url.split("#activities")[1].split('/')[1].split("_")[0];
 		var country_id = current_url.split("#activities")[1].split('/')[1].split("_")[2];
-var that = this;
-		console.log("category_id",category_id);
-		console.log("country_id",country_id);
+		var that = this;
+		that.collections.packages.reset();
 		/*No sorters Given for categories so we search countries*/
 		if(category_id == 'All' ){
 			category_id="";

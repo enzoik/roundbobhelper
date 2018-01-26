@@ -3,7 +3,9 @@ define(function(require, exports, module) {
 
   var Layout = require("layoutmanager");
   var app = require("app");
-
+  var package_name = "";
+  var package_id = "";
+	
   var Packages = {
     // Views needed for this layout
     Views: {
@@ -30,8 +32,11 @@ define(function(require, exports, module) {
 console.log("attributes", that.model.attributes);		
 		var destination_id = that.model.attributes.id;
 		var name = that.model.attributes.name;
+		 package_name = name;
+		 package_id = destination_id;
 		var display_price = that.model.attributes.display_price;
-		var country_name = that.model.attributes.country_name;
+		var country_name = that.model.attributes.city_name+" , "+that.model.attributes.country_name;
+		var more_info = that.model.attributes.excerpt;
 		var city_name = that.model.attributes.city_name;
 		  var current_url  = window.location.href.toString();
 		  var splitted = current_url.split("#surprise")[1].split("/");
@@ -58,6 +63,8 @@ console.log("attributes", that.model.attributes);
 		  console.log("response data",data.productContent.content+"");
 		  var info_data = data.productContent.content+"";
 		  var ref_number = data.productContent.id;
+		  var adult_price_option = data.productMeta.adult_price_option;
+		  var gallery = data.productMeta.gallery;
 		  var cost = display_price;
 		  
 		  
@@ -102,9 +109,48 @@ console.log("attributes", that.model.attributes);
 				$('#phone_number').val(retrieveduserdetails.watsapp);
 			}else{
 				console.log("Not Found",'Not defined');
-			}		  
-		  $('.brief-info').html(info_data);
-		  $('.ref-number-info').html(ref_number);
+			}	
+			var info_d = info_data.split(".");
+			var html_data="";
+			if(typeof data.productContent.content !== 'undefined' && data.productContent.content.length > 0){
+				 html_data="<b>Other Details</b></br>";
+				//var html_data="";
+				for(var i=1;i<=data.productContent.content.length;i++){
+					console.log("info",data.productContent.content[i]);
+					if(data.productContent.content[i]){
+						html_data += data.productContent.content[i]+"</br>";	
+					}
+				
+				}
+			}
+			
+		/*	var gallery_list="";
+			//var html_data="";
+			for(var x=1;x<=gallery.length;x++){
+				console.log("info",gallery[x]);
+				if(gallery[x]){
+					//gallery_list += adult_price_option[x].title+" is USD "+adult_price_option[x].price+"</br>";	
+					gallery_list +=  '<li><a href="image-1-link"><img src='"/path/to/image-1-file" +'/></a></li>';	
+				}
+			
+			}*/
+			var price_data="";
+			if(typeof adult_price_option !== 'undefined' && adult_price_option.length > 0){
+				 price_data="<b>Other Price Options</b></br>";
+				//var html_data="";
+				for(var x=1;x<=adult_price_option.length;x++){
+					
+					if(adult_price_option[x]){
+						//price_data +=gallery[x].src+"->"+ adult_price_option[x].title+" is USD "+adult_price_option[x].price+"</br>";	
+						console.log("info",adult_price_option[x].title);
+						price_data += adult_price_option[x].title +" is USD "+ adult_price_option[x].price+"</br>";	
+					}
+				}
+			}		
+		  $('.brief-info').html(html_data);
+		  $('.price-info').html(price_data);
+		  $('.ref-number-info').html(country_name);
+		  $('.package-location').html(more_info);
 		  $('.package-item-total-price').html(total_cost);
 		  $('.individualbasis').html("On single basis ($"+cost+")");
 		  $('.indoublebasis').html("On double basis ($"+double_book+")");
@@ -192,6 +238,8 @@ console.log("attributes", that.model.attributes);
 		var travel_date = document.getElementById("travel_date").value;
 		var phone_number = document.getElementById("phone_number").value;
 		var client_email = document.getElementById("client_email").value;
+		//var brief_info_id = document.getElementById("brief_info_id").value;
+		var brief_info_id = $("#brief_info_id").text();
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		var final_info = {};
 		final_info.email=client_email;
@@ -201,12 +249,15 @@ console.log("attributes", that.model.attributes);
 		final_info.adults=adults;
 		final_info.children=children;
 		final_info.infants=infants;
+		final_info.PackageName=package_name;
+		final_info.PackageId=package_id;
 		var data_info = {};
 		data_info.DepartureDate = travel_date;
 		 var jsonString= JSON.stringify(data_info);
 		 final_info.meta_data = jsonString;
 		 var finaljson = JSON.stringify(final_info);
 		console.log("finaljson",finaljson);
+		console.log("brief_info_id",brief_info_id);
 		 
 		if(client_name_id === null || client_name_id === undefined || client_name_id === ""){
 			swal(
@@ -233,7 +284,9 @@ console.log("attributes", that.model.attributes);
 			  'error'
 			);				
 		}else{
-				$("#submit_booking_details").attr("disabled","disabled");
+			//console.log("sentdetails",client_email+"-"+phone_number+"-"+client_name_id+"-"+adults+"-"+children+"-"+infants+"-"+jsonString);
+			
+			$("#submit_booking_details").attr("disabled","disabled");
 				var redirectTo = '';
 				$.ajax({
 					//url: '//customrequests.roundbob.com/public-api/custom-requests/add.json',
@@ -251,6 +304,7 @@ console.log("attributes", that.model.attributes);
 						adults : adults,
 						children : children,
 						infants : infants,
+						description : brief_info_id,
 						meta_data :jsonString,
 						}) ,
 				})

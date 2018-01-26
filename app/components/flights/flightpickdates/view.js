@@ -2,6 +2,7 @@ define(function(require, exports, module) {
   "use strict";
 
   var app = require("app");
+  var date_range="";
   var Config = {
     // Views needed for this layout
     Views: {
@@ -22,7 +23,19 @@ define(function(require, exports, module) {
 	afterRender : function() {
 		$('#go_backward_btn').show();
 		$('#go_forward_btn').show();
-
+		
+		var daparturevalue = document.getElementById("departure-date");
+		var date = new Date();
+		var value_t = date.getTime();
+		if(daparturevalue.value){
+		var parts = daparturevalue.value.split("-");
+			var final_d_date=new Date(parts[0], parts[1] - 1, parts[2]);
+			
+			var ONE_DAY = 1000 * 60 * 60 * 24;
+			var difference_ms = Math.abs(final_d_date.getTime() - value_t);
+			var days =Math.round(difference_ms/ONE_DAY) + 1;
+		}
+	console.log("tester",date_range);
 	},
 	events: {
       'click .multiplepeopleGetDate' : 'multiplepeopleGetDate',
@@ -35,6 +48,8 @@ define(function(require, exports, module) {
 		var view = this;
 		//console.log($(e.currentTarget));
 		//$.noConflict();
+		var date = new Date();
+		var value_t = date.getTime();
 		jQuery.noConflict();
 		$(e.currentTarget).datepicker({
 		  minDate:'2',
@@ -44,6 +59,14 @@ define(function(require, exports, module) {
 			console.log('onSelect',dateText);
 			view.selectedDate = dateText;  
 			//$("#departure-date").val("");
+			var parts = dateText.split("-");
+			var final_d_date=new Date(parts[0], parts[1] - 1, parts[2]);
+			
+			var ONE_DAY = 1000 * 60 * 60 * 24;
+			var difference_ms = Math.abs(final_d_date.getTime() - value_t);
+			var days =Math.round(difference_ms/ONE_DAY) + 1;
+			date_range=days;
+		
 		  }
 		});
 	
@@ -52,7 +75,7 @@ define(function(require, exports, module) {
 		var that = this;
 		var date = new Date();
 		var value_t = date.getTime();
-		
+		console.log("date_rangeflight",date_range);
 		var parts = document.getElementById("departure-date").value.split("-");
 		var final_d_date=new Date(parts[0], parts[1] - 1, parts[2]);
 		
@@ -64,7 +87,7 @@ define(function(require, exports, module) {
 		//$.noConflict();
 		jQuery.noConflict();
 		$(e.currentTarget).datepicker({
-		  minDate:days,
+		  minDate:date_range,
 		  dateFormat: 'yy-mm-dd',
 		  defaultDate:that.selectedDate,
 		  onSelect:function(dateText,datePicker) {
